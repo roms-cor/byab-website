@@ -94,7 +94,7 @@ function TeamSlider() {
   const member = teamMembers[active];
 
   return (
-    <div className="mt-12 sm:mt-16" data-testid="team-slider">
+    <div data-testid="team-slider">
       <div className="flex items-center gap-6">
         <div className="flex -space-x-3">
           {teamMembers.map((m, i) => (
@@ -152,53 +152,57 @@ function Hero() {
   return (
     <section id="hero" aria-labelledby="hero-heading" className="px-4 sm:px-6 lg:px-8 pt-32 sm:pt-40 lg:pt-48 pb-20 sm:pb-28 lg:pb-36">
       <div className="max-w-[1200px] mx-auto">
-        <div className="max-w-3xl">
-          <p
-            className="text-xs uppercase tracking-[0.2em] font-medium mb-6"
-            style={{ color: "#666666" }}
-            data-testid="text-hero-label"
-          >
-            Since 2005 — Operations · Transformation · Growth
-          </p>
-          <h1
-            id="hero-heading"
-            className="text-4xl sm:text-6xl lg:text-[80px] font-semibold tracking-tight text-foreground leading-[1.02]"
-            data-testid="text-hero-title"
-          >
-            We run what
-            <br />
-            you can't get to
-            <br />
-            <span style={{ color: "#999999" }}>anymore.</span>
-          </h1>
-          <p
-            className="text-base sm:text-lg mt-6 sm:mt-8 leading-relaxed max-w-lg"
-            style={{ color: "#666666" }}
-            data-testid="text-hero-description"
-          >
-            Externalized operations, transformation consulting, and growth engineering
-            for founders and managing partners too busy to do it all.
-          </p>
-          <div className="flex flex-wrap items-center gap-4 mt-8 sm:mt-10">
-            <a
-              href="#contact"
-              data-testid="button-hero-primary"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-[10px] text-sm font-medium transition-opacity duration-150"
-              style={{ backgroundColor: "#000000", color: "#FFFFFF", border: "1px solid #666666" }}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div>
+            <p
+              className="text-xs uppercase tracking-[0.2em] font-medium mb-6"
+              style={{ color: "#666666" }}
+              data-testid="text-hero-label"
             >
-              Start a project
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
-            </a>
-            <a
-              href="#about"
-              data-testid="button-hero-secondary"
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium border transition-opacity duration-150"
-              style={{ backgroundColor: "#F5F5F5", color: "#000000", borderRadius: "0px", borderColor: "#E5E5E5" }}
+              Since 2005 — Operations · Transformation · Growth
+            </p>
+            <h1
+              id="hero-heading"
+              className="text-4xl sm:text-6xl lg:text-[80px] font-semibold tracking-tight text-foreground leading-[1.02]"
+              data-testid="text-hero-title"
             >
-              Our approach
-            </a>
+              We run what
+              <br />
+              you can't get to
+              <br />
+              <span style={{ color: "#999999" }}>anymore.</span>
+            </h1>
+            <p
+              className="text-base sm:text-lg mt-6 sm:mt-8 leading-relaxed max-w-lg"
+              style={{ color: "#666666" }}
+              data-testid="text-hero-description"
+            >
+              Externalized operations, transformation consulting, and growth engineering
+              for founders and managing partners too busy to do it all.
+            </p>
+            <div className="flex flex-wrap items-center gap-4 mt-8 sm:mt-10">
+              <a
+                href="#contact"
+                data-testid="button-hero-primary"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-[10px] text-sm font-medium transition-opacity duration-150"
+                style={{ backgroundColor: "#000000", color: "#FFFFFF", border: "1px solid #666666" }}
+              >
+                Start a project
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </a>
+              <a
+                href="#about"
+                data-testid="button-hero-secondary"
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium border transition-opacity duration-150"
+                style={{ backgroundColor: "#F5F5F5", color: "#000000", borderRadius: "0px", borderColor: "#E5E5E5" }}
+              >
+                Our approach
+              </a>
+            </div>
           </div>
-          <TeamSlider />
+          <div className="flex items-center justify-center lg:justify-end">
+            <TeamSlider />
+          </div>
         </div>
       </div>
     </section>
