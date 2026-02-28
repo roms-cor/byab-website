@@ -1,88 +1,55 @@
-# Attio Brand Guidelines
+# Attio
 
-> Comprehensive brand guidelines and design system documentation for Attio. This resource provides all visual identity specifications including logo usage, color palette, typography, spacing, component library, and design principles.
+> Attio is a modern CRM platform designed for tech-savvy professionals. Powerful, flexible, and intuitive — build meaningful relationships with your customers at scale.
+
+## Pages
+
+- [Homepage](/) — Main landing page with product overview, features, pricing, testimonials, and FAQ
+- [Brand Guidelines](/brand) — Complete design system documentation including logo, colors, typography, spacing, and components
+
+## Product Overview
+
+Attio is a CRM that adapts to your process. It provides lightning-fast performance, full customization, real-time reporting, team collaboration, enterprise security, and an API-first platform.
+
+## Key Features
+
+- Lightning fast — Built for speed, every interaction feels instant
+- Fully customizable — Custom objects, fields, and views built your way
+- Real-time reporting — Live dashboards and analytics
+- Team collaboration — Shared notes, mentions, and activity feeds
+- Enterprise security — SOC 2 certified with SAML SSO, role-based access, and audit logs
+- API-first platform — REST API and webhooks for integrations
+
+## How It Works
+
+1. Connect your data — Import from CSV, Salesforce, HubSpot, and more
+2. Customize your workspace — Build custom objects, views, and automations
+3. Close more deals — Real-time insights and automated follow-ups
+
+## Pricing
+
+- Free: $0 forever — Up to 1,000 contacts, basic reporting, email integration, mobile app
+- Pro: $29/user/month — Unlimited contacts, advanced reporting, custom objects, API access, automations, priority support
+- Enterprise: Custom pricing — SAML SSO, audit logs, dedicated CSM, custom SLA, advanced security
+
+## FAQ
+
+- Setup takes under 15 minutes
+- Supports migration from Salesforce, HubSpot, Pipedrive, and other CRMs
+- Free plan available, no credit card required
+- All plans include email support; Pro gets priority support; Enterprise gets dedicated CSM
 
 ## Brand Identity
 
-Attio is a modern CRM platform designed for tech-savvy professionals. The brand identity reflects a clean, professional, and accessible design language.
+- Primary Color: #B5BDC9
+- Accent Color: #202124
+- Background: #FFFFFF
+- Text: #1C1D1F
+- Links: #505967
+- Font: Inter (body & headings), JetBrains Mono (code)
+- Spacing: 8px grid system
+- Border Radius: 8px default, 10px buttons
 
-## Logo
+## Full Design System
 
-- Primary logo: Attio wordmark
-- Minimum size: 48px width for digital
-- Clear space: 2x the height of the logomark around all sides
-- File formats: SVG for web, PNG for social and print
-- Available in light and dark variations
-
-## Color Palette
-
-### Brand Colors
-- Primary: #B5BDC9 (HSL 216, 14%, 75%) — Used for backgrounds and subtle accents
-- Accent: #202124 (HSL 220, 6%, 13%) — Used for buttons, headings, and emphasis
-- Background: #FFFFFF — Page backgrounds and content areas
-- Text Primary: #1C1D1F — Main body text and headings
-- Link: #505967 — Links, secondary text, and supporting elements
-
-### Extended Palette (Slate)
-- Slate 50: #F8F9FA
-- Slate 100: #EEF0F3
-- Slate 200: #D8DCE2
-- Slate 300: #B5BDC9
-- Slate 400: #8C95A5
-- Slate 500: #505967
-- Slate 600: #3A4250
-- Slate 700: #2A3140
-- Slate 800: #202124
-- Slate 900: #1C1D1F
-
-## Typography
-
-- Primary typeface: Inter (body and headings)
-- Monospace typeface: JetBrains Mono (code blocks)
-- Display: 64px / semibold / line-height 1.1 / tracking -0.02em
-- Heading 1: 48px / semibold / line-height 1.15
-- Heading 2: 36px / semibold / line-height 1.2
-- Heading 3: 28px / semibold / line-height 1.25
-- Body Large: 18px / regular / line-height 1.6
-- Body: 16px / regular / line-height 1.6
-- Body Small: 14px / regular / line-height 1.5
-- Caption: 12px / medium / line-height 1.4
-
-## Spacing
-
-Base unit: 8px grid system
-- 2xs: 4px (0.5x)
-- xs: 8px (1x)
-- sm: 12px (1.5x)
-- md: 16px (2x)
-- lg: 24px (3x)
-- xl: 32px (4x)
-- 2xl: 48px (6x)
-- 3xl: 64px (8x)
-- 4xl: 96px (12x)
-
-## Components
-
-### Primary Button
-- Background: #202124
-- Text: #F3F4F6
-- Border: #505967
-- Border radius: 10px
-
-### Secondary Button
-- Background: #FAFAFB
-- Text: #232529
-- Border radius: 0px
-
-### Border Radius
-- Default: 8px
-- Buttons: 10px
-- Small elements: 6px
-- Cards: 12-16px
-
-## Design Principles
-
-1. Hierarchy — Use size, weight, and color to create clear visual hierarchy
-2. Consistency — Stick to 8px spacing grid, no arbitrary values
-3. Restraint — Less is more, let content breathe with generous whitespace
-4. Accessibility — All text must meet WCAG AA contrast requirements
+See [/llms-full.txt](/llms-full.txt) for complete brand guidelines and design token specifications.
