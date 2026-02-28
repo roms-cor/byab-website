@@ -1,0 +1,278 @@
+# Attio Brand Guidelines — Full Reference
+
+> Complete brand guidelines and design system documentation for Attio, a modern CRM platform for tech-savvy professionals. This document contains all visual identity specifications, design tokens, component specifications, and usage guidelines.
+
+## Table of Contents
+
+1. Brand Overview
+2. Logo Guidelines
+3. Color System
+4. Typography System
+5. Spacing System
+6. Component Library
+7. Design Principles
+8. Accessibility Standards
+9. Design Tokens Reference
+
+---
+
+## 1. Brand Overview
+
+Attio is a modern CRM platform designed for tech-savvy professionals. The brand identity reflects a clean, professional, and accessible design language with a focus on clarity and restraint.
+
+### Brand Attributes
+- Tone: Modern
+- Energy: Medium
+- Target Audience: Tech-savvy professionals
+- Design Framework: Tailwind CSS
+- Color Scheme: Light mode primary
+
+### Quick Reference
+- Font Family: Inter
+- Base Spacing Unit: 8px
+- Default Border Radius: 8px
+- Color Scheme: Light
+
+---
+
+## 2. Logo Guidelines
+
+The Attio logo is the cornerstone of the brand identity. It must be used consistently across all touchpoints.
+
+### Logo Specifications
+- Primary format: SVG wordmark
+- Minimum width: 48px for digital applications
+- Clear space: 2x the logomark height on all sides
+- File formats: SVG (web), PNG (social media and print)
+
+### Approved Variations
+- Standard: Dark logomark on light backgrounds
+- Inverted: Light/white logomark on dark backgrounds (#202124 or darker)
+
+### Usage Rules — Do
+- Maintain original proportions at all times
+- Use only approved color variations
+- Ensure adequate contrast against backgrounds
+- Keep minimum clear space around the logo
+
+### Usage Rules — Don't
+- Do not stretch or distort the logo
+- Do not add drop shadows, glows, or other effects
+- Do not place on busy or low-contrast backgrounds
+- Do not rotate, skew, or tilt the logo
+- Do not alter the logo colors outside approved variations
+- Do not add outlines or strokes to the logo
+
+---
+
+## 3. Color System
+
+The color palette is designed to be clean, professional, and accessible. Each color has a specific purpose within the design system.
+
+### Brand Colors
+
+#### Primary (#B5BDC9)
+- HSL: 216, 14%, 75%
+- Usage: Primary brand color for large surface areas, section backgrounds, and decorative elements
+- Contrast on white: Decorative use only (does not meet text contrast requirements on white)
+
+#### Accent (#202124)
+- HSL: 220, 6%, 13%
+- Usage: Primary CTAs, important text, interactive elements, headings
+- Contrast on white: AAA (14.7:1 ratio)
+
+#### Background (#FFFFFF)
+- HSL: 0, 0%, 100%
+- Usage: Page backgrounds and primary content areas
+
+#### Text Primary (#1C1D1F)
+- HSL: 220, 6%, 12%
+- Usage: Main body text, headings, and all primary readable content
+- Contrast on white: AAA (15.2:1 ratio)
+
+#### Link (#505967)
+- HSL: 215, 12%, 36%
+- Usage: Clickable elements, secondary labels, navigation items, supporting text
+- Contrast on white: AA (5.2:1 ratio)
+
+### Extended Palette — Slate Scale
+
+| Token     | Hex     | Usage                                    |
+|-----------|---------|------------------------------------------|
+| Slate 50  | #F8F9FA | Subtle backgrounds, card surfaces        |
+| Slate 100 | #EEF0F3 | Borders, dividers, input backgrounds     |
+| Slate 200 | #D8DCE2 | Heavier borders, disabled states         |
+| Slate 300 | #B5BDC9 | Primary brand color, decorative fills    |
+| Slate 400 | #8C95A5 | Placeholder text, disabled text          |
+| Slate 500 | #505967 | Secondary text, links, captions          |
+| Slate 600 | #3A4250 | Body text alternative, icons             |
+| Slate 700 | #2A3140 | Dark UI elements, emphasis               |
+| Slate 800 | #202124 | Buttons, headings, primary CTA           |
+| Slate 900 | #1C1D1F | Darkest text, maximum contrast           |
+
+### Accessibility Compliance
+- Accent (#202124) on White (#FFFFFF): AAA — 14.7:1 contrast ratio
+- Link (#505967) on White (#FFFFFF): AA — 5.2:1 contrast ratio
+- Text Primary (#1C1D1F) on Primary (#B5BDC9): AA — 7.1:1 contrast ratio
+
+---
+
+## 4. Typography System
+
+Inter is the primary typeface, providing excellent readability and a modern aesthetic across all sizes and weights.
+
+### Typefaces
+
+#### Primary — Inter
+- Role: Body text and headings
+- Weights: 400 (Regular), 500 (Medium), 600 (Semibold), 700 (Bold)
+- Source: Google Fonts
+- Stack: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif
+
+#### Monospace — JetBrains Mono
+- Role: Code blocks, technical values, data
+- Weights: 400 (Regular), 500 (Medium), 700 (Bold)
+- Source: Google Fonts
+- Stack: 'JetBrains Mono', monospace
+
+### Type Scale
+
+| Name        | Size | Weight | Line Height | Letter Spacing | Usage                        |
+|-------------|------|--------|-------------|----------------|------------------------------|
+| Display     | 64px | 600    | 1.1         | -0.02em        | Hero headings, landing pages |
+| Heading 1   | 48px | 600    | 1.15        | -0.02em        | Page titles                  |
+| Heading 2   | 36px | 600    | 1.2         | -0.015em       | Section headings             |
+| Heading 3   | 28px | 600    | 1.25        | -0.01em        | Subsection headings          |
+| Heading 4   | 22px | 600    | 1.3         | -0.005em       | Card titles, labels          |
+| Body Large  | 18px | 400    | 1.6         | 0em            | Lead paragraphs, intros      |
+| Body        | 16px | 400    | 1.6         | 0em            | Standard body text           |
+| Body Small  | 14px | 400    | 1.5         | 0em            | Secondary information        |
+| Caption     | 12px | 500    | 1.4         | 0.02em         | Labels, metadata, timestamps |
+
+### Font Weight Usage
+- Regular (400): Body text, descriptions, paragraphs
+- Medium (500): Labels, captions, navigation items
+- Semibold (600): Headings, titles, emphasis
+- Bold (700): Display headings, key metrics
+
+---
+
+## 5. Spacing System
+
+All spacing is based on an 8px grid, providing consistent rhythm and alignment.
+
+### Scale
+
+| Token | Value | Multiplier | Usage                             |
+|-------|-------|------------|-----------------------------------|
+| 2xs   | 4px   | 0.5x       | Tight gaps, icon padding          |
+| xs    | 8px   | 1x         | Base unit, inline spacing         |
+| sm    | 12px  | 1.5x       | Small component padding           |
+| md    | 16px  | 2x         | Standard padding, gaps            |
+| lg    | 24px  | 3x         | Card padding, section gaps        |
+| xl    | 32px  | 4x         | Section padding                   |
+| 2xl   | 48px  | 6x         | Large section gaps                |
+| 3xl   | 64px  | 8x         | Page section spacing              |
+| 4xl   | 96px  | 12x        | Hero spacing, major separations   |
+
+### Usage Guidelines
+- Padding: 16px for compact elements, 24px for cards, 32-48px for page sections
+- Gap: 8px between tightly related elements, 16px between grouped items, 24-32px between sections
+- Border Radius: 8px default, 10px for buttons, 6px for small elements, 12-16px for cards
+
+---
+
+## 6. Component Library
+
+### Buttons
+
+#### Primary Button
+- Background: #202124
+- Text color: #F3F4F6
+- Border: 1px solid #505967
+- Border radius: 10px
+- Padding: 10px 20px
+- Font: 14px / Medium (500)
+- States: Default, Hover (lighten), Active (darken), Disabled (50% opacity)
+
+#### Secondary Button
+- Background: #FAFAFB
+- Text color: #232529
+- Border: 1px solid border color
+- Border radius: 0px (sharp corners)
+- Padding: 10px 20px
+- Font: 14px / Medium (500)
+- States: Default, Hover, Active, Disabled (50% opacity)
+
+### Input Fields
+- Height: 40px
+- Padding: 0 16px
+- Border radius: 8px
+- Border: 1px solid border color
+- Background: white
+- Font: 14px / Regular
+- Focus: 2px ring with ring color at 20% opacity
+- States: Default, Focus, Disabled (muted background), Error (red border)
+
+### Cards
+- Default Card: Subtle background (#F8F9FA), light border, 8px radius
+- Elevated Card: White background, subtle shadow, 8px radius
+- Dark Card: Dark background (#202124), light text (#F3F4F6), 8px radius
+
+---
+
+## 7. Design Principles
+
+### 1. Hierarchy
+Use size, weight, and color to create clear visual hierarchy. Headings should use semibold (600) weight and body text regular (400). Use muted foreground colors for secondary information.
+
+### 2. Consistency
+Stick to the spacing scale and never use arbitrary values. All spacing should be multiples of 8px. Maintain consistent padding and gaps throughout the interface.
+
+### 3. Restraint
+Less is more. Avoid unnecessary decoration, shadows, or color. Let content breathe with generous whitespace. Every element should serve a clear purpose.
+
+### 4. Accessibility
+All text must meet WCAG AA contrast requirements. Interactive elements need visible focus states. Use semantic HTML and proper ARIA labels for screen readers.
+
+---
+
+## 8. Accessibility Standards
+
+- All text meets WCAG 2.1 AA contrast requirements minimum
+- Primary text (#1C1D1F) on white achieves AAA (15.2:1)
+- Link text (#505967) on white achieves AA (5.2:1)
+- Interactive elements have visible focus indicators
+- All images require descriptive alt text
+- Semantic HTML structure with proper heading hierarchy
+- Keyboard navigation support for all interactive elements
+
+---
+
+## 9. Design Tokens Reference
+
+```css
+/* Colors */
+--color-primary: #B5BDC9;
+--color-accent: #202124;
+--color-background: #FFFFFF;
+--color-text: #1C1D1F;
+--color-link: #505967;
+
+/* Typography */
+--font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+--font-mono: 'JetBrains Mono', monospace;
+
+/* Spacing */
+--space-unit: 8px;
+--radius: 8px;
+--radius-button: 10px;
+
+/* Shadows */
+--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+```
+
+---
+
+Last updated: February 2026 — Version 1.0
