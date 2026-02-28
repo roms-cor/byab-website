@@ -193,7 +193,7 @@ export default function Components() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <a href="/" aria-label="Home" data-testid="link-logo-home">
-              <img src={logoHorizontalWhite} alt="BYAB logo" className="h-8 w-auto" data-testid="img-logo-header" />
+              <img src={logoHorizontalWhite} alt="BYAB logo" className="h-12 w-auto" data-testid="img-logo-header" />
             </a>
             <span className="text-border/80 text-sm font-light" aria-hidden="true">/</span>
             <span className="text-sm font-medium text-muted-foreground">Design</span>
