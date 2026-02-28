@@ -7,6 +7,25 @@ import photoCecile from "@assets/byab-profiles-neon-square-cecile_1772263504235.
 import photoGeorges from "@assets/byab-profiles-neon-square-georges_1772263504235.png";
 import photoRomain from "@assets/byab-profiles-neon-square-romain_1772263504234.png";
 
+function useHeadLinks() {
+  useEffect(() => {
+    const links = [
+      { rel: "canonical", href: "/" },
+      { rel: "alternate", hreflang: "en", href: "/" },
+      { rel: "alternate", hreflang: "fr", href: "/" },
+      { rel: "alternate", hreflang: "x-default", href: "/" },
+    ];
+    const elements: HTMLLinkElement[] = [];
+    links.forEach((attrs) => {
+      const link = document.createElement("link");
+      Object.entries(attrs).forEach(([k, v]) => link.setAttribute(k, v));
+      document.head.appendChild(link);
+      elements.push(link);
+    });
+    return () => elements.forEach((el) => el.remove());
+  }, []);
+}
+
 function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl" role="banner">
@@ -909,6 +928,7 @@ function Footer() {
 }
 
 export default function Home() {
+  useHeadLinks();
   return (
     <div className="min-h-screen bg-background">
       <Header />
