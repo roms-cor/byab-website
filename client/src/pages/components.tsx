@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Copy, Check, ArrowDown, Palette, Type, Grid3X3, Layers, BookOpen, Image, LayoutTemplate } from "lucide-react";
-import logoSvg from "@assets/logo.svg";
+import logoBlack from "@assets/byab-square-logo-black_1772260022058.png";
+import logoWhite from "@assets/byab-square-logo-white_1772260022059.png";
 
 const brandColors = [
   { name: "Primary", hex: "#B5BDC9", usage: "Backgrounds, subtle accents, decorative fills" },
@@ -149,7 +150,7 @@ export default function Components() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <a href="/" aria-label="Home" data-testid="link-logo-home">
-              <img src={logoSvg} alt="Logo" className="h-5" data-testid="img-logo-header" width="103" height="26" />
+              <img src={logoBlack} alt="BYAB logo" className="h-7 w-7" data-testid="img-logo-header" />
             </a>
             <span className="text-border/80 text-sm font-light" aria-hidden="true">/</span>
             <span className="text-sm font-medium text-muted-foreground">Components</span>
@@ -239,11 +240,11 @@ export default function Components() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <figure className="relative rounded-lg border border-border/50 bg-white p-8 sm:p-12 flex items-center justify-center min-h-[160px] sm:min-h-[200px]">
-                <img src={logoSvg} alt="Logo on light background" className="h-6 sm:h-8" data-testid="img-logo-light" width="103" height="26" />
+                <img src={logoBlack} alt="Logo on light background" className="h-16 sm:h-20 w-16 sm:w-20" data-testid="img-logo-light" />
                 <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs text-muted-foreground font-medium">Light background</figcaption>
               </figure>
               <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex items-center justify-center min-h-[160px] sm:min-h-[200px]" style={{ backgroundColor: "#202124" }}>
-                <img src={logoSvg} alt="Logo on dark background (inverted)" className="h-6 sm:h-8 invert" data-testid="img-logo-dark" width="103" height="26" />
+                <img src={logoWhite} alt="Logo on dark background" className="h-16 sm:h-20 w-16 sm:w-20" data-testid="img-logo-dark" />
                 <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium" style={{ color: "#8C95A5" }}>Dark background</figcaption>
               </figure>
             </div>
@@ -803,7 +804,7 @@ export default function Components() {
             <div className="p-6 sm:p-8 rounded-lg" style={{ backgroundColor: "#202124" }}>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <img src={logoSvg} alt="Logo" className="h-4 invert mb-3" width="103" height="26" />
+                  <img src={logoWhite} alt="BYAB logo" className="h-6 w-6 mb-3" />
                   <p className="text-sm leading-relaxed" style={{ color: "#8C95A5" }}>
                     Components maintained by the design team.
                   </p>

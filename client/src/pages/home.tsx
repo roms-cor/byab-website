@@ -1,13 +1,14 @@
 import { Link } from "wouter";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import logoSvg from "@assets/logo.svg";
+import logoBlack from "@assets/byab-square-logo-black_1772260022058.png";
+import logoWhite from "@assets/byab-square-logo-white_1772260022059.png";
 
 function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl" role="banner">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         <a href="/" aria-label="Home" data-testid="link-logo-home">
-          <img src={logoSvg} alt="Logo" className="h-5" data-testid="img-logo-header" width="103" height="26" />
+          <img src={logoBlack} alt="BYAB logo" className="h-7 w-7" data-testid="img-logo-header" />
         </a>
         <nav aria-label="Main navigation" className="hidden md:block">
           <ul className="flex items-center gap-8 list-none m-0 p-0">
@@ -423,7 +424,7 @@ function Footer() {
     <footer className="px-4 sm:px-6 lg:px-8 py-10 sm:py-12 border-t border-border/50" role="contentinfo">
       <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-6">
-          <img src={logoSvg} alt="Logo" className="h-4" width="103" height="26" />
+          <img src={logoBlack} alt="BYAB logo" className="h-5 w-5" />
           <p className="text-xs" style={{ color: "#505967" }}>2026. All rights reserved.</p>
         </div>
         <div className="flex items-center gap-6">
