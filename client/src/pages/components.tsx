@@ -189,7 +189,7 @@ export default function Components() {
   return (
     <div className="min-h-screen bg-background">
 
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50" role="banner">
+      <header className="sticky top-0 z-50 bg-white border-b border-border/50" role="banner">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <a href="/" aria-label="Home" data-testid="link-logo-home">
