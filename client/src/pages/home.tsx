@@ -189,7 +189,7 @@ function TeamSlider() {
           </div>
         </div>
 
-        <div className="mt-6 text-center w-full">
+        <div className="text-center w-full mt-[55px] mb-[55px]">
           <div className="overflow-hidden h-[30px] relative">
             {teamMembers.map((m, i) => (
               <p
