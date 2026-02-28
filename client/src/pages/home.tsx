@@ -894,12 +894,12 @@ function Footer() {
         </div>
         <div className="flex items-center gap-6">
           <Link
-            href="/components"
-            data-testid="link-components"
+            href="/design"
+            data-testid="link-design"
             className="text-xs font-medium flex items-center gap-1 transition-opacity duration-150"
             style={{ color: "#666666" }}
           >
-            Components
+            Design
             <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
           </Link>
         </div>

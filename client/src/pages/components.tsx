@@ -61,7 +61,7 @@ const siteSections = [
   { id: "story", name: "Story", description: "Full company history timeline (2005–2026) with 5 phases: BYAB founding, 2015 law firm specialization, 2020 consolidation, 2025 Georges Grosz joins, 2025–26 Romain Cornu joins. Contains 14 external backlinks to company registries (annuaire-entreprises, Pappers, societe.com, Le Figaro), LinkedIn profiles (Anne Grosz, Georges Grosz, Romain Cornu), Vatier & Associés, Avizio, and Oysterz. Closes with brand promise quote on dark panel.", tokens: "year: Text Primary font-mono, text: Link (#666666), links: Text Primary underline, promise panel: Accent (#000000) bg, #FFFFFF text" },
   { id: "testimonial", name: "Testimonial", description: "Centered blockquote: 'They didn't just take work off my plate. They rebuilt how my company runs — and revenue followed.' — M. Laurent, Managing Partner.", tokens: "avatar bg: Primary (#999999), avatar text: Text Primary" },
   { id: "contact", name: "Contact", description: "Two-column layout with heading 'Let's take something off your plate.' + contact info (hello@becausebusy.com, Paris & La Rochelle) on left, form on right.", tokens: "inputs: default border/bg, submit: Accent (#000000)" },
-  { id: "footer", name: "Footer", description: "Minimal bar with Because Busy logo, copyright text (© 2005–2026), and link to Components page.", tokens: "text: Link (#666666)" },
+  { id: "footer", name: "Footer", description: "Minimal bar with Because Busy logo, copyright text (© 2005–2026), and link to Design page.", tokens: "text: Link (#666666)" },
 ];
 
 const navSections = [
@@ -151,6 +151,23 @@ export default function Components() {
   const [activeSection, setActiveSection] = useState("overview");
 
   useEffect(() => {
+    document.title = "Design — Because You Are Busy";
+    let meta = document.querySelector('meta[name="robots"]') as HTMLMetaElement;
+    if (meta) {
+      meta.content = "noindex, nofollow";
+    } else {
+      meta = document.createElement("meta");
+      meta.name = "robots";
+      meta.content = "noindex, nofollow";
+      document.head.appendChild(meta);
+    }
+    return () => {
+      document.title = "Because You Are Busy — Operations, Transformation & Growth Consulting Since 2005";
+      if (meta) meta.content = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
+    };
+  }, []);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -179,7 +196,7 @@ export default function Components() {
               <img src={logoHorizontalWhite} alt="BYAB logo" className="h-8 w-auto" data-testid="img-logo-header" />
             </a>
             <span className="text-border/80 text-sm font-light" aria-hidden="true">/</span>
-            <span className="text-sm font-medium text-muted-foreground">Components</span>
+            <span className="text-sm font-medium text-muted-foreground">Design</span>
           </div>
           <span className="text-xs text-muted-foreground font-mono px-2 py-1 rounded-md bg-accent" data-testid="text-version">v1.0</span>
         </div>
@@ -204,7 +221,7 @@ export default function Components() {
                 className="text-4xl sm:text-5xl lg:text-7xl font-semibold tracking-tight text-foreground leading-[1.05]"
                 data-testid="text-hero-title"
               >
-                Components
+                Design
               </h1>
               <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mt-4 sm:mt-6 leading-relaxed max-w-xl" data-testid="text-hero-description">
                 The single source of truth for the Because Busy brand identity, design tokens,

@@ -9,7 +9,7 @@
 ## Pages
 
 - [Homepage](/) — Agency landing page: services, track record, company history with backlinks, stats, about, testimonial, and contact form
-- [Components](/components) — Complete design system: brand identity, design tokens, UI components, and site section reference
+- [Design](/design) — Complete design system: brand identity, design tokens, UI components, and site section reference (noindex)
 
 ## What Is Because You Are Busy?
 
