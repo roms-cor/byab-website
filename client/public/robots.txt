@@ -1,5 +1,12 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
 
 User-agent: GPTBot
 Allow: /
@@ -29,6 +36,15 @@ User-agent: CCBot
 Allow: /
 
 User-agent: FirecrawlBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: YouBot
 Allow: /
 
 Sitemap: /sitemap.xml

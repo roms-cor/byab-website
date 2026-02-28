@@ -12,7 +12,7 @@ function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl" role="banner">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         <a href="/" aria-label="Home" data-testid="link-logo-home">
-          <img src={logoHorizontalWhite} alt="Because Busy logo" className="h-8 w-auto" data-testid="img-logo-header" />
+          <img src={logoHorizontalWhite} alt="Because You Are Busy — Operations, Transformation & Growth Consultancy" className="h-8 w-auto" data-testid="img-logo-header" />
         </a>
         <nav aria-label="Main navigation" className="hidden md:block">
           <ul className="flex items-center gap-8 list-none m-0 p-0">
@@ -288,8 +288,9 @@ function Hero() {
               style={{ color: "#666666" }}
               data-testid="text-hero-description"
             >
-              Externalized operations, transformation consulting, and growth engineering
-              for founders and managing partners too busy to do it all.
+              <strong className="font-medium text-foreground">Because you are busy</strong>, we externalize
+              your operations, drive transformation, and engineer growth — so founders
+              and managing partners can lead instead of drown.
             </p>
             <div className="flex flex-wrap items-center gap-4 mt-8 sm:mt-10">
               <a
@@ -500,7 +501,7 @@ function About() {
           </div>
           <div className="flex flex-col justify-center">
             <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
-              Three forces converge at Because Busy: twenty years of hands-on operational
+              Three forces converge at Because You Are Busy: twenty years of hands-on operational
               leadership in admin, finance, and law firm management — a systems and data
               vision forged across two decades at CGI and the Sorbonne — and a growth engine
               built from the trenches of B2B SaaS, outbound, and acquisition.
@@ -820,8 +821,8 @@ function Contact() {
               off your plate.
             </h2>
             <p className="text-sm sm:text-base mt-4 leading-relaxed" style={{ color: "#666666" }}>
-              Tell us what's burying you. We'll get back to you within 24 hours
-              with a clear plan of action.
+              Because you are busy, we'll take it from here. Tell us what's burying you
+              and we'll get back within 24 hours with a clear plan of action.
             </p>
             <div className="mt-8 space-y-3">
               <p className="text-sm" style={{ color: "#666666" }}>
@@ -888,8 +889,8 @@ function Footer() {
     <footer className="px-4 sm:px-6 lg:px-8 py-10 sm:py-12 border-t border-border/50" role="contentinfo">
       <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-6">
-          <img src={logoHorizontalWhite} alt="Because Busy logo" className="h-6 w-auto" />
-          <p className="text-xs" style={{ color: "#666666" }}>© 2005–2026 Because You Are Busy. All rights reserved.</p>
+          <img src={logoHorizontalWhite} alt="Because You Are Busy logo" className="h-6 w-auto" />
+          <p className="text-xs" style={{ color: "#666666" }}>© 2005–2026 <span itemScope itemType="https://schema.org/Organization"><span itemProp="name">Because You Are Busy</span></span>. All rights reserved.</p>
         </div>
         <div className="flex items-center gap-6">
           <Link
