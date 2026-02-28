@@ -326,6 +326,13 @@ function Story() {
           </p>
           <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "#666666" }}>
             Behind this name, ahead of its time, lies a strong conviction: founders don't lack courage or ideas — they lack time and structure to execute them. For nearly twenty years,{" "}
+            <a href="https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-cecile-linkedin">
+              Cécile Noiriel
+            </a>{" "}
+            has been the "conductor" (chef d'orchestre) of this mission, ensuring that every operational detail aligns with the founder's vision.
+          </p>
+          <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "#666666" }}>
+            For nearly twenty years,{" "}
             <a href="https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab-figaro">
               BYAB
             </a>{" "}
@@ -488,7 +495,7 @@ function Story() {
           </p>
           <div className="mt-6 flex flex-wrap gap-4">
             <span className="text-xs font-medium" style={{ color: "#777777" }}>
-              Operational depth — Anne, BYAB, law firms
+              Operational depth — Anne, Cécile, BYAB, law firms
             </span>
             <span className="text-xs" style={{ color: "#777777" }}>·</span>
             <span className="text-xs font-medium" style={{ color: "#777777" }}>

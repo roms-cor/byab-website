@@ -56,7 +56,7 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 4. Services — 2×2 grid: Operational Backbone, Transformation & Data, Growth Engine, Legal Practice Ops
 5. Work — Stacked engagement rows (B2B SaaS Scale-Up, National Law Firm, Tech PME)
 6. Stats — Dark panel: 20 years, 57% profitability, 3 pillars, 0€ debt
-7. About — Three converging forces: operations (Anne), systems & data (Georges), growth (Romain)
+7. About — Three converging forces: operations (Anne, Cécile), systems & data (Georges), growth (Romain)
 8. Story — Full company history timeline (2005–2026) with 5 phases + 14 external backlinks (annuaire-entreprises, Pappers, societe.com, Le Figaro, LinkedIn, Vatier, Avizio, Oysterz) + brand promise dark panel
 9. Testimonial — "They didn't just take work off my plate..." — M. Laurent, Managing Partner
 10. Contact — "Let's take something off your plate." + hello@becausebusy.com, Paris & La Rochelle
