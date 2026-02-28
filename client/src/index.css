@@ -184,6 +184,24 @@
   animation: marquee 20s linear infinite;
 }
 
+@keyframes team-slide {
+  0%, 20% { opacity: 1; transform: translateY(0); }
+  22%, 24% { opacity: 0; transform: translateY(-12px); }
+  25% { opacity: 0; transform: translateY(12px); }
+  27%, 45% { opacity: 1; transform: translateY(0); }
+  47%, 49% { opacity: 0; transform: translateY(-12px); }
+  50% { opacity: 0; transform: translateY(12px); }
+  52%, 70% { opacity: 1; transform: translateY(0); }
+  72%, 74% { opacity: 0; transform: translateY(-12px); }
+  75% { opacity: 0; transform: translateY(12px); }
+  77%, 95% { opacity: 1; transform: translateY(0); }
+  97%, 100% { opacity: 0; transform: translateY(-12px); }
+}
+
+.animate-team-slide {
+  animation: team-slide 12s ease-in-out infinite;
+}
+
 /**
  * Using the elevate system.
  * Automatic contrast adjustment.

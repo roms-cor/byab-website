@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import logoBlack from "@assets/byab-square-logo-black_1772260022058.png";
@@ -46,6 +47,105 @@ function Header() {
         </a>
       </div>
     </header>
+  );
+}
+
+const teamMembers = [
+  {
+    src: photoAnne,
+    name: "Anne Grosz",
+    role: "Founder & Operations",
+    skills: ["General Secretariat", "Finance & Admin", "Law Firm Ops", "ISO Compliance"],
+  },
+  {
+    src: photoCecile,
+    name: "Cécile Noiriel",
+    role: "Operations Conductor",
+    skills: ["Project Coordination", "Administrative Org", "Client Delivery", "Process Design"],
+  },
+  {
+    src: photoGeorges,
+    name: "Georges Grosz",
+    role: "Transformation & Data",
+    skills: ["Systems Architecture", "Data Governance", "Project Management", "Business Analysis"],
+  },
+  {
+    src: photoRomain,
+    name: "Romain Cornu",
+    role: "Growth Engine",
+    skills: ["Outbound B2B", "Acquisition Funnels", "Sales Machines", "Revenue Ops"],
+  },
+];
+
+function TeamSlider() {
+  const [active, setActive] = useState(0);
+  const [transitioning, setTransitioning] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTransitioning(true);
+      setTimeout(() => {
+        setActive((prev) => (prev + 1) % teamMembers.length);
+        setTransitioning(false);
+      }, 300);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const member = teamMembers[active];
+
+  return (
+    <div className="mt-12 sm:mt-16" data-testid="team-slider">
+      <div className="flex items-center gap-6">
+        <div className="flex -space-x-3">
+          {teamMembers.map((m, i) => (
+            <button
+              key={m.name}
+              onClick={() => { setTransitioning(true); setTimeout(() => { setActive(i); setTransitioning(false); }, 300); }}
+              className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover ring-2 ring-background transition-all duration-300 ${i === active ? "z-10 scale-110" : "z-0 opacity-60 hover:opacity-90"}`}
+              aria-label={`View ${m.name}`}
+              data-testid={`button-slider-${m.name.split(" ")[0].toLowerCase()}`}
+            >
+              <img src={m.src} alt={m.name} className="w-full h-full rounded-full object-cover" />
+              {i === active && (
+                <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-background" style={{ backgroundColor: "#000000" }} />
+              )}
+            </button>
+          ))}
+        </div>
+
+        <div className={`min-w-0 transition-all duration-300 ${transitioning ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"}`}>
+          <p className="text-sm sm:text-base font-semibold text-foreground truncate" data-testid="text-slider-name">{member.name}</p>
+          <p className="text-xs" style={{ color: "#666666" }} data-testid="text-slider-role">{member.role}</p>
+        </div>
+      </div>
+
+      <div className={`mt-4 flex flex-wrap gap-2 transition-all duration-300 ${transitioning ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"}`}>
+        {member.skills.map((skill) => (
+          <span
+            key={skill}
+            className="text-[11px] font-medium px-2.5 py-1 rounded-full"
+            style={{ backgroundColor: "#F5F5F5", color: "#666666", border: "1px solid #E5E5E5" }}
+            data-testid={`badge-skill-${skill.toLowerCase().replace(/\s/g, "-")}`}
+          >
+            {skill}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-4 flex gap-1.5">
+        {teamMembers.map((_, i) => (
+          <div
+            key={i}
+            className="h-0.5 rounded-full transition-all duration-500"
+            style={{
+              width: i === active ? "32px" : "8px",
+              backgroundColor: i === active ? "#000000" : "#E5E5E5",
+            }}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -99,6 +199,7 @@ function Hero() {
               Our approach
             </a>
           </div>
+          <TeamSlider />
         </div>
       </div>
     </section>
