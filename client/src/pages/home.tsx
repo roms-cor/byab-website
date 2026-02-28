@@ -54,25 +54,33 @@ const teamMembers = [
     src: photoAnne,
     name: "Anne Grosz",
     role: "Founder & Operations",
+    bio: "8 years as Secretary General & CFO at Vatier & Associés. Now leads externalized general secretariat for law firms and SMEs — finance, admin, HR, and ISO compliance.",
     skills: ["General Secretariat", "Finance & Admin", "Law Firm Ops", "ISO Compliance"],
+    since: "Since 2015",
   },
   {
     src: photoCecile,
     name: "Cécile Noiriel",
     role: "Operations Conductor",
+    bio: "The original 'chef d'orchestre' of BYAB since day one. Ensures every operational detail aligns with the founder's vision — coordination, delivery, and administrative orchestration.",
     skills: ["Project Coordination", "Administrative Org", "Client Delivery", "Process Design"],
+    since: "Since 2005",
   },
   {
     src: photoGeorges,
     name: "Georges Grosz",
     role: "Transformation & Data",
+    bio: "22+ years as Senior Executive Consultant at CGI. Teaches at Université Paris 1 Panthéon-Sorbonne. Brings systems architecture, data governance, and structured transformation.",
     skills: ["Systems Architecture", "Data Governance", "Project Management", "Business Analysis"],
+    since: "Since July 2025",
   },
   {
     src: photoRomain,
     name: "Romain Cornu",
     role: "Growth Engine",
+    bio: "Built growth machines at Datananas, Clovis, and MerciApp. CEO of Oysterz. Designs outbound systems, acquisition funnels, and revenue ops that make growth predictable.",
     skills: ["Outbound B2B", "Acquisition Funnels", "Sales Machines", "Revenue Ops"],
+    since: "Since 2025",
   },
 ];
 
@@ -87,62 +95,77 @@ function TeamSlider() {
         setActive((prev) => (prev + 1) % teamMembers.length);
         setTransitioning(false);
       }, 300);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
   const member = teamMembers[active];
 
   return (
-    <div data-testid="team-slider">
-      <div className="flex items-center gap-6">
-        <div className="flex -space-x-3">
+    <div className="w-full max-w-md" data-testid="team-slider">
+      <div className="relative rounded-lg overflow-hidden border border-border/50" style={{ backgroundColor: "#F5F5F5" }}>
+        <div className={`transition-all duration-300 ${transitioning ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
+          <img
+            src={member.src}
+            alt={member.name}
+            className="w-full aspect-square object-cover"
+            data-testid="img-slider-active"
+          />
+        </div>
+
+        <div className={`p-5 sm:p-6 transition-all duration-300 ${transitioning ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"}`}>
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <p className="text-lg sm:text-xl font-semibold text-foreground" data-testid="text-slider-name">{member.name}</p>
+              <p className="text-sm font-medium" style={{ color: "#666666" }} data-testid="text-slider-role">{member.role}</p>
+            </div>
+            <span className="text-[10px] font-mono px-2 py-1 rounded-full whitespace-nowrap mt-1" style={{ backgroundColor: "#E5E5E5", color: "#666666" }}>{member.since}</span>
+          </div>
+
+          <p className="text-sm leading-relaxed mt-3" style={{ color: "#666666" }} data-testid="text-slider-bio">{member.bio}</p>
+
+          <div className="mt-4 flex flex-wrap gap-1.5">
+            {member.skills.map((skill) => (
+              <span
+                key={skill}
+                className="text-[11px] font-medium px-2.5 py-1 rounded-full"
+                style={{ backgroundColor: "#FFFFFF", color: "#666666", border: "1px solid #E5E5E5" }}
+                data-testid={`badge-skill-${skill.toLowerCase().replace(/\s/g, "-")}`}
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-4 flex items-center justify-between">
+        <div className="flex -space-x-2">
           {teamMembers.map((m, i) => (
             <button
               key={m.name}
               onClick={() => { setTransitioning(true); setTimeout(() => { setActive(i); setTransitioning(false); }, 300); }}
-              className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover ring-2 ring-background transition-all duration-300 ${i === active ? "z-10 scale-110" : "z-0 opacity-60 hover:opacity-90"}`}
+              className={`relative w-9 h-9 sm:w-10 sm:h-10 rounded-full ring-2 ring-background transition-all duration-300 ${i === active ? "z-10 scale-110 ring-foreground/20" : "z-0 opacity-50 hover:opacity-80"}`}
               aria-label={`View ${m.name}`}
               data-testid={`button-slider-${m.name.split(" ")[0].toLowerCase()}`}
             >
               <img src={m.src} alt={m.name} className="w-full h-full rounded-full object-cover" />
-              {i === active && (
-                <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-background" style={{ backgroundColor: "#000000" }} />
-              )}
             </button>
           ))}
         </div>
 
-        <div className={`min-w-0 transition-all duration-300 ${transitioning ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"}`}>
-          <p className="text-sm sm:text-base font-semibold text-foreground truncate" data-testid="text-slider-name">{member.name}</p>
-          <p className="text-xs" style={{ color: "#666666" }} data-testid="text-slider-role">{member.role}</p>
+        <div className="flex gap-1.5">
+          {teamMembers.map((_, i) => (
+            <div
+              key={i}
+              className="h-1 rounded-full transition-all duration-500"
+              style={{
+                width: i === active ? "24px" : "6px",
+                backgroundColor: i === active ? "#000000" : "#E5E5E5",
+              }}
+            />
+          ))}
         </div>
-      </div>
-
-      <div className={`mt-4 flex flex-wrap gap-2 transition-all duration-300 ${transitioning ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"}`}>
-        {member.skills.map((skill) => (
-          <span
-            key={skill}
-            className="text-[11px] font-medium px-2.5 py-1 rounded-full"
-            style={{ backgroundColor: "#F5F5F5", color: "#666666", border: "1px solid #E5E5E5" }}
-            data-testid={`badge-skill-${skill.toLowerCase().replace(/\s/g, "-")}`}
-          >
-            {skill}
-          </span>
-        ))}
-      </div>
-
-      <div className="mt-4 flex gap-1.5">
-        {teamMembers.map((_, i) => (
-          <div
-            key={i}
-            className="h-0.5 rounded-full transition-all duration-500"
-            style={{
-              width: i === active ? "32px" : "8px",
-              backgroundColor: i === active ? "#000000" : "#E5E5E5",
-            }}
-          />
-        ))}
       </div>
     </div>
   );
