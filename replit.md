@@ -1,7 +1,7 @@
-# Premium Growth Agency — Landing Page & Components
+# Because Busy — Landing Page & Components
 
 ## Overview
-A two-page site for a premium growth agency: a landing page (homepage) and a Components page (design system + site structure reference). The Components page is the single source of truth — it defines the brand identity, design tokens, UI elements, and documents every section available on the site.
+A two-page site for Because You Are Busy (BYAB), an operations, transformation, and growth consultancy serving founders and managing partners since 2005. The homepage is the agency landing page; the Components page is the single source of truth — it defines the brand identity, design tokens, UI elements, and documents every section available on the site.
 
 ## Architecture
 - **Frontend only** — No backend API needed, purely static content
@@ -50,13 +50,13 @@ A two-page site for a premium growth agency: a landing page (homepage) and a Com
 8. Guidelines — 4 design principles, CSS tokens reference, machine-readable resources
 
 ## Homepage Sections
-1. Header — Fixed nav, logo, anchor links, CTA
-2. Hero — Display heading, subtitle, primary/secondary buttons
-3. Marquee — Infinite scrolling keyword strip
-4. Services — 2×2 grid of numbered service cards
-5. Work — Stacked case study rows with badges
-6. Stats — Dark panel with 4 metrics
-7. About — Two-column mission + approach tags
-8. Testimonial — Centered blockquote
-9. Contact — Two-column info + form
-10. Footer — Logo, copyright, Components link
+1. Header — Fixed nav, Because Busy logo, anchor links (Services, Track Record, About, Contact), CTA
+2. Hero — "We run what you can't get to anymore." + Since 2005 label, primary/secondary buttons
+3. Marquee — Infinite scrolling expertise keywords (Operations, Transformation, Growth, etc.)
+4. Services — 2×2 grid: Operational Backbone, Transformation & Data, Growth Engine, Legal Practice Ops
+5. Work — Stacked engagement rows (B2B SaaS Scale-Up, National Law Firm, Tech PME)
+6. Stats — Dark panel: 20 years, 57% profitability, 3 pillars, 0€ debt
+7. About — Three converging forces: operations (Anne), systems & data (Georges), growth (Romain)
+8. Testimonial — "They didn't just take work off my plate..." — M. Laurent, Managing Partner
+9. Contact — "Let's take something off your plate." + hello@becausebusy.com, Paris & La Rochelle
+10. Footer — Logo, © 2005–2026, Components link

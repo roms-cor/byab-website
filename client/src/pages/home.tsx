@@ -8,20 +8,20 @@ function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl" role="banner">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         <a href="/" aria-label="Home" data-testid="link-logo-home">
-          <img src={logoBlack} alt="BYAB logo" className="h-7 w-7" data-testid="img-logo-header" />
+          <img src={logoBlack} alt="Because Busy logo" className="h-7 w-7" data-testid="img-logo-header" />
         </a>
         <nav aria-label="Main navigation" className="hidden md:block">
           <ul className="flex items-center gap-8 list-none m-0 p-0">
             {[
               { label: "Services", href: "#services" },
-              { label: "Work", href: "#work" },
+              { label: "Track Record", href: "#work" },
               { label: "About", href: "#about" },
               { label: "Contact", href: "#contact" },
             ].map((item) => (
               <li key={item.label}>
                 <a
                   href={item.href}
-                  data-testid={`link-nav-${item.label.toLowerCase()}`}
+                  data-testid={`link-nav-${item.label.toLowerCase().replace(/\s/g, "-")}`}
                   className="text-sm font-medium transition-opacity duration-150"
                   style={{ color: "#666666" }}
                 >
@@ -54,26 +54,26 @@ function Hero() {
             style={{ color: "#666666" }}
             data-testid="text-hero-label"
           >
-            Premium Growth Agency
+            Since 2005 — Operations · Transformation · Growth
           </p>
           <h1
             id="hero-heading"
             className="text-4xl sm:text-6xl lg:text-[80px] font-semibold tracking-tight text-foreground leading-[1.02]"
             data-testid="text-hero-title"
           >
-            We build brands
+            We run what
             <br />
-            that outgrow
+            you can't get to
             <br />
-            <span style={{ color: "#999999" }}>expectations.</span>
+            <span style={{ color: "#999999" }}>anymore.</span>
           </h1>
           <p
             className="text-base sm:text-lg mt-6 sm:mt-8 leading-relaxed max-w-lg"
             style={{ color: "#666666" }}
             data-testid="text-hero-description"
           >
-            Strategy, design, and performance marketing for ambitious companies
-            ready to dominate their market.
+            Externalized operations, transformation consulting, and growth engineering
+            for founders and managing partners too busy to do it all.
           </p>
           <div className="flex flex-wrap items-center gap-4 mt-8 sm:mt-10">
             <a
@@ -86,12 +86,12 @@ function Hero() {
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </a>
             <a
-              href="#work"
+              href="#about"
               data-testid="button-hero-secondary"
               className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium border transition-opacity duration-150"
               style={{ backgroundColor: "#F5F5F5", color: "#000000", borderRadius: "0px", borderColor: "#E5E5E5" }}
             >
-              View our work
+              Our approach
             </a>
           </div>
         </div>
@@ -102,11 +102,11 @@ function Hero() {
 
 function Marquee() {
   return (
-    <section aria-label="Clients" className="border-t border-b border-border/50 py-5 overflow-hidden">
+    <section aria-label="Expertise" className="border-t border-b border-border/50 py-5 overflow-hidden">
       <div className="flex items-center gap-12 sm:gap-16 animate-marquee whitespace-nowrap">
         {[...Array(2)].map((_, set) => (
           <div key={set} className="flex items-center gap-12 sm:gap-16 shrink-0">
-            {["Strategy", "Branding", "Performance", "Creative", "Growth", "Digital", "Content", "Analytics"].map((word) => (
+            {["Operations", "Transformation", "Growth", "Outbound", "Data", "Organization", "Finance", "Strategy"].map((word) => (
               <span
                 key={`${set}-${word}`}
                 className="text-xs uppercase tracking-[0.2em] font-medium"
@@ -126,23 +126,23 @@ function Services() {
   const services = [
     {
       num: "01",
-      title: "Brand Strategy",
-      description: "Positioning, messaging, and market analysis that give your brand an unfair advantage.",
+      title: "Operational Backbone",
+      description: "Externalized general secretariat, admin, and finance — so you stop drowning in back-office and start leading.",
     },
     {
       num: "02",
-      title: "Identity Design",
-      description: "Visual systems that command attention and build instant recognition across every touchpoint.",
+      title: "Transformation & Data",
+      description: "Systems architecture, project governance, and data strategy that turn operational chaos into measurable clarity.",
     },
     {
       num: "03",
-      title: "Performance Marketing",
-      description: "Data-driven campaigns that turn ad spend into predictable, scalable revenue growth.",
+      title: "Growth Engine",
+      description: "Outbound, acquisition funnels, and predictable sales machines that make your revenue growth inevitable.",
     },
     {
       num: "04",
-      title: "Web & Digital",
-      description: "Conversion-optimized websites and digital experiences that work as hard as your team.",
+      title: "Legal Practice Ops",
+      description: "Purpose-built admin, finance, and organizational support for law firms where nothing can be improvised.",
     },
   ];
 
@@ -186,22 +186,22 @@ function Services() {
 
 function Work() {
   const projects = [
-    { title: "Theorem", category: "Brand Identity", year: "2025" },
-    { title: "Northlight", category: "Web & Performance", year: "2025" },
-    { title: "Arcadia", category: "Full Rebrand", year: "2024" },
+    { title: "B2B SaaS Scale-Up", category: "Growth Engineering", year: "2025" },
+    { title: "National Law Firm", category: "Operations Restructuring", year: "2024" },
+    { title: "Tech PME", category: "Transformation & Data", year: "2025" },
   ];
 
   return (
     <section id="work" aria-labelledby="work-heading" className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 border-t border-border/50">
       <div className="max-w-[1200px] mx-auto">
         <header className="mb-12 sm:mb-16">
-          <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#666666" }} aria-hidden="true">Selected work</p>
+          <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#666666" }} aria-hidden="true">Track record</p>
           <h2
             id="work-heading"
             className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground"
             data-testid="text-section-work"
           >
-            Case Studies
+            Engagements
           </h2>
         </header>
 
@@ -237,10 +237,10 @@ function Work() {
 
 function Stats() {
   const stats = [
-    { value: "150+", label: "Projects delivered" },
-    { value: "3.2x", label: "Average ROI" },
-    { value: "40+", label: "Brands scaled" },
-    { value: "98%", label: "Client retention" },
+    { value: "20", label: "Years serving founders" },
+    { value: "57%", label: "Operating profitability" },
+    { value: "3", label: "Expertise pillars" },
+    { value: "0€", label: "External debt raised" },
   ];
 
   return (
@@ -274,22 +274,24 @@ function About() {
               data-testid="text-section-about"
             >
               We partner with founders
-              who refuse to settle
-              for average.
+              who refuse to drown
+              in their own operations.
             </h2>
           </div>
           <div className="flex flex-col justify-center">
             <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
-              We are a collective of strategists, designers, and performance marketers
-              who believe great brands are built at the intersection of clarity and ambition.
+              Three forces converge at Because Busy: twenty years of hands-on operational
+              leadership in admin, finance, and law firm management — a systems and data
+              vision forged across two decades at CGI and the Sorbonne — and a growth engine
+              built from the trenches of B2B SaaS, outbound, and acquisition.
             </p>
             <p className="text-sm sm:text-base leading-relaxed mt-4" style={{ color: "#666666" }}>
-              Every engagement starts with deep understanding. We study your market,
-              dissect your competition, and uncover the positioning that makes your growth
-              inevitable, not accidental.
+              Every engagement starts with the same question: what is burying you?
+              We find the answer, remove the weight, and turn what was chaos into
+              a machine you can read, predict, and scale.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              {["Strategy-led", "Data-informed", "Design-obsessed"].map((tag) => (
+              {["Operations-first", "Data-driven", "Growth-engineered"].map((tag) => (
                 <span
                   key={tag}
                   className="text-xs font-medium px-3 py-1.5 rounded-full"
@@ -316,8 +318,9 @@ function Testimonial() {
             className="text-xl sm:text-2xl lg:text-3xl font-semibold text-foreground leading-snug tracking-tight"
             data-testid="text-testimonial-quote"
           >
-            "They didn't just redesign our brand. They repositioned us
-            in the market and our revenue followed."
+            "They didn't just take work off my plate.
+            They rebuilt how my company runs —
+            and revenue followed."
           </p>
           <footer className="mt-6 sm:mt-8">
             <div className="flex items-center justify-center gap-3">
@@ -326,11 +329,11 @@ function Testimonial() {
                 style={{ backgroundColor: "#999999", color: "#000000" }}
                 aria-hidden="true"
               >
-                SL
+                ML
               </div>
               <div className="text-left">
-                <cite className="not-italic text-sm font-medium text-foreground" data-testid="text-testimonial-author">Sarah Larsen</cite>
-                <p className="text-xs" style={{ color: "#666666" }}>CEO, Northlight</p>
+                <cite className="not-italic text-sm font-medium text-foreground" data-testid="text-testimonial-author">M. Laurent</cite>
+                <p className="text-xs" style={{ color: "#666666" }}>Managing Partner</p>
               </div>
             </div>
           </footer>
@@ -352,21 +355,21 @@ function Contact() {
               className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground leading-tight"
               data-testid="text-section-contact"
             >
-              Let's build
-              something remarkable.
+              Let's take something
+              off your plate.
             </h2>
             <p className="text-sm sm:text-base mt-4 leading-relaxed" style={{ color: "#666666" }}>
-              Tell us about your project. We'll get back to you within 24 hours
+              Tell us what's burying you. We'll get back to you within 24 hours
               with a clear plan of action.
             </p>
             <div className="mt-8 space-y-3">
               <p className="text-sm" style={{ color: "#666666" }}>
                 <span className="font-medium text-foreground">Email</span>
-                <br />hello@agency.com
+                <br />hello@becausebusy.com
               </p>
               <p className="text-sm" style={{ color: "#666666" }}>
                 <span className="font-medium text-foreground">Based in</span>
-                <br />London & New York
+                <br />Paris & La Rochelle
               </p>
             </div>
           </div>
@@ -393,11 +396,11 @@ function Contact() {
                 />
               </div>
               <div>
-                <label htmlFor="contact-message" className="text-xs font-medium text-foreground block mb-1.5">Tell us about your project</label>
+                <label htmlFor="contact-message" className="text-xs font-medium text-foreground block mb-1.5">Tell us what's burying you</label>
                 <textarea
                   id="contact-message"
                   rows={4}
-                  placeholder="What are you looking to achieve?"
+                  placeholder="What would you delegate tomorrow if you could?"
                   data-testid="input-contact-message"
                   className="w-full px-4 py-2.5 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring transition-colors resize-none"
                 />
@@ -424,8 +427,8 @@ function Footer() {
     <footer className="px-4 sm:px-6 lg:px-8 py-10 sm:py-12 border-t border-border/50" role="contentinfo">
       <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-6">
-          <img src={logoBlack} alt="BYAB logo" className="h-5 w-5" />
-          <p className="text-xs" style={{ color: "#666666" }}>2026. All rights reserved.</p>
+          <img src={logoBlack} alt="Because Busy logo" className="h-5 w-5" />
+          <p className="text-xs" style={{ color: "#666666" }}>© 2005–2026 Because You Are Busy. All rights reserved.</p>
         </div>
         <div className="flex items-center gap-6">
           <Link

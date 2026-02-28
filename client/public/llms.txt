@@ -1,39 +1,59 @@
-# Premium Growth Agency
+# Because Busy — Operations · Transformation · Growth
 
-> Strategy, design, and performance marketing for ambitious companies ready to dominate their market. We build brands that outgrow expectations.
+> Since 2005, Because You Are Busy (BYAB) helps founders and managing partners who are too busy to do it all. We externalize operations, drive transformation, and engineer growth — so leaders can lead.
 
 ## Pages
 
-- [Homepage](/) — Agency landing page with services, case studies, stats, about, testimonial, and contact form
+- [Homepage](/) — Agency landing page with services, track record, stats, about, testimonial, and contact form
 - [Components](/components) — Complete design system: brand identity, design tokens, UI components, and site section reference
 
 ## Services
 
-1. Brand Strategy — Positioning, messaging, and market analysis
-2. Identity Design — Visual systems that command attention and build recognition
-3. Performance Marketing — Data-driven campaigns that turn ad spend into revenue growth
-4. Web & Digital — Conversion-optimized websites and digital experiences
+1. Operational Backbone — Externalized general secretariat, admin, and finance for founders drowning in back-office
+2. Transformation & Data — Systems architecture, project governance, and data strategy that turn chaos into clarity
+3. Growth Engine — Outbound, acquisition funnels, and predictable sales machines for inevitable revenue growth
+4. Legal Practice Ops — Purpose-built admin, finance, and organizational support for demanding law firms
 
-## Selected Work
+## Who We Are
 
-- Theorem — Brand Identity (2025)
-- Northlight — Web & Performance (2025)
-- Arcadia — Full Rebrand (2024)
+Three forces converge at Because Busy:
+
+- **Anne Grosz** — 20 years of hands-on operational leadership. Former Secretary General at Vatier & Associés (Paris law firm). Founded BYAB in 2005, then Because You Are Busy in 2015. Expert in externalized general secretariat, admin, finance, and law firm operations.
+- **Georges Grosz** — 22 years as Senior Executive Consultant at CGI (international IT & management consulting). Professor at Université Paris 1 Panthéon-Sorbonne. Expert in transformation, information systems, project governance, and data.
+- **Romain Cornu** — Growth engineer. Former Head of Marketing at Datananas, Head of Growth at Clovis, Growth Advisor at MerciApp, Teacher Outbound at GrowthMakers, CEO of Oysterz. Expert in outbound B2B, acquisition funnels, and scalable sales machines.
+
+## Company History
+
+- **2005** — BYAB (SIREN 481 631 471) created. First "right-hand for busy founders" model. Ultra-lean, 57%+ operating profitability, zero external debt.
+- **2015** — Because You Are Busy (SIREN 814 783 056) created by Anne Grosz. Specialization in externalized general secretariat for law firms and SMEs.
+- **2020** — Transformation from SAS to SARL. Craft model over startup model. Confidential accounts, trust-based client relationships.
+- **2025** — Georges Grosz joins as co-manager. Transformation & data layer added.
+- **2025–2026** — Romain Cornu joins. Growth engineering capability: ICP, packaged offers, outbound funnels, performance metrics.
 
 ## Key Metrics
 
-- 150+ projects delivered
-- 3.2x average ROI
-- 40+ brands scaled
-- 98% client retention
+- 20 years serving founders since 2005
+- 57% operating profitability
+- 3 complementary expertise pillars
+- 0€ external debt raised
+
+## Track Record
+
+- B2B SaaS Scale-Up — Growth Engineering (2025)
+- National Law Firm — Operations Restructuring (2024)
+- Tech PME — Transformation & Data (2025)
 
 ## Locations
 
-London & New York
+Paris & La Rochelle, France
 
 ## Contact
 
-hello@agency.com
+hello@becausebusy.com
+
+## Brand Promise
+
+"Because you are busy, we do the work that frees your time — and we do it in a way that makes your growth more readable, more predictable, and better controlled."
 
 ## Design System
 

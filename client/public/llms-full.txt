@@ -1,6 +1,6 @@
-# Attio Brand Guidelines — Full Reference
+# Because Busy — Brand Guidelines & Design System
 
-> Complete brand guidelines and design system documentation for Attio, a modern CRM platform for tech-savvy professionals. This document contains all visual identity specifications, design tokens, component specifications, and usage guidelines.
+> Complete brand guidelines and design system documentation for Because You Are Busy (BYAB), an operations, transformation, and growth consultancy serving founders and managing partners since 2005. This document contains all visual identity specifications, design tokens, component specifications, and usage guidelines.
 
 ## Table of Contents
 
@@ -18,26 +18,26 @@
 
 ## 1. Brand Overview
 
-Attio is a modern CRM platform designed for tech-savvy professionals. The brand identity reflects a clean, professional, and accessible design language with a focus on clarity and restraint.
+Because You Are Busy (BYAB) is an operations, transformation, and growth consultancy founded in 2005. The brand identity reflects a clean, professional, and authoritative design language — pure grayscale from black to white — communicating structure, clarity, and trust.
 
 ### Brand Attributes
-- Tone: Modern
-- Energy: Medium
-- Target Audience: Tech-savvy professionals
+- Tone: Authoritative, direct, confident
+- Energy: Measured, professional
+- Target Audience: Founders, managing partners, law firm partners, B2B leaders
 - Design Framework: Tailwind CSS
-- Color Scheme: Light mode primary
+- Color Scheme: Pure grayscale, light mode primary
 
 ### Quick Reference
 - Font Family: Inter
 - Base Spacing Unit: 8px
 - Default Border Radius: 8px
-- Color Scheme: Light
+- Color Scheme: Light (pure grayscale)
 
 ---
 
 ## 2. Logo Guidelines
 
-The Attio logo is the cornerstone of the brand identity. It must be used consistently across all touchpoints.
+The Because Busy logo is the cornerstone of the brand identity. It must be used consistently across all touchpoints.
 
 ### Logo Specifications
 - Primary format: SVG wordmark

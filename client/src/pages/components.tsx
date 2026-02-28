@@ -49,16 +49,16 @@ const spacingScale = [
 ];
 
 const siteSections = [
-  { id: "header", name: "Header", description: "Fixed navigation bar with logo, anchor links (Services, Work, About, Contact), and primary CTA button.", tokens: "bg: Background / backdrop-blur, text: Link (#666666), CTA: Accent (#000000)" },
-  { id: "hero", name: "Hero", description: "Full-width intro with label, display heading, subtitle, and primary + secondary action buttons.", tokens: "heading: Text Primary, accent word: Primary (#999999), buttons: Accent + #F5F5F5" },
-  { id: "marquee", name: "Marquee", description: "Infinite horizontal scroll of keyword labels separated by borders.", tokens: "text: Primary (#999999), border: Gray 100" },
-  { id: "services", name: "Services", description: "2×2 grid of numbered service cards with title, description, and section header with CTA link.", tokens: "card bg: Gray 50, number: Primary (#999999), text: Link (#666666)" },
-  { id: "work", name: "Case Studies", description: "Stacked project rows with title, category badge, year, and arrow icon. Border-separated list.", tokens: "badge bg: Gray 100, badge text: Link, year: Primary (#999999)" },
-  { id: "stats", name: "Stats", description: "Dark panel with 2×4 / 4-column grid of key metrics (value + label).", tokens: "panel bg: Accent (#000000), values: #FFFFFF, labels: Gray 400" },
-  { id: "about", name: "About", description: "Two-column layout with mission heading on left, description + tag badges on right.", tokens: "tags bg: Gray 100, tag text: Link (#666666)" },
-  { id: "testimonial", name: "Testimonial", description: "Centered blockquote with avatar initial, author name, and title.", tokens: "avatar bg: Primary (#999999), avatar text: Text Primary" },
-  { id: "contact", name: "Contact", description: "Two-column layout with heading + contact info on left, form (name, email, message, submit) on right.", tokens: "inputs: default border/bg, submit: Accent (#000000)" },
-  { id: "footer", name: "Footer", description: "Minimal bar with logo, copyright text, and link to Components page.", tokens: "text: Link (#666666)" },
+  { id: "header", name: "Header", description: "Fixed navigation bar with Because Busy logo, anchor links (Services, Track Record, About, Contact), and primary CTA button.", tokens: "bg: Background / backdrop-blur, text: Link (#666666), CTA: Accent (#000000)" },
+  { id: "hero", name: "Hero", description: "Full-width intro with 'Since 2005' label, display heading 'We run what you can't get to anymore.', subtitle, and primary + secondary action buttons.", tokens: "heading: Text Primary, accent word: Primary (#999999), buttons: Accent + #F5F5F5" },
+  { id: "marquee", name: "Marquee", description: "Infinite horizontal scroll of expertise keywords: Operations, Transformation, Growth, Outbound, Data, Organization, Finance, Strategy.", tokens: "text: Primary (#999999), border: Gray 100" },
+  { id: "services", name: "Services", description: "2×2 grid: Operational Backbone, Transformation & Data, Growth Engine, Legal Practice Ops. Numbered cards with title, description, and section header with CTA link.", tokens: "card bg: Gray 50, number: Primary (#999999), text: Link (#666666)" },
+  { id: "work", name: "Engagements", description: "Stacked engagement rows with title, category badge, year, and arrow icon. Border-separated list.", tokens: "badge bg: Gray 100, badge text: Link, year: Primary (#999999)" },
+  { id: "stats", name: "Stats", description: "Dark panel with 4 key metrics: 20 years, 57% profitability, 3 expertise pillars, 0€ external debt.", tokens: "panel bg: Accent (#000000), values: #FFFFFF, labels: Gray 400" },
+  { id: "about", name: "About", description: "Two-column layout: 'We partner with founders who refuse to drown in their own operations.' Three converging forces: operations (Anne), systems & data (Georges), growth (Romain).", tokens: "tags bg: Gray 100, tag text: Link (#666666)" },
+  { id: "testimonial", name: "Testimonial", description: "Centered blockquote: 'They didn't just take work off my plate. They rebuilt how my company runs — and revenue followed.' — M. Laurent, Managing Partner.", tokens: "avatar bg: Primary (#999999), avatar text: Text Primary" },
+  { id: "contact", name: "Contact", description: "Two-column layout with heading 'Let's take something off your plate.' + contact info (hello@becausebusy.com, Paris & La Rochelle) on left, form on right.", tokens: "inputs: default border/bg, submit: Accent (#000000)" },
+  { id: "footer", name: "Footer", description: "Minimal bar with Because Busy logo, copyright text (© 2005–2026), and link to Components page.", tokens: "text: Link (#666666)" },
 ];
 
 const navSections = [
@@ -181,8 +181,8 @@ export default function Components() {
                 Components
               </h1>
               <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mt-4 sm:mt-6 leading-relaxed max-w-xl" data-testid="text-hero-description">
-                The single source of truth for our brand identity, design tokens, UI elements,
-                and site structure. Everything needed to build and extend the site consistently.
+                The single source of truth for the Because Busy brand identity, design tokens,
+                UI elements, and site structure. Everything needed to build and extend the site consistently.
               </p>
               <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-8 sm:mt-10">
                 <a
