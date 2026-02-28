@@ -1,55 +1,44 @@
-# Attio
+# Premium Growth Agency
 
-> Attio is a modern CRM platform designed for tech-savvy professionals. Powerful, flexible, and intuitive — build meaningful relationships with your customers at scale.
+> Strategy, design, and performance marketing for ambitious companies ready to dominate their market. We build brands that outgrow expectations.
 
 ## Pages
 
-- [Homepage](/) — Main landing page with product overview, features, pricing, testimonials, and FAQ
+- [Homepage](/) — Agency landing page with services, case studies, stats, about, testimonial, and contact form
 - [Brand Guidelines](/brand) — Complete design system documentation including logo, colors, typography, spacing, and components
 
-## Product Overview
+## Services
 
-Attio is a CRM that adapts to your process. It provides lightning-fast performance, full customization, real-time reporting, team collaboration, enterprise security, and an API-first platform.
+1. Brand Strategy — Positioning, messaging, and market analysis
+2. Identity Design — Visual systems that command attention and build recognition
+3. Performance Marketing — Data-driven campaigns that turn ad spend into revenue growth
+4. Web & Digital — Conversion-optimized websites and digital experiences
 
-## Key Features
+## Selected Work
 
-- Lightning fast — Built for speed, every interaction feels instant
-- Fully customizable — Custom objects, fields, and views built your way
-- Real-time reporting — Live dashboards and analytics
-- Team collaboration — Shared notes, mentions, and activity feeds
-- Enterprise security — SOC 2 certified with SAML SSO, role-based access, and audit logs
-- API-first platform — REST API and webhooks for integrations
+- Theorem — Brand Identity (2025)
+- Northlight — Web & Performance (2025)
+- Arcadia — Full Rebrand (2024)
 
-## How It Works
+## Key Metrics
 
-1. Connect your data — Import from CSV, Salesforce, HubSpot, and more
-2. Customize your workspace — Build custom objects, views, and automations
-3. Close more deals — Real-time insights and automated follow-ups
+- 150+ projects delivered
+- 3.2x average ROI
+- 40+ brands scaled
+- 98% client retention
 
-## Pricing
+## Approach
 
-- Free: $0 forever — Up to 1,000 contacts, basic reporting, email integration, mobile app
-- Pro: $29/user/month — Unlimited contacts, advanced reporting, custom objects, API access, automations, priority support
-- Enterprise: Custom pricing — SAML SSO, audit logs, dedicated CSM, custom SLA, advanced security
+Strategy-led, data-informed, design-obsessed. Every engagement starts with deep understanding of the market, competition, and positioning.
 
-## FAQ
+## Locations
 
-- Setup takes under 15 minutes
-- Supports migration from Salesforce, HubSpot, Pipedrive, and other CRMs
-- Free plan available, no credit card required
-- All plans include email support; Pro gets priority support; Enterprise gets dedicated CSM
+London & New York
+
+## Contact
+
+hello@agency.com
 
 ## Brand Identity
 
-- Primary Color: #B5BDC9
-- Accent Color: #202124
-- Background: #FFFFFF
-- Text: #1C1D1F
-- Links: #505967
-- Font: Inter (body & headings), JetBrains Mono (code)
-- Spacing: 8px grid system
-- Border Radius: 8px default, 10px buttons
-
-## Full Design System
-
-See [/llms-full.txt](/llms-full.txt) for complete brand guidelines and design token specifications.
+Full design system available at [/brand](/brand) and [/llms-full.txt](/llms-full.txt).
