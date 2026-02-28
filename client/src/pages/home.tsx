@@ -2,6 +2,10 @@ import { Link } from "wouter";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import logoBlack from "@assets/byab-square-logo-black_1772260022058.png";
 import logoWhite from "@assets/byab-square-logo-white_1772260022059.png";
+import photoAnne from "@assets/byab-profiles-neon-square-anne_1772263504235.png";
+import photoCecile from "@assets/byab-profiles-neon-square-cecile_1772263504235.png";
+import photoGeorges from "@assets/byab-profiles-neon-square-georges_1772263504235.png";
+import photoRomain from "@assets/byab-profiles-neon-square-romain_1772263504234.png";
 
 function Header() {
   return (
@@ -303,6 +307,25 @@ function About() {
                 </span>
               ))}
             </div>
+            <div className="mt-8 grid grid-cols-4 gap-4">
+              {[
+                { src: photoAnne, name: "Anne Grosz", role: "Operations" },
+                { src: photoCecile, name: "Cécile Noiriel", role: "Conductor" },
+                { src: photoGeorges, name: "Georges Grosz", role: "Transformation" },
+                { src: photoRomain, name: "Romain Cornu", role: "Growth" },
+              ].map((member) => (
+                <div key={member.name} className="text-center" data-testid={`about-member-${member.name.split(" ")[0].toLowerCase()}`}>
+                  <img
+                    src={member.src}
+                    alt={member.name}
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover mx-auto ring-2 ring-border/50"
+                    data-testid={`img-about-${member.name.split(" ")[0].toLowerCase()}`}
+                  />
+                  <p className="text-xs font-medium text-foreground mt-2">{member.name}</p>
+                  <p className="text-[10px]" style={{ color: "#777777" }}>{member.role}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -315,6 +338,8 @@ function Story() {
     {
       year: "2005",
       title: "The first seed",
+      photo: photoCecile,
+      photoAlt: "Cécile Noiriel",
       content: (
         <>
           <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
@@ -348,6 +373,8 @@ function Story() {
     {
       year: "2015",
       title: "Specialization: law firms & SMEs",
+      photo: photoAnne,
+      photoAlt: "Anne Grosz",
       content: (
         <>
           <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
@@ -381,6 +408,8 @@ function Story() {
     {
       year: "2020",
       title: "Consolidation: craft over startup",
+      photo: null,
+      photoAlt: null,
       content: (
         <>
           <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
@@ -399,6 +428,8 @@ function Story() {
     {
       year: "2025",
       title: "Georges: the transformation & data layer",
+      photo: photoGeorges,
+      photoAlt: "Georges Grosz",
       content: (
         <>
           <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
@@ -417,6 +448,8 @@ function Story() {
     {
       year: "2025–26",
       title: "Romain: the growth machine",
+      photo: photoRomain,
+      photoAlt: "Romain Cornu",
       content: (
         <>
           <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
@@ -480,7 +513,17 @@ function Story() {
                 <span className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground font-mono">{entry.year}</span>
               </div>
               <div>
-                <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-4">{entry.title}</h3>
+                <div className="flex items-center gap-4 mb-4">
+                  {entry.photo && (
+                    <img
+                      src={entry.photo}
+                      alt={entry.photoAlt || ""}
+                      className="w-12 h-12 rounded-full object-cover flex-shrink-0 ring-2 ring-border/50"
+                      data-testid={`img-story-${entry.photoAlt?.split(" ")[0]?.toLowerCase()}`}
+                    />
+                  )}
+                  <h3 className="text-lg sm:text-xl font-semibold text-foreground">{entry.title}</h3>
+                </div>
                 {entry.content}
               </div>
             </article>
