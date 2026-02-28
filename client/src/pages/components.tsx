@@ -851,7 +851,7 @@ export default function Components() {
             <div className="p-6 sm:p-8 rounded-lg" style={{ backgroundColor: "#000000" }}>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <img src={logoWhite} alt="BYAB logo" className="h-6 w-6 mb-3" />
+                  <img src={logoHorizontalBlack} alt="BYAB logo" className="h-6 w-auto mb-3" />
                   <p className="text-sm leading-relaxed" style={{ color: "#777777" }}>
                     Components maintained by the design team.
                   </p>
