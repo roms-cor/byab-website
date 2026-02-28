@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Copy, Check, ChevronRight, ArrowDown, Palette, Type, Grid3X3, Layers, BookOpen, Image } from "lucide-react";
+import { Copy, Check, ArrowDown, Palette, Type, Grid3X3, Layers, BookOpen, Image, LayoutTemplate } from "lucide-react";
 import logoSvg from "@assets/logo.svg";
 
 const brandColors = [
@@ -47,13 +47,27 @@ const spacingScale = [
   { name: "4xl", value: "96px", multiplier: "12x" },
 ];
 
+const siteSections = [
+  { id: "header", name: "Header", description: "Fixed navigation bar with logo, anchor links (Services, Work, About, Contact), and primary CTA button.", tokens: "bg: Background / backdrop-blur, text: Link (#505967), CTA: Accent (#202124)" },
+  { id: "hero", name: "Hero", description: "Full-width intro with label, display heading, subtitle, and primary + secondary action buttons.", tokens: "heading: Text Primary, accent word: Primary (#B5BDC9), buttons: Accent + FAFAFB" },
+  { id: "marquee", name: "Marquee", description: "Infinite horizontal scroll of keyword labels separated by borders.", tokens: "text: Primary (#B5BDC9), border: Slate 100" },
+  { id: "services", name: "Services", description: "2×2 grid of numbered service cards with title, description, and section header with CTA link.", tokens: "card bg: Slate 50, number: Primary (#B5BDC9), text: Link (#505967)" },
+  { id: "work", name: "Case Studies", description: "Stacked project rows with title, category badge, year, and arrow icon. Border-separated list.", tokens: "badge bg: Slate 100, badge text: Link, year: Primary (#B5BDC9)" },
+  { id: "stats", name: "Stats", description: "Dark panel with 2×4 / 4-column grid of key metrics (value + label).", tokens: "panel bg: Accent (#202124), values: #F3F4F6, labels: Slate 400" },
+  { id: "about", name: "About", description: "Two-column layout with mission heading on left, description + tag badges on right.", tokens: "tags bg: Slate 100, tag text: Link (#505967)" },
+  { id: "testimonial", name: "Testimonial", description: "Centered blockquote with avatar initial, author name, and title.", tokens: "avatar bg: Primary (#B5BDC9), avatar text: Text Primary" },
+  { id: "contact", name: "Contact", description: "Two-column layout with heading + contact info on left, form (name, email, message, submit) on right.", tokens: "inputs: default border/bg, submit: Accent (#202124)" },
+  { id: "footer", name: "Footer", description: "Minimal bar with logo, copyright text, and link to Components page.", tokens: "text: Link (#505967)" },
+];
+
 const navSections = [
   { id: "overview", label: "Overview", icon: BookOpen },
   { id: "logo", label: "Logo", icon: Image },
   { id: "colors", label: "Colors", icon: Palette },
   { id: "typography", label: "Typography", icon: Type },
   { id: "spacing", label: "Spacing", icon: Grid3X3 },
-  { id: "components", label: "Components", icon: Layers },
+  { id: "ui-components", label: "UI Components", icon: Layers },
+  { id: "sections", label: "Site Sections", icon: LayoutTemplate },
   { id: "guidelines", label: "Guidelines", icon: BookOpen },
 ];
 
@@ -106,7 +120,7 @@ function SideNav({ activeSection }: { activeSection: string }) {
   );
 }
 
-export default function BrandGuidelines() {
+export default function Components() {
   const [activeSection, setActiveSection] = useState("overview");
 
   useEffect(() => {
@@ -134,11 +148,11 @@ export default function BrandGuidelines() {
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50" role="banner">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <a href="/" aria-label="Home">
-              <img src={logoSvg} alt="Attio logo" className="h-5" data-testid="img-logo-header" width="103" height="26" />
+            <a href="/" aria-label="Home" data-testid="link-logo-home">
+              <img src={logoSvg} alt="Logo" className="h-5" data-testid="img-logo-header" width="103" height="26" />
             </a>
             <span className="text-border/80 text-sm font-light" aria-hidden="true">/</span>
-            <span className="text-sm font-medium text-muted-foreground">Brand Guidelines</span>
+            <span className="text-sm font-medium text-muted-foreground">Components</span>
           </div>
           <span className="text-xs text-muted-foreground font-mono px-2 py-1 rounded-md bg-accent" data-testid="text-version">v1.0</span>
         </div>
@@ -152,7 +166,6 @@ export default function BrandGuidelines() {
 
         <main className="flex-1 min-w-0" role="main">
 
-          {/* ─── HERO / OVERVIEW ─── */}
           <section id="overview" aria-labelledby="overview-heading" className="px-4 sm:px-6 lg:px-16 py-12 sm:py-16 lg:py-24">
             <article className="max-w-3xl">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent text-xs font-medium text-muted-foreground mb-6 sm:mb-8" data-testid="badge-design-system">
@@ -164,11 +177,11 @@ export default function BrandGuidelines() {
                 className="text-4xl sm:text-5xl lg:text-7xl font-semibold tracking-tight text-foreground leading-[1.05]"
                 data-testid="text-hero-title"
               >
-                Brand<br />Guidelines
+                Components
               </h1>
               <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mt-4 sm:mt-6 leading-relaxed max-w-xl" data-testid="text-hero-description">
-                A comprehensive guide to our visual identity, design tokens, and component library.
-                Everything you need to build consistent, beautiful interfaces.
+                The single source of truth for our brand identity, design tokens, UI elements,
+                and site structure. Everything needed to build and extend the site consistently.
               </p>
               <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-8 sm:mt-10">
                 <a
@@ -181,12 +194,12 @@ export default function BrandGuidelines() {
                   <ArrowDown className="w-3.5 h-3.5" aria-hidden="true" />
                 </a>
                 <a
-                  href="/llms.txt"
-                  data-testid="link-llms-txt"
+                  href="#sections"
+                  data-testid="link-site-sections"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[10px] text-sm font-medium border border-border/50 text-muted-foreground transition-opacity duration-150"
                   style={{ backgroundColor: "#FAFAFB" }}
                 >
-                  llms.txt
+                  Site sections
                 </a>
               </div>
             </article>
@@ -196,7 +209,7 @@ export default function BrandGuidelines() {
                 { label: "Font Family", value: "Inter", description: "Primary typeface for all text" },
                 { label: "Base Unit", value: "8px", description: "Spacing grid foundation" },
                 { label: "Border Radius", value: "8px", description: "Default corner rounding" },
-                { label: "Color Scheme", value: "Light", description: "Primary color mode" },
+                { label: "Sections", value: "10", description: "Available site sections" },
               ].map((item) => (
                 <article
                   key={item.label}
@@ -213,7 +226,6 @@ export default function BrandGuidelines() {
 
           <hr className="mx-4 sm:mx-6 lg:mx-16 border-border/50" aria-hidden="true" />
 
-          {/* ─── LOGO ─── */}
           <section id="logo" aria-labelledby="logo-heading" className="px-4 sm:px-6 lg:px-16 py-12 sm:py-16 lg:py-24">
             <header className="max-w-3xl mb-8 sm:mb-12">
               <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium mb-2 sm:mb-3" aria-hidden="true">01</p>
@@ -221,17 +233,17 @@ export default function BrandGuidelines() {
                 Logo
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground mt-2 sm:mt-3 leading-relaxed">
-                Our logo is the cornerstone of our brand identity. Use it consistently across all touchpoints to ensure brand recognition.
+                Our logo is the cornerstone of the brand identity. Use it consistently across all touchpoints.
               </p>
             </header>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <figure className="relative rounded-lg border border-border/50 bg-white p-8 sm:p-12 flex items-center justify-center min-h-[160px] sm:min-h-[200px]">
-                <img src={logoSvg} alt="Attio logo on light background" className="h-6 sm:h-8" data-testid="img-logo-light" width="103" height="26" />
+                <img src={logoSvg} alt="Logo on light background" className="h-6 sm:h-8" data-testid="img-logo-light" width="103" height="26" />
                 <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs text-muted-foreground font-medium">Light background</figcaption>
               </figure>
               <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex items-center justify-center min-h-[160px] sm:min-h-[200px]" style={{ backgroundColor: "#202124" }}>
-                <img src={logoSvg} alt="Attio logo on dark background (inverted)" className="h-6 sm:h-8 invert" data-testid="img-logo-dark" width="103" height="26" />
+                <img src={logoSvg} alt="Logo on dark background (inverted)" className="h-6 sm:h-8 invert" data-testid="img-logo-dark" width="103" height="26" />
                 <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium" style={{ color: "#8C95A5" }}>Dark background</figcaption>
               </figure>
             </div>
@@ -251,39 +263,10 @@ export default function BrandGuidelines() {
                 </article>
               ))}
             </div>
-
-            <div className="mt-8 sm:mt-12 p-4 sm:p-6 rounded-lg border border-border/50 bg-card/30">
-              <h3 className="text-sm font-semibold text-foreground mb-4">Usage Rules</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-                {[
-                  { rule: "Maintain original proportions", allowed: true },
-                  { rule: "Use approved color variations only", allowed: true },
-                  { rule: "Ensure adequate contrast against backgrounds", allowed: true },
-                  { rule: "Keep minimum clear space around logo", allowed: true },
-                  { rule: "Do not stretch or distort", allowed: false },
-                  { rule: "Do not add effects or shadows", allowed: false },
-                  { rule: "Do not place on busy backgrounds", allowed: false },
-                  { rule: "Do not rotate or skew", allowed: false },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 text-sm" data-testid={`rule-${i}`}>
-                    <span
-                      className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold ${
-                        item.allowed ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-600"
-                      }`}
-                      aria-label={item.allowed ? "Do" : "Don't"}
-                    >
-                      {item.allowed ? "+" : "-"}
-                    </span>
-                    <span className="text-muted-foreground">{item.rule}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </section>
 
           <hr className="mx-4 sm:mx-6 lg:mx-16 border-border/50" aria-hidden="true" />
 
-          {/* ─── COLORS ─── */}
           <section id="colors" aria-labelledby="colors-heading" className="px-4 sm:px-6 lg:px-16 py-12 sm:py-16 lg:py-24">
             <header className="max-w-3xl mb-8 sm:mb-12">
               <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium mb-2 sm:mb-3" aria-hidden="true">02</p>
@@ -291,8 +274,7 @@ export default function BrandGuidelines() {
                 Colors
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground mt-2 sm:mt-3 leading-relaxed">
-                Our color palette is designed to be clean, professional, and accessible.
-                Each color has a specific purpose in the design system.
+                Our color palette is clean, professional, and accessible. Each color has a specific role.
               </p>
             </header>
 
@@ -381,7 +363,6 @@ export default function BrandGuidelines() {
 
           <hr className="mx-4 sm:mx-6 lg:mx-16 border-border/50" aria-hidden="true" />
 
-          {/* ─── TYPOGRAPHY ─── */}
           <section id="typography" aria-labelledby="typography-heading" className="px-4 sm:px-6 lg:px-16 py-12 sm:py-16 lg:py-24">
             <header className="max-w-3xl mb-8 sm:mb-12">
               <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium mb-2 sm:mb-3" aria-hidden="true">03</p>
@@ -389,8 +370,7 @@ export default function BrandGuidelines() {
                 Typography
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground mt-2 sm:mt-3 leading-relaxed">
-                Inter is our primary typeface, providing excellent readability and a modern aesthetic
-                across all sizes and weights.
+                Inter is our primary typeface, providing excellent readability and a modern aesthetic.
               </p>
             </header>
 
@@ -466,28 +446,10 @@ export default function BrandGuidelines() {
                 </div>
               ))}
             </div>
-
-            <div className="mt-8 sm:mt-12 p-4 sm:p-6 rounded-lg border border-border/50 bg-card/30">
-              <h3 className="text-sm font-semibold text-foreground mb-4">Font Weight Usage</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[
-                  { weight: "Regular (400)", usage: "Body text, descriptions, paragraphs" },
-                  { weight: "Medium (500)", usage: "Labels, captions, navigation items" },
-                  { weight: "Semibold (600)", usage: "Headings, titles, emphasis" },
-                  { weight: "Bold (700)", usage: "Display headings, key metrics" },
-                ].map((item) => (
-                  <article key={item.weight} data-testid={`card-weight-${item.weight.split(" ")[0].toLowerCase()}`}>
-                    <h4 className="text-sm font-medium text-foreground">{item.weight}</h4>
-                    <p className="text-xs text-muted-foreground mt-1">{item.usage}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
           </section>
 
           <hr className="mx-4 sm:mx-6 lg:mx-16 border-border/50" aria-hidden="true" />
 
-          {/* ─── SPACING ─── */}
           <section id="spacing" aria-labelledby="spacing-heading" className="px-4 sm:px-6 lg:px-16 py-12 sm:py-16 lg:py-24">
             <header className="max-w-3xl mb-8 sm:mb-12">
               <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium mb-2 sm:mb-3" aria-hidden="true">04</p>
@@ -495,8 +457,7 @@ export default function BrandGuidelines() {
                 Spacing
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground mt-2 sm:mt-3 leading-relaxed">
-                Our spacing system is based on an 8px grid, providing consistent rhythm
-                and alignment across all interfaces.
+                Based on an 8px grid for consistent rhythm and alignment.
               </p>
             </header>
 
@@ -552,16 +513,14 @@ export default function BrandGuidelines() {
 
           <hr className="mx-4 sm:mx-6 lg:mx-16 border-border/50" aria-hidden="true" />
 
-          {/* ─── COMPONENTS ─── */}
-          <section id="components" aria-labelledby="components-heading" className="px-4 sm:px-6 lg:px-16 py-12 sm:py-16 lg:py-24">
+          <section id="ui-components" aria-labelledby="ui-components-heading" className="px-4 sm:px-6 lg:px-16 py-12 sm:py-16 lg:py-24">
             <header className="max-w-3xl mb-8 sm:mb-12">
               <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium mb-2 sm:mb-3" aria-hidden="true">05</p>
-              <h2 id="components-heading" className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground" data-testid="text-section-components">
-                Components
+              <h2 id="ui-components-heading" className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground" data-testid="text-section-ui-components">
+                UI Components
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground mt-2 sm:mt-3 leading-relaxed">
-                Core UI components with their styling specifications. Every component follows
-                the design tokens defined above.
+                Core UI elements with their styling specs. Every component follows the tokens above.
               </p>
             </header>
 
@@ -576,7 +535,7 @@ export default function BrandGuidelines() {
                     style={{ backgroundColor: "#202124", color: "#F3F4F6", borderRadius: "10px", border: "1px solid #505967" }}
                     role="presentation"
                   >
-                    Start for free
+                    Start a project
                   </span>
                   <span
                     className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium opacity-50"
@@ -610,7 +569,7 @@ export default function BrandGuidelines() {
                     style={{ backgroundColor: "#FAFAFB", color: "#232529", borderRadius: "0px" }}
                     role="presentation"
                   >
-                    Ask Attio
+                    View our work
                   </span>
                   <span
                     className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium border border-border/50 opacity-50"
@@ -710,24 +669,80 @@ export default function BrandGuidelines() {
 
           <hr className="mx-4 sm:mx-6 lg:mx-16 border-border/50" aria-hidden="true" />
 
-          {/* ─── GUIDELINES ─── */}
-          <section id="guidelines" aria-labelledby="guidelines-heading" className="px-4 sm:px-6 lg:px-16 py-12 sm:py-16 lg:py-24">
+          <section id="sections" aria-labelledby="sections-heading" className="px-4 sm:px-6 lg:px-16 py-12 sm:py-16 lg:py-24">
             <header className="max-w-3xl mb-8 sm:mb-12">
               <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium mb-2 sm:mb-3" aria-hidden="true">06</p>
+              <h2 id="sections-heading" className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground" data-testid="text-section-sections">
+                Site Sections
+              </h2>
+              <p className="text-sm sm:text-base text-muted-foreground mt-2 sm:mt-3 leading-relaxed">
+                Every section available on the site, with its purpose, structure, and the design tokens it uses.
+                This is the definitive reference for building and extending pages.
+              </p>
+            </header>
+
+            <div className="space-y-0 border-t border-border/50">
+              {siteSections.map((section, i) => (
+                <article
+                  key={section.id}
+                  className="border-b border-border/50 py-5 sm:py-6"
+                  data-testid={`section-ref-${section.id}`}
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6">
+                    <div className="flex items-center gap-3 sm:w-44 flex-shrink-0">
+                      <span className="text-xs font-mono" style={{ color: "#B5BDC9" }}>
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="text-sm sm:text-base font-semibold text-foreground">{section.name}</h3>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm leading-relaxed" style={{ color: "#505967" }}>{section.description}</p>
+                      <p className="text-xs font-mono mt-2" style={{ color: "#8C95A5" }}>{section.tokens}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-8 sm:mt-12 p-4 sm:p-6 rounded-lg border border-border/50 bg-card/30">
+              <h3 className="text-sm font-semibold text-foreground mb-3">Page Structure</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                The homepage follows this exact section order. All sections are wrapped in semantic HTML5 elements
+                with proper heading hierarchy (h1 in Hero, h2 per section, h3 for sub-items).
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {siteSections.map((section) => (
+                  <span
+                    key={section.id}
+                    className="text-xs font-mono px-2.5 py-1 rounded-md"
+                    style={{ backgroundColor: "#EEF0F3", color: "#505967" }}
+                  >
+                    {section.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <hr className="mx-4 sm:mx-6 lg:mx-16 border-border/50" aria-hidden="true" />
+
+          <section id="guidelines" aria-labelledby="guidelines-heading" className="px-4 sm:px-6 lg:px-16 py-12 sm:py-16 lg:py-24">
+            <header className="max-w-3xl mb-8 sm:mb-12">
+              <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium mb-2 sm:mb-3" aria-hidden="true">07</p>
               <h2 id="guidelines-heading" className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground" data-testid="text-section-guidelines">
                 Guidelines
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground mt-2 sm:mt-3 leading-relaxed">
-                Best practices and principles for applying the design system consistently.
+                Principles for applying the design system consistently.
               </p>
             </header>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
               {[
-                { num: "01", title: "Hierarchy", desc: "Use size, weight, and color to create clear visual hierarchy. Headings should be semibold (600) and body text regular (400). Use muted foreground for secondary information." },
-                { num: "02", title: "Consistency", desc: "Stick to the spacing scale and never use arbitrary values. All spacing should be multiples of 8px. Maintain consistent padding and gaps throughout the interface." },
-                { num: "03", title: "Restraint", desc: "Less is more. Avoid unnecessary decoration, shadows, or color. Let content breathe with generous whitespace. Every element should serve a clear purpose." },
-                { num: "04", title: "Accessibility", desc: "All text must meet WCAG AA contrast requirements. Interactive elements need visible focus states. Use semantic HTML and proper ARIA labels for screen readers." },
+                { num: "01", title: "Hierarchy", desc: "Use size, weight, and color to create clear visual hierarchy. Headings should be semibold (600) and body text regular (400)." },
+                { num: "02", title: "Consistency", desc: "Stick to the spacing scale and never use arbitrary values. All spacing should be multiples of 8px." },
+                { num: "03", title: "Restraint", desc: "Less is more. Avoid unnecessary decoration, shadows, or color. Let content breathe with generous whitespace." },
+                { num: "04", title: "Accessibility", desc: "All text must meet WCAG AA contrast requirements. Interactive elements need visible focus states and semantic HTML." },
               ].map((p) => (
                 <article key={p.num} className="p-6 sm:p-8 rounded-lg border border-border/50 bg-card/30" data-testid={`card-principle-${p.num}`}>
                   <div className="flex items-center gap-3 mb-4">
@@ -765,7 +780,7 @@ export default function BrandGuidelines() {
             <article className="p-4 sm:p-6 rounded-lg border border-border/50 bg-card/30">
               <h3 className="text-sm font-semibold text-foreground mb-4">Machine-Readable Resources</h3>
               <p className="text-sm text-muted-foreground mb-4">
-                This design system is optimized for AI and automated consumption. The following files are available for crawlers and AI models:
+                This design system is optimized for AI and automated consumption.
               </p>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-2">
@@ -784,14 +799,13 @@ export default function BrandGuidelines() {
             </article>
           </section>
 
-          {/* ─── FOOTER ─── */}
           <footer className="px-4 sm:px-6 lg:px-16 py-8 sm:py-12" role="contentinfo">
             <div className="p-6 sm:p-8 rounded-lg" style={{ backgroundColor: "#202124" }}>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <img src={logoSvg} alt="Attio logo" className="h-4 invert mb-3" width="103" height="26" />
+                  <img src={logoSvg} alt="Logo" className="h-4 invert mb-3" width="103" height="26" />
                   <p className="text-sm leading-relaxed" style={{ color: "#8C95A5" }}>
-                    Brand guidelines maintained by the design team.
+                    Components maintained by the design team.
                   </p>
                 </div>
                 <p className="text-xs" style={{ color: "#505967" }}>

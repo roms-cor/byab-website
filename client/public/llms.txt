@@ -5,7 +5,7 @@
 ## Pages
 
 - [Homepage](/) — Agency landing page with services, case studies, stats, about, testimonial, and contact form
-- [Brand Guidelines](/brand) — Complete design system documentation including logo, colors, typography, spacing, and components
+- [Components](/components) — Complete design system: brand identity, design tokens, UI components, and site section reference
 
 ## Services
 
@@ -27,10 +27,6 @@
 - 40+ brands scaled
 - 98% client retention
 
-## Approach
-
-Strategy-led, data-informed, design-obsessed. Every engagement starts with deep understanding of the market, competition, and positioning.
-
 ## Locations
 
 London & New York
@@ -39,6 +35,6 @@ London & New York
 
 hello@agency.com
 
-## Brand Identity
+## Design System
 
-Full design system available at [/brand](/brand) and [/llms-full.txt](/llms-full.txt).
+Full components reference (brand identity, colors, typography, spacing, UI components, site sections, guidelines) available at [/components](/components) and [/llms-full.txt](/llms-full.txt).
