@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { Copy, Check, ArrowDown, Download, Palette, Type, Grid3X3, Layers, BookOpen, Image, LayoutTemplate } from "lucide-react";
-import logoBlack from "@assets/byab-square-logo-black_1772260022058.png";
-import logoWhite from "@assets/byab-square-logo-white_1772260022059.png";
 import logoHorizontalBlack from "@assets/byab-horizontal-logo-black_1772264662584.png";
 import logoHorizontalWhite from "@assets/byab-horizontal-logo-white_1772264662585.png";
 
@@ -176,7 +174,7 @@ export default function Components() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <a href="/" aria-label="Home" data-testid="link-logo-home">
-              <img src={logoBlack} alt="BYAB logo" className="h-7 w-7" data-testid="img-logo-header" />
+              <img src={logoHorizontalWhite} alt="BYAB logo" className="h-8 w-auto" data-testid="img-logo-header" />
             </a>
             <span className="text-border/80 text-sm font-light" aria-hidden="true">/</span>
             <span className="text-sm font-medium text-muted-foreground">Components</span>
@@ -267,18 +265,16 @@ export default function Components() {
             <h3 className="text-xs sm:text-sm font-semibold text-foreground mb-4 sm:mb-6 uppercase tracking-wider">Logomark (Square)</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
               <figure className="relative rounded-lg border border-border/50 bg-white p-8 sm:p-12 flex flex-col items-center justify-center min-h-[160px] sm:min-h-[200px] gap-4">
-                <img src={logoBlack} alt="Logomark on light background" className="h-16 sm:h-20 w-16 sm:w-20" data-testid="img-logo-light" />
-                <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs text-muted-foreground font-medium">Light background</figcaption>
-                <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
-                  <DownloadButton src={logoBlack} filename="byab-logomark-black.png" />
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#000000] rounded-full flex items-center justify-center" data-testid="img-logo-light">
+                  <span className="text-white font-bold text-2xl italic">B</span>
                 </div>
+                <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs text-muted-foreground font-medium">Light background</figcaption>
               </figure>
               <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex flex-col items-center justify-center min-h-[160px] sm:min-h-[200px] gap-4" style={{ backgroundColor: "#000000" }}>
-                <img src={logoWhite} alt="Logomark on dark background" className="h-16 sm:h-20 w-16 sm:w-20" data-testid="img-logo-dark" />
-                <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium" style={{ color: "#777777" }}>Dark background</figcaption>
-                <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
-                  <DownloadButton src={logoWhite} filename="byab-logomark-white.png" />
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full flex items-center justify-center" data-testid="img-logo-dark">
+                  <span className="text-black font-bold text-2xl italic">B</span>
                 </div>
+                <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium" style={{ color: "#777777" }}>Dark background</figcaption>
               </figure>
             </div>
 
@@ -288,14 +284,14 @@ export default function Components() {
                 <img src={logoHorizontalWhite} alt="Horizontal logo on light background" className="h-auto w-48 sm:w-64" data-testid="img-logo-horizontal-light" />
                 <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs text-muted-foreground font-medium">Light background</figcaption>
                 <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
-                  <DownloadButton src={logoHorizontalWhite} filename="byab-horizontal-black.png" />
+                  <DownloadButton src={logoHorizontalWhite} filename="byab-horizontal-logo-light.png" />
                 </div>
               </figure>
               <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex flex-col items-center justify-center min-h-[160px] sm:min-h-[200px] gap-4" style={{ backgroundColor: "#000000" }}>
                 <img src={logoHorizontalBlack} alt="Horizontal logo on dark background" className="h-auto w-48 sm:w-64" data-testid="img-logo-horizontal-dark" />
                 <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium" style={{ color: "#777777" }}>Dark background</figcaption>
                 <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
-                  <DownloadButton src={logoHorizontalBlack} filename="byab-horizontal-white.png" />
+                  <DownloadButton src={logoHorizontalBlack} filename="byab-horizontal-logo-dark.png" />
                 </div>
               </figure>
             </div>

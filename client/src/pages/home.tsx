@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import logoBlack from "@assets/byab-square-logo-black_1772260022058.png";
-import logoWhite from "@assets/byab-square-logo-white_1772260022059.png";
+import logoHorizontalWhite from "@assets/byab-horizontal-logo-white_1772264662585.png";
 import photoAnne from "@assets/byab-profiles-neon-square-anne_1772263504235.png";
 import photoCecile from "@assets/byab-profiles-neon-square-cecile_1772263504235.png";
 import photoGeorges from "@assets/byab-profiles-neon-square-georges_1772263504235.png";
@@ -13,7 +12,7 @@ function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl" role="banner">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         <a href="/" aria-label="Home" data-testid="link-logo-home">
-          <img src={logoBlack} alt="Because Busy logo" className="h-7 w-7" data-testid="img-logo-header" />
+          <img src={logoHorizontalWhite} alt="Because Busy logo" className="h-8 w-auto" data-testid="img-logo-header" />
         </a>
         <nav aria-label="Main navigation" className="hidden md:block">
           <ul className="flex items-center gap-8 list-none m-0 p-0">
@@ -774,7 +773,7 @@ function Footer() {
     <footer className="px-4 sm:px-6 lg:px-8 py-10 sm:py-12 border-t border-border/50" role="contentinfo">
       <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-6">
-          <img src={logoBlack} alt="Because Busy logo" className="h-5 w-5" />
+          <img src={logoHorizontalWhite} alt="Because Busy logo" className="h-6 w-auto" />
           <p className="text-xs" style={{ color: "#666666" }}>© 2005–2026 Because You Are Busy. All rights reserved.</p>
         </div>
         <div className="flex items-center gap-6">
