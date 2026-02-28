@@ -15,6 +15,7 @@ function Header() {
             {[
               { label: "Services", href: "#services" },
               { label: "Track Record", href: "#work" },
+              { label: "Story", href: "#story" },
               { label: "About", href: "#about" },
               { label: "Contact", href: "#contact" },
             ].map((item) => (
@@ -309,6 +310,201 @@ function About() {
   );
 }
 
+function Story() {
+  const timeline = [
+    {
+      year: "2005",
+      title: "The first seed",
+      content: (
+        <>
+          <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
+            It all starts on April 1, 2005 with the creation of{" "}
+            <a href="https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab-annuaire">
+              Because You Are Busy (B Y A B)
+            </a>
+            , a consulting firm registered under SIREN 481 631 471. The mission is clear: studies, consulting, and assistance in administrative and commercial organization for SMEs.
+          </p>
+          <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "#666666" }}>
+            Behind this name, ahead of its time, lies a strong conviction: founders don't lack courage or ideas — they lack time and structure to execute them. For nearly twenty years,{" "}
+            <a href="https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab-figaro">
+              BYAB
+            </a>{" "}
+            will live exactly what it promises its clients: an{" "}
+            <a href="https://www.pappers.fr/entreprise/b-y-a-b-because-you-are-busy-481631471" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab-pappers">
+              ultra-lean, ultra-profitable structure
+            </a>
+            , with no fundraising and no hype — revenue around 130,000€, operating profitability above 57%, and near-zero debt.
+          </p>
+        </>
+      ),
+    },
+    {
+      year: "2015",
+      title: "Specialization: law firms & SMEs",
+      content: (
+        <>
+          <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
+            Ten years after BYAB was born, a second entity extends and specializes the intuition:{" "}
+            <a href="https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab2-figaro">
+              Because You Are Busy
+            </a>{" "}
+            (SIREN 814 783 056), created on November 20, 2015 and based at 18 rue Arago, 94400 Vitry-sur-Seine. At its origin:{" "}
+            <a href="https://www.linkedin.com/in/annegrosz" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-anne-linkedin">
+              Anne Grosz
+            </a>
+            , who becomes president, then manager of the structure.
+          </p>
+          <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "#666666" }}>
+            Before launching Because You Are Busy, Anne spent eight years as Secretary General and CFO at{" "}
+            <a href="https://www.infocession.fr/avocats/vatier-associes" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-vatier">
+              Vatier & Associés
+            </a>
+            , a Paris law firm, where she managed accounting, commercial management, treasury, HR, IT, legal documentation, events, and ISO compliance. She knows the daily reality of a law firm intimately: over-solicited partners, overwhelmed staff, critical deadlines.
+          </p>
+          <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "#666666" }}>
+            With{" "}
+            <a href="https://www.societe.com/societe/because-you-are-busy-814783056.html" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab2-societe">
+              Because You Are Busy
+            </a>
+            , Anne transforms this experience into an offer: externalized general secretariat for law firms and SMEs — exactly what she embodied internally, now serving multiple clients.
+          </p>
+        </>
+      ),
+    },
+    {
+      year: "2020",
+      title: "Consolidation: craft over startup",
+      content: (
+        <>
+          <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
+            Over the years,{" "}
+            <a href="https://www.pappers.fr/entreprise/because-you-are-busy-814783056" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab2-pappers">
+              Because You Are Busy
+            </a>{" "}
+            evolves legally: initially created as a SAS with 500€ capital, it transforms into a SARL in 2020. Anne moves from president to manager. This shift reflects a deliberate choice — simplify, anchor in a model that is more craft than startup, aligned with the deeply operational nature of the missions.
+          </p>
+          <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "#666666" }}>
+            Accounts are systematically filed with a confidentiality declaration — consistent with a human-scale consulting firm oriented toward discretion and trust with sensitive clients: law firm partners and SME founders.
+          </p>
+        </>
+      ),
+    },
+    {
+      year: "2025",
+      title: "Georges: the transformation & data layer",
+      content: (
+        <>
+          <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
+            On July 4, 2025, a new leader joins the company:{" "}
+            <a href="https://www.linkedin.com/in/georges-grosz-8aa9613" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-georges-linkedin">
+              Georges Grosz
+            </a>{" "}
+            becomes co-manager alongside Anne. His track record adds a strategic and technological dimension: over 22 years as Senior Executive Consultant at CGI, one of the world's largest IT and management consulting groups, working on transformation, information systems, and data governance. In parallel, he teaches at Université Paris 1 Panthéon-Sorbonne on project management, business analysis, and data.
+          </p>
+          <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "#666666" }}>
+            With Georges, the story levels up: the administrative right-hand becomes a transformation co-pilot, able to translate business challenges into structured, measurable, tooled decisions.
+          </p>
+        </>
+      ),
+    },
+    {
+      year: "2025–26",
+      title: "Romain: the growth machine",
+      content: (
+        <>
+          <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
+            At the same time, another path converges:{" "}
+            <a href="https://fr.linkedin.com/in/romaincornu" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-romain-linkedin">
+              Romain Cornu
+            </a>
+            , entrepreneur and B2B growth specialist. His career is built around one thread: building predictable growth machines.
+          </p>
+          <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "#666666" }}>
+            Head of Marketing at Datananas (B2B outbound SaaS).{" "}
+            <a href="https://www.avizio.fr/expert/romain-cornu" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-romain-avizio">
+              Head of Growth at Clovis
+            </a>
+            , where he designs and runs a sales machine aligning marketing and sales. Growth Advisor and investor at MerciApp, structuring the AARRR funnel. Teacher Outbound at GrowthMakers. CEO of{" "}
+            <a href="https://www.societe.com/societe/oysterz-884894296.html" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-oysterz-societe">
+              Oysterz
+            </a>
+            {" "}(
+            <a href="https://entreprises.lefigaro.fr/oysterz-17/entreprise-884894296" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-oysterz-figaro">
+              SIREN 884 894 296
+            </a>
+            ), a La Rochelle-based firm focused on B2B systems consulting and talent matching. (
+            <a href="https://clay.earth/profile/romain-cornu" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-romain-clay">
+              Full profile on Clay
+            </a>
+            )
+          </p>
+          <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "#666666" }}>
+            Where Anne and Georges spent decades relieving founders' mental load, Romain spent years creating demand, structuring outbound, and turning commercial processes into machines. When he joins Because You Are Busy, the puzzle is complete.
+          </p>
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <section id="story" aria-labelledby="story-heading" className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 border-t border-border/50">
+      <div className="max-w-[1200px] mx-auto">
+        <header className="mb-12 sm:mb-16 max-w-2xl">
+          <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#666666" }} aria-hidden="true">Our story</p>
+          <h2
+            id="story-heading"
+            className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground leading-tight"
+            data-testid="text-section-story"
+          >
+            Twenty years of the same intuition:
+            founders don't lack ideas — they lack
+            time to execute them.
+          </h2>
+        </header>
+
+        <div className="space-y-0">
+          {timeline.map((entry, i) => (
+            <article
+              key={entry.year}
+              className="grid grid-cols-1 lg:grid-cols-[120px_1fr] gap-4 lg:gap-12 py-10 sm:py-12 border-t border-border/50"
+              data-testid={`story-phase-${i}`}
+            >
+              <div className="flex items-start">
+                <span className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground font-mono">{entry.year}</span>
+              </div>
+              <div>
+                <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-4">{entry.title}</h3>
+                {entry.content}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-12 sm:mt-16 p-8 sm:p-12 rounded-lg" style={{ backgroundColor: "#000000" }}>
+          <p className="text-lg sm:text-xl lg:text-2xl font-semibold leading-snug tracking-tight" style={{ color: "#FFFFFF" }} data-testid="text-story-promise">
+            "Because you are busy, we do the work that frees your time —
+            and we do it in a way that makes your growth more readable,
+            more predictable, and better controlled."
+          </p>
+          <div className="mt-6 flex flex-wrap gap-4">
+            <span className="text-xs font-medium" style={{ color: "#777777" }}>
+              Operational depth — Anne, BYAB, law firms
+            </span>
+            <span className="text-xs" style={{ color: "#777777" }}>·</span>
+            <span className="text-xs font-medium" style={{ color: "#777777" }}>
+              Systems & data vision — Georges, CGI, Sorbonne
+            </span>
+            <span className="text-xs" style={{ color: "#777777" }}>·</span>
+            <span className="text-xs font-medium" style={{ color: "#777777" }}>
+              Growth machine — Romain, Datananas, Clovis, MerciApp
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Testimonial() {
   return (
     <section aria-label="Client testimonial" className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28 border-t border-border/50">
@@ -457,6 +653,7 @@ export default function Home() {
         <Work />
         <Stats />
         <About />
+        <Story />
         <Testimonial />
         <Contact />
       </main>

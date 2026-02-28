@@ -56,6 +56,7 @@ const siteSections = [
   { id: "work", name: "Engagements", description: "Stacked engagement rows with title, category badge, year, and arrow icon. Border-separated list.", tokens: "badge bg: Gray 100, badge text: Link, year: Primary (#999999)" },
   { id: "stats", name: "Stats", description: "Dark panel with 4 key metrics: 20 years, 57% profitability, 3 expertise pillars, 0€ external debt.", tokens: "panel bg: Accent (#000000), values: #FFFFFF, labels: Gray 400" },
   { id: "about", name: "About", description: "Two-column layout: 'We partner with founders who refuse to drown in their own operations.' Three converging forces: operations (Anne), systems & data (Georges), growth (Romain).", tokens: "tags bg: Gray 100, tag text: Link (#666666)" },
+  { id: "story", name: "Story", description: "Full company history timeline (2005–2026) with 5 phases: BYAB founding, 2015 law firm specialization, 2020 consolidation, 2025 Georges Grosz joins, 2025–26 Romain Cornu joins. Contains 14 external backlinks to company registries (annuaire-entreprises, Pappers, societe.com, Le Figaro), LinkedIn profiles (Anne Grosz, Georges Grosz, Romain Cornu), Vatier & Associés, Avizio, and Oysterz. Closes with brand promise quote on dark panel.", tokens: "year: Text Primary font-mono, text: Link (#666666), links: Text Primary underline, promise panel: Accent (#000000) bg, #FFFFFF text" },
   { id: "testimonial", name: "Testimonial", description: "Centered blockquote: 'They didn't just take work off my plate. They rebuilt how my company runs — and revenue followed.' — M. Laurent, Managing Partner.", tokens: "avatar bg: Primary (#999999), avatar text: Text Primary" },
   { id: "contact", name: "Contact", description: "Two-column layout with heading 'Let's take something off your plate.' + contact info (hello@becausebusy.com, Paris & La Rochelle) on left, form on right.", tokens: "inputs: default border/bg, submit: Accent (#000000)" },
   { id: "footer", name: "Footer", description: "Minimal bar with Because Busy logo, copyright text (© 2005–2026), and link to Components page.", tokens: "text: Link (#666666)" },
@@ -210,7 +211,7 @@ export default function Components() {
                 { label: "Font Family", value: "Inter", description: "Primary typeface for all text" },
                 { label: "Base Unit", value: "8px", description: "Spacing grid foundation" },
                 { label: "Border Radius", value: "8px", description: "Default corner rounding" },
-                { label: "Sections", value: "10", description: "Available site sections" },
+                { label: "Sections", value: "11", description: "Available site sections" },
               ].map((item) => (
                 <article
                   key={item.label}

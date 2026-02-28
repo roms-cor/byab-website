@@ -1,10 +1,10 @@
-# Because Busy — Operations · Transformation · Growth
+# Because You Are Busy — Operations · Transformation · Growth
 
 > Since 2005, Because You Are Busy (BYAB) helps founders and managing partners who are too busy to do it all. We externalize operations, drive transformation, and engineer growth — so leaders can lead.
 
 ## Pages
 
-- [Homepage](/) — Agency landing page with services, track record, stats, about, testimonial, and contact form
+- [Homepage](/) — Agency landing page with services, track record, company history with backlinks, stats, about, testimonial, and contact form
 - [Components](/components) — Complete design system: brand identity, design tokens, UI components, and site section reference
 
 ## Services
@@ -16,19 +16,19 @@
 
 ## Who We Are
 
-Three forces converge at Because Busy:
+Three forces converge at Because You Are Busy:
 
-- **Anne Grosz** — 20 years of hands-on operational leadership. Former Secretary General at Vatier & Associés (Paris law firm). Founded BYAB in 2005, then Because You Are Busy in 2015. Expert in externalized general secretariat, admin, finance, and law firm operations.
-- **Georges Grosz** — 22 years as Senior Executive Consultant at CGI (international IT & management consulting). Professor at Université Paris 1 Panthéon-Sorbonne. Expert in transformation, information systems, project governance, and data.
-- **Romain Cornu** — Growth engineer. Former Head of Marketing at Datananas, Head of Growth at Clovis, Growth Advisor at MerciApp, Teacher Outbound at GrowthMakers, CEO of Oysterz. Expert in outbound B2B, acquisition funnels, and scalable sales machines.
+- **Anne Grosz** ([LinkedIn](https://www.linkedin.com/in/annegrosz)) — 20 years of hands-on operational leadership. Former Secretary General at [Vatier & Associés](https://www.infocession.fr/avocats/vatier-associes) (Paris law firm). Founded BYAB in 2005, then Because You Are Busy in 2015. Expert in externalized general secretariat, admin, finance, and law firm operations.
+- **Georges Grosz** ([LinkedIn](https://www.linkedin.com/in/georges-grosz-8aa9613)) — 22 years as Senior Executive Consultant at CGI (international IT & management consulting). Professor at Université Paris 1 Panthéon-Sorbonne. Expert in transformation, information systems, project governance, and data.
+- **Romain Cornu** ([LinkedIn](https://fr.linkedin.com/in/romaincornu)) — Growth engineer. Former Head of Marketing at Datananas, [Head of Growth at Clovis](https://www.avizio.fr/expert/romain-cornu), Growth Advisor at MerciApp, Teacher Outbound at GrowthMakers, CEO of [Oysterz](https://www.societe.com/societe/oysterz-884894296.html) ([Le Figaro](https://entreprises.lefigaro.fr/oysterz-17/entreprise-884894296)). Expert in outbound B2B, acquisition funnels, and scalable sales machines.
 
 ## Company History
 
-- **2005** — BYAB (SIREN 481 631 471) created. First "right-hand for busy founders" model. Ultra-lean, 57%+ operating profitability, zero external debt.
-- **2015** — Because You Are Busy (SIREN 814 783 056) created by Anne Grosz. Specialization in externalized general secretariat for law firms and SMEs.
-- **2020** — Transformation from SAS to SARL. Craft model over startup model. Confidential accounts, trust-based client relationships.
-- **2025** — Georges Grosz joins as co-manager. Transformation & data layer added.
-- **2025–2026** — Romain Cornu joins. Growth engineering capability: ICP, packaged offers, outbound funnels, performance metrics.
+- **2005** — [Because You Are Busy (B Y A B)](https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471) (SIREN 481 631 471) created. First "right-hand for busy founders" model. [Ultra-lean, ultra-profitable structure](https://www.pappers.fr/entreprise/b-y-a-b-because-you-are-busy-481631471) — revenue ~130,000€, 57%+ operating profitability, zero external debt. ([Le Figaro](https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471))
+- **2015** — [Because You Are Busy](https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056) (SIREN 814 783 056) created by Anne Grosz. Specialization in [externalized general secretariat](https://www.societe.com/societe/because-you-are-busy-814783056.html) for law firms and SMEs. Anne brings 8 years as Secretary General at [Vatier & Associés](https://www.infocession.fr/avocats/vatier-associes).
+- **2020** — Transformation from SAS to SARL. Craft model over startup model. Confidential accounts, trust-based client relationships. ([Pappers](https://www.pappers.fr/entreprise/because-you-are-busy-814783056))
+- **2025** — Georges Grosz joins as co-manager. Transformation & data layer added. 22 years at CGI, professor at Sorbonne.
+- **2025–2026** — Romain Cornu joins. Growth engineering capability: ICP, packaged offers, outbound funnels, performance metrics. Former Head of Growth at Clovis, Growth Advisor at MerciApp, CEO of [Oysterz](https://entreprises.lefigaro.fr/oysterz-17/entreprise-884894296).
 
 ## Key Metrics
 
@@ -54,6 +54,23 @@ hello@becausebusy.com
 ## Brand Promise
 
 "Because you are busy, we do the work that frees your time — and we do it in a way that makes your growth more readable, more predictable, and better controlled."
+
+## External References
+
+- [Annuaire Entreprises — BYAB](https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471)
+- [Le Figaro — Because You Are Busy](https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056)
+- [Le Figaro — BYAB](https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471)
+- [Pappers — BYAB](https://www.pappers.fr/entreprise/b-y-a-b-because-you-are-busy-481631471)
+- [Societe.com — Because You Are Busy](https://www.societe.com/societe/because-you-are-busy-814783056.html)
+- [Pappers — Because You Are Busy](https://www.pappers.fr/entreprise/because-you-are-busy-814783056)
+- [Anne Grosz — LinkedIn](https://www.linkedin.com/in/annegrosz)
+- [Vatier & Associés — Infocession](https://www.infocession.fr/avocats/vatier-associes)
+- [Georges Grosz — LinkedIn](https://www.linkedin.com/in/georges-grosz-8aa9613)
+- [Romain Cornu — LinkedIn](https://fr.linkedin.com/in/romaincornu)
+- [Romain Cornu — Avizio](https://www.avizio.fr/expert/romain-cornu)
+- [Societe.com — Oysterz](https://www.societe.com/societe/oysterz-884894296.html)
+- [Le Figaro — Oysterz](https://entreprises.lefigaro.fr/oysterz-17/entreprise-884894296)
+- [Romain Cornu — Clay](https://clay.earth/profile/romain-cornu)
 
 ## Design System
 
