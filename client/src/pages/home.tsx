@@ -149,32 +149,44 @@ function TeamSlider() {
             ))}
           </div>
 
-          {teamMembers
-            .map((m, i) => ({ m, i }))
-            .filter(({ i }) => i !== active)
-            .map(({ m, i }, thumbIdx) => {
-              const pos = thumbPositions[thumbIdx] || {};
+          <div className="absolute inset-0 slider-orbit" style={{ zIndex: 4 }}>
+            {teamMembers.map((m, i) => {
+              if (i === active) return null;
+              // Distribute remaining members around the circle
+              const others = teamMembers.filter((_, idx) => idx !== active);
+              const thumbIdx = others.indexOf(m);
+              const angle = (thumbIdx * (360 / others.length)) + 45;
+              const radius = 170; // Position them on the outer rings
+              
               return (
-                <button
+                <div
                   key={m.name}
-                  onClick={() => goTo(i)}
-                  className="absolute w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden"
+                  className="absolute"
                   style={{
-                    ...pos,
-                    zIndex: 5,
-                    border: "2.5px solid #FFFFFF",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-                    transition: "transform 400ms cubic-bezier(0.4,0,0.2,1), box-shadow 400ms ease",
+                    left: "50%",
+                    top: "50%",
+                    transform: `translate(-50%, -50%) rotate(${angle}deg) translateY(-${radius}px)`,
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.2)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.14)"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.08)"; }}
-                  aria-label={`View ${m.name}`}
-                  data-testid={`button-slider-${m.name.split(" ")[0].toLowerCase()}`}
                 >
-                  <img src={m.src} alt={m.name} className="w-full h-full object-cover" />
-                </button>
+                  <button
+                    onClick={() => goTo(i)}
+                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden slider-orbit-reverse"
+                    style={{
+                      border: "2.5px solid #FFFFFF",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+                      transition: "transform 400ms cubic-bezier(0.4,0,0.2,1)",
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.2)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+                    aria-label={`View ${m.name}`}
+                    data-testid={`button-slider-${m.name.split(" ")[0].toLowerCase()}`}
+                  >
+                    <img src={m.src} alt={m.name} className="w-full h-full object-cover" />
+                  </button>
+                </div>
               );
             })}
+          </div>
         </div>
 
         <div className="mt-6 text-center w-full">

@@ -200,11 +200,12 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-.slider-ring-1 { animation: ring-pulse-1 4s ease-in-out infinite; }
-.slider-ring-2 { animation: ring-pulse-2 5s ease-in-out infinite 0.5s; }
-.slider-ring-3 { animation: ring-pulse-3 6s ease-in-out infinite 1s; }
-.slider-orbit { animation: slider-rotate 30s linear infinite; }
-.slider-orbit-reverse { animation: slider-rotate 30s linear infinite reverse; }
+@keyframes slider-rotate-reverse {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+.slider-orbit { animation: slider-rotate 20s linear infinite; }
+.slider-orbit-reverse { animation: slider-rotate-reverse 20s linear infinite; }
 
 /**
  * Using the elevate system.
