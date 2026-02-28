@@ -4,24 +4,24 @@ import logoBlack from "@assets/byab-square-logo-black_1772260022058.png";
 import logoWhite from "@assets/byab-square-logo-white_1772260022059.png";
 
 const brandColors = [
-  { name: "Primary", hex: "#B5BDC9", usage: "Backgrounds, subtle accents, decorative fills" },
-  { name: "Accent", hex: "#202124", usage: "Buttons, headings, primary CTAs" },
+  { name: "Primary", hex: "#999999", usage: "Backgrounds, subtle accents, decorative fills" },
+  { name: "Accent", hex: "#000000", usage: "Buttons, headings, primary CTAs" },
   { name: "Background", hex: "#FFFFFF", usage: "Page backgrounds, content areas" },
-  { name: "Text Primary", hex: "#1C1D1F", usage: "Body text, headings" },
-  { name: "Link", hex: "#505967", usage: "Links, secondary text, navigation" },
+  { name: "Text Primary", hex: "#000000", usage: "Body text, headings" },
+  { name: "Link", hex: "#666666", usage: "Links, secondary text, navigation" },
 ];
 
 const extendedPalette = [
-  { name: "Slate 50", hex: "#F8F9FA" },
-  { name: "Slate 100", hex: "#EEF0F3" },
-  { name: "Slate 200", hex: "#D8DCE2" },
-  { name: "Slate 300", hex: "#B5BDC9" },
-  { name: "Slate 400", hex: "#8C95A5" },
-  { name: "Slate 500", hex: "#505967" },
-  { name: "Slate 600", hex: "#3A4250" },
-  { name: "Slate 700", hex: "#2A3140" },
-  { name: "Slate 800", hex: "#202124" },
-  { name: "Slate 900", hex: "#1C1D1F" },
+  { name: "Gray 50", hex: "#F5F5F5" },
+  { name: "Gray 100", hex: "#E5E5E5" },
+  { name: "Gray 200", hex: "#CCCCCC" },
+  { name: "Gray 300", hex: "#999999" },
+  { name: "Gray 400", hex: "#777777" },
+  { name: "Gray 500", hex: "#666666" },
+  { name: "Gray 600", hex: "#444444" },
+  { name: "Gray 700", hex: "#333333" },
+  { name: "Gray 800", hex: "#1A1A1A" },
+  { name: "Gray 900", hex: "#000000" },
 ];
 
 const typographyScale = [
@@ -49,16 +49,16 @@ const spacingScale = [
 ];
 
 const siteSections = [
-  { id: "header", name: "Header", description: "Fixed navigation bar with logo, anchor links (Services, Work, About, Contact), and primary CTA button.", tokens: "bg: Background / backdrop-blur, text: Link (#505967), CTA: Accent (#202124)" },
-  { id: "hero", name: "Hero", description: "Full-width intro with label, display heading, subtitle, and primary + secondary action buttons.", tokens: "heading: Text Primary, accent word: Primary (#B5BDC9), buttons: Accent + FAFAFB" },
-  { id: "marquee", name: "Marquee", description: "Infinite horizontal scroll of keyword labels separated by borders.", tokens: "text: Primary (#B5BDC9), border: Slate 100" },
-  { id: "services", name: "Services", description: "2×2 grid of numbered service cards with title, description, and section header with CTA link.", tokens: "card bg: Slate 50, number: Primary (#B5BDC9), text: Link (#505967)" },
-  { id: "work", name: "Case Studies", description: "Stacked project rows with title, category badge, year, and arrow icon. Border-separated list.", tokens: "badge bg: Slate 100, badge text: Link, year: Primary (#B5BDC9)" },
-  { id: "stats", name: "Stats", description: "Dark panel with 2×4 / 4-column grid of key metrics (value + label).", tokens: "panel bg: Accent (#202124), values: #F3F4F6, labels: Slate 400" },
-  { id: "about", name: "About", description: "Two-column layout with mission heading on left, description + tag badges on right.", tokens: "tags bg: Slate 100, tag text: Link (#505967)" },
-  { id: "testimonial", name: "Testimonial", description: "Centered blockquote with avatar initial, author name, and title.", tokens: "avatar bg: Primary (#B5BDC9), avatar text: Text Primary" },
-  { id: "contact", name: "Contact", description: "Two-column layout with heading + contact info on left, form (name, email, message, submit) on right.", tokens: "inputs: default border/bg, submit: Accent (#202124)" },
-  { id: "footer", name: "Footer", description: "Minimal bar with logo, copyright text, and link to Components page.", tokens: "text: Link (#505967)" },
+  { id: "header", name: "Header", description: "Fixed navigation bar with logo, anchor links (Services, Work, About, Contact), and primary CTA button.", tokens: "bg: Background / backdrop-blur, text: Link (#666666), CTA: Accent (#000000)" },
+  { id: "hero", name: "Hero", description: "Full-width intro with label, display heading, subtitle, and primary + secondary action buttons.", tokens: "heading: Text Primary, accent word: Primary (#999999), buttons: Accent + #F5F5F5" },
+  { id: "marquee", name: "Marquee", description: "Infinite horizontal scroll of keyword labels separated by borders.", tokens: "text: Primary (#999999), border: Gray 100" },
+  { id: "services", name: "Services", description: "2×2 grid of numbered service cards with title, description, and section header with CTA link.", tokens: "card bg: Gray 50, number: Primary (#999999), text: Link (#666666)" },
+  { id: "work", name: "Case Studies", description: "Stacked project rows with title, category badge, year, and arrow icon. Border-separated list.", tokens: "badge bg: Gray 100, badge text: Link, year: Primary (#999999)" },
+  { id: "stats", name: "Stats", description: "Dark panel with 2×4 / 4-column grid of key metrics (value + label).", tokens: "panel bg: Accent (#000000), values: #FFFFFF, labels: Gray 400" },
+  { id: "about", name: "About", description: "Two-column layout with mission heading on left, description + tag badges on right.", tokens: "tags bg: Gray 100, tag text: Link (#666666)" },
+  { id: "testimonial", name: "Testimonial", description: "Centered blockquote with avatar initial, author name, and title.", tokens: "avatar bg: Primary (#999999), avatar text: Text Primary" },
+  { id: "contact", name: "Contact", description: "Two-column layout with heading + contact info on left, form (name, email, message, submit) on right.", tokens: "inputs: default border/bg, submit: Accent (#000000)" },
+  { id: "footer", name: "Footer", description: "Minimal bar with logo, copyright text, and link to Components page.", tokens: "text: Link (#666666)" },
 ];
 
 const navSections = [
@@ -85,7 +85,7 @@ function CopyButton({ text }: { text: string }) {
       data-testid={`button-copy-${text.replace(/[^a-zA-Z0-9]/g, "").slice(0, 12)}`}
       className="inline-flex items-center justify-center w-7 h-7 rounded-md text-muted-foreground transition-colors duration-150"
       aria-label={`Copy ${text} to clipboard`}
-      style={{ background: copied ? "hsl(216, 12%, 92%)" : "transparent" }}
+      style={{ background: copied ? "hsl(0, 0%, 90%)" : "transparent" }}
     >
       {copied ? <Check className="w-3.5 h-3.5" aria-hidden="true" /> : <Copy className="w-3.5 h-3.5" aria-hidden="true" />}
     </button>
@@ -170,7 +170,7 @@ export default function Components() {
           <section id="overview" aria-labelledby="overview-heading" className="px-4 sm:px-6 lg:px-16 py-12 sm:py-16 lg:py-24">
             <article className="max-w-3xl">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent text-xs font-medium text-muted-foreground mb-6 sm:mb-8" data-testid="badge-design-system">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#B5BDC9]" aria-hidden="true" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#999999]" aria-hidden="true" />
                 Design System
               </div>
               <h1
@@ -189,7 +189,7 @@ export default function Components() {
                   href="#colors"
                   data-testid="button-explore-system"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[10px] text-sm font-medium transition-opacity duration-150"
-                  style={{ backgroundColor: "#202124", color: "#F3F4F6" }}
+                  style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
                 >
                   Explore system
                   <ArrowDown className="w-3.5 h-3.5" aria-hidden="true" />
@@ -198,7 +198,7 @@ export default function Components() {
                   href="#sections"
                   data-testid="link-site-sections"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[10px] text-sm font-medium border border-border/50 text-muted-foreground transition-opacity duration-150"
-                  style={{ backgroundColor: "#FAFAFB" }}
+                  style={{ backgroundColor: "#F5F5F5" }}
                 >
                   Site sections
                 </a>
@@ -243,9 +243,9 @@ export default function Components() {
                 <img src={logoBlack} alt="Logo on light background" className="h-16 sm:h-20 w-16 sm:w-20" data-testid="img-logo-light" />
                 <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs text-muted-foreground font-medium">Light background</figcaption>
               </figure>
-              <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex items-center justify-center min-h-[160px] sm:min-h-[200px]" style={{ backgroundColor: "#202124" }}>
+              <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex items-center justify-center min-h-[160px] sm:min-h-[200px]" style={{ backgroundColor: "#000000" }}>
                 <img src={logoWhite} alt="Logo on dark background" className="h-16 sm:h-20 w-16 sm:w-20" data-testid="img-logo-dark" />
-                <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium" style={{ color: "#8C95A5" }}>Dark background</figcaption>
+                <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium" style={{ color: "#777777" }}>Dark background</figcaption>
               </figure>
             </div>
 
@@ -301,7 +301,7 @@ export default function Components() {
 
             <h3 className="text-xs sm:text-sm font-semibold text-foreground mb-4 sm:mb-6 uppercase tracking-wider">Extended Palette</h3>
             <div className="rounded-lg border border-border/50 overflow-hidden">
-              <div className="flex" role="img" aria-label="Extended slate color palette gradient from light (#F8F9FA) to dark (#1C1D1F)">
+              <div className="flex" role="img" aria-label="Extended grayscale palette from white (#F5F5F5) to black (#000000)">
                 {extendedPalette.map((color) => (
                   <div key={color.name} className="flex-1 h-16 sm:h-20" style={{ backgroundColor: color.hex }} />
                 ))}
@@ -321,16 +321,16 @@ export default function Components() {
                 <h3 className="text-sm font-semibold text-foreground mb-4">Accessibility Contrast Ratios</h3>
                 <dl className="space-y-3">
                   {[
-                    { pair: "Accent on White", bg: "#202124", fg: "#FFFFFF", ratio: "AAA 14.7:1" },
-                    { pair: "Link on White", bg: "#FFFFFF", fg: "#505967", ratio: "AA 5.2:1", border: true },
-                    { pair: "Text on Primary", bg: "#B5BDC9", fg: "#1C1D1F", ratio: "AA 7.1:1" },
+                    { pair: "Accent on White", bg: "#000000", fg: "#FFFFFF", ratio: "AAA 21:1" },
+                    { pair: "Link on White", bg: "#FFFFFF", fg: "#666666", ratio: "AA 5.74:1", border: true },
+                    { pair: "Text on Primary", bg: "#999999", fg: "#000000", ratio: "AA 5.32:1" },
                   ].map((item) => (
                     <div key={item.pair} className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <dt className="sr-only">{item.pair}</dt>
                         <div
                           className="w-8 h-8 rounded-md flex items-center justify-center text-xs font-bold"
-                          style={{ backgroundColor: item.bg, color: item.fg, border: item.border ? "1px solid #EEF0F3" : "none" }}
+                          style={{ backgroundColor: item.bg, color: item.fg, border: item.border ? "1px solid #E5E5E5" : "none" }}
                           aria-hidden="true"
                         >Aa</div>
                         <dd className="text-sm text-muted-foreground">{item.pair}</dd>
@@ -345,9 +345,9 @@ export default function Components() {
                 <h3 className="text-sm font-semibold text-foreground mb-4">Color Usage Guide</h3>
                 <dl className="space-y-3 text-sm text-muted-foreground">
                   {[
-                    { color: "#B5BDC9", name: "Primary", desc: "Large surface areas, section backgrounds, decorative elements" },
-                    { color: "#202124", name: "Accent", desc: "Primary CTAs, important text, interactive elements" },
-                    { color: "#505967", name: "Link", desc: "Clickable elements, secondary labels, navigation" },
+                    { color: "#999999", name: "Primary", desc: "Large surface areas, section backgrounds, decorative elements" },
+                    { color: "#000000", name: "Accent", desc: "Primary CTAs, important text, interactive elements" },
+                    { color: "#666666", name: "Link", desc: "Clickable elements, secondary labels, navigation" },
                   ].map((item) => (
                     <div key={item.name} className="flex items-start gap-3">
                       <dt>
@@ -490,7 +490,7 @@ export default function Components() {
                   <div className="flex-1" role="cell">
                     <div
                       className="h-3 rounded-sm"
-                      style={{ width: item.value, backgroundColor: "#B5BDC9", minWidth: "4px" }}
+                      style={{ width: item.value, backgroundColor: "#999999", minWidth: "4px" }}
                       aria-label={`${item.value} spacing bar`}
                     />
                   </div>
@@ -533,14 +533,14 @@ export default function Components() {
                   <span
                     data-testid="button-demo-primary"
                     className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium"
-                    style={{ backgroundColor: "#202124", color: "#F3F4F6", borderRadius: "10px", border: "1px solid #505967" }}
+                    style={{ backgroundColor: "#000000", color: "#FFFFFF", borderRadius: "10px", border: "1px solid #666666" }}
                     role="presentation"
                   >
                     Start a project
                   </span>
                   <span
                     className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium opacity-50"
-                    style={{ backgroundColor: "#202124", color: "#F3F4F6", borderRadius: "10px", border: "1px solid #505967" }}
+                    style={{ backgroundColor: "#000000", color: "#FFFFFF", borderRadius: "10px", border: "1px solid #666666" }}
                     role="presentation"
                   >
                     Disabled
@@ -548,9 +548,9 @@ export default function Components() {
                 </div>
                 <dl className="space-y-2">
                   {[
-                    { prop: "Background", val: "#202124" },
-                    { prop: "Text", val: "#F3F4F6" },
-                    { prop: "Border", val: "#505967" },
+                    { prop: "Background", val: "#000000" },
+                    { prop: "Text", val: "#FFFFFF" },
+                    { prop: "Border", val: "#666666" },
                     { prop: "Radius", val: "10px" },
                   ].map((s) => (
                     <div key={s.prop} className="flex items-center gap-3 text-xs">
@@ -567,14 +567,14 @@ export default function Components() {
                   <span
                     data-testid="button-demo-secondary"
                     className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium border border-border/50"
-                    style={{ backgroundColor: "#FAFAFB", color: "#232529", borderRadius: "0px" }}
+                    style={{ backgroundColor: "#F5F5F5", color: "#000000", borderRadius: "0px" }}
                     role="presentation"
                   >
                     View our work
                   </span>
                   <span
                     className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium border border-border/50 opacity-50"
-                    style={{ backgroundColor: "#FAFAFB", color: "#232529", borderRadius: "0px" }}
+                    style={{ backgroundColor: "#F5F5F5", color: "#000000", borderRadius: "0px" }}
                     role="presentation"
                   >
                     Disabled
@@ -582,8 +582,8 @@ export default function Components() {
                 </div>
                 <dl className="space-y-2">
                   {[
-                    { prop: "Background", val: "#FAFAFB" },
-                    { prop: "Text", val: "#232529" },
+                    { prop: "Background", val: "#F5F5F5" },
+                    { prop: "Text", val: "#000000" },
                     { prop: "Radius", val: "0px" },
                   ].map((s) => (
                     <div key={s.prop} className="flex items-center gap-3 text-xs">
@@ -642,9 +642,9 @@ export default function Components() {
             <h3 className="text-xs sm:text-sm font-semibold text-foreground mb-4 sm:mb-6 uppercase tracking-wider">Cards &amp; Containers</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
               {[
-                { title: "Default Card", desc: "Subtle background with light border", bg: "#F8F9FA", borderCol: "#EEF0F3", textColor: undefined, subColor: undefined, specs: { bg: "#F8F9FA", border: "#EEF0F3", radius: "8px" } },
-                { title: "Elevated Card", desc: "White background with subtle shadow", bg: "#FFFFFF", borderCol: "#EEF0F3", textColor: undefined, subColor: undefined, specs: { bg: "#FFFFFF", shadow: "sm", radius: "8px" } },
-                { title: "Dark Card", desc: "For dark sections and footers", bg: "#202124", borderCol: undefined, textColor: "#F3F4F6", subColor: "#8C95A5", specs: { bg: "#202124", text: "#F3F4F6", radius: "8px" } },
+                { title: "Default Card", desc: "Subtle background with light border", bg: "#F5F5F5", borderCol: "#E5E5E5", textColor: undefined, subColor: undefined, specs: { bg: "#F5F5F5", border: "#E5E5E5", radius: "8px" } },
+                { title: "Elevated Card", desc: "White background with subtle shadow", bg: "#FFFFFF", borderCol: "#E5E5E5", textColor: undefined, subColor: undefined, specs: { bg: "#FFFFFF", shadow: "sm", radius: "8px" } },
+                { title: "Dark Card", desc: "For dark sections and footers", bg: "#000000", borderCol: undefined, textColor: "#FFFFFF", subColor: "#777777", specs: { bg: "#000000", text: "#FFFFFF", radius: "8px" } },
               ].map((card) => (
                 <article
                   key={card.title}
@@ -652,14 +652,14 @@ export default function Components() {
                   style={{ backgroundColor: card.bg, borderColor: card.borderCol }}
                   data-testid={`card-demo-${card.title.toLowerCase().replace(/\s/g, "-")}`}
                 >
-                  <div className="w-full h-20 sm:h-24 rounded-md mb-3 sm:mb-4" style={{ backgroundColor: "#B5BDC9", opacity: card.textColor ? 0.15 : 0.25 }} aria-hidden="true" />
+                  <div className="w-full h-20 sm:h-24 rounded-md mb-3 sm:mb-4" style={{ backgroundColor: "#999999", opacity: card.textColor ? 0.15 : 0.25 }} aria-hidden="true" />
                   <h4 className="text-sm font-medium" style={{ color: card.textColor || undefined }}>{card.title}</h4>
                   <p className="text-xs mt-1" style={{ color: card.subColor || undefined }}>{card.desc}</p>
                   <dl className="mt-3 space-y-1.5">
                     {Object.entries(card.specs).map(([k, v]) => (
                       <div key={k} className="flex items-center gap-2 text-[10px]">
                         <dt style={{ color: card.subColor || undefined }} className="text-muted-foreground">{k}</dt>
-                        <dd className="font-mono" style={{ color: card.textColor ? "#B5BDC9" : undefined }}>{v}</dd>
+                        <dd className="font-mono" style={{ color: card.textColor ? "#999999" : undefined }}>{v}</dd>
                       </div>
                     ))}
                   </dl>
@@ -691,14 +691,14 @@ export default function Components() {
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6">
                     <div className="flex items-center gap-3 sm:w-44 flex-shrink-0">
-                      <span className="text-xs font-mono" style={{ color: "#B5BDC9" }}>
+                      <span className="text-xs font-mono" style={{ color: "#999999" }}>
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <h3 className="text-sm sm:text-base font-semibold text-foreground">{section.name}</h3>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm leading-relaxed" style={{ color: "#505967" }}>{section.description}</p>
-                      <p className="text-xs font-mono mt-2" style={{ color: "#8C95A5" }}>{section.tokens}</p>
+                      <p className="text-sm leading-relaxed" style={{ color: "#666666" }}>{section.description}</p>
+                      <p className="text-xs font-mono mt-2" style={{ color: "#777777" }}>{section.tokens}</p>
                     </div>
                   </div>
                 </article>
@@ -716,7 +716,7 @@ export default function Components() {
                   <span
                     key={section.id}
                     className="text-xs font-mono px-2.5 py-1 rounded-md"
-                    style={{ backgroundColor: "#EEF0F3", color: "#505967" }}
+                    style={{ backgroundColor: "#E5E5E5", color: "#666666" }}
                   >
                     {section.name}
                   </span>
@@ -747,7 +747,7 @@ export default function Components() {
               ].map((p) => (
                 <article key={p.num} className="p-6 sm:p-8 rounded-lg border border-border/50 bg-card/30" data-testid={`card-principle-${p.num}`}>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-8 h-8 rounded-md flex items-center justify-center text-sm" style={{ backgroundColor: "#B5BDC9" }} aria-hidden="true">{p.num}</div>
+                    <div className="w-8 h-8 rounded-md flex items-center justify-center text-sm" style={{ backgroundColor: "#999999" }} aria-hidden="true">{p.num}</div>
                     <h3 className="text-base font-semibold text-foreground">{p.title}</h3>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
@@ -758,13 +758,13 @@ export default function Components() {
             <article className="p-6 sm:p-8 rounded-lg border border-border/50 bg-card/30 mb-8 sm:mb-12">
               <h3 className="text-base font-semibold text-foreground mb-6">Design Tokens Reference</h3>
               <div className="rounded-lg border border-border/50 overflow-hidden">
-                <pre className="p-4 sm:p-5 text-xs sm:text-sm leading-relaxed overflow-x-auto" style={{ backgroundColor: "#202124", color: "#B5BDC9" }}>
+                <pre className="p-4 sm:p-5 text-xs sm:text-sm leading-relaxed overflow-x-auto" style={{ backgroundColor: "#000000", color: "#999999" }}>
                   <code>{`/* Colors */
---color-primary: #B5BDC9;
---color-accent: #202124;
+--color-primary: #999999;
+--color-accent: #000000;
 --color-background: #FFFFFF;
---color-text: #1C1D1F;
---color-link: #505967;
+--color-text: #000000;
+--color-link: #666666;
 
 /* Typography */
 --font-sans: 'Inter', sans-serif;
@@ -801,15 +801,15 @@ export default function Components() {
           </section>
 
           <footer className="px-4 sm:px-6 lg:px-16 py-8 sm:py-12" role="contentinfo">
-            <div className="p-6 sm:p-8 rounded-lg" style={{ backgroundColor: "#202124" }}>
+            <div className="p-6 sm:p-8 rounded-lg" style={{ backgroundColor: "#000000" }}>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                   <img src={logoWhite} alt="BYAB logo" className="h-6 w-6 mb-3" />
-                  <p className="text-sm leading-relaxed" style={{ color: "#8C95A5" }}>
+                  <p className="text-sm leading-relaxed" style={{ color: "#777777" }}>
                     Components maintained by the design team.
                   </p>
                 </div>
-                <p className="text-xs" style={{ color: "#505967" }}>
+                <p className="text-xs" style={{ color: "#666666" }}>
                   Last updated: February 2026<br />
                   Version 1.0
                 </p>

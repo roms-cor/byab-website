@@ -47,7 +47,7 @@ The Attio logo is the cornerstone of the brand identity. It must be used consist
 
 ### Approved Variations
 - Standard: Dark logomark on light backgrounds
-- Inverted: Light/white logomark on dark backgrounds (#202124 or darker)
+- Inverted: Light/white logomark on dark backgrounds (#000000 or darker)
 
 ### Usage Rules — Do
 - Maintain original proportions at all times
@@ -71,49 +71,49 @@ The color palette is designed to be clean, professional, and accessible. Each co
 
 ### Brand Colors
 
-#### Primary (#B5BDC9)
-- HSL: 216, 14%, 75%
+#### Primary (#999999)
+- HSL: 0, 0%, 60%
 - Usage: Primary brand color for large surface areas, section backgrounds, and decorative elements
 - Contrast on white: Decorative use only (does not meet text contrast requirements on white)
 
-#### Accent (#202124)
-- HSL: 220, 6%, 13%
+#### Accent (#000000)
+- HSL: 0, 0%, 0%
 - Usage: Primary CTAs, important text, interactive elements, headings
-- Contrast on white: AAA (14.7:1 ratio)
+- Contrast on white: AAA (21:1 ratio)
 
 #### Background (#FFFFFF)
 - HSL: 0, 0%, 100%
 - Usage: Page backgrounds and primary content areas
 
-#### Text Primary (#1C1D1F)
-- HSL: 220, 6%, 12%
+#### Text Primary (#000000)
+- HSL: 0, 0%, 0%
 - Usage: Main body text, headings, and all primary readable content
-- Contrast on white: AAA (15.2:1 ratio)
+- Contrast on white: AAA (21:1 ratio)
 
-#### Link (#505967)
-- HSL: 215, 12%, 36%
+#### Link (#666666)
+- HSL: 0, 0%, 40%
 - Usage: Clickable elements, secondary labels, navigation items, supporting text
-- Contrast on white: AA (5.2:1 ratio)
+- Contrast on white: AA (5.74:1 ratio)
 
-### Extended Palette — Slate Scale
+### Extended Palette — Grayscale
 
-| Token     | Hex     | Usage                                    |
-|-----------|---------|------------------------------------------|
-| Slate 50  | #F8F9FA | Subtle backgrounds, card surfaces        |
-| Slate 100 | #EEF0F3 | Borders, dividers, input backgrounds     |
-| Slate 200 | #D8DCE2 | Heavier borders, disabled states         |
-| Slate 300 | #B5BDC9 | Primary brand color, decorative fills    |
-| Slate 400 | #8C95A5 | Placeholder text, disabled text          |
-| Slate 500 | #505967 | Secondary text, links, captions          |
-| Slate 600 | #3A4250 | Body text alternative, icons             |
-| Slate 700 | #2A3140 | Dark UI elements, emphasis               |
-| Slate 800 | #202124 | Buttons, headings, primary CTA           |
-| Slate 900 | #1C1D1F | Darkest text, maximum contrast           |
+| Token    | Hex     | Usage                                    |
+|----------|---------|------------------------------------------|
+| Gray 50  | #F5F5F5 | Subtle backgrounds, card surfaces        |
+| Gray 100 | #E5E5E5 | Borders, dividers, input backgrounds     |
+| Gray 200 | #CCCCCC | Heavier borders, disabled states         |
+| Gray 300 | #999999 | Primary brand color, decorative fills    |
+| Gray 400 | #777777 | Placeholder text, disabled text          |
+| Gray 500 | #666666 | Secondary text, links, captions          |
+| Gray 600 | #444444 | Body text alternative, icons             |
+| Gray 700 | #333333 | Dark UI elements, emphasis               |
+| Gray 800 | #1A1A1A | Near-black surfaces                      |
+| Gray 900 | #000000 | Buttons, headings, maximum contrast      |
 
 ### Accessibility Compliance
-- Accent (#202124) on White (#FFFFFF): AAA — 14.7:1 contrast ratio
-- Link (#505967) on White (#FFFFFF): AA — 5.2:1 contrast ratio
-- Text Primary (#1C1D1F) on Primary (#B5BDC9): AA — 7.1:1 contrast ratio
+- Accent (#000000) on White (#FFFFFF): AAA — 21:1 contrast ratio
+- Link (#666666) on White (#FFFFFF): AA — 5.74:1 contrast ratio
+- Text (#000000) on Primary (#999999): AA — 5.32:1 contrast ratio
 
 ---
 
@@ -187,17 +187,17 @@ All spacing is based on an 8px grid, providing consistent rhythm and alignment.
 ### Buttons
 
 #### Primary Button
-- Background: #202124
-- Text color: #F3F4F6
-- Border: 1px solid #505967
+- Background: #000000
+- Text color: #FFFFFF
+- Border: 1px solid #666666
 - Border radius: 10px
 - Padding: 10px 20px
 - Font: 14px / Medium (500)
 - States: Default, Hover (lighten), Active (darken), Disabled (50% opacity)
 
 #### Secondary Button
-- Background: #FAFAFB
-- Text color: #232529
+- Background: #F5F5F5
+- Text color: #000000
 - Border: 1px solid border color
 - Border radius: 0px (sharp corners)
 - Padding: 10px 20px
@@ -215,9 +215,9 @@ All spacing is based on an 8px grid, providing consistent rhythm and alignment.
 - States: Default, Focus, Disabled (muted background), Error (red border)
 
 ### Cards
-- Default Card: Subtle background (#F8F9FA), light border, 8px radius
+- Default Card: Subtle background (#F5F5F5), light border, 8px radius
 - Elevated Card: White background, subtle shadow, 8px radius
-- Dark Card: Dark background (#202124), light text (#F3F4F6), 8px radius
+- Dark Card: Dark background (#000000), light text (#FFFFFF), 8px radius
 
 ---
 
@@ -240,8 +240,8 @@ All text must meet WCAG AA contrast requirements. Interactive elements need visi
 ## 8. Accessibility Standards
 
 - All text meets WCAG 2.1 AA contrast requirements minimum
-- Primary text (#1C1D1F) on white achieves AAA (15.2:1)
-- Link text (#505967) on white achieves AA (5.2:1)
+- Primary text (#000000) on white achieves AAA (21:1)
+- Link text (#666666) on white achieves AA (5.74:1)
 - Interactive elements have visible focus indicators
 - All images require descriptive alt text
 - Semantic HTML structure with proper heading hierarchy
@@ -253,11 +253,11 @@ All text must meet WCAG AA contrast requirements. Interactive elements need visi
 
 ```css
 /* Colors */
---color-primary: #B5BDC9;
---color-accent: #202124;
+--color-primary: #999999;
+--color-accent: #000000;
 --color-background: #FFFFFF;
---color-text: #1C1D1F;
---color-link: #505967;
+--color-text: #000000;
+--color-link: #666666;
 
 /* Typography */
 --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;

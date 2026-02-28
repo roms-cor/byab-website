@@ -23,7 +23,7 @@ function Header() {
                   href={item.href}
                   data-testid={`link-nav-${item.label.toLowerCase()}`}
                   className="text-sm font-medium transition-opacity duration-150"
-                  style={{ color: "#505967" }}
+                  style={{ color: "#666666" }}
                 >
                   {item.label}
                 </a>
@@ -35,7 +35,7 @@ function Header() {
           href="#contact"
           data-testid="button-header-cta"
           className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-[10px] transition-opacity duration-150"
-          style={{ backgroundColor: "#202124", color: "#F3F4F6" }}
+          style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
         >
           Get in touch
         </a>
@@ -51,7 +51,7 @@ function Hero() {
         <div className="max-w-3xl">
           <p
             className="text-xs uppercase tracking-[0.2em] font-medium mb-6"
-            style={{ color: "#505967" }}
+            style={{ color: "#666666" }}
             data-testid="text-hero-label"
           >
             Premium Growth Agency
@@ -65,11 +65,11 @@ function Hero() {
             <br />
             that outgrow
             <br />
-            <span style={{ color: "#B5BDC9" }}>expectations.</span>
+            <span style={{ color: "#999999" }}>expectations.</span>
           </h1>
           <p
             className="text-base sm:text-lg mt-6 sm:mt-8 leading-relaxed max-w-lg"
-            style={{ color: "#505967" }}
+            style={{ color: "#666666" }}
             data-testid="text-hero-description"
           >
             Strategy, design, and performance marketing for ambitious companies
@@ -80,7 +80,7 @@ function Hero() {
               href="#contact"
               data-testid="button-hero-primary"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-[10px] text-sm font-medium transition-opacity duration-150"
-              style={{ backgroundColor: "#202124", color: "#F3F4F6", border: "1px solid #505967" }}
+              style={{ backgroundColor: "#000000", color: "#FFFFFF", border: "1px solid #666666" }}
             >
               Start a project
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -89,7 +89,7 @@ function Hero() {
               href="#work"
               data-testid="button-hero-secondary"
               className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium border transition-opacity duration-150"
-              style={{ backgroundColor: "#FAFAFB", color: "#232529", borderRadius: "0px", borderColor: "#EEF0F3" }}
+              style={{ backgroundColor: "#F5F5F5", color: "#000000", borderRadius: "0px", borderColor: "#E5E5E5" }}
             >
               View our work
             </a>
@@ -110,7 +110,7 @@ function Marquee() {
               <span
                 key={`${set}-${word}`}
                 className="text-xs uppercase tracking-[0.2em] font-medium"
-                style={{ color: "#B5BDC9" }}
+                style={{ color: "#999999" }}
               >
                 {word}
               </span>
@@ -151,7 +151,7 @@ function Services() {
       <div className="max-w-[1200px] mx-auto">
         <header className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 sm:mb-16">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#505967" }} aria-hidden="true">What we do</p>
+            <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#666666" }} aria-hidden="true">What we do</p>
             <h2
               id="services-heading"
               className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground"
@@ -160,7 +160,7 @@ function Services() {
               Services
             </h2>
           </div>
-          <a href="#contact" className="text-sm font-medium flex items-center gap-1.5 transition-opacity duration-150" style={{ color: "#505967" }} data-testid="link-discuss-project">
+          <a href="#contact" className="text-sm font-medium flex items-center gap-1.5 transition-opacity duration-150" style={{ color: "#666666" }} data-testid="link-discuss-project">
             Discuss your project <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </a>
         </header>
@@ -170,12 +170,12 @@ function Services() {
             <article
               key={service.num}
               className="p-6 sm:p-8 lg:p-10"
-              style={{ backgroundColor: "#F8F9FA" }}
+              style={{ backgroundColor: "#F5F5F5" }}
               data-testid={`card-service-${service.num}`}
             >
-              <span className="text-xs font-mono font-medium" style={{ color: "#B5BDC9" }}>{service.num}</span>
+              <span className="text-xs font-mono font-medium" style={{ color: "#999999" }}>{service.num}</span>
               <h3 className="text-lg sm:text-xl font-semibold text-foreground mt-3">{service.title}</h3>
-              <p className="text-sm leading-relaxed mt-2" style={{ color: "#505967" }}>{service.description}</p>
+              <p className="text-sm leading-relaxed mt-2" style={{ color: "#666666" }}>{service.description}</p>
             </article>
           ))}
         </div>
@@ -195,7 +195,7 @@ function Work() {
     <section id="work" aria-labelledby="work-heading" className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 border-t border-border/50">
       <div className="max-w-[1200px] mx-auto">
         <header className="mb-12 sm:mb-16">
-          <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#505967" }} aria-hidden="true">Selected work</p>
+          <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#666666" }} aria-hidden="true">Selected work</p>
           <h2
             id="work-heading"
             className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground"
@@ -216,15 +216,15 @@ function Work() {
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
                   <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-foreground tracking-tight">{project.title}</h3>
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-medium px-2.5 py-1 rounded-full" style={{ backgroundColor: "#EEF0F3", color: "#505967" }}>{project.category}</span>
-                    <span className="text-xs font-mono" style={{ color: "#B5BDC9" }}>{project.year}</span>
+                    <span className="text-xs font-medium px-2.5 py-1 rounded-full" style={{ backgroundColor: "#E5E5E5", color: "#666666" }}>{project.category}</span>
+                    <span className="text-xs font-mono" style={{ color: "#999999" }}>{project.year}</span>
                   </div>
                 </div>
                 <div
                   className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 border border-border/50 transition-colors duration-200"
                   aria-hidden="true"
                 >
-                  <ArrowUpRight className="w-4 h-4" style={{ color: "#505967" }} />
+                  <ArrowUpRight className="w-4 h-4" style={{ color: "#666666" }} />
                 </div>
               </div>
             </article>
@@ -246,12 +246,12 @@ function Stats() {
   return (
     <section aria-label="Key metrics" className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
       <div className="max-w-[1200px] mx-auto">
-        <div className="rounded-lg p-8 sm:p-12 lg:p-16" style={{ backgroundColor: "#202124" }}>
+        <div className="rounded-lg p-8 sm:p-12 lg:p-16" style={{ backgroundColor: "#000000" }}>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
             {stats.map((stat) => (
               <div key={stat.label} className="text-center sm:text-left" data-testid={`stat-${stat.label.toLowerCase().replace(/\s/g, "-")}`}>
-                <p className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight" style={{ color: "#F3F4F6" }}>{stat.value}</p>
-                <p className="text-xs sm:text-sm mt-1.5" style={{ color: "#8C95A5" }}>{stat.label}</p>
+                <p className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight" style={{ color: "#FFFFFF" }}>{stat.value}</p>
+                <p className="text-xs sm:text-sm mt-1.5" style={{ color: "#777777" }}>{stat.label}</p>
               </div>
             ))}
           </div>
@@ -267,7 +267,7 @@ function About() {
       <div className="max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#505967" }} aria-hidden="true">About</p>
+            <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#666666" }} aria-hidden="true">About</p>
             <h2
               id="about-heading"
               className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground leading-tight"
@@ -279,11 +279,11 @@ function About() {
             </h2>
           </div>
           <div className="flex flex-col justify-center">
-            <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#505967" }}>
+            <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
               We are a collective of strategists, designers, and performance marketers
               who believe great brands are built at the intersection of clarity and ambition.
             </p>
-            <p className="text-sm sm:text-base leading-relaxed mt-4" style={{ color: "#505967" }}>
+            <p className="text-sm sm:text-base leading-relaxed mt-4" style={{ color: "#666666" }}>
               Every engagement starts with deep understanding. We study your market,
               dissect your competition, and uncover the positioning that makes your growth
               inevitable, not accidental.
@@ -293,7 +293,7 @@ function About() {
                 <span
                   key={tag}
                   className="text-xs font-medium px-3 py-1.5 rounded-full"
-                  style={{ backgroundColor: "#EEF0F3", color: "#505967" }}
+                  style={{ backgroundColor: "#E5E5E5", color: "#666666" }}
                   data-testid={`badge-${tag.toLowerCase().replace(/\s/g, "-")}`}
                 >
                   {tag}
@@ -323,14 +323,14 @@ function Testimonial() {
             <div className="flex items-center justify-center gap-3">
               <div
                 className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-semibold flex-shrink-0"
-                style={{ backgroundColor: "#B5BDC9", color: "#1C1D1F" }}
+                style={{ backgroundColor: "#999999", color: "#000000" }}
                 aria-hidden="true"
               >
                 SL
               </div>
               <div className="text-left">
                 <cite className="not-italic text-sm font-medium text-foreground" data-testid="text-testimonial-author">Sarah Larsen</cite>
-                <p className="text-xs" style={{ color: "#505967" }}>CEO, Northlight</p>
+                <p className="text-xs" style={{ color: "#666666" }}>CEO, Northlight</p>
               </div>
             </div>
           </footer>
@@ -346,7 +346,7 @@ function Contact() {
       <div className="max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#505967" }} aria-hidden="true">Contact</p>
+            <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#666666" }} aria-hidden="true">Contact</p>
             <h2
               id="contact-heading"
               className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground leading-tight"
@@ -355,16 +355,16 @@ function Contact() {
               Let's build
               something remarkable.
             </h2>
-            <p className="text-sm sm:text-base mt-4 leading-relaxed" style={{ color: "#505967" }}>
+            <p className="text-sm sm:text-base mt-4 leading-relaxed" style={{ color: "#666666" }}>
               Tell us about your project. We'll get back to you within 24 hours
               with a clear plan of action.
             </p>
             <div className="mt-8 space-y-3">
-              <p className="text-sm" style={{ color: "#505967" }}>
+              <p className="text-sm" style={{ color: "#666666" }}>
                 <span className="font-medium text-foreground">Email</span>
                 <br />hello@agency.com
               </p>
-              <p className="text-sm" style={{ color: "#505967" }}>
+              <p className="text-sm" style={{ color: "#666666" }}>
                 <span className="font-medium text-foreground">Based in</span>
                 <br />London & New York
               </p>
@@ -406,7 +406,7 @@ function Contact() {
                 type="submit"
                 data-testid="button-contact-submit"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-[10px] text-sm font-medium transition-opacity duration-150 w-full justify-center"
-                style={{ backgroundColor: "#202124", color: "#F3F4F6", border: "1px solid #505967" }}
+                style={{ backgroundColor: "#000000", color: "#FFFFFF", border: "1px solid #666666" }}
               >
                 Send message
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -425,14 +425,14 @@ function Footer() {
       <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-6">
           <img src={logoBlack} alt="BYAB logo" className="h-5 w-5" />
-          <p className="text-xs" style={{ color: "#505967" }}>2026. All rights reserved.</p>
+          <p className="text-xs" style={{ color: "#666666" }}>2026. All rights reserved.</p>
         </div>
         <div className="flex items-center gap-6">
           <Link
             href="/components"
             data-testid="link-components"
             className="text-xs font-medium flex items-center gap-1 transition-opacity duration-150"
-            style={{ color: "#505967" }}
+            style={{ color: "#666666" }}
           >
             Components
             <ArrowUpRight className="w-3 h-3" aria-hidden="true" />

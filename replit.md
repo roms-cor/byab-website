@@ -26,14 +26,15 @@ A two-page site for a premium growth agency: a landing page (homepage) and a Com
 - `client/src/App.tsx` — Router setup (/ and /components)
 - `client/src/index.css` — Design tokens + marquee animation
 
-## Brand Design Tokens
-- **Primary**: #B5BDC9 — Decorative fills, accents
-- **Accent**: #202124 — Primary buttons, dark sections
+## Brand Design Tokens (Pure Grayscale)
+- **Primary**: #999999 — Decorative fills, accents
+- **Accent**: #000000 — Primary buttons, dark sections
 - **Background**: #FFFFFF
-- **Text Primary**: #1C1D1F
-- **Link/Secondary**: #505967
-- **Card BG**: #F8F9FA (Slate 50)
-- **Card Border**: #EEF0F3 (Slate 100)
+- **Text Primary**: #000000
+- **Link/Secondary**: #666666
+- **Card BG**: #F5F5F5 (Gray 50)
+- **Card Border**: #E5E5E5 (Gray 100)
+- **Dark Label**: #777777
 - **Font**: Inter (body + headings), JetBrains Mono (code)
 - **Spacing**: 8px grid
 - **Border Radius**: 8px default, 10px buttons, 0px secondary buttons
@@ -41,7 +42,7 @@ A two-page site for a premium growth agency: a landing page (homepage) and a Com
 ## Components Page Sections
 1. Overview — Design system intro + key stats
 2. Logo — Light/dark usage, minimum size, clear space, file format
-3. Colors — Brand palette, extended slate palette, contrast ratios, usage guide
+3. Colors — Brand palette, extended grayscale palette, contrast ratios, usage guide
 4. Typography — Inter + JetBrains Mono specimens, type scale table
 5. Spacing — 8px grid scale table, padding/gap/radius reference
 6. UI Components — Buttons (primary/secondary), inputs (text/states), cards (default/elevated/dark)
