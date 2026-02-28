@@ -184,23 +184,27 @@
   animation: marquee 20s linear infinite;
 }
 
-@keyframes team-slide {
-  0%, 20% { opacity: 1; transform: translateY(0); }
-  22%, 24% { opacity: 0; transform: translateY(-12px); }
-  25% { opacity: 0; transform: translateY(12px); }
-  27%, 45% { opacity: 1; transform: translateY(0); }
-  47%, 49% { opacity: 0; transform: translateY(-12px); }
-  50% { opacity: 0; transform: translateY(12px); }
-  52%, 70% { opacity: 1; transform: translateY(0); }
-  72%, 74% { opacity: 0; transform: translateY(-12px); }
-  75% { opacity: 0; transform: translateY(12px); }
-  77%, 95% { opacity: 1; transform: translateY(0); }
-  97%, 100% { opacity: 0; transform: translateY(-12px); }
+@keyframes ring-pulse-1 {
+  0%, 100% { transform: scale(1); opacity: 0.15; }
+  50% { transform: scale(1.04); opacity: 0.25; }
 }
-
-.animate-team-slide {
-  animation: team-slide 12s ease-in-out infinite;
+@keyframes ring-pulse-2 {
+  0%, 100% { transform: scale(1); opacity: 0.1; }
+  50% { transform: scale(1.03); opacity: 0.18; }
 }
+@keyframes ring-pulse-3 {
+  0%, 100% { transform: scale(1); opacity: 0.06; }
+  50% { transform: scale(1.02); opacity: 0.12; }
+}
+@keyframes slider-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.slider-ring-1 { animation: ring-pulse-1 4s ease-in-out infinite; }
+.slider-ring-2 { animation: ring-pulse-2 5s ease-in-out infinite 0.5s; }
+.slider-ring-3 { animation: ring-pulse-3 6s ease-in-out infinite 1s; }
+.slider-orbit { animation: slider-rotate 30s linear infinite; }
+.slider-orbit-reverse { animation: slider-rotate 30s linear infinite reverse; }
 
 /**
  * Using the elevate system.

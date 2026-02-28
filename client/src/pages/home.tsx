@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import logoHorizontalWhite from "@assets/byab-horizontal-logo-white_1772264662585.png";
@@ -86,85 +86,161 @@ const teamMembers = [
 
 function TeamSlider() {
   const [active, setActive] = useState(0);
-  const [transitioning, setTransitioning] = useState(false);
+  const [prev, setPrev] = useState(-1);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const goTo = useCallback((index: number) => {
+    if (index === active) return;
+    setPrev(active);
+    setActive(index);
+  }, [active]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTransitioning(true);
-      setTimeout(() => {
-        setActive((prev) => (prev + 1) % teamMembers.length);
-        setTransitioning(false);
-      }, 300);
+    timerRef.current = setInterval(() => {
+      setActive((a) => {
+        setPrev(a);
+        return (a + 1) % teamMembers.length;
+      });
     }, 4000);
-    return () => clearInterval(interval);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, []);
 
   const member = teamMembers[active];
 
-  return (
-    <div className="w-full max-w-md" data-testid="team-slider">
-      <div className="relative rounded-lg overflow-hidden border border-border/50" style={{ backgroundColor: "#F5F5F5" }}>
-        <div className={`transition-all duration-300 ${transitioning ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
-          <img
-            src={member.src}
-            alt={member.name}
-            className="w-full aspect-square object-cover"
-            data-testid="img-slider-active"
-          />
-        </div>
+  const thumbPositions = [
+    { top: "2%", right: "-8%" },
+    { bottom: "8%", right: "-12%" },
+    { bottom: "-6%", left: "25%" },
+  ];
 
-        <div className={`p-5 sm:p-6 transition-all duration-300 ${transitioning ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"}`}>
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <p className="text-lg sm:text-xl font-semibold text-foreground" data-testid="text-slider-name">{member.name}</p>
-              <p className="text-sm font-medium" style={{ color: "#666666" }} data-testid="text-slider-role">{member.role}</p>
-            </div>
-            <span className="text-[10px] font-mono px-2 py-1 rounded-full whitespace-nowrap mt-1" style={{ backgroundColor: "#E5E5E5", color: "#666666" }}>{member.since}</span>
+  return (
+    <div className="w-full max-w-[380px]" data-testid="team-slider">
+      <div className="relative flex flex-col items-center">
+        <div className="relative w-[260px] h-[260px] sm:w-[300px] sm:h-[300px]">
+          <div
+            className="absolute rounded-full slider-ring-1"
+            style={{ inset: "-16px", border: "1px solid rgba(0,0,0,0.06)" }}
+          />
+          <div
+            className="absolute rounded-full slider-ring-2"
+            style={{ inset: "-34px", border: "1px solid rgba(0,0,0,0.04)" }}
+          />
+          <div
+            className="absolute rounded-full slider-ring-3"
+            style={{ inset: "-52px", border: "1px solid rgba(0,0,0,0.02)" }}
+          />
+
+          <div className="absolute inset-0 rounded-full overflow-hidden" style={{ zIndex: 3 }}>
+            {teamMembers.map((m, i) => (
+              <img
+                key={m.name}
+                src={m.src}
+                alt={m.name}
+                className="absolute inset-0 w-full h-full rounded-full object-cover"
+                style={{
+                  opacity: i === active ? 1 : 0,
+                  transform: i === active ? "scale(1)" : (i === prev ? "scale(1.08)" : "scale(0.92)"),
+                  transition: "opacity 700ms cubic-bezier(0.4,0,0.2,1), transform 700ms cubic-bezier(0.4,0,0.2,1)",
+                  border: "3px solid #FFFFFF",
+                  boxShadow: "0 8px 40px rgba(0,0,0,0.10)",
+                }}
+                data-testid={i === active ? "img-slider-active" : undefined}
+              />
+            ))}
           </div>
 
-          <p className="text-sm leading-relaxed mt-3" style={{ color: "#666666" }} data-testid="text-slider-bio">{member.bio}</p>
+          {teamMembers
+            .map((m, i) => ({ m, i }))
+            .filter(({ i }) => i !== active)
+            .map(({ m, i }, thumbIdx) => {
+              const pos = thumbPositions[thumbIdx] || {};
+              return (
+                <button
+                  key={m.name}
+                  onClick={() => goTo(i)}
+                  className="absolute w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden"
+                  style={{
+                    ...pos,
+                    zIndex: 5,
+                    border: "2.5px solid #FFFFFF",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+                    transition: "transform 400ms cubic-bezier(0.4,0,0.2,1), box-shadow 400ms ease",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.2)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.14)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.08)"; }}
+                  aria-label={`View ${m.name}`}
+                  data-testid={`button-slider-${m.name.split(" ")[0].toLowerCase()}`}
+                >
+                  <img src={m.src} alt={m.name} className="w-full h-full object-cover" />
+                </button>
+              );
+            })}
+        </div>
 
-          <div className="mt-4 flex flex-wrap gap-1.5">
+        <div className="mt-6 text-center w-full">
+          <div className="overflow-hidden h-[30px] relative">
+            {teamMembers.map((m, i) => (
+              <p
+                key={m.name}
+                className="absolute inset-x-0 text-xl sm:text-2xl font-semibold text-foreground tracking-tight"
+                style={{
+                  opacity: i === active ? 1 : 0,
+                  transform: i === active ? "translateY(0)" : "translateY(14px)",
+                  transition: "opacity 500ms cubic-bezier(0.4,0,0.2,1), transform 500ms cubic-bezier(0.4,0,0.2,1)",
+                }}
+                data-testid={i === active ? "text-slider-name" : undefined}
+              >
+                {m.name}
+              </p>
+            ))}
+          </div>
+          <div className="overflow-hidden h-[20px] relative mt-0.5">
+            {teamMembers.map((m, i) => (
+              <p
+                key={m.role}
+                className="absolute inset-x-0 text-sm font-medium"
+                style={{
+                  color: "#666666",
+                  opacity: i === active ? 1 : 0,
+                  transform: i === active ? "translateY(0)" : "translateY(10px)",
+                  transition: "opacity 500ms cubic-bezier(0.4,0,0.2,1) 60ms, transform 500ms cubic-bezier(0.4,0,0.2,1) 60ms",
+                }}
+                data-testid={i === active ? "text-slider-role" : undefined}
+              >
+                {m.role}
+              </p>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-1.5 mt-4 min-h-[28px]">
             {member.skills.map((skill) => (
               <span
                 key={skill}
                 className="text-[11px] font-medium px-2.5 py-1 rounded-full"
-                style={{ backgroundColor: "#FFFFFF", color: "#666666", border: "1px solid #E5E5E5" }}
+                style={{ backgroundColor: "#F5F5F5", color: "#666666", border: "1px solid #E5E5E5" }}
                 data-testid={`badge-skill-${skill.toLowerCase().replace(/\s/g, "-")}`}
               >
                 {skill}
               </span>
             ))}
           </div>
-        </div>
-      </div>
 
-      <div className="mt-4 flex items-center justify-between">
-        <div className="flex -space-x-2">
-          {teamMembers.map((m, i) => (
-            <button
-              key={m.name}
-              onClick={() => { setTransitioning(true); setTimeout(() => { setActive(i); setTransitioning(false); }, 300); }}
-              className={`relative w-9 h-9 sm:w-10 sm:h-10 rounded-full ring-2 ring-background transition-all duration-300 ${i === active ? "z-10 scale-110 ring-foreground/20" : "z-0 opacity-50 hover:opacity-80"}`}
-              aria-label={`View ${m.name}`}
-              data-testid={`button-slider-${m.name.split(" ")[0].toLowerCase()}`}
-            >
-              <img src={m.src} alt={m.name} className="w-full h-full rounded-full object-cover" />
-            </button>
-          ))}
-        </div>
-
-        <div className="flex gap-1.5">
-          {teamMembers.map((_, i) => (
-            <div
-              key={i}
-              className="h-1 rounded-full transition-all duration-500"
-              style={{
-                width: i === active ? "24px" : "6px",
-                backgroundColor: i === active ? "#000000" : "#E5E5E5",
-              }}
-            />
-          ))}
+          <div className="flex justify-center gap-2 mt-5">
+            {teamMembers.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                className="relative h-1.5 rounded-full cursor-pointer"
+                style={{
+                  width: i === active ? "28px" : "8px",
+                  backgroundColor: i === active ? "#000000" : "#E5E5E5",
+                  transition: "width 500ms cubic-bezier(0.4,0,0.2,1), background-color 500ms ease",
+                }}
+                aria-label={`Go to member ${i + 1}`}
+                data-testid={`dot-slider-${i}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
