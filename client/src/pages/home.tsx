@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Globe } from "lucide-react";
+import { SiLinkedin, SiX } from "react-icons/si";
 import logoHorizontalWhite from "@assets/byab-horizontal-logo-white_1772264662585.png";
 import photoAnne from "@assets/byab-profiles-neon-square-anne_1772263504235.png";
 import photoCecile from "@assets/byab-profiles-neon-square-cecile_1772263504235.png";
@@ -38,6 +39,7 @@ function Header() {
             {[
               { label: "Services", href: "#services" },
               { label: "Track Record", href: "#work" },
+              { label: "Team", href: "#team" },
               { label: "Story", href: "#story" },
               { label: "About", href: "#about" },
               { label: "Contact", href: "#contact" },
@@ -76,6 +78,7 @@ const teamMembers = [
     bio: "8 years as Secretary General & CFO at Vatier & Associés. Now leads externalized general secretariat for law firms and SMEs — finance, admin, HR, and ISO compliance.",
     skills: ["General Secretariat", "Finance & Admin", "Law Firm Ops", "ISO Compliance"],
     since: "Since 2015",
+    linkedin: "https://www.linkedin.com/in/annegrosz",
   },
   {
     src: photoCecile,
@@ -84,6 +87,7 @@ const teamMembers = [
     bio: "The original 'chef d'orchestre' of BYAB since day one. Ensures every operational detail aligns with the founder's vision — coordination, delivery, and administrative orchestration.",
     skills: ["Project Coordination", "Administrative Org", "Client Delivery", "Process Design"],
     since: "Since 2005",
+    linkedin: "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/",
   },
   {
     src: photoGeorges,
@@ -92,6 +96,7 @@ const teamMembers = [
     bio: "22+ years as Senior Executive Consultant at CGI. Teaches at Université Paris 1 Panthéon-Sorbonne. Brings systems architecture, data governance, and structured transformation.",
     skills: ["Systems Architecture", "Data Governance", "Project Management", "Business Analysis"],
     since: "Since July 2025",
+    linkedin: "https://www.linkedin.com/in/georges-grosz-8aa9613",
   },
   {
     src: photoRomain,
@@ -100,6 +105,8 @@ const teamMembers = [
     bio: "Built growth machines at Datananas, Clovis, and MerciApp. CEO of Oysterz. Designs outbound systems, acquisition funnels, and revenue ops that make growth predictable.",
     skills: ["Outbound B2B", "Acquisition Funnels", "Sales Machines", "Revenue Ops"],
     since: "Since 2025",
+    linkedin: "https://fr.linkedin.com/in/romaincornu",
+    website: "https://www.societe.com/societe/oysterz-884894296.html",
   },
 ];
 
@@ -542,26 +549,90 @@ function About() {
                 </span>
               ))}
             </div>
-            <div className="mt-8 grid grid-cols-4 gap-4">
-              {[
-                { src: photoAnne, name: "Anne Grosz", role: "Operations" },
-                { src: photoCecile, name: "Cécile Noiriel", role: "Conductor" },
-                { src: photoGeorges, name: "Georges Grosz", role: "Transformation" },
-                { src: photoRomain, name: "Romain Cornu", role: "Growth" },
-              ].map((member) => (
-                <div key={member.name} className="text-center" data-testid={`about-member-${member.name.split(" ")[0].toLowerCase()}`}>
-                  <img
-                    src={member.src}
-                    alt={member.name}
-                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover mx-auto ring-2 ring-border/50"
-                    data-testid={`img-about-${member.name.split(" ")[0].toLowerCase()}`}
-                  />
-                  <p className="text-xs font-medium text-foreground mt-2">{member.name}</p>
-                  <p className="text-[10px]" style={{ color: "#777777" }}>{member.role}</p>
-                </div>
-              ))}
-            </div>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Team() {
+  return (
+    <section id="team" aria-labelledby="team-heading" className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 border-t border-border/50">
+      <div className="max-w-[1200px] mx-auto">
+        <header className="mb-12 sm:mb-16 max-w-2xl">
+          <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: "#666666" }} aria-hidden="true">Who we are</p>
+          <h2
+            id="team-heading"
+            className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground"
+            data-testid="text-section-team"
+          >
+            Our team
+          </h2>
+          <p className="text-sm sm:text-base mt-4 leading-relaxed" style={{ color: "#666666" }}>
+            Four complementary profiles — operations, orchestration, transformation, and growth — united by one conviction: founders deserve better than drowning in their own back-office.
+          </p>
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px rounded-lg overflow-hidden border border-border/50">
+          {teamMembers.map((member) => {
+            const firstName = member.name.split(" ")[0].toLowerCase();
+            return (
+              <article
+                key={member.name}
+                className="flex gap-5 sm:gap-6 p-6 sm:p-8"
+                style={{ backgroundColor: "#F5F5F5" }}
+                data-testid={`card-team-${firstName}`}
+              >
+                <img
+                  src={member.src}
+                  alt={member.name}
+                  className="w-24 h-24 sm:w-28 sm:h-28 rounded-lg object-cover flex-shrink-0"
+                  style={{ border: "1px solid #E5E5E5" }}
+                  data-testid={`img-team-${firstName}`}
+                />
+                <div className="flex flex-col min-w-0">
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground" data-testid={`text-team-name-${firstName}`}>
+                    {member.name}
+                  </h3>
+                  <p className="text-sm font-medium mt-0.5" style={{ color: "#999999" }} data-testid={`text-team-role-${firstName}`}>
+                    {member.role}
+                  </p>
+                  <p className="text-sm leading-relaxed mt-3 line-clamp-3" style={{ color: "#666666" }} data-testid={`text-team-bio-${firstName}`}>
+                    {member.bio}
+                  </p>
+                  <div className="flex items-center gap-3 mt-4">
+                    {member.linkedin && (
+                      <a
+                        href={member.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${member.name} on LinkedIn`}
+                        className="transition-opacity duration-150 hover:opacity-70"
+                        style={{ color: "#666666" }}
+                        data-testid={`link-team-linkedin-${firstName}`}
+                      >
+                        <SiLinkedin className="w-4 h-4" />
+                      </a>
+                    )}
+                    {member.website && (
+                      <a
+                        href={member.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${member.name} website`}
+                        className="transition-opacity duration-150 hover:opacity-70"
+                        style={{ color: "#666666" }}
+                        data-testid={`link-team-website-${firstName}`}
+                      >
+                        <Globe className="w-4 h-4" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -939,6 +1010,7 @@ export default function Home() {
         <Work />
         <Stats />
         <About />
+        <Team />
         <Story />
         <Testimonial />
         <Contact />
