@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
-import { ArrowRight, ArrowUpRight, Globe } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Globe, Mail, MapPin } from "lucide-react";
 import { SiLinkedin, SiX } from "react-icons/si";
 import logoHorizontalWhite from "@assets/byab-horizontal-logo-white_1772264662585.png";
 import photoAnne from "@assets/byab-profiles-neon-square-anne_1772263504235.png";
@@ -975,23 +975,143 @@ function Contact() {
 }
 
 function Footer() {
+  const footerNav = [
+    { label: "Services", href: "#services" },
+    { label: "Team", href: "#team" },
+    { label: "Story", href: "#story" },
+    { label: "Contact", href: "#contact" },
+  ];
+
+  const linkedinProfiles = [
+    { name: "Anne Grosz", href: "https://www.linkedin.com/in/annegrosz" },
+    { name: "Georges Grosz", href: "https://www.linkedin.com/in/georges-grosz-8aa9613" },
+    { name: "Romain Cornu", href: "https://fr.linkedin.com/in/romaincornu" },
+    { name: "Cécile Noiriel", href: "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/" },
+  ];
+
+  const registryLinks = [
+    { label: "BYAB on Annuaire Entreprises", short: "Annuaire Entreprises", href: "https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471" },
+    { label: "Because You Are Busy on Pappers", short: "Pappers", href: "https://www.pappers.fr/entreprise/because-you-are-busy-814783056" },
+    { label: "Because You Are Busy on Société.com", short: "Société.com", href: "https://www.societe.com/societe/because-you-are-busy-814783056.html" },
+    { label: "Because You Are Busy on Le Figaro", short: "Le Figaro", href: "https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056" },
+  ];
+
   return (
-    <footer className="px-4 sm:px-6 lg:px-8 py-10 sm:py-12 border-t border-border/50" role="contentinfo">
-      <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div className="flex items-center gap-6">
-          <img src={logoHorizontalWhite} alt="Because You Are Busy logo" className="h-6 w-auto" />
-          <p className="text-xs" style={{ color: "#666666" }}>© 2005–2026 <span itemScope itemType="https://schema.org/Organization"><span itemProp="name">Because You Are Busy</span></span>. All rights reserved.</p>
+    <footer className="px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-8 sm:pb-10 border-t border-border/50" role="contentinfo">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          <div>
+            <img src={logoHorizontalWhite} alt="Because You Are Busy logo" className="h-7 w-auto mb-4" data-testid="img-footer-logo" />
+            <p className="text-xs leading-relaxed" style={{ color: "#666666" }}>
+              Operations, transformation & growth consultancy for founders and managing partners since 2005.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-xs uppercase tracking-[0.15em] font-semibold text-foreground mb-3">Navigate</p>
+            <ul className="space-y-2 list-none m-0 p-0">
+              {footerNav.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    className="text-xs transition-opacity duration-150 hover:opacity-70"
+                    style={{ color: "#666666" }}
+                    data-testid={`link-footer-${item.label.toLowerCase()}`}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <Link
+                  href="/design"
+                  className="text-xs flex items-center gap-1 transition-opacity duration-150 hover:opacity-70"
+                  style={{ color: "#666666" }}
+                  data-testid="link-footer-design"
+                >
+                  Design <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-xs uppercase tracking-[0.15em] font-semibold text-foreground mb-3">Contact</p>
+            <ul className="space-y-2 list-none m-0 p-0">
+              <li className="flex items-center gap-2">
+                <Mail className="w-3 h-3 flex-shrink-0" style={{ color: "#999999" }} aria-hidden="true" />
+                <a
+                  href="mailto:hello@becausebusy.com"
+                  className="text-xs transition-opacity duration-150 hover:opacity-70"
+                  style={{ color: "#666666" }}
+                  data-testid="link-footer-email"
+                >
+                  hello@becausebusy.com
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: "#999999" }} aria-hidden="true" />
+                <span className="text-xs" style={{ color: "#666666" }} data-testid="text-footer-locations">Paris & La Rochelle</span>
+              </li>
+            </ul>
+            <div className="flex items-center gap-3 mt-4">
+              {linkedinProfiles.map((profile) => (
+                <a
+                  key={profile.name}
+                  href={profile.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${profile.name} on LinkedIn`}
+                  className="transition-opacity duration-150 hover:opacity-70"
+                  style={{ color: "#666666" }}
+                  data-testid={`link-footer-linkedin-${profile.name.split(" ")[0].toLowerCase()}`}
+                >
+                  <SiLinkedin className="w-3.5 h-3.5" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="text-xs uppercase tracking-[0.15em] font-semibold text-foreground mb-3">Legal</p>
+            <ul className="space-y-2 list-none m-0 p-0">
+              <li>
+                <span className="text-xs" style={{ color: "#666666" }} data-testid="text-footer-siren-1">
+                  SIREN 481 631 471 <span style={{ color: "#999999" }}>(B Y A B)</span>
+                </span>
+              </li>
+              <li>
+                <span className="text-xs" style={{ color: "#666666" }} data-testid="text-footer-siren-2">
+                  SIREN 814 783 056 <span style={{ color: "#999999" }}>(BYAB)</span>
+                </span>
+              </li>
+            </ul>
+            <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3">
+              {registryLinks.map((link) => (
+                <a
+                  key={link.short}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={link.label}
+                  className="text-[11px] underline transition-opacity duration-150 hover:opacity-70"
+                  style={{ color: "#999999" }}
+                  data-testid={`link-footer-registry-${link.short.toLowerCase().replace(/[.\s]/g, "-")}`}
+                >
+                  {link.short}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="flex items-center gap-6">
-          <Link
-            href="/design"
-            data-testid="link-design"
-            className="text-xs font-medium flex items-center gap-1 transition-opacity duration-150"
-            style={{ color: "#666666" }}
-          >
-            Design
-            <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
-          </Link>
+
+        <div className="mt-10 sm:mt-12 pt-6 border-t border-border/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <p className="text-[11px]" style={{ color: "#999999" }}>
+            © 2005–2026 <span itemScope itemType="https://schema.org/Organization"><span itemProp="name">Because You Are Busy</span></span>. All rights reserved.
+          </p>
+          <p className="text-[11px]" style={{ color: "#999999" }} data-testid="text-footer-address">
+            18 rue Arago, 94400 Vitry-sur-Seine, France
+          </p>
         </div>
       </div>
     </footer>
