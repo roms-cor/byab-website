@@ -32,7 +32,7 @@ function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white" role="banner">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4 pl-[32px] pr-[32px] ml-[0px] mr-[0px]">
         <a href="/" aria-label="Home" data-testid="link-logo-home">
-          <img src={logoHorizontalWhite} alt="Because You Are Busy — Operations, Transformation & Growth Consultancy" className="h-12 w-auto ml-[-10px] mr-[-10px]" data-testid="img-logo-header" />
+          <img src={logoHorizontalWhite} alt="Because You Are Busy — Operations, Transformation & Growth Consultancy" className="h-12 w-auto ml-[-20px] mr-[-20px]" data-testid="img-logo-header" />
         </a>
         <nav aria-label="Main navigation" className="hidden md:block">
           <ul className="flex items-center gap-8 list-none m-0 p-0">
