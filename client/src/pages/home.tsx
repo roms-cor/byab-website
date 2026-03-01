@@ -30,7 +30,7 @@ function useHeadLinks() {
 function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white" role="banner">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4 pl-[32px] pr-[32px] ml-[0px] mr-[0px]">
         <a href="/" aria-label="Home" data-testid="link-logo-home">
           <img src={logoHorizontalWhite} alt="Because You Are Busy — Operations, Transformation & Growth Consultancy" className="h-12 w-auto ml-[-10px] mr-[-10px]" data-testid="img-logo-header" />
         </a>
