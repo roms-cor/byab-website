@@ -32,7 +32,7 @@ function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white" role="banner">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4 pl-[32px] pr-[32px] ml-[0px] mr-[0px]">
         <a href="/" aria-label="Home" data-testid="link-logo-home">
-          <img src={logoHorizontalWhite} alt="Because You Are Busy — Operations, Transformation & Growth Consultancy" className="h-12 w-auto ml-[-20px] mr-[-20px]" data-testid="img-logo-header" />
+          <img src={logoHorizontalWhite} alt="Because You Are Busy — Operations, Transformation & Growth Consultancy" className="h-12 w-auto ml-[0px] mr-[0px]" data-testid="img-logo-header" />
         </a>
         <nav aria-label="Main navigation" className="hidden md:block">
           <ul className="flex items-center gap-8 list-none m-0 p-0">
@@ -982,34 +982,64 @@ function Footer() {
     { label: "Contact", href: "#contact" },
   ];
 
-  const linkedinProfiles = [
-    { name: "Anne Grosz", href: "https://www.linkedin.com/in/annegrosz" },
-    { name: "Georges Grosz", href: "https://www.linkedin.com/in/georges-grosz-8aa9613" },
-    { name: "Romain Cornu", href: "https://fr.linkedin.com/in/romaincornu" },
-    { name: "Cécile Noiriel", href: "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/" },
+  const people = [
+    { name: "Anne Grosz", role: "Founder & Operations", linkedin: "https://www.linkedin.com/in/annegrosz" },
+    { name: "Cécile Noiriel", role: "Operations Conductor", linkedin: "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/" },
+    { name: "Georges Grosz", role: "Transformation & Data", linkedin: "https://www.linkedin.com/in/georges-grosz-8aa9613" },
+    { name: "Romain Cornu", role: "Growth Engine", linkedin: "https://fr.linkedin.com/in/romaincornu", extra: { label: "Oysterz", href: "https://www.societe.com/societe/oysterz-884894296.html" } },
   ];
 
-  const registryLinks = [
-    { label: "BYAB on Annuaire Entreprises", short: "Annuaire Entreprises", href: "https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471" },
-    { label: "Because You Are Busy on Pappers", short: "Pappers", href: "https://www.pappers.fr/entreprise/because-you-are-busy-814783056" },
-    { label: "Because You Are Busy on Société.com", short: "Société.com", href: "https://www.societe.com/societe/because-you-are-busy-814783056.html" },
-    { label: "Because You Are Busy on Le Figaro", short: "Le Figaro", href: "https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056" },
+  const companies = [
+    {
+      name: "B Y A B",
+      siren: "481 631 471",
+      founded: "2005",
+      links: [
+        { label: "Annuaire Entreprises", href: "https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471" },
+        { label: "Pappers", href: "https://www.pappers.fr/entreprise/b-y-a-b-because-you-are-busy-481631471" },
+        { label: "Le Figaro", href: "https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471" },
+      ],
+    },
+    {
+      name: "Because You Are Busy",
+      siren: "814 783 056",
+      founded: "2015",
+      links: [
+        { label: "Société.com", href: "https://www.societe.com/societe/because-you-are-busy-814783056.html" },
+        { label: "Pappers", href: "https://www.pappers.fr/entreprise/because-you-are-busy-814783056" },
+        { label: "Le Figaro", href: "https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056" },
+      ],
+    },
   ];
 
   return (
     <footer className="px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-8 sm:pb-10 border-t border-border/50" role="contentinfo">
       <div className="max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+
           <div>
             <img src={logoHorizontalWhite} alt="Because You Are Busy logo" className="h-7 w-auto mb-4" data-testid="img-footer-logo" />
             <p className="text-xs leading-relaxed" style={{ color: "#666666" }}>
               Operations, transformation & growth consultancy for founders and managing partners since 2005.
             </p>
-          </div>
-
-          <div>
-            <p className="text-xs uppercase tracking-[0.15em] font-semibold text-foreground mb-3">Navigate</p>
-            <ul className="space-y-2 list-none m-0 p-0">
+            <ul className="mt-4 space-y-2 list-none m-0 p-0">
+              <li className="flex items-center gap-2">
+                <Mail className="w-3 h-3 flex-shrink-0" style={{ color: "#999999" }} aria-hidden="true" />
+                <a
+                  href="mailto:hello@becausebusy.com"
+                  className="text-xs transition-opacity duration-150 hover:opacity-70"
+                  style={{ color: "#666666" }}
+                  data-testid="link-footer-email"
+                >
+                  hello@becausebusy.com
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: "#999999" }} aria-hidden="true" />
+                <span className="text-xs" style={{ color: "#666666" }} data-testid="text-footer-locations">Paris & La Rochelle</span>
+              </li>
+            </ul>
+            <ul className="mt-3 space-y-1 list-none m-0 p-0">
               {footerNav.map((item) => (
                 <li key={item.label}>
                   <a
@@ -1036,73 +1066,74 @@ function Footer() {
           </div>
 
           <div>
-            <p className="text-xs uppercase tracking-[0.15em] font-semibold text-foreground mb-3">Contact</p>
-            <ul className="space-y-2 list-none m-0 p-0">
-              <li className="flex items-center gap-2">
-                <Mail className="w-3 h-3 flex-shrink-0" style={{ color: "#999999" }} aria-hidden="true" />
-                <a
-                  href="mailto:hello@becausebusy.com"
-                  className="text-xs transition-opacity duration-150 hover:opacity-70"
-                  style={{ color: "#666666" }}
-                  data-testid="link-footer-email"
-                >
-                  hello@becausebusy.com
-                </a>
-              </li>
-              <li className="flex items-center gap-2">
-                <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: "#999999" }} aria-hidden="true" />
-                <span className="text-xs" style={{ color: "#666666" }} data-testid="text-footer-locations">Paris & La Rochelle</span>
-              </li>
+            <p className="text-xs uppercase tracking-[0.15em] font-semibold text-foreground mb-3">People</p>
+            <ul className="space-y-3 list-none m-0 p-0">
+              {people.map((person) => {
+                const first = person.name.split(" ")[0].toLowerCase();
+                return (
+                  <li key={person.name}>
+                    <a
+                      href={person.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-medium text-foreground flex items-center gap-1.5 transition-opacity duration-150 hover:opacity-70"
+                      data-testid={`link-footer-person-${first}`}
+                    >
+                      <SiLinkedin className="w-3 h-3 flex-shrink-0" style={{ color: "#999999" }} aria-hidden="true" />
+                      {person.name}
+                    </a>
+                    <p className="text-[11px] mt-0.5 pl-[18px]" style={{ color: "#999999" }}>{person.role}</p>
+                    {person.extra && (
+                      <a
+                        href={person.extra.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[11px] underline mt-0.5 pl-[18px] block transition-opacity duration-150 hover:opacity-70"
+                        style={{ color: "#999999" }}
+                        data-testid={`link-footer-extra-${first}`}
+                      >
+                        {person.extra.label}
+                      </a>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
-            <div className="flex items-center gap-3 mt-4">
-              {linkedinProfiles.map((profile) => (
-                <a
-                  key={profile.name}
-                  href={profile.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${profile.name} on LinkedIn`}
-                  className="transition-opacity duration-150 hover:opacity-70"
-                  style={{ color: "#666666" }}
-                  data-testid={`link-footer-linkedin-${profile.name.split(" ")[0].toLowerCase()}`}
-                >
-                  <SiLinkedin className="w-3.5 h-3.5" />
-                </a>
+          </div>
+
+          <div className="lg:col-span-2">
+            <p className="text-xs uppercase tracking-[0.15em] font-semibold text-foreground mb-3">Companies</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {companies.map((company) => (
+                <div key={company.siren}>
+                  <p className="text-xs font-medium text-foreground" data-testid={`text-footer-company-${company.siren.replace(/\s/g, "")}`}>
+                    {company.name}
+                  </p>
+                  <p className="text-[11px] mt-0.5" style={{ color: "#999999" }}>
+                    SIREN {company.siren} · Founded {company.founded}
+                  </p>
+                  <ul className="flex flex-wrap gap-x-3 gap-y-1 mt-2 list-none m-0 p-0">
+                    {company.links.map((link) => (
+                      <li key={link.label}>
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title={`${company.name} on ${link.label}`}
+                          className="text-[11px] underline transition-opacity duration-150 hover:opacity-70"
+                          style={{ color: "#999999" }}
+                          data-testid={`link-footer-registry-${company.siren.replace(/\s/g, "")}-${link.label.toLowerCase().replace(/[.\s]/g, "-")}`}
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
           </div>
 
-          <div>
-            <p className="text-xs uppercase tracking-[0.15em] font-semibold text-foreground mb-3">Legal</p>
-            <ul className="space-y-2 list-none m-0 p-0">
-              <li>
-                <span className="text-xs" style={{ color: "#666666" }} data-testid="text-footer-siren-1">
-                  SIREN 481 631 471 <span style={{ color: "#999999" }}>(B Y A B)</span>
-                </span>
-              </li>
-              <li>
-                <span className="text-xs" style={{ color: "#666666" }} data-testid="text-footer-siren-2">
-                  SIREN 814 783 056 <span style={{ color: "#999999" }}>(BYAB)</span>
-                </span>
-              </li>
-            </ul>
-            <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3">
-              {registryLinks.map((link) => (
-                <a
-                  key={link.short}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title={link.label}
-                  className="text-[11px] underline transition-opacity duration-150 hover:opacity-70"
-                  style={{ color: "#999999" }}
-                  data-testid={`link-footer-registry-${link.short.toLowerCase().replace(/[.\s]/g, "-")}`}
-                >
-                  {link.short}
-                </a>
-              ))}
-            </div>
-          </div>
         </div>
 
         <div className="mt-10 sm:mt-12 pt-6 border-t border-border/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
