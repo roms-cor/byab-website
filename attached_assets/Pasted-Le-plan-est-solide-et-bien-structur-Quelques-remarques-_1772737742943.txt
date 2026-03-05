@@ -1,0 +1,59 @@
+Le plan est solide et bien structuré. Quelques remarques et suggestions d'amélioration avant de valider :
+
+---
+
+**T001 — Release workflow ✅ bon**
+
+La condition anti-boucle est clé. Assure-toi que la condition dans le job ressemble à ça :
+
+```yaml
+jobs:
+  release:
+    if: github.actor != 'github-actions[bot]'
+```
+
+Et ne pas oublier les permissions au niveau du workflow (pas juste du job) :
+
+```yaml
+permissions:
+  contents: write
+```
+
+---
+
+**T002 — Deploy workflow ✅ bon**
+
+Les deux approches (actor + message) sont complémentaires. Je recommande de combiner les deux pour être bullet-proof :
+
+```yaml
+jobs:
+  deploy:
+    if: |
+      github.actor != 'github-actions[bot]' &&
+      !startsWith(github.event.head_commit.message, 'chore(release)')
+```
+
+---
+
+**T003 — Push script ⚠️ attention**
+
+`chore(publish):` ne déclenchera effectivement pas de bump de version, c'est correct. Mais assure-toi que Replit utilise ce script **pour tous ses commits**, sinon les commits de features codées par Replit n'auront pas le bon préfixe (`feat:`, `fix:`) et aucune release ne sera jamais déclenchée. Il faudrait peut-être que Replit adopte les conventional commits **sur tous ses messages**, pas seulement le script de push.
+
+---
+
+**T004 — replit.md ✅ bon**
+
+Ajoute aussi la note sur la **re-sync manuelle de `package.json`** depuis GitHub vers Replit après chaque release (`git pull`), c'est le point le plus susceptible de causer de la confusion à l'usage.
+
+---
+
+**Point manquant : lecture dynamique de la version dans le footer**
+
+Le plan ne couvre pas l'injection de `__APP_VERSION__` depuis `package.json` au moment du build. Sans ça, le footer restera désynchronisé. Je suggèrerais un **T005** :
+
+> **T005 : Injecter la version depuis `package.json` dans le build**
+> Configurer Vite (ou l'équivalent) pour lire `version` depuis `package.json` et l'exposer comme variable globale `__APP_VERSION__` au build, plutôt que de le hardcoder.
+
+---
+
+En résumé, le plan est prêt à être exécuté tel quel, mais sans T005 la version dans le footer ne sera jamais automatiquement à jour côté Replit.

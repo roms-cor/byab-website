@@ -1,0 +1,65 @@
+Excellentes observations. Voici le message corrigé à envoyer à Replit :
+
+---
+
+> **Mise à jour du workflow de release — 3 problèmes à corriger :**
+>
+> **1. Double deploy — Ignorer les commits de la release dans le workflow de deploy**
+>
+> Dans `.github/workflows/deploy.yml`, ajoute une condition pour ignorer les commits automatiques de la release :
+>
+> ```yaml
+> on:
+>   push:
+>     branches:
+>       - main
+>     paths-ignore:
+>       - 'CHANGELOG.md'
+>       - 'package.json'
+> ```
+>
+> Ou plus robuste, ignore les commits dont le message commence par `chore(release)` en ajoutant dans le job :
+>
+> ```yaml
+> jobs:
+>   deploy:
+>     if: "!contains(github.event.head_commit.message, 'chore(release)')"
+> ```
+>
+> **2. Action dépréciée — Remplace `actions/create-release@v1` par `softprops/action-gh-release`**
+>
+> Le fichier `.github/workflows/release.yml` doit utiliser :
+>
+> ```yaml
+> - name: Create GitHub Release
+>   uses: softprops/action-gh-release@v2
+>   if: ${{ steps.changelog.outputs.skipped == 'false' }}
+>   with:
+>     tag_name: ${{ steps.changelog.outputs.tag }}
+>     name: ${{ steps.changelog.outputs.tag }}
+>     body: ${{ steps.changelog.outputs.clean_changelog }}
+>   env:
+>     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+> ```
+>
+> **3. Désynchronisation de version — Lire la version depuis `package.json` à la volée**
+>
+> Plutôt que d'hardcoder `__APP_VERSION__` dans le footer, fais lire la version directement depuis `package.json` au build ou au runtime. Par exemple en Node.js/Vite :
+>
+> ```js
+> // vite.config.js
+> import { version } from './package.json'
+> export default {
+>   define: {
+>     __APP_VERSION__: JSON.stringify(version)
+>   }
+> }
+> ```
+>
+> Ainsi, la version affichée dans le footer sera toujours celle de `package.json`, qui est mise à jour automatiquement par la release. Pas besoin de sync manuel depuis Replit — la prochaine fois que Replit pull ou que le build se déclenche, la bonne version sera injectée.
+>
+> **Résumé du flux corrigé :**
+> 1. Tu commites un `feat:` ou `fix:` → push sur `main`
+> 2. Le workflow **release** se déclenche → bumpe `package.json` + `CHANGELOG.md` + crée la GitHub Release
+> 3. Le commit de bump (`chore(release)`) est ignoré par le workflow **deploy**
+> 4. Le footer affiche toujours la bonne version via `package.json`

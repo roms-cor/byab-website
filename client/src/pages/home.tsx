@@ -1,5 +1,6 @@
 declare const __APP_VERSION__: string;
 declare const __BUILD_DATE__: string;
+declare const __GIT_COMMIT_DATE__: string;
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
@@ -331,7 +332,7 @@ function Hero() {
             </p>
             <h1
               id="hero-heading"
-              className="text-4xl sm:text-6xl lg:text-[80px] font-semibold tracking-tight text-foreground leading-[1.02]"
+              className="sm:text-6xl lg:text-[80px] font-semibold tracking-tight text-foreground text-[75px]"
               data-testid="text-hero-title"
             >
               We run what
@@ -1172,7 +1173,7 @@ function Footer() {
             © 2005–2026 <span itemScope itemType="https://schema.org/Organization"><span itemProp="name">Because You Are Busy</span></span>. All rights reserved.
           </p>
           <p className="text-[10px] hidden sm:block" style={{ color: "#BBBBBB" }} data-testid="text-footer-version">
-            v{__APP_VERSION__} · {new Date(__BUILD_DATE__).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+            v{__APP_VERSION__} · Published {new Date(__BUILD_DATE__).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} {new Date(__BUILD_DATE__).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })} · Commit {__GIT_COMMIT_DATE__ ? `${new Date(__GIT_COMMIT_DATE__).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} ${new Date(__GIT_COMMIT_DATE__).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })}` : "—"}
           </p>
           <p className="text-[11px]" style={{ color: "#767676" }} data-testid="text-footer-address">
             18 rue Arago, 94400 Vitry-sur-Seine, France

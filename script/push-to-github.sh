@@ -39,7 +39,7 @@ git add -A
 if git diff --cached --quiet; then
   echo "✓ No changes to push"
 else
-  git commit -m "Publish v${VERSION} — ${DATE}"
+  git commit -m "chore(publish): v${VERSION} — ${DATE}"
   GIT_ASKPASS="$GIT_ASKPASS" git push origin "$BRANCH"
   echo "✓ Pushed v${VERSION} to GitHub"
 fi

@@ -1,0 +1,33 @@
+name: Auto Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Bump version and generate changelog
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          skip-on-empty: true
+
+      - name: Create GitHub Release
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}

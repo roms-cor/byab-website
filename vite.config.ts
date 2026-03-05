@@ -2,9 +2,15 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { readFileSync } from "fs";
+import { execSync } from "child_process";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 const pkg = JSON.parse(readFileSync("package.json", "utf-8"));
+
+let gitCommitDate = "";
+try {
+  gitCommitDate = execSync("git log -1 --format=%cI", { encoding: "utf-8" }).trim();
+} catch { /* no git available */ }
 
 export default defineConfig({
   plugins: [
@@ -32,7 +38,8 @@ export default defineConfig({
   root: path.resolve(import.meta.dirname, "client"),
   define: {
     __APP_VERSION__: JSON.stringify(pkg.version),
-    __BUILD_DATE__: JSON.stringify(new Date().toISOString().split("T")[0]),
+    __BUILD_DATE__: JSON.stringify(new Date().toISOString()),
+    __GIT_COMMIT_DATE__: JSON.stringify(gitCommitDate),
   },
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),

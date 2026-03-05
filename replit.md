@@ -10,7 +10,7 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - React + Tailwind CSS + shadcn/ui tokens
 - Semantic HTML5 throughout
 - Proper heading hierarchy (h1 > h2 > h3)
-- **Build-time injection:** `vite.config.ts` defines `__APP_VERSION__` (from package.json) and `__BUILD_DATE__` (ISO date at build time), displayed subtly in the footer bottom bar (text-[10px], color #BBBBBB)
+- **Build-time injection:** `vite.config.ts` defines `__APP_VERSION__` (from package.json), `__BUILD_DATE__` (full ISO datetime at build/publish time), and `__GIT_COMMIT_DATE__` (ISO datetime of the latest git commit). Both timestamps are displayed in the footer bottom bar (text-[10px], color #BBBBBB) as "Published {date} {time} · Commit {date} {time}". **This footer version line must always be preserved** — it is a persistent project requirement.
 - **Image optimization:** All images converted to WebP at 256px (hero/team) and 128px (orbit/story thumbnails), served from `client/public/images/`. Logos resized to 504×168 (2x retina). Total image payload ~92KB. Lazy loading + decoding="async" on below-fold images, fetchpriority="high" on LCP hero image + header logo.
 - **LCP optimization:** Hero first image renders with opacity:1 and NO CSS transition on initial paint (hasAdvanced ref). LCP image (anne-256.webp) preloaded in `<head>`.
 - **Pre-rendered HTML shell:** `<div id="root">` contains a static HTML skeleton (header + hero title) so FCP happens before JS loads. React replaces it entirely on mount.
@@ -21,6 +21,14 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - **Font loading:** Google Fonts loaded asynchronously via preload+onload pattern (non-render-blocking), with slimmed weight range (Inter 400-700, JetBrains Mono 400-500)
 - **Preload hints:** LCP image (anne-256.webp) and header logo preloaded in `<head>`
 - **Auto-push on Publish:** `script/build.ts` runs `script/push-to-github.sh` after building, which syncs the workspace to GitHub `main` using `GITHUB_PAT` (Replit secret). GitHub Actions then auto-deploys to `becausebusy.com`. Replit = staging, Publish = production.
+- **Auto-release:** `.github/workflows/release.yml` uses `TriPSs/conventional-changelog-action` to bump `package.json` version, generate `CHANGELOG.md`, and create a GitHub Release — only when conventional commits (`feat:`, `fix:`) are present. The deploy workflow skips bot-authored commits and `chore(release)` messages to prevent double-deploy loops.
+- **Conventional commits (persistent convention):** All commit messages in this project must follow [Conventional Commits](https://www.conventionalcommits.org/) format:
+  - `feat: ...` → minor version bump (new feature)
+  - `fix: ...` → patch version bump (bug fix)
+  - `chore: ...` → no version bump (maintenance, publish)
+  - `refactor:`, `perf:`, `docs:`, `style:`, `test:` → also valid, no bump
+  - The push script uses `chore(publish):` prefix automatically
+- **Version sync caveat:** After a GitHub release bumps `package.json` version on GitHub, you must update the version in Replit's `package.json` **before the next deploy**, otherwise the footer will display the old version. `__APP_VERSION__` in `vite.config.ts` reads dynamically from `package.json` at build time — no hardcoding.
 
 ## Routes
 - `/` — Coming Soon page (temporary landing while homepage content is updated)
