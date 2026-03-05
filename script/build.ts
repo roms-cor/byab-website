@@ -1,6 +1,9 @@
 import { build as esbuild } from "esbuild";
 import { build as viteBuild } from "vite";
 import { rm, readFile } from "fs/promises";
+import { execSync } from "child_process";
+import { fileURLToPath } from "url";
+import { dirname, resolve } from "path";
 
 // server deps to bundle to reduce openat(2) syscalls
 // which helps cold start times
@@ -61,7 +64,18 @@ async function buildAll() {
   });
 }
 
-buildAll().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+buildAll()
+  .then(() => {
+    const scriptDir = dirname(fileURLToPath(import.meta.url));
+    const pushScript = resolve(scriptDir, "push-to-github.sh");
+    console.log("pushing to GitHub...");
+    try {
+      execSync(`bash "${pushScript}"`, { stdio: "inherit" });
+    } catch {
+      console.warn("⚠ GitHub push failed — build succeeded, deploy manually if needed");
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
