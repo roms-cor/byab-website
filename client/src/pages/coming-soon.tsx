@@ -54,6 +54,14 @@ export default function ComingSoon() {
         data-testid="text-coming-soon-footer"
       >
         Operations, transformation &amp; growth since 2005
+        <a 
+          href="/home" 
+          className="ml-1 opacity-10 underline" 
+          style={{ color: "#999999" }}
+          data-testid="link-hidden-home"
+        >
+          .
+        </a>
       </p>
     </div>
   );
