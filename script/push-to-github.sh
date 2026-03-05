@@ -6,6 +6,8 @@ BRANCH="main"
 WORKSPACE="$(cd "$(dirname "$0")/.." && pwd)"
 TMPDIR=$(mktemp -d)
 
+trap 'rm -rf "$TMPDIR"' EXIT
+
 if [ -z "$GITHUB_PAT" ]; then
   echo "⚠ GITHUB_PAT not set — skipping push to GitHub"
   exit 0
@@ -15,7 +17,11 @@ VERSION=$(node -e "console.log(require('${WORKSPACE}/package.json').version)")
 DATE=$(date -u +"%Y-%m-%d %H:%M UTC")
 
 echo "→ Cloning $REPO..."
-git clone --depth 1 "https://x-access-token:${GITHUB_PAT}@github.com/${REPO}.git" "$TMPDIR/repo" 2>/dev/null
+GIT_ASKPASS="$TMPDIR/askpass.sh"
+printf '#!/bin/sh\necho "$GITHUB_PAT"\n' > "$GIT_ASKPASS"
+chmod +x "$GIT_ASKPASS"
+
+GIT_ASKPASS="$GIT_ASKPASS" git clone --depth 1 "https://x-access-token@github.com/${REPO}.git" "$TMPDIR/repo" 2>/dev/null
 
 echo "→ Syncing workspace..."
 cd "$TMPDIR/repo"
@@ -34,8 +40,6 @@ if git diff --cached --quiet; then
   echo "✓ No changes to push"
 else
   git commit -m "Publish v${VERSION} — ${DATE}"
-  git push origin "$BRANCH"
+  GIT_ASKPASS="$GIT_ASKPASS" git push origin "$BRANCH"
   echo "✓ Pushed v${VERSION} to GitHub"
 fi
-
-rm -rf "$TMPDIR"
