@@ -23,20 +23,25 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 
 ## SEO & AI Search Optimization
 - **Primary keyword:** "because you are busy" — appears in title, meta, h1 subtext, hero description, about section, contact section, story quote, footer, schema.org, llms.txt
-- **Title tag:** "Because You Are Busy — Operations, Transformation & Growth Consulting Since 2005"
+- **Title tag:** "Because You Are Busy — Coming Soon" (temporary; full title on /home)
+- **All URLs absolute** — sitemap, robots.txt Sitemap directive, JSON-LD, canonical, hreflang all use `https://becausebusy.com/`
 - **Schema.org structured data** (6 blocks in index.html):
-  1. Organization — name, alternateName, sameAs (all backlinks), founder, members, areaServed
-  2. ProfessionalService — services catalog, address, email, aggregateRating
+  1. Organization — name, alternateName, sameAs (all backlinks), founder, members, areaServed (structured objects)
+  2. ProfessionalService — services catalog, address, email, aggregateRating, areaServed (structured objects)
   3. WebSite — name, description, inLanguage
   4. FAQPage — 5 questions/answers about the company
-  5. BreadcrumbList — Home, Components
-- **Open Graph + Twitter cards** with keyword-rich titles/descriptions
-- **hreflang** tags for en/fr
-- **robots.txt** — Allows all major search + AI bots (Googlebot, GPTBot, ClaudeBot, PerplexityBot, FirecrawlBot, etc.)
-- **llms.txt** — Comprehensive structured summary for LLM/AI consumption, keyword-dense
-- **llms-full.txt** — Complete design system specification
-- **sitemap.xml** — Both routes with priorities
+  5. BreadcrumbList — Accueil (/home), Services (/home#services), Références (/home#track-record)
+- **Open Graph + Twitter cards** — og:image (1200×630), og:url, twitter:image, all absolute URLs
+- **Favicons** — apple-touch-icon (180×180), favicon-32x32, favicon-16x16 + original favicon.png
+- **theme-color** — #ffffff
+- **Viewport** — No maximum-scale restriction (accessibility)
+- **hreflang** tags for en/fr (absolute URLs via useHeadLinks)
+- **robots.txt** — Allows all major search + AI bots (Googlebot, GPTBot, ClaudeBot, PerplexityBot, FirecrawlBot, OAI-SearchBot, Diffbot, Applebot, DataForSeoBot, iaskspider, omgili, etc.)
+- **llms.txt** — Comprehensive structured summary + Tone & Voice, Competitive Differentiation, Citations sections
+- **llms-full.txt** — Full editorial site content (hero, services, team bios, FAQ, track record, company history)
+- **sitemap.xml** — Both routes with absolute URLs and priorities
 - **Backlinks** (14+ external) embedded in Story section: annuaire-entreprises, Pappers, societe.com, Le Figaro, LinkedIn (4 profiles), Vatier, Avizio, Clay, Oysterz
+- **CNAME** — Single file at root (`becausebusy.com`), copied to dist during deploy
 
 ## Key Files
 - `client/src/pages/home.tsx` — Homepage landing page

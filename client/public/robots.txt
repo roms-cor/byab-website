@@ -48,4 +48,22 @@ Allow: /
 User-agent: YouBot
 Allow: /
 
-Sitemap: /sitemap.xml
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: iaskspider
+Allow: /
+
+User-agent: omgili
+Allow: /
+
+User-agent: DataForSeoBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+Sitemap: https://becausebusy.com/sitemap.xml

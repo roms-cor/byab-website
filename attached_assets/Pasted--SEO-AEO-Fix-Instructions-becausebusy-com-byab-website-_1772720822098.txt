@@ -1,0 +1,287 @@
+# SEO/AEO Fix Instructions — becausebusy.com (byab-website)
+
+> Ces tâches sont issues d'un audit SEO/AEO complet du codebase.  
+> Elles sont triées par priorité décroissante. Chaque tâche est indépendante sauf mention contraire.
+
+---
+
+## 🔴 P0 — Bloquant pour l'indexation
+
+---
+
+### T001 · Swap route racine `/` → composant `Home`
+
+- **Blocked By:** []
+- **Details:**
+  - Dans `App.tsx`, la route `path="/"` charge actuellement `ComingSoon`
+  - Remplacer par le composant `Home` (actuellement sur `/home`)
+  - Supprimer la route `/home` ou la rediriger vers `/` avec un `<Redirect>`
+  - La page `ComingSoon` peut être conservée sous une route cachée type `/coming-soon` si besoin
+  - **Files:** `client/src/App.tsx`
+- **Acceptance:** Naviguer vers `https://becausebusy.com/` affiche le contenu de la Home page (hero, services, team, etc.), pas le placeholder "Coming soon"
+
+---
+
+### T002 · URLs absolues dans `sitemap.xml`
+
+- **Blocked By:** []
+- **Details:**
+  - Les `<loc>` actuelles utilisent des chemins relatifs (`<loc>/</loc>`, `<loc>/home</loc>`)
+  - Remplacer par des URLs absolues : `<loc>https://becausebusy.com/</loc>` et `<loc>https://becausebusy.com/home</loc>`
+  - Après T001, mettre à jour le sitemap pour ne lister que `/` (plus de `/home` comme URL primaire)
+  - Ajouter `<lastmod>` avec la date du dernier build au format `YYYY-MM-DD`
+  - **Files:** `client/public/sitemap.xml`
+- **Acceptance:** Toutes les `<loc>` commencent par `https://becausebusy.com`
+
+---
+
+### T003 · URL absolue dans `robots.txt`
+
+- **Blocked By:** []
+- **Details:**
+  - La directive `Sitemap:` utilise un chemin relatif (`Sitemap: /sitemap.xml`)
+  - Remplacer par : `Sitemap: https://becausebusy.com/sitemap.xml`
+  - **Files:** `client/public/robots.txt`
+- **Acceptance:** `robots.txt` contient `Sitemap: https://becausebusy.com/sitemap.xml`
+
+---
+
+### T004 · Supprimer `maximum-scale=1` du viewport meta
+
+- **Blocked By:** []
+- **Details:**
+  - La balise viewport contient `maximum-scale=1` qui bloque le zoom sur mobile → pénalité Core Web Vitals accessibilité
+  - Remplacer par : `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
+  - **Files:** `client/index.html`
+- **Acceptance:** La balise viewport ne contient plus `maximum-scale`
+
+---
+
+## 🟠 P1 — Impact fort sur ranking et partage social
+
+---
+
+### T005 · Ajouter `og:image` et `og:url` dans `index.html`
+
+- **Blocked By:** []
+- **Details:**
+  - Ajouter dans le `<head>` statique de `index.html` :
+    ```html
+    <meta property="og:url" content="https://becausebusy.com/" />
+    <meta property="og:image" content="https://becausebusy.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:image" content="https://becausebusy.com/og-image.png" />
+    ```
+  - Créer un fichier image `og-image.png` (1200×630px) dans `client/public/` — peut être un screenshot du hero ou un visuel brandé simple avec le logo BYAB sur fond sombre
+  - **Files:** `client/index.html`, `client/public/og-image.png`
+- **Acceptance:** Un aperçu LinkedIn/Twitter du site affiche le visuel et non une carte texte vide
+
+---
+
+### T006 · Corriger le `BreadcrumbList` JSON-LD
+
+- **Blocked By:** [T001]
+- **Details:**
+  - Le schéma `BreadcrumbList` actuel pointe vers `/home` et `/design` (page `noindex`)
+  - Après T001, le corriger pour pointer vers les sections réelles de la homepage via ancres :
+    ```json
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://becausebusy.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://becausebusy.com/#services" },
+        { "@type": "ListItem", "position": 3, "name": "Références", "item": "https://becausebusy.com/#track-record" }
+      ]
+    }
+    ```
+  - Adapter les noms et ancres aux vraies sections présentes dans `home.tsx`
+  - **Files:** `client/index.html`
+- **Acceptance:** Le JSON-LD BreadcrumbList ne contient plus de références à `/design` ou `/home`
+
+---
+
+### T007 · Supprimer ou renseigner `telephone` dans le schema `ProfessionalService`
+
+- **Blocked By:** []
+- **Details:**
+  - Le champ `"telephone": ""` est une chaîne vide dans le JSON-LD → erreur remontée dans Google Search Console
+  - Si pas de numéro public : supprimer entièrement la propriété `telephone` du schéma
+  - Si numéro disponible : renseigner au format international `"+33XXXXXXXXX"`
+  - **Files:** `client/index.html`
+- **Acceptance:** Le schema `ProfessionalService` ne contient plus `"telephone": ""`
+
+---
+
+### T008 · Corriger les URLs relatives dans les JSON-LD
+
+- **Blocked By:** []
+- **Details:**
+  - Dans le schéma `Organization`, la propriété `"url": "/"` est une URL relative → invalide Schema.org
+  - Remplacer toutes les URLs relatives par des URLs absolues dans tous les blocs JSON-LD :
+    - `"url": "/"` → `"url": "https://becausebusy.com/"`
+    - `"logo": "/logo.png"` → `"logo": "https://becausebusy.com/logo.png"`
+    - Idem pour toute propriété `image`, `sameAs`, `url` dans les schémas `Organization`, `ProfessionalService`, `WebSite`
+  - **Files:** `client/index.html`
+- **Acceptance:** Aucune URL relative dans les blocs `<script type="application/ld+json">`
+
+---
+
+### T009 · Homogénéiser `areaServed` dans `ProfessionalService`
+
+- **Blocked By:** []
+- **Details:**
+  - Le schéma `Organization` utilise des objets structurés pour `areaServed` mais `ProfessionalService` utilise des strings simples `["Paris", "La Rochelle", "France"]`
+  - Mettre en cohérence avec le format structuré :
+    ```json
+    "areaServed": [
+      { "@type": "City", "name": "Paris" },
+      { "@type": "City", "name": "La Rochelle" },
+      { "@type": "Country", "name": "France" }
+    ]
+    ```
+  - **Files:** `client/index.html`
+- **Acceptance:** Les deux schémas utilisent le même format d'objet pour `areaServed`
+
+---
+
+## 🟡 P2 — Optimisations SEO/AEO significatives
+
+---
+
+### T010 · Ajouter `theme-color` meta et `apple-touch-icon`
+
+- **Blocked By:** []
+- **Details:**
+  - Ajouter dans `<head>` :
+    ```html
+    <meta name="theme-color" content="#0a0a0a" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    ```
+  - Générer les variantes favicon depuis le PNG existant (outil : `https://realfavicongenerator.net` ou sharp en node)
+  - Adapter la couleur `theme-color` à la couleur de fond du site
+  - **Files:** `client/index.html`, `client/public/` (nouveaux fichiers favicon)
+- **Acceptance:** Lighthouse ne remonte plus d'erreur favicon/apple-touch-icon
+
+---
+
+### T011 · Ajouter les crawlers IA manquants dans `robots.txt`
+
+- **Blocked By:** []
+- **Details:**
+  - Les bots suivants sont absents du `robots.txt` — les ajouter avec `Allow: /` :
+    ```
+    User-agent: OAI-SearchBot
+    Allow: /
+
+    User-agent: Diffbot
+    Allow: /
+
+    User-agent: iaskspider
+    Allow: /
+
+    User-agent: omgili
+    Allow: /
+
+    User-agent: DataForSeoBot
+    Allow: /
+
+    User-agent: Applebot
+    Allow: /
+    ```
+  - **Files:** `client/public/robots.txt`
+- **Acceptance:** Les 6 bots listés ci-dessus sont présents dans `robots.txt`
+
+---
+
+### T012 · Refondre `llms-full.txt` en contenu éditorial
+
+- **Blocked By:** []
+- **Details:**
+  - Le fichier actuel `llms-full.txt` expose le design system (tokens, couleurs) — inutile pour les LLM répondant à des questions sur BYAB
+  - Le remplacer par le contenu éditorial complet du site :
+    - Texte intégral de la homepage (hero, services, manifeste, track record, équipe, FAQ)
+    - Biographies longues de chaque associé
+    - Descriptions détaillées de chaque offre de service
+    - Cas d'usage et types de clients ciblés
+    - Contenu de toutes les pages publiques
+  - Format : Markdown structuré avec `##` sections claires
+  - **Files:** `client/public/llms-full.txt`
+- **Acceptance:** `llms-full.txt` ne contient plus aucun token CSS/design system ; il contient uniquement le contenu textuel du site
+
+---
+
+### T013 · Enrichir `llms.txt` avec sections manquantes
+
+- **Blocked By:** []
+- **Details:**
+  - Ajouter les sections suivantes au fichier `llms.txt` existant :
+    - `## Tone & Voice` : description du style de communication de BYAB (direct, expert, sans jargon inutile, orienté résultats, français et anglais)
+    - `## Competitive Differentiation` : ce qui distingue BYAB de freelances et grandes agences (équipe senior pluri-disciplinaire, modèle hybride, pas de juniors en client)
+    - `## Citations` : liste de sources tierces vérifiables (Pappers, Société.com, Le Figaro Entreprises) avec leurs URLs
+  - **Files:** `client/public/llms.txt`
+- **Acceptance:** `llms.txt` contient les 3 nouvelles sections
+
+---
+
+### T014 · Corriger les attributs `loading` sur les images
+
+- **Blocked By:** []
+- **Details:**
+  - Le logo header (`logo-horizontal-white.webp`) est above-the-fold → ne doit **pas** avoir `loading="lazy"` (pénalise le LCP)
+  - Vérifier tous les `<img>` dans `home.tsx` et `App.tsx` :
+    - Images above-the-fold (logo, hero) : supprimer `loading="lazy"` ou passer à `loading="eager"`
+    - Images below-the-fold (photos équipe, sections basses) : s'assurer que `loading="lazy"` est présent
+  - S'assurer que tous les `<img>` ont des attributs `width` et `height` explicites pour éviter le CLS
+  - **Files:** `client/src/components/home.tsx`, layout components
+- **Acceptance:** Le logo et l'image hero n'ont pas `loading="lazy"` ; les images sous la ligne de flottaison ont `loading="lazy"`
+
+---
+
+### T015 · Corriger les `hreflang` pour pointer vers la route racine
+
+- **Blocked By:** [T001]
+- **Details:**
+  - Les balises `hreflang` actuelles pointent toutes vers `/home` alors que la page principale sera `/` après T001
+  - Mettre à jour dans le `<head>` statique :
+    ```html
+    <link rel="alternate" hreflang="fr" href="https://becausebusy.com/" />
+    <link rel="alternate" hreflang="en" href="https://becausebusy.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://becausebusy.com/" />
+    ```
+  - **Files:** `client/index.html`
+- **Acceptance:** Les 3 `hreflang` pointent vers `https://becausebusy.com/`
+
+---
+
+## ⚙️ P3 — Technique / Performance
+
+---
+
+### T016 · Ajouter `rel="preload"` pour les images critiques
+
+- **Blocked By:** []
+- **Details:**
+  - Ajouter dans le `<head>` de `index.html` un preload pour le logo et l'image hero :
+    ```html
+    <link rel="preload" as="image" href="/logo-horizontal-white.webp" type="image/webp" />
+    ```
+  - Adapter le chemin au nom réel du fichier dans `client/public/`
+  - Ne pas preloader plus de 2-3 images pour ne pas saturer le réseau
+  - **Files:** `client/index.html`
+- **Acceptance:** Le logo header a un `<link rel="preload">` correspondant dans le `<head>`
+
+---
+
+### T017 · Vérifier et dédupliquer le fichier `CNAME`
+
+- **Blocked By:** []
+- **Details:**
+  - Il existe potentiellement un fichier `CNAME` à la racine du repo ET un dans `client/public/`
+  - Vérifier l'état actuel : seul le `CNAME` dans `client/public/` doit exister (il est copié dans `dist/` au build)
+  - Si un `CNAME` existe à la racine, le supprimer pour éviter tout conflit
+  - Le contenu doit être : `becausebusy.com` (sans `https://`, sans trailing slash)
+  - **Files:** `CNAME` (racine), `client/public/CNAME`
+- **Acceptance:** Un seul fichier `CNAME` existe dans le projet, situé dans `client/public/`, contenant uniquement `becausebusy.com`

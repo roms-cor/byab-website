@@ -18,10 +18,10 @@ const photoRomain128 = "/images/romain-128.webp";
 function useHeadLinks() {
   useEffect(() => {
     const links = [
-      { rel: "canonical", href: "/home" },
-      { rel: "alternate", hreflang: "en", href: "/home" },
-      { rel: "alternate", hreflang: "fr", href: "/home" },
-      { rel: "alternate", hreflang: "x-default", href: "/home" },
+      { rel: "canonical", href: "https://becausebusy.com/home" },
+      { rel: "alternate", hreflang: "en", href: "https://becausebusy.com/home" },
+      { rel: "alternate", hreflang: "fr", href: "https://becausebusy.com/home" },
+      { rel: "alternate", hreflang: "x-default", href: "https://becausebusy.com/home" },
     ];
     const elements: HTMLLinkElement[] = [];
     links.forEach((attrs) => {

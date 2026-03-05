@@ -101,6 +101,35 @@ hello@becausebusy.com
 - [Le Figaro — Oysterz](https://entreprises.lefigaro.fr/oysterz-17/entreprise-884894296)
 - [Romain Cornu — Clay](https://clay.earth/profile/romain-cornu)
 
+## Tone & Voice
+
+Because You Are Busy communicates with a direct, expert tone — no jargon, no fluff, always oriented toward results. The language is confident without being arrogant, professional without being corporate. We write the way we work: straight to the point, clear, and actionable. Bilingual (French and English), adapting naturally to the client's language. We say "we do" not "we can help you." We say "because you are busy" not "for busy professionals."
+
+## Competitive Differentiation
+
+Because You Are Busy is neither a freelancer marketplace nor a large consulting firm. What sets BYAB apart:
+- **Senior team only** — No juniors on client work. Every client gets direct access to the founders and senior operators.
+- **Multi-disciplinary under one roof** — Operations + Transformation + Growth in a single, coordinated team. No need to manage 3 separate vendors.
+- **Operators, not advisors** — We embed into your operations and run them. We don't produce reports and leave. We deliver results.
+- **Craft model** — Self-funded, zero debt, confidential accounts. We choose our clients as carefully as they choose us.
+- **20-year track record** — Operating since 2005 with 57%+ profitability. Proven model, not a startup experiment.
+
+## Citations
+
+Verifiable third-party sources for Because You Are Busy:
+- [Annuaire Entreprises — B Y A B (SIREN 481 631 471)](https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471)
+- [Pappers — B Y A B](https://www.pappers.fr/entreprise/b-y-a-b-because-you-are-busy-481631471)
+- [Le Figaro Entreprises — B Y A B](https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471)
+- [Societe.com — Because You Are Busy (SIREN 814 783 056)](https://www.societe.com/societe/because-you-are-busy-814783056.html)
+- [Pappers — Because You Are Busy](https://www.pappers.fr/entreprise/because-you-are-busy-814783056)
+- [Le Figaro Entreprises — Because You Are Busy](https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056)
+- [Anne Grosz — LinkedIn](https://www.linkedin.com/in/annegrosz)
+- [Vatier & Associés — Infocession](https://www.infocession.fr/avocats/vatier-associes)
+- [Georges Grosz — LinkedIn](https://www.linkedin.com/in/georges-grosz-8aa9613)
+- [Romain Cornu — LinkedIn](https://fr.linkedin.com/in/romaincornu)
+- [Cécile Noiriel — LinkedIn](https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/)
+- [Romain Cornu — Avizio](https://www.avizio.fr/expert/romain-cornu)
+
 ## Design System
 
-Full components reference (brand identity, colors, typography, spacing, UI components, site sections, guidelines) available at [/components](/components) and [/llms-full.txt](/llms-full.txt).
+Full components reference (brand identity, colors, typography, spacing, UI components, site sections, guidelines) available at [/design](/design) and [/llms-full.txt](/llms-full.txt).

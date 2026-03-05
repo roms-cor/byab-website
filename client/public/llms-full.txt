@@ -1,278 +1,168 @@
-# Because Busy — Brand Guidelines & Design System
+# Because You Are Busy — Full Site Content
 
-> Complete brand guidelines and design system documentation for Because You Are Busy (BYAB), an operations, transformation, and growth consultancy serving founders and managing partners since 2005. This document contains all visual identity specifications, design tokens, component specifications, and usage guidelines.
-
-## Table of Contents
-
-1. Brand Overview
-2. Logo Guidelines
-3. Color System
-4. Typography System
-5. Spacing System
-6. Component Library
-7. Design Principles
-8. Accessibility Standards
-9. Design Tokens Reference
+> Because You Are Busy (BYAB) is an operations, transformation, and growth consultancy for founders and managing partners since 2005. This document contains the complete editorial content of becausebusy.com.
 
 ---
 
-## 1. Brand Overview
+## Hero
 
-Because You Are Busy (BYAB) is an operations, transformation, and growth consultancy founded in 2005. The brand identity reflects a clean, professional, and authoritative design language — pure grayscale from black to white — communicating structure, clarity, and trust.
+**We run what you can't get to anymore.**
 
-### Brand Attributes
-- Tone: Authoritative, direct, confident
-- Energy: Measured, professional
-- Target Audience: Founders, managing partners, law firm partners, B2B leaders
-- Design Framework: Tailwind CSS
-- Color Scheme: Pure grayscale, light mode primary
-
-### Quick Reference
-- Font Family: Inter
-- Base Spacing Unit: 8px
-- Default Border Radius: 8px
-- Color Scheme: Light (pure grayscale)
+Because you are busy building, leading, and deciding — we handle the operations, transformation, and growth that keep falling through the cracks. Since 2005.
 
 ---
 
-## 2. Logo Guidelines
+## Services
 
-The Because Busy logo is the cornerstone of the brand identity. It must be used consistently across all touchpoints.
+### 1. Operational Backbone
+Externalized general secretariat, admin, and finance so founders stop drowning in back-office and start leading. We become your invisible operations layer — payroll, contracts, compliance, reporting — handled with the rigor of an in-house team and the flexibility of an external partner.
 
-### Logo Specifications
-- Primary format: SVG wordmark
-- Minimum width: 48px for digital applications
-- Clear space: 2x the logomark height on all sides
-- File formats: SVG (web), PNG (social media and print)
+### 2. Transformation & Data
+Systems architecture, project governance, and data strategy that turn operational chaos into measurable clarity. We design and deploy the information systems, dashboards, and governance frameworks that let you make decisions based on facts, not feelings.
 
-### Approved Variations
-- Standard: Dark logomark on light backgrounds
-- Inverted: Light/white logomark on dark backgrounds (#000000 or darker)
+### 3. Growth Engine
+Outbound, acquisition funnels, and predictable sales machines that make revenue growth inevitable. We build your ICP, package your offers, set up outbound sequences, and create the metrics layer that turns pipeline into revenue.
 
-### Usage Rules — Do
-- Maintain original proportions at all times
-- Use only approved color variations
-- Ensure adequate contrast against backgrounds
-- Keep minimum clear space around the logo
-
-### Usage Rules — Don't
-- Do not stretch or distort the logo
-- Do not add drop shadows, glows, or other effects
-- Do not place on busy or low-contrast backgrounds
-- Do not rotate, skew, or tilt the logo
-- Do not alter the logo colors outside approved variations
-- Do not add outlines or strokes to the logo
+### 4. Legal Practice Ops
+Purpose-built admin, finance, and organizational support for law firms where nothing can be improvised. Born from Anne Grosz's 8 years as Secretary General at Vatier & Associés, this service is designed for the specific operational demands of legal practices.
 
 ---
 
-## 3. Color System
+## Manifesto
 
-The color palette is designed to be clean, professional, and accessible. Each color has a specific purpose within the design system.
+We exist because founders and managing partners are too busy to do everything themselves. Not because they lack talent — because they lack time and structure.
 
-### Brand Colors
+Since 2005, Because You Are Busy has been the partner that handles what falls through the cracks: the back-office that piles up, the transformation projects that stall, the growth that stays theoretical.
 
-#### Primary (#999999)
-- HSL: 0, 0%, 60%
-- Usage: Primary brand color for large surface areas, section backgrounds, and decorative elements
-- Contrast on white: Decorative use only (does not meet text contrast requirements on white)
-
-#### Accent (#000000)
-- HSL: 0, 0%, 0%
-- Usage: Primary CTAs, important text, interactive elements, headings
-- Contrast on white: AAA (21:1 ratio)
-
-#### Background (#FFFFFF)
-- HSL: 0, 0%, 100%
-- Usage: Page backgrounds and primary content areas
-
-#### Text Primary (#000000)
-- HSL: 0, 0%, 0%
-- Usage: Main body text, headings, and all primary readable content
-- Contrast on white: AAA (21:1 ratio)
-
-#### Link (#666666)
-- HSL: 0, 0%, 40%
-- Usage: Clickable elements, secondary labels, navigation items, supporting text
-- Contrast on white: AA (5.74:1 ratio)
-
-### Extended Palette — Grayscale
-
-| Token    | Hex     | Usage                                    |
-|----------|---------|------------------------------------------|
-| Gray 50  | #F5F5F5 | Subtle backgrounds, card surfaces        |
-| Gray 100 | #E5E5E5 | Borders, dividers, input backgrounds     |
-| Gray 200 | #CCCCCC | Heavier borders, disabled states         |
-| Gray 300 | #999999 | Primary brand color, decorative fills    |
-| Gray 400 | #777777 | Placeholder text, disabled text          |
-| Gray 500 | #666666 | Secondary text, links, captions          |
-| Gray 600 | #444444 | Body text alternative, icons             |
-| Gray 700 | #333333 | Dark UI elements, emphasis               |
-| Gray 800 | #1A1A1A | Near-black surfaces                      |
-| Gray 900 | #000000 | Buttons, headings, maximum contrast      |
-
-### Accessibility Compliance
-- Accent (#000000) on White (#FFFFFF): AAA — 21:1 contrast ratio
-- Link (#666666) on White (#FFFFFF): AA — 5.74:1 contrast ratio
-- Text (#000000) on Primary (#999999): AA — 5.32:1 contrast ratio
+We don't advise. We do. We embed. We run.
 
 ---
 
-## 4. Typography System
+## Track Record
 
-Inter is the primary typeface, providing excellent readability and a modern aesthetic across all sizes and weights.
-
-### Typefaces
-
-#### Primary — Inter
-- Role: Body text and headings
-- Weights: 400 (Regular), 500 (Medium), 600 (Semibold), 700 (Bold)
-- Source: Google Fonts
-- Stack: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif
-
-#### Monospace — JetBrains Mono
-- Role: Code blocks, technical values, data
-- Weights: 400 (Regular), 500 (Medium), 700 (Bold)
-- Source: Google Fonts
-- Stack: 'JetBrains Mono', monospace
-
-### Type Scale
-
-| Name        | Size | Weight | Line Height | Letter Spacing | Usage                        |
-|-------------|------|--------|-------------|----------------|------------------------------|
-| Display     | 64px | 600    | 1.1         | -0.02em        | Hero headings, landing pages |
-| Heading 1   | 48px | 600    | 1.15        | -0.02em        | Page titles                  |
-| Heading 2   | 36px | 600    | 1.2         | -0.015em       | Section headings             |
-| Heading 3   | 28px | 600    | 1.25        | -0.01em        | Subsection headings          |
-| Heading 4   | 22px | 600    | 1.3         | -0.005em       | Card titles, labels          |
-| Body Large  | 18px | 400    | 1.6         | 0em            | Lead paragraphs, intros      |
-| Body        | 16px | 400    | 1.6         | 0em            | Standard body text           |
-| Body Small  | 14px | 400    | 1.5         | 0em            | Secondary information        |
-| Caption     | 12px | 500    | 1.4         | 0.02em         | Labels, metadata, timestamps |
-
-### Font Weight Usage
-- Regular (400): Body text, descriptions, paragraphs
-- Medium (500): Labels, captions, navigation items
-- Semibold (600): Headings, titles, emphasis
-- Bold (700): Display headings, key metrics
+- **B2B SaaS Scale-Up** — Growth Engineering (2025): ICP definition, outbound infrastructure, acquisition funnel setup, and predictable pipeline metrics for a scaling SaaS company.
+- **National Law Firm** — Operations Restructuring (2024): Full operational overhaul including administrative processes, financial reporting, and organizational structure for a multi-office law firm.
+- **Tech PME** — Transformation & Data (2025): Information systems architecture, data governance framework, and project management methodology for a growing tech SME.
 
 ---
 
-## 5. Spacing System
+## Key Metrics
 
-All spacing is based on an 8px grid, providing consistent rhythm and alignment.
-
-### Scale
-
-| Token | Value | Multiplier | Usage                             |
-|-------|-------|------------|-----------------------------------|
-| 2xs   | 4px   | 0.5x       | Tight gaps, icon padding          |
-| xs    | 8px   | 1x         | Base unit, inline spacing         |
-| sm    | 12px  | 1.5x       | Small component padding           |
-| md    | 16px  | 2x         | Standard padding, gaps            |
-| lg    | 24px  | 3x         | Card padding, section gaps        |
-| xl    | 32px  | 4x         | Section padding                   |
-| 2xl   | 48px  | 6x         | Large section gaps                |
-| 3xl   | 64px  | 8x         | Page section spacing              |
-| 4xl   | 96px  | 12x        | Hero spacing, major separations   |
-
-### Usage Guidelines
-- Padding: 16px for compact elements, 24px for cards, 32-48px for page sections
-- Gap: 8px between tightly related elements, 16px between grouped items, 24-32px between sections
-- Border Radius: 8px default, 10px for buttons, 6px for small elements, 12-16px for cards
+- **20 years** serving founders since 2005
+- **57%** operating profitability
+- **3** complementary expertise pillars (Operations, Transformation, Growth)
+- **0€** external debt raised — self-funded, craft model
 
 ---
 
-## 6. Component Library
+## Team
 
-### Buttons
+### Anne Grosz — Co-Manager & Head of Operations
+LinkedIn: https://www.linkedin.com/in/annegrosz
 
-#### Primary Button
-- Background: #000000
-- Text color: #FFFFFF
-- Border: 1px solid #666666
-- Border radius: 10px
-- Padding: 10px 20px
-- Font: 14px / Medium (500)
-- States: Default, Hover (lighten), Active (darken), Disabled (50% opacity)
+20 years of hands-on operational leadership. Former Secretary General at Vatier & Associés (Paris law firm). Founded B Y A B in 2005, then Because You Are Busy in 2015. Expert in externalized general secretariat, administrative management, financial operations, and law firm operations. Anne is the operational backbone of BYAB — the person who makes sure nothing falls through the cracks while founders focus on leading.
 
-#### Secondary Button
-- Background: #F5F5F5
-- Text color: #000000
-- Border: 1px solid border color
-- Border radius: 0px (sharp corners)
-- Padding: 10px 20px
-- Font: 14px / Medium (500)
-- States: Default, Hover, Active, Disabled (50% opacity)
+### Cécile Noiriel — Operations Conductor
+LinkedIn: https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/
 
-### Input Fields
-- Height: 40px
-- Padding: 0 16px
-- Border radius: 8px
-- Border: 1px solid border color
-- Background: white
-- Font: 14px / Regular
-- Focus: 2px ring with ring color at 20% opacity
-- States: Default, Focus, Disabled (muted background), Error (red border)
+The original "chef d'orchestre" of Because You Are Busy since 2005. Cécile has been integral to the company from the very beginning, coordinating operational delivery and administrative organization. She is the continuity and reliability that allows BYAB's model to scale across multiple clients without losing quality.
 
-### Cards
-- Default Card: Subtle background (#F5F5F5), light border, 8px radius
-- Elevated Card: White background, subtle shadow, 8px radius
-- Dark Card: Dark background (#000000), light text (#FFFFFF), 8px radius
+### Georges Grosz — Co-Manager, Transformation & Data
+LinkedIn: https://www.linkedin.com/in/georges-grosz-8aa9613
+
+22 years as Senior Executive Consultant at CGI. Professor at Université Paris 1 Panthéon-Sorbonne. Expert in transformation, information systems architecture, project governance, and data strategy. Georges joined Because You Are Busy as co-manager in 2025, adding a deep transformation and data layer to the consultancy's capabilities.
+
+### Romain Cornu — Growth Engine
+LinkedIn: https://fr.linkedin.com/in/romaincornu
+
+B2B growth specialist. Former Head of Marketing at Datananas, Head of Growth at Clovis, Growth Advisor at MerciApp, Teacher Outbound at GrowthMakers, CEO of Oysterz. Expert in outbound B2B, acquisition funnels, ICP definition, packaged offers, and scalable sales machines. Romain joined Because You Are Busy to build the growth engineering capability — turning pipeline into predictable revenue.
 
 ---
 
-## 7. Design Principles
+## Company History
 
-### 1. Hierarchy
-Use size, weight, and color to create clear visual hierarchy. Headings should use semibold (600) weight and body text regular (400). Use muted foreground colors for secondary information.
-
-### 2. Consistency
-Stick to the spacing scale and never use arbitrary values. All spacing should be multiples of 8px. Maintain consistent padding and gaps throughout the interface.
-
-### 3. Restraint
-Less is more. Avoid unnecessary decoration, shadows, or color. Let content breathe with generous whitespace. Every element should serve a clear purpose.
-
-### 4. Accessibility
-All text must meet WCAG AA contrast requirements. Interactive elements need visible focus states. Use semantic HTML and proper ARIA labels for screen readers.
+- **2005** — B Y A B (SIREN 481 631 471) created. First "right-hand for busy founders" model. Ultra-lean, ultra-profitable structure — revenue ~130,000€, 57%+ operating profitability, zero external debt.
+- **2015** — Because You Are Busy (SIREN 814 783 056) created by Anne Grosz. Specialization in externalized general secretariat for law firms and SMEs. Anne brings 8 years as Secretary General at Vatier & Associés.
+- **2020** — Transformation from SAS to SARL. Craft model over startup model. Confidential accounts, trust-based client relationships.
+- **2025** — Georges Grosz joins Because You Are Busy as co-manager. Transformation & data layer added. 22 years at CGI, professor at Sorbonne.
+- **2025–2026** — Romain Cornu joins Because You Are Busy. Growth engineering capability: ICP, packaged offers, outbound funnels, performance metrics.
 
 ---
 
-## 8. Accessibility Standards
+## About
 
-- All text meets WCAG 2.1 AA contrast requirements minimum
-- Primary text (#000000) on white achieves AAA (21:1)
-- Link text (#666666) on white achieves AA (5.74:1)
-- Interactive elements have visible focus indicators
-- All images require descriptive alt text
-- Semantic HTML structure with proper heading hierarchy
-- Keyboard navigation support for all interactive elements
+Because You Are Busy was born from a simple observation: founders and managing partners are brilliant at what they do, but the operational weight of running a company — admin, finance, HR, data, growth — buries them.
+
+We started in 2005 with a radical idea: instead of advising from the outside, embed directly into the operations. Run the back-office. Own the transformation. Build the growth engine. Not as consultants who leave reports — as operators who deliver results.
+
+Two decades later, that model hasn't changed. What has changed is the depth: from pure operations, we've added transformation & data expertise and growth engineering. Three pillars, one promise: because you are busy, we do the work that frees your time.
 
 ---
 
-## 9. Design Tokens Reference
+## Testimonial
 
-```css
-/* Colors */
---color-primary: #999999;
---color-accent: #000000;
---color-background: #FFFFFF;
---color-text: #000000;
---color-link: #666666;
-
-/* Typography */
---font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
---font-mono: 'JetBrains Mono', monospace;
-
-/* Spacing */
---space-unit: 8px;
---radius: 8px;
---radius-button: 10px;
-
-/* Shadows */
---shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
---shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
-```
+"Their team became invisible — in the best way. Everything just worked."
+— Managing Partner, National Law Firm
 
 ---
 
-Last updated: February 2026 — Version 1.0
+## Frequently Asked Questions
+
+**What is Because You Are Busy?**
+Because You Are Busy (BYAB) is an operations, transformation, and growth consultancy founded in 2005. We help founders and managing partners who are too busy to do it all by externalizing operations, driving data-powered transformation, and engineering predictable B2B growth.
+
+**What services does Because You Are Busy offer?**
+Four core services: (1) Operational Backbone — externalized general secretariat, admin, and finance; (2) Transformation & Data — systems architecture, project governance, and data strategy; (3) Growth Engine — outbound, acquisition funnels, and predictable sales machines; (4) Legal Practice Ops — purpose-built support for law firms.
+
+**Who founded Because You Are Busy?**
+Anne Grosz and Cécile Noiriel founded the original BYAB in 2005. The team now includes Georges Grosz (Transformation & Data, co-manager since 2025) and Romain Cornu (Growth Engine).
+
+**Where is Because You Are Busy located?**
+18 rue Arago, 94400 Vitry-sur-Seine, France. Operating across Paris and La Rochelle.
+
+**How long has Because You Are Busy been operating?**
+Over 20 years — since April 2005. Two decades of hands-on operational leadership, transformation consulting, and growth engineering.
+
+**What types of clients does Because You Are Busy serve?**
+Founders, managing partners, CEOs, and law firm partners who are scaling their business but can't handle everything alone. Our clients range from tech SMEs and B2B SaaS companies to national law firms and professional services firms.
+
+**How is Because You Are Busy different from freelancers or large consulting firms?**
+We're neither. We're a senior, multi-disciplinary team that embeds into your operations. No juniors on client work. No 200-page reports that collect dust. We operate — we don't just advise. Our craft model means every client gets the founders and senior team directly.
+
+---
+
+## Contact
+
+Email: hello@becausebusy.com
+Address: 18 rue Arago, 94400 Vitry-sur-Seine, France
+Locations: Paris & La Rochelle, France
+
+---
+
+## Legal Identifiers
+
+- SIREN 481 631 471 (B Y A B, created April 2005)
+- SIREN 814 783 056 (Because You Are Busy, created 2015)
+
+---
+
+## External References
+
+- Annuaire Entreprises — BYAB: https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471
+- Le Figaro — Because You Are Busy: https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056
+- Le Figaro — BYAB: https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471
+- Pappers — BYAB: https://www.pappers.fr/entreprise/b-y-a-b-because-you-are-busy-481631471
+- Societe.com — Because You Are Busy: https://www.societe.com/societe/because-you-are-busy-814783056.html
+- Pappers — Because You Are Busy: https://www.pappers.fr/entreprise/because-you-are-busy-814783056
+- Anne Grosz — LinkedIn: https://www.linkedin.com/in/annegrosz
+- Vatier & Associés — Infocession: https://www.infocession.fr/avocats/vatier-associes
+- Georges Grosz — LinkedIn: https://www.linkedin.com/in/georges-grosz-8aa9613
+- Romain Cornu — LinkedIn: https://fr.linkedin.com/in/romaincornu
+- Cécile Noiriel — LinkedIn: https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/
+- Romain Cornu — Avizio: https://www.avizio.fr/expert/romain-cornu
+
+---
+
+## Brand Promise
+
+"Because you are busy, we do the work that frees your time — and we do it in a way that makes your growth more readable, more predictable, and better controlled."
