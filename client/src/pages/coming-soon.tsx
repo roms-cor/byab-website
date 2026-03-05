@@ -50,14 +50,14 @@ export default function ComingSoon() {
 
       <p
         className="text-[11px] mt-16"
-        style={{ color: "#999999" }}
+        style={{ color: "#767676" }}
         data-testid="text-coming-soon-footer"
       >
         Operations, transformation &amp; growth since 2005
         <a 
           href="/home" 
           className="ml-1 opacity-10 underline" 
-          style={{ color: "#999999" }}
+          style={{ color: "#767676" }}
           data-testid="link-hidden-home"
         >
           .

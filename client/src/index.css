@@ -207,6 +207,14 @@
 .slider-orbit { animation: slider-rotate 20s linear infinite; }
 .slider-orbit-reverse { animation: slider-rotate-reverse 20s linear infinite; }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .slider-orbit,
+  .slider-orbit-reverse {
+    animation: none !important;
+  }
+}
+
 /**
  * Using the elevate system.
  * Automatic contrast adjustment.

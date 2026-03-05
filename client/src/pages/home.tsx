@@ -17,6 +17,9 @@ const photoRomain128 = "/images/romain-128.webp";
 
 function useHeadLinks() {
   useEffect(() => {
+    const existingCanonical = document.querySelector('link[rel="canonical"]');
+    if (existingCanonical) existingCanonical.remove();
+
     const links = [
       { rel: "canonical", href: "https://becausebusy.com/home" },
       { rel: "alternate", hreflang: "en", href: "https://becausebusy.com/home" },
@@ -39,7 +42,7 @@ function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white" role="banner">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4 pl-[32px] pr-[32px] ml-[0px] mr-[0px]">
         <a href="/home" aria-label="Home" data-testid="link-logo-home">
-          <img src={logoHorizontalWhite} alt="Because You Are Busy — Operations, Transformation & Growth Consultancy" width={240} height={48} className="h-12 w-auto ml-[0px] mr-[0px]" data-testid="img-logo-header" />
+          <img src={logoHorizontalWhite} alt="Because You Are Busy — Operations, Transformation & Growth Consultancy" width={240} height={48} className="h-12 w-auto ml-[0px] mr-[0px]" {...{fetchpriority: "high"} as any} data-testid="img-logo-header" />
         </a>
         <nav aria-label="Main navigation" className="hidden md:block">
           <ul className="flex items-center gap-8 list-none m-0 p-0">
@@ -168,26 +171,30 @@ function TeamSlider() {
           />
 
           <div className="absolute inset-0 rounded-full overflow-hidden" style={{ zIndex: 3 }}>
-            {teamMembers.map((m, i) => (
-              <img
-                key={m.name}
-                src={m.src}
-                alt={m.name}
-                width={256}
-                height={256}
-                {...(i === 0 ? { fetchpriority: "high" } : { fetchpriority: "low" }) as any}
-                decoding={i === 0 ? "sync" : "async"}
-                className="absolute inset-0 w-full h-full rounded-full object-cover"
-                style={{
-                  opacity: i === active ? 1 : 0,
-                  transform: i === active ? "scale(1)" : (i === prev ? "scale(1.08)" : "scale(0.92)"),
-                  transition: "opacity 700ms cubic-bezier(0.4,0,0.2,1), transform 700ms cubic-bezier(0.4,0,0.2,1)",
-                  border: "3px solid #FFFFFF",
-                  boxShadow: "0 8px 40px rgba(0,0,0,0.10)",
-                }}
-                data-testid={i === active ? "img-slider-active" : undefined}
-              />
-            ))}
+            {teamMembers.map((m, i) => {
+              const isActive = i === active;
+              const isFirst = i === 0;
+              return (
+                <img
+                  key={m.name}
+                  src={m.src}
+                  alt={m.name}
+                  width={256}
+                  height={256}
+                  {...(isFirst ? { fetchpriority: "high" } : { fetchpriority: "low" }) as any}
+                  decoding={isFirst ? "sync" : "async"}
+                  className="absolute inset-0 w-full h-full rounded-full object-cover"
+                  style={{
+                    opacity: isActive || (isFirst && active === 0) ? 1 : 0,
+                    transform: isActive ? "scale(1)" : (i === prev ? "scale(1.08)" : "scale(0.92)"),
+                    transition: "opacity 700ms cubic-bezier(0.4,0,0.2,1), transform 700ms cubic-bezier(0.4,0,0.2,1)",
+                    border: "3px solid #FFFFFF",
+                    boxShadow: "0 8px 40px rgba(0,0,0,0.10)",
+                  }}
+                  data-testid={isActive ? "img-slider-active" : undefined}
+                />
+              );
+            })}
           </div>
 
           <div className="absolute inset-0 slider-orbit" style={{ zIndex: 4 }}>
@@ -211,7 +218,7 @@ function TeamSlider() {
                 >
                   <button
                     onClick={() => goTo(i)}
-                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden slider-orbit-reverse"
+                    className="w-11 h-11 rounded-full overflow-hidden slider-orbit-reverse"
                     style={{
                       border: "2.5px solid #FFFFFF",
                       boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
@@ -222,7 +229,7 @@ function TeamSlider() {
                     aria-label={`View ${m.name}`}
                     data-testid={`button-slider-${m.name.split(" ")[0].toLowerCase()}`}
                   >
-                    <img src={m.thumb} alt={m.name} width={128} height={128} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                    <img src={m.thumb} alt={m.name} width={128} height={128} decoding="async" className="w-full h-full object-cover" />
                   </button>
                 </div>
               );
@@ -283,15 +290,20 @@ function TeamSlider() {
               <button
                 key={i}
                 onClick={() => goTo(i)}
-                className="relative h-1.5 rounded-full cursor-pointer"
-                style={{
-                  width: i === active ? "28px" : "8px",
-                  backgroundColor: i === active ? "#000000" : "#E5E5E5",
-                  transition: "width 500ms cubic-bezier(0.4,0,0.2,1), background-color 500ms ease",
-                }}
+                className="relative flex items-center justify-center cursor-pointer"
+                style={{ width: "44px", height: "44px" }}
                 aria-label={`Go to member ${i + 1}`}
                 data-testid={`dot-slider-${i}`}
-              />
+              >
+                <span
+                  className="block h-1.5 rounded-full"
+                  style={{
+                    width: i === active ? "28px" : "8px",
+                    backgroundColor: i === active ? "#000000" : "#E5E5E5",
+                    transition: "width 500ms cubic-bezier(0.4,0,0.2,1), background-color 500ms ease",
+                  }}
+                />
+              </button>
             ))}
           </div>
         </div>
@@ -322,7 +334,7 @@ function Hero() {
               <br />
               you can't get to
               <br />
-              <span style={{ color: "#999999" }}>anymore.</span>
+              <span style={{ color: "#767676" }}>anymore.</span>
             </h1>
             <p
               className="text-base sm:text-lg mt-6 sm:mt-8 leading-relaxed max-w-lg"
@@ -372,7 +384,7 @@ function Marquee() {
               <span
                 key={`${set}-${word}`}
                 className="text-xs uppercase tracking-[0.2em] font-medium"
-                style={{ color: "#999999" }}
+                style={{ color: "#767676" }}
               >
                 {word}
               </span>
@@ -435,7 +447,7 @@ function Services() {
               style={{ backgroundColor: "#F5F5F5" }}
               data-testid={`card-service-${service.num}`}
             >
-              <span className="text-xs font-mono font-medium" style={{ color: "#999999" }}>{service.num}</span>
+              <span className="text-xs font-mono font-medium" style={{ color: "#767676" }}>{service.num}</span>
               <h3 className="text-lg sm:text-xl font-semibold text-foreground mt-3">{service.title}</h3>
               <p className="text-sm leading-relaxed mt-2" style={{ color: "#666666" }}>{service.description}</p>
             </article>
@@ -479,7 +491,7 @@ function Work() {
                   <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-foreground tracking-tight">{project.title}</h3>
                   <div className="flex items-center gap-3">
                     <span className="text-xs font-medium px-2.5 py-1 rounded-full" style={{ backgroundColor: "#E5E5E5", color: "#666666" }}>{project.category}</span>
-                    <span className="text-xs font-mono" style={{ color: "#999999" }}>{project.year}</span>
+                    <span className="text-xs font-mono" style={{ color: "#767676" }}>{project.year}</span>
                   </div>
                 </div>
                 <div
@@ -614,7 +626,7 @@ function Team() {
                   <h3 className="text-base sm:text-lg font-semibold text-foreground" data-testid={`text-team-name-${firstName}`}>
                     {member.name}
                   </h3>
-                  <p className="text-sm font-medium mt-0.5" style={{ color: "#999999" }} data-testid={`text-team-role-${firstName}`}>
+                  <p className="text-sm font-medium mt-0.5" style={{ color: "#767676" }} data-testid={`text-team-role-${firstName}`}>
                     {member.role}
                   </p>
                   <p className="text-sm leading-relaxed mt-3 line-clamp-3" style={{ color: "#666666" }} data-testid={`text-team-bio-${firstName}`}>
@@ -956,6 +968,8 @@ function Contact() {
                   id="contact-name"
                   type="text"
                   placeholder="Your name"
+                  required
+                  aria-required="true"
                   data-testid="input-contact-name"
                   className="w-full px-4 py-2.5 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring transition-colors"
                 />
@@ -966,6 +980,8 @@ function Contact() {
                   id="contact-email"
                   type="email"
                   placeholder="you@company.com"
+                  required
+                  aria-required="true"
                   data-testid="input-contact-email"
                   className="w-full px-4 py-2.5 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring transition-colors"
                 />
@@ -1047,7 +1063,7 @@ function Footer() {
             </p>
             <ul className="mt-4 space-y-2 list-none m-0 p-0">
               <li className="flex items-center gap-2">
-                <Mail className="w-3 h-3 flex-shrink-0" style={{ color: "#999999" }} aria-hidden="true" />
+                <Mail className="w-3 h-3 flex-shrink-0" style={{ color: "#767676" }} aria-hidden="true" />
                 <a
                   href="mailto:hello@becausebusy.com"
                   className="text-xs transition-opacity duration-150 hover:opacity-70"
@@ -1058,7 +1074,7 @@ function Footer() {
                 </a>
               </li>
               <li className="flex items-center gap-2">
-                <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: "#999999" }} aria-hidden="true" />
+                <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: "#767676" }} aria-hidden="true" />
                 <span className="text-xs" style={{ color: "#666666" }} data-testid="text-footer-locations">Paris & La Rochelle</span>
               </li>
             </ul>
@@ -1102,10 +1118,10 @@ function Footer() {
                       className="text-xs font-medium text-foreground flex items-center gap-1.5 transition-opacity duration-150 hover:opacity-70"
                       data-testid={`link-footer-person-${first}`}
                     >
-                      <SiLinkedin className="w-3 h-3 flex-shrink-0" style={{ color: "#999999" }} aria-hidden="true" />
+                      <SiLinkedin className="w-3 h-3 flex-shrink-0" style={{ color: "#767676" }} aria-hidden="true" />
                       {person.name}
                     </a>
-                    <p className="text-[11px] mt-0.5 pl-[18px]" style={{ color: "#999999" }}>{person.role}</p>
+                    <p className="text-[11px] mt-0.5 pl-[18px]" style={{ color: "#767676" }}>{person.role}</p>
                   </li>
                 );
               })}
@@ -1120,7 +1136,7 @@ function Footer() {
                   <p className="text-xs font-medium text-foreground" data-testid={`text-footer-company-${company.siren.replace(/\s/g, "")}`}>
                     {company.name}
                   </p>
-                  <p className="text-[11px] mt-0.5" style={{ color: "#999999" }}>
+                  <p className="text-[11px] mt-0.5" style={{ color: "#767676" }}>
                     SIREN {company.siren} · Founded {company.founded}
                   </p>
                   <ul className="flex flex-wrap gap-x-3 gap-y-1 mt-2 list-none m-0 p-0">
@@ -1132,7 +1148,7 @@ function Footer() {
                           rel="noopener noreferrer"
                           title={`${company.name} on ${link.label}`}
                           className="text-[11px] underline transition-opacity duration-150 hover:opacity-70"
-                          style={{ color: "#999999" }}
+                          style={{ color: "#767676" }}
                           data-testid={`link-footer-registry-${company.siren.replace(/\s/g, "")}-${link.label.toLowerCase().replace(/[.\s]/g, "-")}`}
                         >
                           {link.label}
@@ -1148,13 +1164,13 @@ function Footer() {
         </div>
 
         <div className="mt-10 sm:mt-12 pt-6 border-t border-border/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <p className="text-[11px]" style={{ color: "#999999" }}>
+          <p className="text-[11px]" style={{ color: "#767676" }}>
             © 2005–2026 <span itemScope itemType="https://schema.org/Organization"><span itemProp="name">Because You Are Busy</span></span>. All rights reserved.
           </p>
           <p className="text-[10px] hidden sm:block" style={{ color: "#BBBBBB" }} data-testid="text-footer-version">
             v{__APP_VERSION__} · {new Date(__BUILD_DATE__).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
           </p>
-          <p className="text-[11px]" style={{ color: "#999999" }} data-testid="text-footer-address">
+          <p className="text-[11px]" style={{ color: "#767676" }} data-testid="text-footer-address">
             18 rue Arago, 94400 Vitry-sur-Seine, France
           </p>
         </div>

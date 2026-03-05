@@ -1,0 +1,187 @@
+Analysez les problèmes de performances
+90
+Performances
+93
+Accessibilité
+96
+Bonnes pratiques
+92
+SEO
+90
+FCP
++6
+LCP
++20
+TBT
++30
+CLS
++25
+SI
++10
+Performances
+Les valeurs sont estimées et peuvent varier. Le calcul du score lié aux performances repose directement sur ces statistiques.Affichez la calculatrice.
+0–49
+50–89
+90–100
+Final Screenshot
+
+Statistiques
+Développer la vue
+First Contentful Paint
+2,7 s
+Largest Contentful Paint
+3,0 s
+Total Blocking Time
+0 ms
+Cumulative Layout Shift
+0
+Speed Index
+2,7 s
+Captured at 5 mars 2026, 16:05 UTC+1
+Émulation du Moto G Power with Lighthouse 13.0.1
+Session avec consultation d'une seule page
+Chargement de page initial
+Connexion 4G lente
+Using HeadlessChromium 144.0.7559.132 with lr
+Consultez la carte proportionnelle
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Afficher les audits pertinents pour :
+
+All
+
+FCP
+
+LCP
+
+TBT
+Insights
+Utiliser des durées de mise en cache efficaces Économies estimées : 166 Kio
+Une longue durée de mise en cache peut accélérer les visites répétées sur votre page. En savoir plusLCPFCPNon noté
+Requête
+Cache de la valeur TTL
+Taille de transfert
+becausebusy.com Propriétaire
+181 KiB
+/assets/index-DHBM3mC9.js(becausebusy.com)
+10min
+104 KiB
+/images/logo-horizontal-white.webp(becausebusy.com)
+10min
+15 KiB
+/assets/index-C4JbYOz2.css(becausebusy.com)
+10min
+14 KiB
+/images/cecile-256.webp(becausebusy.com)
+10min
+13 KiB
+/images/anne-256.webp(becausebusy.com)
+10min
+10 KiB
+/images/romain-256.webp(becausebusy.com)
+10min
+8 KiB
+/images/georges-256.webp(becausebusy.com)
+10min
+8 KiB
+/images/cecile-128.webp(becausebusy.com)
+10min
+4 KiB
+/images/romain-128.webp(becausebusy.com)
+10min
+3 KiB
+/images/georges-128.webp(becausebusy.com)
+10min
+3 KiB
+Requêtes de blocage de l'affichage Économies estimées : 150 ms
+Les requêtes bloquent le rendu initial de la page, ce qui peut causer un retard LCP. Le report ou l'intégration de ces requêtes réseau peut les écarter du chemin critique.LCPFCPNon noté
+URL
+Taille de transfert
+Durée
+becausebusy.com Propriétaire
+13,7 KiB	160 ms
+/assets/index-C4JbYOz2.css(becausebusy.com)
+13,7 KiB
+160 ms
+Détection de la requête LCP
+Optimisez le LCP en rendant l'image LCP visible immédiatement à partir du code HTML et en évitant le chargement différéLCPNon noté
+chargement différé non appliqué
+fetchpriority=high appliqué
+La demande est visible dans le document initial
+Anne Grosz
+<img src="/images/anne-256.webp" alt="Anne Grosz" width="256" height="256" fetchpriority="high" decoding="sync" class="absolute inset-0 w-full h-full rounded-full object-cover" style="opacity: 0; transform: scale(1.08);">
+Arborescence du réseau
+Évitez les chaînes de requêtes critiques en réduisant la longueur des chaînes ou la taille de téléchargement des ressources, ou en reportant le téléchargement de ressources inutiles, afin d'améliorer le chargement des pages.LCPNon noté
+Latence de chemin d'accès critique maximale : 231 ms
+Navigation initiale
+/home(becausebusy.com) - 59 ms, 3,63 KiB
+/assets/index-DHBM3mC9.js(becausebusy.com) - 231 ms, 104,02 KiB
+/assets/index-C4JbYOz2.css(becausebusy.com) - 193 ms, 13,66 KiB
+Origines préconnectées
+Les hints de préconnexion aident le navigateur à établir une connexion plus tôt dans le chargement de page, ce qui permet de gagner du temps lors de la première requête pour cette origine. Voici les origines auxquelles la page s'est préconnectée.
+Origine
+Source
+https://fonts.googleapis.com/
+head > link
+<link rel="preconnect" href="https://fonts.googleapis.com">
+https://fonts.gstatic.com/
+head > link
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+Candidats pour la préconnexion
+Ajoutez des hints de préconnexion à vos origines les plus importantes, mais essayez de ne pas en utiliser plus de quatre.
+Aucune autre origine n'est un bon candidat pour la préconnexion
+Améliorer l'affichage des images Économies estimées : 14 Kio
+Réduire le temps de téléchargement des images peut améliorer le temps de chargement perçu de la page et le LCP. En savoir plus sur l'optimisation de la taille des imagesLCPFCPNon noté
+URL
+Taille de la ressource
+Économies estimées
+becausebusy.com Propriétaire
+14,5 KiB	14,1 KiB
+Because You Are Busy — Operations, Transformation & Growth Consultancy
+<img src="/images/logo-horizontal-white.webp" alt="Because You Are Busy — Operations, Transformation &amp; Growth Consultancy" width="240" height="48" class="h-12 w-auto ml-[0px] mr-[0px]" data-testid="img-logo-header">
+/images/logo-horizontal-white.webp(becausebusy.com)
+14,5 KiB
+14,1 KiB
+Compte tenu de ses dimensions affichées (252x84), ce fichier image est plus volumineux que nécessaire (1500x500). Utilisez des images responsives pour réduire la taille de téléchargement de l'image.
+14,1 KiB
+Optimiser la taille du DOM
+Répartition du LCP
+Tiers
+Ces insights sont également disponibles dans le panneau "Performances" des Outils pour les développeurs Chrome. Enregistrez une trace pour afficher des informations plus détaillées.
+Diagnostic
+Réduisez les ressources CSS inutilisées Économies estimées : 11 Kio
+Réduisez les règles inutilisées des feuilles de style et différez les ressources CSS non utilisées pour le contenu au-dessus de la ligne de flottaison afin de réduire la quantité d'octets consommés par l'activité réseau. Découvrez comment réduire les ressources CSS non utilisées.LCPFCPNon noté
+URL
+Taille de transfert
+Économies estimées
+becausebusy.com Propriétaire
+12,9 KiB	10,8 KiB
+/assets/index-C4JbYOz2.css(becausebusy.com)
+12,9 KiB
+10,8 KiB
+Réduisez les ressources JavaScript inutilisées Économies estimées : 49 Kio
+Réduisez les ressources JavaScript inutilisées et différez le chargement des scripts tant qu'ils ne sont pas requis afin de réduire la quantité d'octets consommés par l'activité réseau. Découvrez comment réduire les ressources JavaScript inutilisées.LCPFCPNon noté
+URL
+Taille de transfert
+Économies estimées
+becausebusy.com Propriétaire
+103,2 KiB	48,6 KiB
+/assets/index-DHBM3mC9.js(becausebusy.com)
+103,2 KiB
+48,6 KiB
+Évitez les tâches longues dans le thread principal 1 tâche longue trouvée
+Indique les tâches les plus longues du thread principal, ce qui est utile pour identifier celles qui entraînent le plus de retard. Découvrez comment éviter les longues tâches du thread principal.TBTNon noté
+URL
+Heure de début
+Durée
+becausebusy.com Propriétaire
+90 ms
+/assets/index-DHBM3mC9.js(becausebusy.com)
+2 263 ms
+90 ms
