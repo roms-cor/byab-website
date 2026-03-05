@@ -14,10 +14,12 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - **Image optimization:** All images converted to WebP at 256px (hero/team) and 128px (orbit/story thumbnails), served from `client/public/images/`. Total image payload ~108KB (down from 6MB PNGs). Lazy loading + decoding="async" on below-fold images, fetchpriority="high" on LCP hero image.
 - **Font loading:** Google Fonts loaded asynchronously via preload+onload pattern (non-render-blocking), with slimmed weight range (Inter 400-700, JetBrains Mono 400-500)
 - **Preload hints:** LCP image (anne-256.webp) and header logo preloaded in `<head>`
+- **Auto-push on Publish:** `script/build.ts` runs `script/push-to-github.sh` after building, which syncs the workspace to GitHub `main` using `GITHUB_PAT` (Replit secret). GitHub Actions then auto-deploys to `becausebusy.com`. Replit = staging, Publish = production.
 
 ## Routes
-- `/` — Homepage (agency landing page)
-- `/components` — Components (design system + site sections reference)
+- `/` — Coming Soon page (temporary landing while homepage content is updated)
+- `/home` — Full homepage (agency landing page)
+- `/design` — Design system page (noindex, design tokens + site sections reference)
 
 ## SEO & AI Search Optimization
 - **Primary keyword:** "because you are busy" — appears in title, meta, h1 subtext, hero description, about section, contact section, story quote, footer, schema.org, llms.txt

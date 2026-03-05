@@ -18,10 +18,10 @@ const photoRomain128 = "/images/romain-128.webp";
 function useHeadLinks() {
   useEffect(() => {
     const links = [
-      { rel: "canonical", href: "/" },
-      { rel: "alternate", hreflang: "en", href: "/" },
-      { rel: "alternate", hreflang: "fr", href: "/" },
-      { rel: "alternate", hreflang: "x-default", href: "/" },
+      { rel: "canonical", href: "/home" },
+      { rel: "alternate", hreflang: "en", href: "/home" },
+      { rel: "alternate", hreflang: "fr", href: "/home" },
+      { rel: "alternate", hreflang: "x-default", href: "/home" },
     ];
     const elements: HTMLLinkElement[] = [];
     links.forEach((attrs) => {
@@ -38,7 +38,7 @@ function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white" role="banner">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4 pl-[32px] pr-[32px] ml-[0px] mr-[0px]">
-        <a href="/" aria-label="Home" data-testid="link-logo-home">
+        <a href="/home" aria-label="Home" data-testid="link-logo-home">
           <img src={logoHorizontalWhite} alt="Because You Are Busy — Operations, Transformation & Growth Consultancy" width={240} height={48} className="h-12 w-auto ml-[0px] mr-[0px]" data-testid="img-logo-header" />
         </a>
         <nav aria-label="Main navigation" className="hidden md:block">
@@ -1009,7 +1009,7 @@ function Footer() {
     { name: "Anne Grosz", role: "Founder & Operations", linkedin: "https://www.linkedin.com/in/annegrosz" },
     { name: "Cécile Noiriel", role: "Operations Conductor", linkedin: "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/" },
     { name: "Georges Grosz", role: "Transformation & Data", linkedin: "https://www.linkedin.com/in/georges-grosz-8aa9613" },
-    { name: "Romain Cornu", role: "Growth Engine", linkedin: "https://fr.linkedin.com/in/romaincornu", extra: { label: "Oysterz", href: "https://www.societe.com/societe/oysterz-884894296.html" } },
+    { name: "Romain Cornu", role: "Growth Engine", linkedin: "https://fr.linkedin.com/in/romaincornu" },
   ];
 
   const companies = [
@@ -1106,18 +1106,6 @@ function Footer() {
                       {person.name}
                     </a>
                     <p className="text-[11px] mt-0.5 pl-[18px]" style={{ color: "#999999" }}>{person.role}</p>
-                    {person.extra && (
-                      <a
-                        href={person.extra.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[11px] underline mt-0.5 pl-[18px] block transition-opacity duration-150 hover:opacity-70"
-                        style={{ color: "#999999" }}
-                        data-testid={`link-footer-extra-${first}`}
-                      >
-                        {person.extra.label}
-                      </a>
-                    )}
                   </li>
                 );
               })}
