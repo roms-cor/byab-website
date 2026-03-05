@@ -10,6 +10,7 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - React + Tailwind CSS + shadcn/ui tokens
 - Semantic HTML5 throughout
 - Proper heading hierarchy (h1 > h2 > h3)
+- **Build-time injection:** `vite.config.ts` defines `__APP_VERSION__` (from package.json) and `__BUILD_DATE__` (ISO date at build time), displayed subtly in the footer bottom bar (text-[10px], color #BBBBBB)
 
 ## Routes
 - `/` — Homepage (agency landing page)

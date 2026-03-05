@@ -1,3 +1,6 @@
+declare const __APP_VERSION__: string;
+declare const __BUILD_DATE__: string;
+
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
 import { ArrowRight, ArrowUpRight, Globe, Mail, MapPin } from "lucide-react";
@@ -1139,6 +1142,9 @@ function Footer() {
         <div className="mt-10 sm:mt-12 pt-6 border-t border-border/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <p className="text-[11px]" style={{ color: "#999999" }}>
             © 2005–2026 <span itemScope itemType="https://schema.org/Organization"><span itemProp="name">Because You Are Busy</span></span>. All rights reserved.
+          </p>
+          <p className="text-[10px] hidden sm:block" style={{ color: "#BBBBBB" }} data-testid="text-footer-version">
+            v{__APP_VERSION__} · {new Date(__BUILD_DATE__).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
           </p>
           <p className="text-[11px]" style={{ color: "#999999" }} data-testid="text-footer-address">
             18 rue Arago, 94400 Vitry-sur-Seine, France
