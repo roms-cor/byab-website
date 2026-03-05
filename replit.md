@@ -30,6 +30,27 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
   - The push script uses `chore(publish):` prefix automatically
 - **Version sync caveat:** After a GitHub release bumps `package.json` version on GitHub, you must update the version in Replit's `package.json` **before the next deploy**, otherwise the footer will display the old version. `__APP_VERSION__` in `vite.config.ts` reads dynamically from `package.json` at build time — no hardcoding.
 
+## Homepage Sections (in order)
+1. **Header** — fixed nav with logo, anchor links (Services, Track Record, Team, Story, Contact), "Get in touch" CTA
+2. **Hero** — h1 "We run what you can't get to anymore.", subtitle, proof stats row (20 years, 57%, 0€), TeamSlider
+3. **Marquee** — scrolling keyword strip (Organization, Finance, Strategy, Operations, Transformation, Growth, Outbound, Data)
+4. **Pain Recognition** — dark section (#000), 3 numbered pain points with bold leads
+5. **Services** — "Four ways we take it off your plate." — 4 service cards with descriptions + outcome lists (→ prefix)
+6. **Stats/Proof Bar** — dark section, "by the numbers" label, 4 stats with yellow accent suffixes (#E8E020) + subtexts
+7. **Track Record** — "Recent engagements." — 3 engagement rows with category, description, year, outcome badge (yellow)
+8. **About** — "We partner with founders who refuse to keep drowning." — 3 pillars (Operations-first, Data-driven, Growth-engineered) with descriptions
+9. **Team** — "Our team." — 4 team cards (Anne, Cécile, Georges, Romain) with photos, bios, LinkedIn
+10. **Story** — Timeline (2005, 2015, 2020, 2025, 2025–26) + brand promise blockquote
+11. **Testimonial** — M. Laurent quote
+12. **Contact** — "Let's take something off your plate." — form + contact details (bg #F5F5F5)
+13. **Footer** — logo, nav, People (Cécile listed first as "Founder, B Y A B 2005"), Companies with SIREN numbers, version timestamps
+
+## Team Members (persistent data)
+- **Cécile Noiriel** — Founder — B Y A B, 2005 (original founder, created the company April 1, 2005)
+- **Anne Grosz** — Founder & Operations (Co-founder of second entity, 2015; 8 years at Vatier & Associés)
+- **Georges Grosz** — Transformation & Data (22+ years at CGI, professor at Sorbonne, co-manager since July 2025)
+- **Romain Cornu** — Growth Engine (Datananas, Clovis, MerciApp, CEO of Oysterz)
+
 ## Routes
 - `/` — Coming Soon page (temporary landing while homepage content is updated)
 - `/home` — Full homepage (agency landing page)

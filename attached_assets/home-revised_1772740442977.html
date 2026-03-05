@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Because You Are Busy — Operations, Transformation & Growth</title>
+  <meta name="description" content="Because you are busy, we run what you can't get to anymore. Operations, transformation and growth consultancy for founders and managing partners since 2005." />
+
+  <!-- Google Fonts – keeping a distinctive, editorial pairing -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --gray-50: #f8f8f7;
+      --gray-100: #f0efed;
+      --gray-300: #c0bdb8;
+      --gray-500: #7a7672;
+      --gray-700: #3d3b38;
+      --accent: #e8e020;        /* sharp volt yellow — the one memorable punch */
+      --radius: 6px;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --font-mono: 'DM Mono', 'Courier New', monospace;
+      --max-w: 1200px;
+      --section-gap: 120px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--black);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+
+    /* ─── NAVIGATION ───────────────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo-bolt {
+      width: 20px;
+      height: 20px;
+      background: var(--black);
+      clip-path: polygon(60% 0%, 20% 45%, 55% 45%, 40% 100%, 80% 55%, 45% 55%);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--gray-500);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--black);
+      color: var(--white);
+      padding: 10px 22px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: opacity 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--black);
+      padding: 10px 22px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 500;
+      border: 1.5px solid var(--gray-300);
+      transition: border-color 0.15s, background 0.15s;
+      cursor: pointer;
+    }
+    .btn-ghost:hover { border-color: var(--black); background: var(--gray-50); }
+
+    /* ─── LABEL CHIP ───────────────────────────────────────────────────── */
+    .label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+    }
+
+    /* ─── 1. HERO ──────────────────────────────────────────────────────── */
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 64px;
+      padding: 80px 32px 60px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow-line {
+      width: 32px;
+      height: 1.5px;
+      background: var(--gray-300);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 5.5vw, 76px);
+      line-height: 1.05;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gray-500);
+    }
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--gray-700);
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+    .hero-sub strong { color: var(--black); font-weight: 600; }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-proof {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--gray-100);
+      display: flex;
+      gap: 32px;
+    }
+    .hero-proof-item {}
+    .hero-proof-num {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1;
+    }
+    .hero-proof-text {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 4px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+    }
+
+    /* Team carousel (hero right side) */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-100);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      width: 100%;
+      max-width: 340px;
+    }
+    .hero-card-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      background: var(--gray-100);
+      overflow: hidden;
+    }
+    .hero-card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-card-name { font-weight: 600; font-size: 18px; }
+    .hero-card-role { font-size: 13px; color: var(--gray-500); margin-top: 2px; }
+    .hero-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 16px;
+    }
+    .tag {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      padding: 4px 10px;
+      border-radius: 100px;
+      border: 1px solid var(--gray-300);
+      color: var(--gray-700);
+    }
+
+    /* ─── 2. PAIN RECOGNITION ──────────────────────────────────────────── */
+    .pain {
+      background: var(--black);
+      color: var(--white);
+      padding: 80px 32px;
+    }
+    .pain-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .pain-heading {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1.2;
+      font-weight: 400;
+    }
+    .pain-heading em { font-style: italic; color: var(--gray-300); }
+    .pain-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .pain-item {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .pain-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .pain-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray-500);
+      padding-top: 3px;
+    }
+    .pain-text { font-size: 17px; line-height: 1.55; color: rgba(255,255,255,0.85); }
+    .pain-text strong { color: var(--white); font-weight: 600; }
+
+    /* ─── 3. SERVICES ──────────────────────────────────────────────────── */
+    .services {
+      padding: var(--section-gap) 32px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 56px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .section-link {
+      font-size: 14px;
+      color: var(--gray-500);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s;
+    }
+    .section-link:hover { color: var(--black); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--gray-100);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .service-card {
+      background: var(--white);
+      padding: 40px;
+      transition: background 0.2s;
+    }
+    .service-card:hover { background: var(--gray-50); }
+    .service-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray-300);
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+    .service-title {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .service-desc {
+      font-size: 15px;
+      color: var(--gray-700);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .service-outcomes {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .service-outcomes li {
+      font-size: 13px;
+      color: var(--gray-500);
+      padding-left: 16px;
+      position: relative;
+      font-family: var(--font-mono);
+    }
+    .service-outcomes li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+    }
+
+    /* ─── 4. PROOF BAR ─────────────────────────────────────────────────── */
+    .proof-bar {
+      background: var(--black);
+      color: var(--white);
+      padding: 64px 32px;
+    }
+    .proof-bar-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .proof-bar-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 40px;
+    }
+    .proof-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+    .proof-stat {}
+    .proof-stat-num {
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .proof-stat-num span { color: var(--accent); }
+    .proof-stat-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+    .proof-stat-sub {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: rgba(255,255,255,0.25);
+      margin-top: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── 5. TRACK RECORD ──────────────────────────────────────────────── */
+    .track-record {
+      padding: var(--section-gap) 32px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .engagements {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--gray-100);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .engagement {
+      display: grid;
+      grid-template-columns: 180px 1fr auto;
+      align-items: center;
+      gap: 32px;
+      padding: 28px 32px;
+      border-bottom: 1px solid var(--gray-100);
+      transition: background 0.15s;
+    }
+    .engagement:last-child { border-bottom: none; }
+    .engagement:hover { background: var(--gray-50); }
+    .engagement-type {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+    }
+    .engagement-title { font-weight: 600; font-size: 16px; }
+    .engagement-desc { font-size: 14px; color: var(--gray-500); margin-top: 4px; }
+    .engagement-meta {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .engagement-year {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray-300);
+    }
+    .engagement-outcome {
+      font-size: 12px;
+      color: var(--black);
+      font-weight: 500;
+      background: var(--accent);
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-top: 4px;
+      display: inline-block;
+    }
+
+    /* ─── 6. ABOUT / VALUE PROP ─────────────────────────────────────────── */
+    .about {
+      background: var(--gray-50);
+      padding: var(--section-gap) 32px;
+    }
+    .about-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: start;
+    }
+    .about-heading {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+    }
+    .about-heading em { font-style: italic; }
+    .about-body {
+      font-size: 16px;
+      color: var(--gray-700);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .about-pillars {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 40px;
+      border-top: 1px solid var(--gray-300);
+    }
+    .about-pillar {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--gray-300);
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .about-pillar-bullet {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--black);
+      margin-top: 7px;
+    }
+    .about-pillar-name { font-weight: 600; font-size: 15px; }
+    .about-pillar-desc { font-size: 14px; color: var(--gray-500); margin-top: 4px; }
+
+    /* ─── 7. TEAM ───────────────────────────────────────────────────────── */
+    .team {
+      padding: var(--section-gap) 32px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .team-card {
+      background: var(--gray-50);
+      border-radius: 12px;
+      padding: 28px 24px;
+      position: relative;
+    }
+    .team-photo {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--gray-100);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .team-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .team-name { font-weight: 600; font-size: 17px; letter-spacing: -0.01em; }
+    .team-role {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--gray-500);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-top: 2px;
+      margin-bottom: 14px;
+    }
+    .team-bio { font-size: 13px; color: var(--gray-700); line-height: 1.6; }
+    .team-linkedin {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--gray-500);
+      transition: color 0.15s;
+    }
+    .team-linkedin:hover { color: var(--black); }
+
+    /* ─── 8. STORY TIMELINE ─────────────────────────────────────────────── */
+    .story {
+      background: var(--gray-50);
+      padding: var(--section-gap) 32px;
+    }
+    .story-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .story-header { margin-bottom: 64px; }
+    .story-heading {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 400;
+      line-height: 1.2;
+      max-width: 640px;
+      margin-top: 16px;
+      letter-spacing: -0.02em;
+    }
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1px 1fr;
+      gap: 0 32px;
+      padding-bottom: 48px;
+      position: relative;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-year {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--gray-300);
+      padding-top: 2px;
+      text-align: right;
+    }
+    .timeline-line {
+      width: 1px;
+      background: linear-gradient(to bottom, var(--black) 0%, var(--gray-100) 100%);
+      position: relative;
+    }
+    .timeline-dot {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--black);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 1px var(--black);
+    }
+    .timeline-content { padding-left: 32px; }
+    .timeline-phase {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .timeline-phase-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--gray-200);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .timeline-phase-img img { width: 100%; height: 100%; object-fit: cover; }
+    .timeline-title { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+    .timeline-body { font-size: 15px; color: var(--gray-700); line-height: 1.65; }
+    .timeline-body a {
+      border-bottom: 1px solid var(--gray-300);
+      transition: border-color 0.15s;
+    }
+    .timeline-body a:hover { border-color: var(--black); }
+    .timeline-body p { margin-bottom: 12px; }
+    .timeline-body p:last-child { margin-bottom: 0; }
+
+    /* ─── 9. TESTIMONIAL ───────────────────────────────────────────────── */
+    .testimonial {
+      padding: var(--section-gap) 32px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .testimonial-card {
+      background: var(--black);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 64px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: end;
+    }
+    .testimonial-quote {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.5vw, 32px);
+      font-weight: 400;
+      line-height: 1.3;
+      font-style: italic;
+      max-width: 700px;
+    }
+    .testimonial-meta { text-align: right; white-space: nowrap; }
+    .testimonial-author { font-weight: 600; font-size: 15px; }
+    .testimonial-role { font-family: var(--font-mono); font-size: 11px; color: var(--gray-500); margin-top: 4px; letter-spacing: 0.05em; }
+
+    /* ─── 10. CONTACT ──────────────────────────────────────────────────── */
+    .contact {
+      background: var(--gray-50);
+      padding: var(--section-gap) 32px;
+    }
+    .contact-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: start;
+    }
+    .contact-heading {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .contact-heading em { font-style: italic; }
+    .contact-sub { font-size: 16px; color: var(--gray-700); line-height: 1.65; margin-bottom: 40px; }
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .contact-detail-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+    }
+    .contact-detail-value { font-size: 15px; font-weight: 500; }
+    .contact-detail-value a { border-bottom: 1px solid var(--gray-300); }
+    .contact-detail-value a:hover { border-color: var(--black); }
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-700);
+    }
+    .form-input, .form-textarea {
+      background: var(--white);
+      border: 1.5px solid var(--gray-100);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--black);
+      transition: border-color 0.15s;
+      outline: none;
+      width: 100%;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--black); }
+    .form-textarea { resize: vertical; min-height: 120px; }
+    ::placeholder { color: var(--gray-300); }
+
+    /* ─── FOOTER ───────────────────────────────────────────────────────── */
+    .footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 56px 32px 40px;
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 2fr 2fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand-name {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer-brand-bolt {
+      width: 16px;
+      height: 16px;
+      background: var(--white);
+      clip-path: polygon(60% 0%, 20% 45%, 55% 45%, 40% 100%, 80% 55%, 45% 55%);
+    }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.6; max-width: 240px; }
+    .footer-col-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 16px;
+    }
+    .footer-col-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col-links a { font-size: 13px; color: rgba(255,255,255,0.6); transition: color 0.15s; }
+    .footer-col-links a:hover { color: var(--white); }
+    .footer-company-block { margin-bottom: 20px; }
+    .footer-company-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .footer-company-siren { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 0.04em; }
+    .footer-company-links { display: flex; gap: 16px; margin-top: 6px; }
+    .footer-company-links a { font-size: 12px; color: rgba(255,255,255,0.4); transition: color 0.15s; }
+    .footer-company-links a:hover { color: rgba(255,255,255,0.8); }
+    .footer-bottom {
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+    .footer-meta { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 0.04em; }
+
+    /* ─── TICKER STRIP ─────────────────────────────────────────────────── */
+    .ticker {
+      overflow: hidden;
+      border-top: 1px solid var(--gray-100);
+      border-bottom: 1px solid var(--gray-100);
+      padding: 14px 0;
+      background: var(--white);
+    }
+    .ticker-track {
+      display: flex;
+      gap: 40px;
+      animation: ticker-scroll 30s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-item {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-300);
+      flex-shrink: 0;
+    }
+    .ticker-item strong { color: var(--gray-500); }
+    @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ─── SECTION DIVIDERS ─────────────────────────────────────────────── */
+    .section-divider { border: none; border-top: 1px solid var(--gray-100); }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; padding: 60px 24px 40px; }
+      .hero-visual { display: none; }
+      .pain-inner { grid-template-columns: 1fr; gap: 32px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .proof-stats { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .testimonial-card { grid-template-columns: 1fr; gap: 24px; }
+      .engagement { grid-template-columns: 1fr; gap: 8px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── NAVIGATION ────────────────────────────────────── -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="/home" class="nav-logo">
+        <span class="nav-logo-bolt" aria-hidden="true"></span>
+        Because&nbsp;You&nbsp;Are&nbsp;Busy
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#work">Track Record</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#story">Story</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="#contact" class="btn-primary">Get in touch</a>
+    </div>
+  </header>
+
+  <a href="#main-content" class="sr-only" style="position:absolute;left:-9999px">Skip to content</a>
+
+  <main id="main-content">
+
+    <!-- ── 1. HERO ──────────────────────────────────────── -->
+    <section class="hero" aria-label="Hero">
+      <div>
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-line" aria-hidden="true"></span>
+          <span class="label">Since 2005 — Operations · Transformation · Growth</span>
+        </div>
+
+        <h1 class="hero-title">
+          We run what<br>
+          you can't get to<br>
+          <em>anymore.</em>
+        </h1>
+
+        <p class="hero-sub">
+          <strong>Because you are busy,</strong> we externalize your operations, engineer growth systems, and turn operational chaos into measurable clarity — so you lead your company instead of getting buried by it.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Start a project →</a>
+          <a href="#approach" class="btn-ghost">Our approach</a>
+        </div>
+
+        <div class="hero-proof">
+          <div class="hero-proof-item">
+            <div class="hero-proof-num">20</div>
+            <div class="hero-proof-text">Years serving<br>founders</div>
+          </div>
+          <div class="hero-proof-item">
+            <div class="hero-proof-num">57%</div>
+            <div class="hero-proof-text">Operating<br>profitability</div>
+          </div>
+          <div class="hero-proof-item">
+            <div class="hero-proof-num">0€</div>
+            <div class="hero-proof-text">External debt<br>raised, ever</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right panel -->
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-img">
+            <img src="/images/cecile-noiriel.webp" alt="Cécile Noiriel, Founder of Because You Are Busy" />
+          </div>
+          <div class="hero-card-name">Cécile Noiriel</div>
+          <div class="hero-card-role">Founder — B Y A B since 2005</div>
+          <div class="hero-card-tags">
+            <span class="tag">Founded 2005</span>
+            <span class="tag">Operations</span>
+            <span class="tag">Delivery</span>
+            <span class="tag">Coordination</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TICKER STRIP ──────────────────────────────────── -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span class="ticker-item"><strong>Organization</strong></span>
+        <span class="ticker-item">Finance</span>
+        <span class="ticker-item"><strong>Strategy</strong></span>
+        <span class="ticker-item">Operations</span>
+        <span class="ticker-item"><strong>Transformation</strong></span>
+        <span class="ticker-item">Growth</span>
+        <span class="ticker-item"><strong>Outbound</strong></span>
+        <span class="ticker-item">Data</span>
+        <span class="ticker-item"><strong>Organization</strong></span>
+        <span class="ticker-item">Finance</span>
+        <span class="ticker-item"><strong>Strategy</strong></span>
+        <span class="ticker-item">Operations</span>
+        <span class="ticker-item"><strong>Transformation</strong></span>
+        <span class="ticker-item">Growth</span>
+        <span class="ticker-item"><strong>Outbound</strong></span>
+        <span class="ticker-item">Data</span>
+      </div>
+    </div>
+
+    <!-- ── 2. PAIN RECOGNITION ───────────────────────────── -->
+    <section class="pain" aria-label="The problem we solve">
+      <div class="pain-inner">
+        <h2 class="pain-heading">
+          You didn't start a company<br>
+          to manage its<br>
+          <em>back-office.</em>
+        </h2>
+        <ul class="pain-list">
+          <li class="pain-item">
+            <span class="pain-num">01</span>
+            <p class="pain-text"><strong>Your mental bandwidth is consumed by operations</strong> that should run themselves — admin, finance, HR, compliance — instead of by the decisions that actually move the needle.</p>
+          </li>
+          <li class="pain-item">
+            <span class="pain-num">02</span>
+            <p class="pain-text"><strong>Your data is scattered, your processes are improvised</strong>, and every week you're putting out fires instead of building the systems that would prevent them.</p>
+          </li>
+          <li class="pain-item">
+            <span class="pain-num">03</span>
+            <p class="pain-text"><strong>Your growth is stalling</strong> not because the opportunity isn't there, but because no one owns the outbound machine, the funnel architecture, or the commercial pipeline that would capture it.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── 3. SERVICES ───────────────────────────────────── -->
+    <section id="services" class="services">
+      <div class="section-header">
+        <div>
+          <span class="label">What we do</span>
+          <h2 class="section-title" style="margin-top:12px">Four ways we<br>take it off your plate.</h2>
+        </div>
+        <a href="#contact" class="section-link">Discuss your project ↗</a>
+      </div>
+
+      <div class="services-grid">
+
+        <article class="service-card">
+          <div class="service-num">01</div>
+          <h3 class="service-title">Operational Backbone</h3>
+          <p class="service-desc">Externalized general secretariat, admin, and finance management — so your back-office runs on autopilot and you stop drowning in the details.</p>
+          <ul class="service-outcomes">
+            <li>General secretariat & admin management</li>
+            <li>Accounting, treasury & financial reporting</li>
+            <li>HR, legal documentation & ISO compliance</li>
+            <li>Ideal for law firms, SMEs & growing founders</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-num">02</div>
+          <h3 class="service-title">Transformation & Data</h3>
+          <p class="service-desc">Systems architecture, project governance and data strategy — turning operational chaos into measurable clarity and scalable infrastructure.</p>
+          <ul class="service-outcomes">
+            <li>Systems architecture & tech governance</li>
+            <li>Data strategy & operational dashboards</li>
+            <li>Project management & transformation roadmaps</li>
+            <li>Business analysis & decision enablement</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-num">03</div>
+          <h3 class="service-title">Growth Engine</h3>
+          <p class="service-desc">Outbound systems, acquisition funnels, and predictable commercial pipelines — engineered so that revenue growth becomes systematic, not accidental.</p>
+          <ul class="service-outcomes">
+            <li>Outbound sequence design & automation</li>
+            <li>Acquisition funnel architecture</li>
+            <li>Sales process structuring & CRM ops</li>
+            <li>Growth machine from Datananas, Clovis, MerciApp playbooks</li>
+          </ul>
+        </article>
+
+        <article class="service-card">
+          <div class="service-num">04</div>
+          <h3 class="service-title">Legal Practice Ops</h3>
+          <p class="service-desc">Purpose-built operational support for law firms — where precision is non-negotiable, nothing can be improvised, and partners need to focus on practice, not paperwork.</p>
+          <ul class="service-outcomes">
+            <li>Partner-facing general secretariat</li>
+            <li>Finance, compliance & ISO management</li>
+            <li>Client file & deadline administration</li>
+            <li>20 years of law firm operational expertise</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── 4. PROOF BAR ──────────────────────────────────── -->
+    <div class="proof-bar">
+      <div class="proof-bar-inner">
+        <p class="proof-bar-label">Because You Are Busy — by the numbers</p>
+        <div class="proof-stats">
+          <div class="proof-stat">
+            <div class="proof-stat-num">20<span>+</span></div>
+            <div class="proof-stat-label">Years of uninterrupted operational service to founders</div>
+            <div class="proof-stat-sub">Founded 2005 — still running</div>
+          </div>
+          <div class="proof-stat">
+            <div class="proof-stat-num">57<span>%</span></div>
+            <div class="proof-stat-label">Operating profitability — a lean machine that lives what it promises</div>
+            <div class="proof-stat-sub">No hype. No dilution.</div>
+          </div>
+          <div class="proof-stat">
+            <div class="proof-stat-num">3</div>
+            <div class="proof-stat-label">Complementary expertise pillars: operations, transformation, growth</div>
+            <div class="proof-stat-sub">One engagement, full stack</div>
+          </div>
+          <div class="proof-stat">
+            <div class="proof-stat-num">0<span>€</span></div>
+            <div class="proof-stat-label">External debt raised — ever. We grow on our own terms.</div>
+            <div class="proof-stat-sub">Ultra-lean by design</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 5. TRACK RECORD ───────────────────────────────── -->
+    <section id="work" class="track-record">
+      <div class="section-header">
+        <div>
+          <span class="label">Track Record</span>
+          <h2 class="section-title" style="margin-top:12px">Recent engagements.</h2>
+        </div>
+      </div>
+
+      <div class="engagements">
+
+        <article class="engagement">
+          <div class="engagement-type">Growth Engineering</div>
+          <div>
+            <div class="engagement-title">B2B SaaS Scale-Up</div>
+            <div class="engagement-desc">Outbound architecture, acquisition funnel structuring and sales machine deployment for a French B2B software company in growth phase.</div>
+          </div>
+          <div class="engagement-meta">
+            <div class="engagement-year">2025</div>
+            <div class="engagement-outcome">Pipeline engineered</div>
+          </div>
+        </article>
+
+        <article class="engagement">
+          <div class="engagement-type">Operations Restructuring</div>
+          <div>
+            <div class="engagement-title">National Law Firm</div>
+            <div class="engagement-desc">Full operational restructuring — general secretariat, financial management, ISO compliance and HR processes rebuilt from the ground up.</div>
+          </div>
+          <div class="engagement-meta">
+            <div class="engagement-year">2024</div>
+            <div class="engagement-outcome">Operations rebuilt</div>
+          </div>
+        </article>
+
+        <article class="engagement">
+          <div class="engagement-type">Transformation & Data</div>
+          <div>
+            <div class="engagement-title">Tech PME</div>
+            <div class="engagement-desc">Systems architecture review, data governance framework and operational dashboard deployment. Chaos to measurable clarity.</div>
+          </div>
+          <div class="engagement-meta">
+            <div class="engagement-year">2025</div>
+            <div class="engagement-outcome">Visibility restored</div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── 6. ABOUT ──────────────────────────────────────── -->
+    <section id="approach" class="about">
+      <div class="about-inner">
+        <div>
+          <span class="label">Our approach</span>
+          <h2 class="about-heading" style="margin-top:16px">
+            We partner with founders<br>
+            who refuse to keep<br>
+            <em>drowning.</em>
+          </h2>
+          <p class="about-body">Three forces converge at Because You Are Busy: twenty years of hands-on operational leadership, the systems architecture discipline of a Senior Executive Consultant, and the growth engineering instincts of a serial B2B builder.</p>
+          <p class="about-body">Every engagement begins with the same question: <strong>what is burying you?</strong> We find it, remove it, and replace it with structure that holds — without the overhead of a full internal team.</p>
+        </div>
+        <div>
+          <ul class="about-pillars">
+            <li class="about-pillar">
+              <span class="about-pillar-bullet" aria-hidden="true"></span>
+              <div>
+                <div class="about-pillar-name">Operations-first</div>
+                <div class="about-pillar-desc">We start where the friction is, not where it looks good. Every engagement is grounded in the messy operational reality, not a top-down strategy deck.</div>
+              </div>
+            </li>
+            <li class="about-pillar">
+              <span class="about-pillar-bullet" aria-hidden="true"></span>
+              <div>
+                <div class="about-pillar-name">Data-driven</div>
+                <div class="about-pillar-desc">Intuition without measurement is noise. We build decision systems so you always know what's working, what's leaking, and what to act on next.</div>
+              </div>
+            </li>
+            <li class="about-pillar">
+              <span class="about-pillar-bullet" aria-hidden="true"></span>
+              <div>
+                <div class="about-pillar-name">Growth-engineered</div>
+                <div class="about-pillar-desc">Freeing your time is only the beginning. We wire your commercial engine so growth becomes predictable, not a function of luck or heroic effort.</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 7. TEAM ────────────────────────────────────────── -->
+    <section id="team" class="team">
+      <div class="section-header">
+        <div>
+          <span class="label">Who we are</span>
+          <h2 class="section-title" style="margin-top:12px">Our team.</h2>
+        </div>
+      </div>
+      <p style="font-size:17px;color:var(--gray-700);max-width:560px;line-height:1.65;">Four complementary profiles — united by a conviction Cécile Noiriel has carried since 2005: founders deserve better than drowning in their own back-office.</p>
+
+      <div class="team-grid">
+
+        <article class="team-card">
+          <div class="team-photo">
+            <img src="/images/anne-grosz.webp" alt="Anne Grosz" />
+          </div>
+          <div class="team-name">Anne Grosz</div>
+          <div class="team-role">Founder & Operations</div>
+          <p class="team-bio">8 years as Secretary General & CFO at Vatier & Associés. Now leads externalized general secretariat for law firms and SMEs — finance, admin, HR, and ISO compliance.</p>
+          <a href="https://www.linkedin.com/in/annegrosz" class="team-linkedin" target="_blank" rel="noopener noreferrer">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </article>
+
+        <article class="team-card">
+          <div class="team-photo">
+            <img src="/images/cecile-noiriel.webp" alt="Cécile Noiriel" />
+          </div>
+          <div class="team-name">Cécile Noiriel</div>
+          <div class="team-role">Founder — B Y A B, 2005</div>
+          <p class="team-bio">The original founder. Created B Y A B on April 1, 2005 with a conviction two decades ahead of its time: founders don't lack courage — they lack time and structure. Has run the operation since day one, ensuring every detail aligns with the founder's vision.</p>
+          <a href="https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/" class="team-linkedin" target="_blank" rel="noopener noreferrer">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </article>
+
+        <article class="team-card">
+          <div class="team-photo">
+            <img src="/images/georges-grosz.webp" alt="Georges Grosz" />
+          </div>
+          <div class="team-name">Georges Grosz</div>
+          <div class="team-role">Transformation & Data</div>
+          <p class="team-bio">22+ years as Senior Executive Consultant at CGI. Teaches at Université Paris 1 Panthéon-Sorbonne. Brings the systems architecture discipline that turns chaotic operations into governed infrastructure.</p>
+          <a href="https://www.linkedin.com/in/georges-grosz-8aa9613" class="team-linkedin" target="_blank" rel="noopener noreferrer">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </article>
+
+        <article class="team-card">
+          <div class="team-photo">
+            <img src="/images/romain-cornu.webp" alt="Romain Cornu" />
+          </div>
+          <div class="team-name">Romain Cornu</div>
+          <div class="team-role">Growth Engine</div>
+          <p class="team-bio">Built growth machines at Datananas, Clovis, and MerciApp. CEO of <a href="https://www.societe.com/societe/oysterz-884894296.html" target="_blank" rel="noopener noreferrer">Oysterz</a>. Designs outbound systems and acquisition funnels that make commercial growth predictable.</p>
+          <a href="https://fr.linkedin.com/in/romaincornu" class="team-linkedin" target="_blank" rel="noopener noreferrer">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── 8. STORY TIMELINE ──────────────────────────────── -->
+    <section id="story" class="story">
+      <div class="story-inner">
+        <div class="story-header">
+          <span class="label">Our story</span>
+          <h2 class="story-heading">Twenty years of the same intuition: founders don't lack ideas — they lack time to execute them.</h2>
+        </div>
+
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <div class="timeline-year">2005</div>
+            <div class="timeline-line"><span class="timeline-dot"></span></div>
+            <div class="timeline-content">
+              <div class="timeline-phase">
+                <div class="timeline-phase-img">
+                  <img src="/images/cecile-noiriel.webp" alt="Cécile Noiriel" />
+                </div>
+                <h3 class="timeline-title">The first seed</h3>
+              </div>
+              <div class="timeline-body">
+                <p>It all starts on April 1, 2005 with the creation of <a href="https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471" target="_blank" rel="noopener noreferrer">Because You Are Busy (B Y A B)</a>, a consulting firm registered under SIREN 481 631 471. At its origin: <a href="https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/" target="_blank" rel="noopener noreferrer">Cécile Noiriel</a>, founder and driving force of the structure from day one. The mission: studies, consulting, and assistance in administrative and commercial organization for SMEs.</p>
+                <p>Behind this name, ahead of its time, lies a strong conviction: founders don't lack courage or ideas — they lack time and structure to execute them. For nearly twenty years, <a href="https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471" target="_blank" rel="noopener noreferrer">BYAB</a> will live exactly what it promises its clients: an <a href="https://www.pappers.fr/entreprise/b-y-a-b-because-you-are-busy-481631471" target="_blank" rel="noopener noreferrer">ultra-lean, ultra-profitable structure</a>, with no fundraising and no hype — revenue around 130,000€, operating profitability above 57%, and near-zero debt.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">2015</div>
+            <div class="timeline-line"><span class="timeline-dot"></span></div>
+            <div class="timeline-content">
+              <div class="timeline-phase">
+                <div class="timeline-phase-img">
+                  <img src="/images/anne-grosz.webp" alt="Anne Grosz" />
+                </div>
+                <h3 class="timeline-title">Specialization: law firms & SMEs</h3>
+              </div>
+              <div class="timeline-body">
+                <p>Ten years after BYAB was born, a second entity extends and specializes the intuition: <a href="https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056" target="_blank" rel="noopener noreferrer">Because You Are Busy</a> (SIREN 814 783 056), created on November 20, 2015. At its origin: <a href="https://www.linkedin.com/in/annegrosz" target="_blank" rel="noopener noreferrer">Anne Grosz</a>, who becomes president, then manager.</p>
+                <p>Before launching, Anne spent eight years as Secretary General and CFO at <a href="https://www.infocession.fr/avocats/vatier-associes" target="_blank" rel="noopener noreferrer">Vatier & Associés</a>, a Paris law firm — managing accounting, HR, IT, legal documentation, events, and ISO compliance. With <a href="https://www.societe.com/societe/because-you-are-busy-814783056.html" target="_blank" rel="noopener noreferrer">Because You Are Busy</a>, she transforms this expertise into an externalized offer: exactly what she embodied internally, now serving multiple clients.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">2020</div>
+            <div class="timeline-line"><span class="timeline-dot"></span></div>
+            <div class="timeline-content">
+              <div class="timeline-phase">
+                <h3 class="timeline-title">Consolidation: craft over startup</h3>
+              </div>
+              <div class="timeline-body">
+                <p>Over the years, <a href="https://www.pappers.fr/entreprise/because-you-are-busy-814783056" target="_blank" rel="noopener noreferrer">Because You Are Busy</a> evolves legally: initially created as a SAS with 500€ capital, it transforms into a SARL, then into an EI for greater simplicity. Accounts are systematically filed with a confidentiality declaration — consistent with a human-scale firm focused on delivery, not visibility.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">2025</div>
+            <div class="timeline-line"><span class="timeline-dot"></span></div>
+            <div class="timeline-content">
+              <div class="timeline-phase">
+                <div class="timeline-phase-img">
+                  <img src="/images/georges-grosz.webp" alt="Georges Grosz" />
+                </div>
+                <h3 class="timeline-title">Georges: the transformation & data layer</h3>
+              </div>
+              <div class="timeline-body">
+                <p>On July 4, 2025, <a href="https://www.linkedin.com/in/georges-grosz-8aa9613" target="_blank" rel="noopener noreferrer">Georges Grosz</a> joins as co-manager alongside Anne. His track record: 22+ years as Senior Executive Consultant at CGI, university lecturer at Paris 1 Panthéon-Sorbonne, decades of systems architecture and data governance work for large French organizations.</p>
+                <p>With Georges, the story levels up: the administrative right-hand becomes a transformation co-pilot, capable of rebuilding systems and turning operational chaos into measurable clarity at any scale.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">2025–26</div>
+            <div class="timeline-line"><span class="timeline-dot"></span></div>
+            <div class="timeline-content">
+              <div class="timeline-phase">
+                <div class="timeline-phase-img">
+                  <img src="/images/romain-cornu.webp" alt="Romain Cornu" />
+                </div>
+                <h3 class="timeline-title">Romain: the growth machine</h3>
+              </div>
+              <div class="timeline-body">
+                <p>At the same time, another path converges: <a href="https://fr.linkedin.com/in/romaincornu" target="_blank" rel="noopener noreferrer">Romain Cornu</a>, entrepreneur and B2B growth specialist. Head of Marketing at Datananas (B2B outbound SaaS), <a href="https://www.avizio.fr/expert/romain-cornu" target="_blank" rel="noopener noreferrer">Head of Growth at Clovis</a>, then CEO of <a href="https://www.societe.com/societe/oysterz-884894296.html" target="_blank" rel="noopener noreferrer">Oysterz</a> (<a href="https://entreprises.lefigaro.fr/oysterz-17/entreprise-884894296" target="_blank" rel="noopener noreferrer">SIREN 884 894 296</a>), a B2B systems consulting and talent-matching firm. <a href="https://clay.earth/profile/romain-cornu" target="_blank" rel="noopener noreferrer">Full profile on Clay</a>.</p>
+                <p>Where Anne and Georges spent decades relieving founders' mental load, Romain spent years creating demand, structuring outbound, and turning commercial processes into machines. When he joins, the puzzle is complete.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Brand promise -->
+        <blockquote style="background:var(--black);color:var(--white);border-radius:12px;padding:48px 48px;margin-top:56px;">
+          <p style="font-family:var(--font-display);font-size:clamp(18px,2vw,26px);font-style:italic;line-height:1.4;margin-bottom:24px;">"Because you are busy, we do the work that frees your time — and we do it in a way that makes your growth more readable, more predictable, and better controlled."</p>
+          <div style="display:flex;gap:32px;flex-wrap:wrap;">
+            <span style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.05em;">Operational depth — Anne, Cécile, BYAB, law firms</span>
+            <span style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.05em;">Systems & data vision — Georges, CGI, Sorbonne</span>
+            <span style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.05em;">Growth machine — Romain, Datananas, Clovis, MerciApp</span>
+          </div>
+        </blockquote>
+
+      </div>
+    </section>
+
+    <!-- ── 9. TESTIMONIAL ────────────────────────────────── -->
+    <section class="testimonial">
+      <div class="testimonial-card">
+        <blockquote>
+          <p class="testimonial-quote">"They didn't just take work off my plate. They rebuilt how my company runs — and revenue followed."</p>
+        </blockquote>
+        <div class="testimonial-meta">
+          <div class="testimonial-author">M. Laurent</div>
+          <div class="testimonial-role">Managing Partner</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 10. CONTACT ───────────────────────────────────── -->
+    <section id="contact" class="contact">
+      <div class="contact-inner">
+        <div>
+          <span class="label">Contact</span>
+          <h2 class="contact-heading" style="margin-top:16px">
+            Let's take something<br>
+            <em>off your plate.</em>
+          </h2>
+          <p class="contact-sub">Because you are busy, we'll take it from here. Tell us what's burying you and we'll get back within 24h.</p>
+          <div class="contact-details">
+            <div class="contact-detail">
+              <span class="contact-detail-label">Email</span>
+              <span class="contact-detail-value"><a href="mailto:hello@becausebusy.com">hello@becausebusy.com</a></span>
+            </div>
+            <div class="contact-detail">
+              <span class="contact-detail-label">Based in</span>
+              <span class="contact-detail-value">Paris & La Rochelle</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="form" method="POST" action="#" novalidate>
+          <div class="form-field">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="you@company.com" required />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="message">Tell us what's burying you</label>
+            <textarea class="form-textarea" id="message" name="message" placeholder="What would you delegate tomorrow if you could?"></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;padding:14px 22px;font-size:15px;">Send message →</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+
+        <div>
+          <div class="footer-brand-name">
+            <span class="footer-brand-bolt" aria-hidden="true"></span>
+            Because You Are Busy
+          </div>
+          <p class="footer-tagline">Operations, transformation & growth consultancy for founders and managing partners since 2005.</p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Navigation</div>
+          <ul class="footer-col-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#story">Story</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="/design">Design ↗</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">People</div>
+          <ul class="footer-col-links">
+            <li><a href="https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/" target="_blank" rel="noopener noreferrer">Cécile Noiriel — Founder, B Y A B 2005</a></li>
+            <li><a href="https://www.linkedin.com/in/annegrosz" target="_blank" rel="noopener noreferrer">Anne Grosz — Co-founder & Operations</a></li>
+            <li><a href="https://www.linkedin.com/in/georges-grosz-8aa9613" target="_blank" rel="noopener noreferrer">Georges Grosz — Transformation & Data</a></li>
+            <li><a href="https://fr.linkedin.com/in/romaincornu" target="_blank" rel="noopener noreferrer">Romain Cornu — Growth Engine</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Companies</div>
+          <div class="footer-company-block">
+            <div class="footer-company-name">B Y A B</div>
+            <div class="footer-company-siren">SIREN 481 631 471 · Founded 2005</div>
+            <div class="footer-company-links">
+              <a href="https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471" target="_blank" rel="noopener noreferrer">Annuaire Entreprises</a>
+              <a href="https://www.pappers.fr/entreprise/b-y-a-b-because-you-are-busy-481631471" target="_blank" rel="noopener noreferrer">Pappers</a>
+              <a href="https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471" target="_blank" rel="noopener noreferrer">Le Figaro</a>
+            </div>
+          </div>
+          <div class="footer-company-block">
+            <div class="footer-company-name">Because You Are Busy</div>
+            <div class="footer-company-siren">SIREN 814 783 056 · Founded 2015</div>
+            <div class="footer-company-links">
+              <a href="https://www.societe.com/societe/because-you-are-busy-814783056.html" target="_blank" rel="noopener noreferrer">Société.com</a>
+              <a href="https://www.pappers.fr/entreprise/because-you-are-busy-814783056" target="_blank" rel="noopener noreferrer">Pappers</a>
+              <a href="https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056" target="_blank" rel="noopener noreferrer">Le Figaro</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2005–2026 Because You Are Busy. All rights reserved. — 18 rue Arago, 94400 Vitry-sur-Seine, France</p>
+        <p class="footer-meta">v1.0.0 · Published Mar 5, 2026 20:14</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
