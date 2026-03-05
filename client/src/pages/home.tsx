@@ -5,11 +5,15 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
 import { ArrowRight, ArrowUpRight, Globe, Mail, MapPin } from "lucide-react";
 import { SiLinkedin, SiX } from "react-icons/si";
-import logoHorizontalWhite from "@assets/byab-horizontal-logo-white_1772264662585.png";
-import photoAnne from "@assets/byab-profiles-neon-square-anne_1772263504235.png";
-import photoCecile from "@assets/byab-profiles-neon-square-cecile_1772263504235.png";
-import photoGeorges from "@assets/byab-profiles-neon-square-georges_1772263504235.png";
-import photoRomain from "@assets/byab-profiles-neon-square-romain_1772263504234.png";
+const logoHorizontalWhite = "/images/logo-horizontal-white.webp";
+const photoAnne256 = "/images/anne-256.webp";
+const photoCecile256 = "/images/cecile-256.webp";
+const photoGeorges256 = "/images/georges-256.webp";
+const photoRomain256 = "/images/romain-256.webp";
+const photoAnne128 = "/images/anne-128.webp";
+const photoCecile128 = "/images/cecile-128.webp";
+const photoGeorges128 = "/images/georges-128.webp";
+const photoRomain128 = "/images/romain-128.webp";
 
 function useHeadLinks() {
   useEffect(() => {
@@ -35,7 +39,7 @@ function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white" role="banner">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4 pl-[32px] pr-[32px] ml-[0px] mr-[0px]">
         <a href="/" aria-label="Home" data-testid="link-logo-home">
-          <img src={logoHorizontalWhite} alt="Because You Are Busy — Operations, Transformation & Growth Consultancy" className="h-12 w-auto ml-[0px] mr-[0px]" data-testid="img-logo-header" />
+          <img src={logoHorizontalWhite} alt="Because You Are Busy — Operations, Transformation & Growth Consultancy" width={240} height={48} className="h-12 w-auto ml-[0px] mr-[0px]" data-testid="img-logo-header" />
         </a>
         <nav aria-label="Main navigation" className="hidden md:block">
           <ul className="flex items-center gap-8 list-none m-0 p-0">
@@ -75,7 +79,8 @@ function Header() {
 
 const teamMembers = [
   {
-    src: photoAnne,
+    src: photoAnne256,
+    thumb: photoAnne128,
     name: "Anne Grosz",
     role: "Founder & Operations",
     bio: "8 years as Secretary General & CFO at Vatier & Associés. Now leads externalized general secretariat for law firms and SMEs — finance, admin, HR, and ISO compliance.",
@@ -84,7 +89,8 @@ const teamMembers = [
     linkedin: "https://www.linkedin.com/in/annegrosz",
   },
   {
-    src: photoCecile,
+    src: photoCecile256,
+    thumb: photoCecile128,
     name: "Cécile Noiriel",
     role: "Operations Conductor",
     bio: "The original 'chef d'orchestre' of BYAB since day one. Ensures every operational detail aligns with the founder's vision — coordination, delivery, and administrative orchestration.",
@@ -93,7 +99,8 @@ const teamMembers = [
     linkedin: "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/",
   },
   {
-    src: photoGeorges,
+    src: photoGeorges256,
+    thumb: photoGeorges128,
     name: "Georges Grosz",
     role: "Transformation & Data",
     bio: "22+ years as Senior Executive Consultant at CGI. Teaches at Université Paris 1 Panthéon-Sorbonne. Brings systems architecture, data governance, and structured transformation.",
@@ -102,7 +109,8 @@ const teamMembers = [
     linkedin: "https://www.linkedin.com/in/georges-grosz-8aa9613",
   },
   {
-    src: photoRomain,
+    src: photoRomain256,
+    thumb: photoRomain128,
     name: "Romain Cornu",
     role: "Growth Engine",
     bio: "Built growth machines at Datananas, Clovis, and MerciApp. CEO of Oysterz. Designs outbound systems, acquisition funnels, and revenue ops that make growth predictable.",
@@ -165,6 +173,10 @@ function TeamSlider() {
                 key={m.name}
                 src={m.src}
                 alt={m.name}
+                width={256}
+                height={256}
+                {...(i === 0 ? { fetchpriority: "high" } : { fetchpriority: "low" }) as any}
+                decoding={i === 0 ? "sync" : "async"}
                 className="absolute inset-0 w-full h-full rounded-full object-cover"
                 style={{
                   opacity: i === active ? 1 : 0,
@@ -210,7 +222,7 @@ function TeamSlider() {
                     aria-label={`View ${m.name}`}
                     data-testid={`button-slider-${m.name.split(" ")[0].toLowerCase()}`}
                   >
-                    <img src={m.src} alt={m.name} className="w-full h-full object-cover" />
+                    <img src={m.thumb} alt={m.name} width={128} height={128} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                   </button>
                 </div>
               );
@@ -590,6 +602,10 @@ function Team() {
                 <img
                   src={member.src}
                   alt={member.name}
+                  width={256}
+                  height={256}
+                  loading="lazy"
+                  decoding="async"
                   className="w-24 h-24 sm:w-28 sm:h-28 rounded-lg object-cover flex-shrink-0"
                   style={{ border: "1px solid #E5E5E5" }}
                   data-testid={`img-team-${firstName}`}
@@ -647,7 +663,7 @@ function Story() {
     {
       year: "2005",
       title: "The first seed",
-      photo: photoCecile,
+      photo: photoCecile128,
       photoAlt: "Cécile Noiriel",
       content: (
         <>
@@ -682,7 +698,7 @@ function Story() {
     {
       year: "2015",
       title: "Specialization: law firms & SMEs",
-      photo: photoAnne,
+      photo: photoAnne128,
       photoAlt: "Anne Grosz",
       content: (
         <>
@@ -737,7 +753,7 @@ function Story() {
     {
       year: "2025",
       title: "Georges: the transformation & data layer",
-      photo: photoGeorges,
+      photo: photoGeorges128,
       photoAlt: "Georges Grosz",
       content: (
         <>
@@ -757,7 +773,7 @@ function Story() {
     {
       year: "2025–26",
       title: "Romain: the growth machine",
-      photo: photoRomain,
+      photo: photoRomain128,
       photoAlt: "Romain Cornu",
       content: (
         <>
@@ -827,6 +843,10 @@ function Story() {
                     <img
                       src={entry.photo}
                       alt={entry.photoAlt || ""}
+                      width={128}
+                      height={128}
+                      loading="lazy"
+                      decoding="async"
                       className="w-12 h-12 rounded-full object-cover flex-shrink-0 ring-2 ring-border/50"
                       data-testid={`img-story-${entry.photoAlt?.split(" ")[0]?.toLowerCase()}`}
                     />
@@ -1021,7 +1041,7 @@ function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
 
           <div>
-            <img src={logoHorizontalWhite} alt="Because You Are Busy logo" className="h-7 w-auto mb-4" data-testid="img-footer-logo" />
+            <img src={logoHorizontalWhite} alt="Because You Are Busy logo" width={140} height={28} loading="lazy" decoding="async" className="h-7 w-auto mb-4" data-testid="img-footer-logo" />
             <p className="text-xs leading-relaxed" style={{ color: "#666666" }}>
               Operations, transformation & growth consultancy for founders and managing partners since 2005.
             </p>

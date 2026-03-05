@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Copy, Check, ArrowDown, Download, Palette, Type, Grid3X3, Layers, BookOpen, Image, LayoutTemplate } from "lucide-react";
-import logoSquareBlack from "@assets/byab-square-logo-black_1772265439751.png";
-import logoSquareWhite from "@assets/byab-square-logo-white_1772265439751.png";
-import logoHorizontalBlack from "@assets/byab-horizontal-logo-black_1772264662584.png";
-import logoHorizontalWhite from "@assets/byab-horizontal-logo-white_1772264662585.png";
+const logoSquareBlack = "/images/logo-square-black.webp";
+const logoSquareWhite = "/images/logo-square-white.webp";
+const logoHorizontalBlack = "/images/logo-horizontal-black.webp";
+const logoHorizontalWhite = "/images/logo-horizontal-white.webp";
 
 const brandColors = [
   { name: "Primary", hex: "#999999", usage: "Backgrounds, subtle accents, decorative fills" },

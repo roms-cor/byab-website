@@ -11,6 +11,9 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - Semantic HTML5 throughout
 - Proper heading hierarchy (h1 > h2 > h3)
 - **Build-time injection:** `vite.config.ts` defines `__APP_VERSION__` (from package.json) and `__BUILD_DATE__` (ISO date at build time), displayed subtly in the footer bottom bar (text-[10px], color #BBBBBB)
+- **Image optimization:** All images converted to WebP at 256px (hero/team) and 128px (orbit/story thumbnails), served from `client/public/images/`. Total image payload ~108KB (down from 6MB PNGs). Lazy loading + decoding="async" on below-fold images, fetchpriority="high" on LCP hero image.
+- **Font loading:** Google Fonts loaded asynchronously via preload+onload pattern (non-render-blocking), with slimmed weight range (Inter 400-700, JetBrains Mono 400-500)
+- **Preload hints:** LCP image (anne-256.webp) and header logo preloaded in `<head>`
 
 ## Routes
 - `/` — Homepage (agency landing page)
