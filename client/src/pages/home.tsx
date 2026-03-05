@@ -128,15 +128,18 @@ function TeamSlider() {
   const [active, setActive] = useState(0);
   const [prev, setPrev] = useState(-1);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hasAdvanced = useRef(false);
 
   const goTo = useCallback((index: number) => {
     if (index === active) return;
+    hasAdvanced.current = true;
     setPrev(active);
     setActive(index);
   }, [active]);
 
   useEffect(() => {
     timerRef.current = setInterval(() => {
+      hasAdvanced.current = true;
       setActive((a) => {
         setPrev(a);
         return (a + 1) % teamMembers.length;
@@ -174,20 +177,21 @@ function TeamSlider() {
             {teamMembers.map((m, i) => {
               const isActive = i === active;
               const isFirst = i === 0;
+              const isInitialFirst = isFirst && !hasAdvanced.current;
               return (
                 <img
                   key={m.name}
                   src={m.src}
-                  alt={m.name}
+                  alt={`${m.name}, ${m.role} at Because You Are Busy`}
                   width={256}
                   height={256}
                   {...(isFirst ? { fetchpriority: "high" } : { fetchpriority: "low" }) as any}
                   decoding={isFirst ? "sync" : "async"}
                   className="absolute inset-0 w-full h-full rounded-full object-cover"
                   style={{
-                    opacity: isActive || (isFirst && active === 0) ? 1 : 0,
-                    transform: isActive ? "scale(1)" : (i === prev ? "scale(1.08)" : "scale(0.92)"),
-                    transition: "opacity 700ms cubic-bezier(0.4,0,0.2,1), transform 700ms cubic-bezier(0.4,0,0.2,1)",
+                    opacity: isActive || isInitialFirst ? 1 : 0,
+                    transform: isActive || isInitialFirst ? "scale(1)" : (i === prev ? "scale(1.08)" : "scale(0.92)"),
+                    ...(isInitialFirst ? {} : { transition: "opacity 700ms cubic-bezier(0.4,0,0.2,1), transform 700ms cubic-bezier(0.4,0,0.2,1)" }),
                     border: "3px solid #FFFFFF",
                     boxShadow: "0 8px 40px rgba(0,0,0,0.10)",
                   }}
@@ -229,7 +233,7 @@ function TeamSlider() {
                     aria-label={`View ${m.name}`}
                     data-testid={`button-slider-${m.name.split(" ")[0].toLowerCase()}`}
                   >
-                    <img src={m.thumb} alt={m.name} width={128} height={128} decoding="async" className="w-full h-full object-cover" />
+                    <img src={m.thumb} alt="" width={128} height={128} decoding="async" className="w-full h-full object-cover" />
                   </button>
                 </div>
               );
@@ -277,7 +281,7 @@ function TeamSlider() {
               <span
                 key={skill}
                 className="text-[11px] font-medium px-2.5 py-1 rounded-full"
-                style={{ backgroundColor: "#F5F5F5", color: "#666666", border: "1px solid #E5E5E5" }}
+                style={{ backgroundColor: "#F5F5F5", color: "#595959", border: "1px solid #E5E5E5" }}
                 data-testid={`badge-skill-${skill.toLowerCase().replace(/\s/g, "-")}`}
               >
                 {skill}
@@ -376,7 +380,7 @@ function Hero() {
 
 function Marquee() {
   return (
-    <section aria-label="Expertise" className="border-t border-b border-border/50 py-5 overflow-hidden">
+    <section aria-hidden="true" className="border-t border-b border-border/50 py-5 overflow-hidden">
       <div className="flex items-center gap-12 sm:gap-16 animate-marquee whitespace-nowrap">
         {[...Array(2)].map((_, set) => (
           <div key={set} className="flex items-center gap-12 sm:gap-16 shrink-0">
@@ -525,7 +529,7 @@ function Stats() {
             {stats.map((stat) => (
               <div key={stat.label} className="text-center sm:text-left" data-testid={`stat-${stat.label.toLowerCase().replace(/\s/g, "-")}`}>
                 <p className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight" style={{ color: "#FFFFFF" }}>{stat.value}</p>
-                <p className="text-xs sm:text-sm mt-1.5" style={{ color: "#777777" }}>{stat.label}</p>
+                <p className="text-xs sm:text-sm mt-1.5" style={{ color: "#949494" }}>{stat.label}</p>
               </div>
             ))}
           </div>
@@ -878,15 +882,15 @@ function Story() {
             more predictable, and better controlled."
           </p>
           <div className="mt-6 flex flex-wrap gap-4">
-            <span className="text-xs font-medium" style={{ color: "#777777" }}>
+            <span className="text-xs font-medium" style={{ color: "#949494" }}>
               Operational depth — Anne, Cécile, BYAB, law firms
             </span>
-            <span className="text-xs" style={{ color: "#777777" }}>·</span>
-            <span className="text-xs font-medium" style={{ color: "#777777" }}>
+            <span className="text-xs" style={{ color: "#949494" }}>·</span>
+            <span className="text-xs font-medium" style={{ color: "#949494" }}>
               Systems & data vision — Georges, CGI, Sorbonne
             </span>
-            <span className="text-xs" style={{ color: "#777777" }}>·</span>
-            <span className="text-xs font-medium" style={{ color: "#777777" }}>
+            <span className="text-xs" style={{ color: "#949494" }}>·</span>
+            <span className="text-xs font-medium" style={{ color: "#949494" }}>
               Growth machine — Romain, Datananas, Clovis, MerciApp
             </span>
           </div>
@@ -1184,7 +1188,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main role="main">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:bg-black focus:text-white focus:rounded" data-testid="link-skip-nav">Skip to content</a>
+      <main id="main-content">
         <Hero />
         <Marquee />
         <Services />

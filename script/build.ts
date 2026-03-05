@@ -1,6 +1,6 @@
 import { build as esbuild } from "esbuild";
 import { build as viteBuild } from "vite";
-import { rm, readFile } from "fs/promises";
+import { rm, readFile, writeFile } from "fs/promises";
 import { execSync } from "child_process";
 import { fileURLToPath } from "url";
 import { dirname, resolve } from "path";
@@ -64,7 +64,19 @@ async function buildAll() {
   });
 }
 
+async function postBuildOptimize() {
+  const htmlPath = resolve("dist/public/index.html");
+  let html = await readFile(htmlPath, "utf-8");
+  html = html.replace(
+    /<link\s+rel="stylesheet"\s+[^>]*href="(\/assets\/[^"]+\.css)"[^>]*>/g,
+    '<link rel="stylesheet" href="$1" media="print" onload="this.media=\'all\'" crossorigin><noscript><link rel="stylesheet" href="$1" crossorigin></noscript>'
+  );
+  await writeFile(htmlPath, html);
+  console.log("post-build: CSS made non-render-blocking");
+}
+
 buildAll()
+  .then(() => postBuildOptimize())
   .then(() => {
     const scriptDir = dirname(fileURLToPath(import.meta.url));
     const pushScript = resolve(scriptDir, "push-to-github.sh");

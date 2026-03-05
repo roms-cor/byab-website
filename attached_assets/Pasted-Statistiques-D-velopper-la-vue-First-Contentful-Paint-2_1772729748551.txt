@@ -1,0 +1,118 @@
+Statistiques
+Développer la vue
+First Contentful Paint
+2,7 s
+Largest Contentful Paint
+3,0 s
+Total Blocking Time
+0 ms
+Cumulative Layout Shift
+0
+Speed Index
+5,5 s
+Captured at 5 mars 2026, 17:54 UTC+1
+Émulation du Moto G Power with Lighthouse 13.0.1
+Session avec consultation d'une seule page
+Chargement de page initial
+Connexion 4G lente
+Using HeadlessChromium 144.0.7559.132 with lr
+Consultez la carte proportionnelle
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Afficher les audits pertinents pour :
+
+All
+
+FCP
+
+LCP
+
+TBT
+
+CLS
+Insights
+Utiliser des durées de mise en cache efficaces Économies estimées : 153 Kio
+Une longue durée de mise en cache peut accélérer les visites répétées sur votre page. En savoir plusLCPFCPNon noté
+Requête
+Cache de la valeur TTL
+Taille de transfert
+becausebusy.com Propriétaire
+167 KiB
+/assets/index-BA9-mYsq.js(becausebusy.com)
+10min
+95 KiB
+/assets/index-B7AWjPYJ.css(becausebusy.com)
+10min
+14 KiB
+/images/cecile-256.webp(becausebusy.com)
+10min
+13 KiB
+/images/anne-256.webp(becausebusy.com)
+10min
+10 KiB
+/images/romain-256.webp(becausebusy.com)
+10min
+8 KiB
+/images/georges-256.webp(becausebusy.com)
+10min
+8 KiB
+/images/logo-horizontal-white.webp(becausebusy.com)
+10min
+6 KiB
+/images/cecile-128.webp(becausebusy.com)
+10min
+4 KiB
+/images/anne-128.webp(becausebusy.com)
+10min
+4 KiB
+/images/romain-128.webp(becausebusy.com)
+10min
+3 KiB
+/images/georges-128.webp(becausebusy.com)
+10min
+3 KiB
+Requêtes de blocage de l'affichage Économies estimées : 150 ms
+Les requêtes bloquent le rendu initial de la page, ce qui peut causer un retard LCP. Le report ou l'intégration de ces requêtes réseau peut les écarter du chemin critique.LCPFCPNon noté
+URL
+Taille de transfert
+Durée
+becausebusy.com Propriétaire
+13,7 KiB	310 ms
+/assets/index-B7AWjPYJ.css(becausebusy.com)
+13,7 KiB
+310 ms
+Détection de la requête LCP
+Optimisez le LCP en rendant l'image LCP visible immédiatement à partir du code HTML et en évitant le chargement différéLCPNon noté
+chargement différé non appliqué
+fetchpriority=high appliqué
+La demande est visible dans le document initial
+Anne Grosz
+<img src="/images/anne-256.webp" alt="Anne Grosz" width="256" height="256" fetchpriority="high" decoding="sync" class="absolute inset-0 w-full h-full rounded-full object-cover" style="opacity: 0; transform: scale(1.08);">
+Arborescence du réseau
+Évitez les chaînes de requêtes critiques en réduisant la longueur des chaînes ou la taille de téléchargement des ressources, ou en reportant le téléchargement de ressources inutiles, afin d'améliorer le chargement des pages.LCPNon noté
+Latence de chemin d'accès critique maximale : 350 ms
+Navigation initiale
+/home(becausebusy.com) - 164 ms, 3,65 KiB
+/assets/index-BA9-mYsq.js(becausebusy.com) - 350 ms, 95,29 KiB
+/assets/index-B7AWjPYJ.css(becausebusy.com) - 333 ms, 13,69 KiB
+Origines préconnectées
+Les hints de préconnexion aident le navigateur à établir une connexion plus tôt dans le chargement de page, ce qui permet de gagner du temps lors de la première requête pour cette origine. Voici les origines auxquelles la page s'est préconnectée.
+Origine
+Source
+https://fonts.googleapis.com/
+head > link
+<link rel="preconnect" href="https://fonts.googleapis.com">
+https://fonts.gstatic.com/
+head > link
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+Candidats pour la préconnexion
+Ajoutez des hints de préconnexion à vos origines les plus importantes, mais essayez de ne pas en utiliser plus de quatre.
+Aucune autre origine n'est un bon candidat pour la préconnexion
+Améliorer l'affichage des images Économies estimées : 4 Kio
+Réduire le temps de téléchargement des images peut améliorer le temps de chargement perçu de la page et le LCP. En savoir plus sur l'optimisation de la taille des imagesLCPFCPNon noté

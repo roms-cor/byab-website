@@ -11,9 +11,12 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - Semantic HTML5 throughout
 - Proper heading hierarchy (h1 > h2 > h3)
 - **Build-time injection:** `vite.config.ts` defines `__APP_VERSION__` (from package.json) and `__BUILD_DATE__` (ISO date at build time), displayed subtly in the footer bottom bar (text-[10px], color #BBBBBB)
-- **Image optimization:** All images converted to WebP at 256px (hero/team) and 128px (orbit/story thumbnails), served from `client/public/images/`. Logos resized to 504×168 (2x retina). Total image payload ~92KB. Lazy loading + decoding="async" on below-fold images, fetchpriority="high" on LCP hero image + header logo. Hero first image starts opacity:1 for instant LCP.
+- **Image optimization:** All images converted to WebP at 256px (hero/team) and 128px (orbit/story thumbnails), served from `client/public/images/`. Logos resized to 504×168 (2x retina). Total image payload ~92KB. Lazy loading + decoding="async" on below-fold images, fetchpriority="high" on LCP hero image + header logo.
+- **LCP optimization:** Hero first image renders with opacity:1 and NO CSS transition on initial paint (hasAdvanced ref). LCP image (anne-256.webp) preloaded in `<head>`.
+- **Pre-rendered HTML shell:** `<div id="root">` contains a static HTML skeleton (header + hero title) so FCP happens before JS loads. React replaces it entirely on mount.
+- **Non-render-blocking CSS:** Post-build script in `script/build.ts` transforms the Vite-injected `<link rel="stylesheet">` to async loading (`media="print" onload="this.media='all'"`).
 - **Code splitting:** Components/design page lazy-loaded via React.lazy + Suspense — not bundled with homepage JS.
-- **Accessibility:** WCAG AA contrast (#767676 for decorative text instead of #999999), 44×44px touch targets on slider dots/orbit buttons, prefers-reduced-motion support, form inputs with required/aria-required.
+- **Accessibility:** WCAG AA contrast (#767676 decorative text, #595959 small badge text, #949494 text on dark bg), 44×44px touch targets on slider dots/orbit buttons, prefers-reduced-motion support, form inputs with required/aria-required, skip-nav link, marquee aria-hidden, descriptive image alt text, orbit button images use alt="" with aria-label.
 - **Canonical:** Static canonical in index.html `<head>`, overridden by useHeadLinks on /home (removes static before injecting page-specific).
 - **Font loading:** Google Fonts loaded asynchronously via preload+onload pattern (non-render-blocking), with slimmed weight range (Inter 400-700, JetBrains Mono 400-500)
 - **Preload hints:** LCP image (anne-256.webp) and header logo preloaded in `<head>`
@@ -58,14 +61,14 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - `client/public/sitemap.xml` — Sitemap
 
 ## Brand Design Tokens (Pure Grayscale)
-- **Primary**: #999999 — Decorative fills, accents
+- **Primary**: #999999 — Decorative fills, accents (NOT for text)
 - **Accent**: #000000 — Primary buttons, dark sections
 - **Background**: #FFFFFF
 - **Text Primary**: #000000
-- **Link/Secondary**: #666666
+- **Text on white**: #666666 (5.74:1) body text, #767676 (4.6:1) decorative, #595959 (7:1) small badges
+- **Text on dark**: #949494 (4.7:1 on black) labels, meta
 - **Card BG**: #F5F5F5 (Gray 50)
 - **Card Border**: #E5E5E5 (Gray 100)
-- **Dark Label**: #777777
 - **Font**: Inter (body + headings), JetBrains Mono (code)
 - **Spacing**: 8px grid
 - **Border Radius**: 8px default, 10px buttons, 0px secondary buttons
