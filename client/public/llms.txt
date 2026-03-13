@@ -29,7 +29,7 @@ The Because You Are Busy team brings three complementary forces:
 - **Anne Grosz** ([LinkedIn](https://www.linkedin.com/in/annegrosz)) — Co-Manager & Head of Operations. 20 years of hands-on operational leadership. Former Secretary General at [Vatier & Associés](https://www.infocession.fr/avocats/vatier-associes) (Paris law firm). Founded BYAB in 2005, then Because You Are Busy in 2015. Expert in externalized general secretariat, admin, finance, and law firm operations.
 - **Cécile Noiriel** ([LinkedIn](https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/)) — Operations Conductor since 2005. The "chef d'orchestre" of Because You Are Busy. Integral to operational delivery and administrative organization that allows founders to scale.
 - **Georges Grosz** ([LinkedIn](https://www.linkedin.com/in/georges-grosz-8aa9613)) — Co-Manager, Transformation & Data. 22 years as Senior Executive Consultant at CGI. Professor at Université Paris 1 Panthéon-Sorbonne. Expert in transformation, information systems, project governance, and data.
-- **Romain Cornu** ([LinkedIn](https://fr.linkedin.com/in/romaincornu)) — Growth Engine. Former Head of Marketing at Datananas, [Head of Growth at Clovis](https://www.avizio.fr/expert/romain-cornu), Growth Advisor at MerciApp, Teacher Outbound at GrowthMakers, CEO of [Oysterz](https://www.societe.com/societe/oysterz-884894296.html) ([Le Figaro](https://entreprises.lefigaro.fr/oysterz-17/entreprise-884894296)). Expert in outbound B2B, acquisition funnels, and scalable sales machines. ([Clay profile](https://clay.earth/profile/romain-cornu))
+- **Romain Cornu** ([LinkedIn](https://fr.linkedin.com/in/romaincornu)) — Growth Engine. Nearly 6 years at MerciApp (Growth Advisor → Investor → GTM & Key Accounts Lead), [Head of Growth at Clovis](https://www.avizio.fr/expert/romain-cornu) for 4+ years, Head of Marketing at Datananas, Outbound Teacher at GrowthMakers. Expert in go-to-market strategy, outbound B2B, acquisition funnels, and scalable sales machines. ([Clay profile](https://clay.earth/profile/romain-cornu))
 
 ## Company History
 
@@ -37,7 +37,7 @@ The Because You Are Busy team brings three complementary forces:
 - **2015** — [Because You Are Busy](https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056) (SIREN 814 783 056) created by Anne Grosz. Specialization in [externalized general secretariat](https://www.societe.com/societe/because-you-are-busy-814783056.html) for law firms and SMEs. Anne brings 8 years as Secretary General at [Vatier & Associés](https://www.infocession.fr/avocats/vatier-associes).
 - **2020** — Transformation from SAS to SARL. Craft model over startup model. Confidential accounts, trust-based client relationships. ([Pappers](https://www.pappers.fr/entreprise/because-you-are-busy-814783056))
 - **2025** — Georges Grosz joins Because You Are Busy as co-manager. Transformation & data layer added. 22 years at CGI, professor at Sorbonne.
-- **2025–2026** — Romain Cornu joins Because You Are Busy. Growth engineering capability: ICP, packaged offers, outbound funnels, performance metrics. Former Head of Growth at Clovis, Growth Advisor at MerciApp, CEO of [Oysterz](https://entreprises.lefigaro.fr/oysterz-17/entreprise-884894296).
+- **2025–2026** — Romain Cornu joins Because You Are Busy. Growth engineering capability: ICP, packaged offers, outbound funnels, performance metrics. Nearly 6 years at MerciApp (Growth Advisor → Investor → GTM & Key Accounts Lead), 4+ years Head of Growth at Clovis, Head of Marketing at Datananas, Outbound Teacher at GrowthMakers.
 
 ## Key Metrics
 
@@ -97,8 +97,6 @@ hello@becausebusy.com
 - [Romain Cornu — LinkedIn](https://fr.linkedin.com/in/romaincornu)
 - [Cécile Noiriel — LinkedIn](https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/)
 - [Romain Cornu — Avizio](https://www.avizio.fr/expert/romain-cornu)
-- [Societe.com — Oysterz](https://www.societe.com/societe/oysterz-884894296.html)
-- [Le Figaro — Oysterz](https://entreprises.lefigaro.fr/oysterz-17/entreprise-884894296)
 - [Romain Cornu — Clay](https://clay.earth/profile/romain-cornu)
 
 ## Tone & Voice

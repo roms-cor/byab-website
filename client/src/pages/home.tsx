@@ -4,8 +4,11 @@ declare const __GIT_COMMIT_DATE__: string;
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
-import { ArrowRight, ArrowUpRight, Globe, Mail, MapPin } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Globe, Loader2, Mail, MapPin, Menu, X } from "lucide-react";
 import { SiLinkedin, SiX } from "react-icons/si";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 const logoHorizontalWhite = "/images/logo-horizontal-white.webp";
 const photoAnne256 = "/images/anne-256.webp";
 const photoCecile256 = "/images/cecile-256.webp";
@@ -22,10 +25,10 @@ function useHeadLinks() {
     if (existingCanonical) existingCanonical.remove();
 
     const links = [
-      { rel: "canonical", href: "https://becausebusy.com/home" },
-      { rel: "alternate", hreflang: "en", href: "https://becausebusy.com/home" },
-      { rel: "alternate", hreflang: "fr", href: "https://becausebusy.com/home" },
-      { rel: "alternate", hreflang: "x-default", href: "https://becausebusy.com/home" },
+      { rel: "canonical", href: "https://becausebusy.com/" },
+      { rel: "alternate", hreflang: "en", href: "https://becausebusy.com/" },
+      { rel: "alternate", hreflang: "fr", href: "https://becausebusy.com/" },
+      { rel: "alternate", hreflang: "x-default", href: "https://becausebusy.com/" },
     ];
     const elements: HTMLLinkElement[] = [];
     links.forEach((attrs) => {
@@ -39,26 +42,63 @@ function useHeadLinks() {
 }
 
 function Header() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const navItems = [
+    { label: "Services", href: "#services", title: "Our four service pillars: operations, transformation, data, and growth" },
+    { label: "Track Record", href: "#work", title: "Recent client engagements and outcomes" },
+    { label: "Team", href: "#team", title: "Meet our team of four specialists" },
+    { label: "Story", href: "#story", title: "Our history from 2005 to today" },
+    { label: "Contact", href: "#contact", title: "Get in touch — email, locations, and contact form" },
+  ];
+
+  const menuRef = useRef<HTMLElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+      const firstLink = menuRef.current?.querySelector("a");
+      firstLink?.focus();
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const handler = () => { if (mq.matches) setMobileOpen(false); };
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        triggerRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [mobileOpen]);
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white" role="banner">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4 pl-[32px] pr-[32px] ml-[0px] mr-[0px]">
-        <a href="/home" aria-label="Home" data-testid="link-logo-home">
-          <img src={logoHorizontalWhite} alt="Because You Are Busy — Operations, Transformation & Growth Consultancy" width={240} height={48} className="h-12 w-auto ml-[0px] mr-[0px]" {...{fetchpriority: "high"} as any} data-testid="img-logo-header" />
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
+        <a href="/" aria-label="Home" data-testid="link-logo-home">
+          <img src={logoHorizontalWhite} alt="Because You Are Busy — Operations, Transformation & Growth Consultancy" width={240} height={48} className="h-[38px] w-auto" {...{fetchpriority: "high"} as any} data-testid="img-logo-header" />
         </a>
         <nav aria-label="Main navigation" className="hidden md:block">
-          <ul className="flex items-center gap-8 list-none m-0 p-0">
-            {[
-              { label: "Services", href: "#services" },
-              { label: "Track Record", href: "#work" },
-              { label: "Team", href: "#team" },
-              { label: "Story", href: "#story" },
-              { label: "Contact", href: "#contact" },
-            ].map((item) => (
+          <ul className="flex items-center gap-6 list-none m-0 p-0">
+            {navItems.map((item) => (
               <li key={item.label}>
                 <a
                   href={item.href}
+                  title={item.title}
                   data-testid={`link-nav-${item.label.toLowerCase().replace(/\s/g, "-")}`}
-                  className="text-sm font-medium transition-opacity duration-150"
+                  className="text-sm transition-opacity duration-150"
                   style={{ color: "#666666" }}
                 >
                   {item.label}
@@ -67,20 +107,75 @@ function Header() {
             ))}
           </ul>
         </nav>
-        <a
-          href="#contact"
-          data-testid="button-header-cta"
-          className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-[10px] transition-opacity duration-150"
-          style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
-        >
-          Get in touch
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href="#contact"
+            title="Get in touch — email, locations, and contact form"
+            data-testid="button-header-cta"
+            className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-medium rounded-full transition-opacity duration-150"
+            style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
+          >
+            Get in touch
+          </a>
+          <button
+            ref={triggerRef}
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden flex items-center justify-center w-10 h-10"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
+            data-testid="button-mobile-menu"
+          >
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
+      {mobileOpen && (
+        <nav ref={menuRef} id="mobile-nav" className="md:hidden absolute top-[72px] left-0 right-0 bg-white border-t border-border/50 shadow-lg" aria-label="Mobile navigation">
+          <ul className="flex flex-col py-4 px-4 list-none m-0 p-0">
+            {navItems.map((item) => (
+              <li key={item.label}>
+                <a
+                  href={item.href}
+                  title={item.title}
+                  onClick={() => { setMobileOpen(false); triggerRef.current?.focus(); }}
+                  data-testid={`link-mobile-nav-${item.label.toLowerCase().replace(/\s/g, "-")}`}
+                  className="block py-3 text-base font-medium transition-opacity duration-150"
+                  style={{ color: "#333333" }}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+            <li className="pt-3 mt-1 border-t border-border/50">
+              <a
+                href="#contact"
+                onClick={() => { setMobileOpen(false); triggerRef.current?.focus(); }}
+                data-testid="button-mobile-cta"
+                className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 text-sm font-medium rounded-full transition-opacity duration-150"
+                style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
+              >
+                Get in touch
+              </a>
+            </li>
+          </ul>
+        </nav>
+      )}
     </header>
   );
 }
 
 const teamMembers = [
+  {
+    src: photoCecile256,
+    thumb: photoCecile128,
+    name: "Cécile Noiriel",
+    role: "Founder — B Y A B, 2005",
+    bio: "Created B Y A B on April 1, 2005 with a conviction ahead of its time: founders don't lack courage — they lack time and structure. Has run the operation since day one.",
+    skills: ["Project Coordination", "Administrative Org", "Client Delivery", "Process Design"],
+    since: "Since 2005",
+    linkedin: "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/",
+  },
   {
     src: photoAnne256,
     thumb: photoAnne128,
@@ -90,16 +185,6 @@ const teamMembers = [
     skills: ["General Secretariat", "Finance & Admin", "Law Firm Ops", "ISO Compliance"],
     since: "Since 2015",
     linkedin: "https://www.linkedin.com/in/annegrosz",
-  },
-  {
-    src: photoCecile256,
-    thumb: photoCecile128,
-    name: "Cécile Noiriel",
-    role: "Founder — B Y A B, 2005",
-    bio: "The original founder. Created B Y A B on April 1, 2005 with a conviction two decades ahead of its time: founders don't lack courage — they lack time and structure. Has run the operation since day one, ensuring every detail aligns with the founder's vision.",
-    skills: ["Project Coordination", "Administrative Org", "Client Delivery", "Process Design"],
-    since: "Since 2005",
-    linkedin: "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/",
   },
   {
     src: photoGeorges256,
@@ -116,11 +201,10 @@ const teamMembers = [
     thumb: photoRomain128,
     name: "Romain Cornu",
     role: "Growth Engine",
-    bio: "Built growth machines at Datananas, Clovis, and MerciApp. CEO of Oysterz. Designs outbound systems and acquisition funnels that make commercial growth predictable.",
-    skills: ["Outbound B2B", "Acquisition Funnels", "Sales Machines", "Revenue Ops"],
+    bio: "6 years at MerciApp (now GTM & Key Accounts Lead), 4 years leading growth at Clovis. Ex-Datananas, GrowthMakers. Designs go-to-market engines that make growth predictable.",
+    skills: ["Go-to-Market", "Acquisition Funnels", "Outbound B2B", "Revenue Ops"],
     since: "Since 2025",
     linkedin: "https://fr.linkedin.com/in/romaincornu",
-    website: "https://www.societe.com/societe/oysterz-884894296.html",
   },
 ];
 
@@ -201,7 +285,7 @@ function TeamSlider() {
               const others = teamMembers.filter((_, idx) => idx !== active);
               const thumbIdx = others.indexOf(m);
               const angle = (thumbIdx * (360 / others.length)) + 45;
-              const radius = 170;
+              const radius = 150;
               
               return (
                 <div
@@ -324,7 +408,7 @@ function Hero() {
             </p>
             <h1
               id="hero-heading"
-              className="sm:text-6xl lg:text-[80px] font-semibold tracking-tight text-foreground text-[75px]"
+              className="sm:text-6xl lg:text-[80px] font-semibold tracking-tight text-foreground text-[70px]"
               data-testid="text-hero-title"
             >
               We run what
@@ -362,7 +446,7 @@ function Hero() {
               </a>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-border/50 flex gap-8" data-testid="hero-proof">
+            <div className="mt-12 pt-8 border-t border-border/50 flex flex-wrap gap-6 sm:gap-8" data-testid="hero-proof">
               <div>
                 <p className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">20</p>
                 <p className="text-xs font-mono mt-1" style={{ color: "#666666" }}>Years serving<br />founders</p>
@@ -377,7 +461,7 @@ function Hero() {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center lg:justify-end">
+          <div className="flex items-center justify-center">
             <TeamSlider />
           </div>
         </div>
@@ -787,7 +871,7 @@ function Team() {
                   <p className="text-sm font-medium mt-0.5" style={{ color: "#767676" }} data-testid={`text-team-role-${firstName}`}>
                     {member.role}
                   </p>
-                  <p className="text-sm leading-relaxed mt-3 line-clamp-3" style={{ color: "#666666" }} data-testid={`text-team-bio-${firstName}`}>
+                  <p className="text-sm leading-relaxed mt-3" style={{ color: "#666666" }} data-testid={`text-team-bio-${firstName}`}>
                     {member.bio}
                   </p>
                   <div className="flex items-center gap-3 mt-4">
@@ -941,26 +1025,18 @@ function Story() {
             <a href="https://fr.linkedin.com/in/romaincornu" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-romain-linkedin">
               Romain Cornu
             </a>
-            , entrepreneur and B2B growth specialist. Head of Marketing at Datananas (B2B outbound SaaS),{" "}
+            , B2B growth specialist. Head of Marketing at Datananas, then nearly six years at MerciApp — from Growth Advisor to Investor to GTM & Key Accounts Lead.{" "}
             <a href="https://www.avizio.fr/expert/romain-cornu" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-romain-avizio">
               Head of Growth at Clovis
             </a>
-            , then CEO of{" "}
-            <a href="https://www.societe.com/societe/oysterz-884894296.html" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-oysterz-societe">
-              Oysterz
-            </a>
-            {" "}(
-            <a href="https://entreprises.lefigaro.fr/oysterz-17/entreprise-884894296" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-oysterz-figaro">
-              SIREN 884 894 296
-            </a>
-            ), a B2B systems consulting and talent-matching firm.{" "}
+            {" "}for over four years, and Outbound Teacher at GrowthMakers.{" "}
             <a href="https://clay.earth/profile/romain-cornu" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-romain-clay">
               Full profile on Clay
             </a>
             .
           </p>
           <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "#666666" }}>
-            Where Anne and Georges spent decades relieving founders' mental load, Romain spent years creating demand, structuring outbound, and turning commercial processes into machines. When he joins, the puzzle is complete.
+            Where Anne and Georges spent decades relieving founders' mental load, Romain spent years building go-to-market engines, structuring outbound, and turning commercial processes into machines. When he joins, the puzzle is complete.
           </p>
         </>
       ),
@@ -1031,7 +1107,7 @@ function Story() {
             </span>
             <span className="text-xs" style={{ color: "#949494" }}>·</span>
             <span className="text-xs font-medium" style={{ color: "#949494" }}>
-              Growth machine — Romain, Datananas, Clovis, MerciApp
+              Growth engine — Romain, MerciApp, Clovis, Datananas
             </span>
           </div>
         </div>
@@ -1075,6 +1151,52 @@ function Testimonial() {
 }
 
 function Contact() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
+  const { toast } = useToast();
+
+  const mutation = useMutation({
+    mutationFn: async (data: { name: string; email: string; message: string | null }) => {
+      const res = await apiRequest("POST", "/api/contact", data);
+      return res.json();
+    },
+    onSuccess: (_data, variables) => {
+      toast({
+        title: "Message saved",
+        description: "Your enquiry has been recorded. Your email client will open so you can send it directly.",
+      });
+
+      const subject = encodeURIComponent(`New enquiry from ${variables.name}`);
+      const body = encodeURIComponent(
+        `Name: ${variables.name}\nEmail: ${variables.email}\n\n${variables.message || ""}`
+      );
+      window.location.href = `mailto:hello@becausebusy.com?subject=${subject}&body=${body}`;
+
+      setName("");
+      setEmail("");
+      setMessage("");
+    },
+    onError: () => {
+      toast({
+        title: "Something went wrong",
+        description: "Your message could not be saved. Please try again or email us directly.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newErrors: { name?: string; email?: string } = {};
+    if (!name.trim()) newErrors.name = "Name is required";
+    if (!email.trim()) newErrors.email = "Email is required";
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) return;
+    mutation.mutate({ name: name.trim(), email: email.trim(), message: message.trim() || null });
+  };
+
   return (
     <section id="contact" aria-labelledby="contact-heading" className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36" style={{ backgroundColor: "#F5F5F5" }}>
       <div className="max-w-[1200px] mx-auto">
@@ -1107,7 +1229,7 @@ function Contact() {
             </div>
           </div>
           <div>
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label htmlFor="contact-name" className="text-xs font-medium text-foreground block mb-1.5">Name</label>
                 <input
@@ -1116,9 +1238,15 @@ function Contact() {
                   placeholder="Your name"
                   required
                   aria-required="true"
+                  value={name}
+                  onChange={(e) => { setName(e.target.value); if (errors.name) setErrors(prev => ({ ...prev, name: undefined })); }}
+                  disabled={mutation.isPending}
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? "contact-name-error" : undefined}
                   data-testid="input-contact-name"
-                  className="w-full px-4 py-2.5 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring transition-colors"
+                  className={`w-full px-4 py-2.5 text-sm rounded-lg border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring transition-colors disabled:opacity-50 ${errors.name ? "border-red-400" : "border-border"}`}
                 />
+                {errors.name && <p id="contact-name-error" className="text-xs mt-1" style={{ color: "#DC2626" }} data-testid="text-error-name">{errors.name}</p>}
               </div>
               <div>
                 <label htmlFor="contact-email" className="text-xs font-medium text-foreground block mb-1.5">Email</label>
@@ -1128,9 +1256,15 @@ function Contact() {
                   placeholder="you@company.com"
                   required
                   aria-required="true"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); if (errors.email) setErrors(prev => ({ ...prev, email: undefined })); }}
+                  disabled={mutation.isPending}
+                  aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? "contact-email-error" : undefined}
                   data-testid="input-contact-email"
-                  className="w-full px-4 py-2.5 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring transition-colors"
+                  className={`w-full px-4 py-2.5 text-sm rounded-lg border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring transition-colors disabled:opacity-50 ${errors.email ? "border-red-400" : "border-border"}`}
                 />
+                {errors.email && <p id="contact-email-error" className="text-xs mt-1" style={{ color: "#DC2626" }} data-testid="text-error-email">{errors.email}</p>}
               </div>
               <div>
                 <label htmlFor="contact-message" className="text-xs font-medium text-foreground block mb-1.5">Tell us what's burying you</label>
@@ -1138,18 +1272,31 @@ function Contact() {
                   id="contact-message"
                   rows={4}
                   placeholder="What would you delegate tomorrow if you could?"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  disabled={mutation.isPending}
                   data-testid="input-contact-message"
-                  className="w-full px-4 py-2.5 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring transition-colors resize-none"
+                  className="w-full px-4 py-2.5 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring transition-colors resize-none disabled:opacity-50"
                 />
               </div>
               <button
                 type="submit"
+                disabled={mutation.isPending}
                 data-testid="button-contact-submit"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-[10px] text-sm font-medium transition-opacity duration-150 w-full justify-center"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-[10px] text-sm font-medium transition-opacity duration-150 w-full justify-center disabled:opacity-50"
                 style={{ backgroundColor: "#000000", color: "#FFFFFF", border: "1px solid #666666" }}
               >
-                Send message
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                {mutation.isPending ? (
+                  <>
+                    Sending...
+                    <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+                  </>
+                ) : (
+                  <>
+                    Send message
+                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                  </>
+                )}
               </button>
             </form>
           </div>
@@ -1311,7 +1458,7 @@ function Footer() {
 
         <div className="mt-10 sm:mt-12 pt-6 border-t border-border/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <p className="text-[11px]" style={{ color: "#767676" }}>
-            © 2005–2026 <span itemScope itemType="https://schema.org/Organization"><span itemProp="name">Because You Are Busy</span></span>. All rights reserved.
+            © 2026 <span itemScope itemType="https://schema.org/Organization"><span itemProp="name">Because You Are Busy</span></span>. All rights reserved.
           </p>
           <p className="text-[10px] hidden sm:block" style={{ color: "#BBBBBB" }} data-testid="text-footer-version">
             v{__APP_VERSION__} · Published {new Date(__BUILD_DATE__).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} {new Date(__BUILD_DATE__).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })} · Commit {__GIT_COMMIT_DATE__ ? `${new Date(__GIT_COMMIT_DATE__).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} ${new Date(__GIT_COMMIT_DATE__).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })}` : "—"}
@@ -1328,7 +1475,7 @@ function Footer() {
 export default function Home() {
   useHeadLinks();
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <Header />
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:bg-black focus:text-white focus:rounded" data-testid="link-skip-nav">Skip to content</a>
       <main id="main-content">
