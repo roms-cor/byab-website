@@ -9,7 +9,9 @@ const pkg = JSON.parse(readFileSync("package.json", "utf-8"));
 
 let gitCommitDate = "";
 try {
-  gitCommitDate = execSync("git log -1 --format=%cI", { encoding: "utf-8" }).trim();
+  const log = execSync("git log -2 --format=%cI", { encoding: "utf-8" }).trim().split("\n");
+  const msg = execSync("git log -1 --format=%s", { encoding: "utf-8" }).trim();
+  gitCommitDate = msg.startsWith("chore(publish)") && log[1] ? log[1] : log[0];
 } catch { /* no git available */ }
 
 export default defineConfig({

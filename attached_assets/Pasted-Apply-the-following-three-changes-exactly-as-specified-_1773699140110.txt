@@ -1,0 +1,73 @@
+Apply the following three changes exactly as specified. Do not refactor anything else.
+
+---
+
+## 1. `vite.config.ts` — Fix git commit date to skip the auto-publish commit
+
+Replace this block:
+
+let gitCommitDate = "";
+try {
+  gitCommitDate = execSync("git log -1 --format=%cI", { encoding: "utf-8" }).trim();
+} catch { /* no git available */ }
+
+With:
+
+let gitCommitDate = "";
+try {
+  const log = execSync("git log -2 --format=%cI", { encoding: "utf-8" }).trim().split("\n");
+  const msg = execSync("git log -1 --format=%s", { encoding: "utf-8" }).trim();
+  gitCommitDate = msg.startsWith("chore(publish)") && log[1] ? log[1] : log[0];
+} catch { /* no git available */ }
+
+Reason: `git log -1` always returns the `chore(publish)` auto-commit created by the
+publish script, not the real last dev commit. This fix reads the commit subject and
+skips the auto-commit when it is HEAD, falling back to the previous commit date.
+
+---
+
+## 2. `script/push-to-github.sh` — Detect and fix version drift before pushing
+
+After this line:
+  cd "$TMPDIR/repo"
+
+Add:
+
+  GITHUB_VERSION=$(node -e "console.log(require('./package.json').version)" 2>/dev/null || echo "")
+  LOCAL_VERSION=$(node -e "console.log(require('${WORKSPACE}/package.json').version)" 2>/dev/null || echo "")
+  if [ -n "$GITHUB_VERSION" ] && [ "$GITHUB_VERSION" != "$LOCAL_VERSION" ]; then
+    echo "⚠ Version drift detected: Replit=${LOCAL_VERSION}, GitHub=${GITHUB_VERSION}"
+    echo "→ Using GitHub version ${GITHUB_VERSION}"
+    cp package.json "$TMPDIR/github-package.json"
+  fi
+
+After the for loop that copies workspace files (the `cp -r` block), add:
+
+  if [ -f "$TMPDIR/github-package.json" ]; then
+    cp "$TMPDIR/github-package.json" package.json
+  fi
+
+Reason: the `release.yml` workflow bumps `package.json` version directly on GitHub
+(via conventional-changelog-action) without syncing back to Replit. If a publish
+happens from Replit before pulling that change, the footer displays the stale version.
+This fix detects the drift and preserves the GitHub-side version.
+
+---
+
+## 3. `.github/workflows/deploy.yml` — Fetch enough history for git log -2
+
+Replace:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+With:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+
+Reason: the default shallow clone (depth 1) only contains the HEAD commit, so
+`git log -2` in `vite.config.ts` cannot see the parent commit during the CI build.
+`fetch-depth: 2` is the minimum needed — no broader history is required.
