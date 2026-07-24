@@ -199,6 +199,21 @@ async function checkHtml(html: string) {
     check(org.name === cfg.name, `Organization.name "${org.name}" ≠ config name`);
     check(org.url === cfg.url, `Organization.url "${org.url}" ≠ config url`);
     check(org.foundingDate === cfg.foundingDate, `Organization.foundingDate "${org.foundingDate}" ≠ config foundingDate`);
+    // Cross-check founder + member against content/team.ts (single source of
+    // truth): founder = first entry, member = the rest.
+    const expectPerson = (label: string, p: any, m: any) => {
+      check(p?.name === m.name, `${label}.name "${p?.name}" ≠ content/team.ts "${m.name}"`);
+      check(p?.jobTitle === m.role, `${label} (${m.name}): jobTitle "${p?.jobTitle}" ≠ role "${m.role}"`);
+      check(p?.description === m.bio, `${label} (${m.name}): description does not match content/team.ts bio (stale copy)`);
+      if (m.linkedin) check(p?.url === m.linkedin, `${label} (${m.name}): url "${p?.url}" ≠ LinkedIn "${m.linkedin}"`);
+    };
+    expectPerson("Organization.founder", org.founder, teamMembers[0]);
+    const members: any[] = Array.isArray(org.member) ? org.member : [];
+    check(
+      members.length === teamMembers.length - 1,
+      `Organization.member: ${members.length} entries ≠ ${teamMembers.length - 1} non-founder members in content/team.ts`
+    );
+    teamMembers.slice(1).forEach((m: any, i: number) => expectPerson(`Organization.member[${i}]`, members[i], m));
   }
   const svc = ldByType["ProfessionalService"]?.[0];
   if (svc) {

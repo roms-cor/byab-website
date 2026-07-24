@@ -65,34 +65,9 @@
         "https://fr.linkedin.com/in/romaincornu",
         "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/"
       ],
-      "founder": {
-        "@type": "Person",
-        "name": "Cécile Noiriel",
-        "jobTitle": "Founder — B Y A B, 2005",
-        "url": "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/"
-      },
+      "founder": {{TEAM_JSONLD_FOUNDER}},
       "member": [
-        {
-          "@type": "Person",
-          "name": "Anne Grosz",
-          "jobTitle": "Founder & Head of Operations",
-          "url": "https://www.linkedin.com/in/annegrosz",
-          "description": "8 years as Secretary General & CFO at Vatier & Associés (Paris law firm). Founded {{SITE_NAME}} (SIREN 814 783 056) in 2015. Expert in externalized general secretariat, admin, finance, and law firm operations."
-        },
-        {
-          "@type": "Person",
-          "name": "Georges Grosz",
-          "jobTitle": "Co-Manager, Transformation & Data",
-          "url": "https://www.linkedin.com/in/georges-grosz-8aa9613",
-          "description": "22+ years as Senior Executive Consultant at CGI. Professor at Université Paris 1 Panthéon-Sorbonne. Joined {{SITE_NAME}} as co-manager in July 2025. Expert in systems architecture, data governance, and project management."
-        },
-        {
-          "@type": "Person",
-          "name": "Romain Cornu",
-          "jobTitle": "Growth Engine",
-          "url": "https://fr.linkedin.com/in/romaincornu",
-          "description": "B2B growth specialist. Nearly 6 years at MerciApp (Growth Advisor → Investor → GTM & Key Accounts Lead), 4+ years Head of Growth at Clovis, Head of Marketing at Datananas, Outbound Teacher at GrowthMakers. Expert in go-to-market strategy, outbound B2B, acquisition funnels, and scalable sales machines."
-        }
+        {{TEAM_JSONLD_MEMBERS}}
       ]
     }
     </script>

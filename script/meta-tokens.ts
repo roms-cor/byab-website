@@ -157,6 +157,33 @@ const composed: Record<string, string> = {
       ).replace(/^/gm, "        ").trimStart()
     )
     .join(",\n        "),
+  // Organization founder (first entry in content/team.ts) + member list (the
+  // rest), so the JSON-LD team can never go stale when content/team.ts changes.
+  TEAM_JSONLD_FOUNDER: JSON.stringify(
+    {
+      "@type": "Person",
+      name: teamMembers[0].name,
+      jobTitle: teamMembers[0].role,
+      ...(teamMembers[0].linkedin ? { url: teamMembers[0].linkedin } : {}),
+      description: teamMembers[0].bio,
+    },
+    null, 2
+  ).replace(/^/gm, "      ").trimStart(),
+  TEAM_JSONLD_MEMBERS: teamMembers
+    .slice(1)
+    .map((m: any) =>
+      JSON.stringify(
+        {
+          "@type": "Person",
+          name: m.name,
+          jobTitle: m.role,
+          ...(m.linkedin ? { url: m.linkedin } : {}),
+          description: m.bio,
+        },
+        null, 2
+      ).replace(/^/gm, "        ").trimStart()
+    )
+    .join(",\n        "),
   SERVICES_OFFER_JSONLD_ENTITIES: services
     .map((s: any) =>
       JSON.stringify(
