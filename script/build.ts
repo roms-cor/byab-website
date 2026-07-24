@@ -101,6 +101,14 @@ async function buildAll() {
     stdio: "inherit",
   });
 
+  // Regenerate the social share card from the current logo + brand colors so
+  // it can never go stale. Runs before the client build because Vite copies
+  // client/public into dist/public.
+  console.log("generating share card (og-image)...");
+  execSync(`npx tsx "${resolve(scriptDir, "generate-og-image.ts")}"`, {
+    stdio: "inherit",
+  });
+
   // One set of compile-time constants shared by the client and prerender
   // builds so the footer version line is identical in both renders.
   const define = buildDefines();
