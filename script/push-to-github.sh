@@ -41,7 +41,7 @@ git config user.name "Replit Publish"
 
 find . -maxdepth 1 -not -name '.git' -not -name '.' -exec rm -rf {} +
 
-for item in .github .gitignore .replit CHANGELOG.md CNAME attached_assets client cliff.toml content server shared script components.json drizzle.config.ts eslint.config.js package.json package-lock.json postcss.config.js replit.md tailwind.config.ts tsconfig.json vite.config.ts generated-icon.png; do
+for item in .github .gitignore .replit CHANGELOG.md CNAME CNAME.template TEMPLATE.md attached_assets client cliff.toml content server shared script components.json drizzle.config.ts eslint.config.js package.json package-lock.json postcss.config.js replit.md tailwind.config.ts tsconfig.json vite.config.ts generated-icon.png; do
   [ -e "${WORKSPACE}/$item" ] && cp -r "${WORKSPACE}/$item" .
 done
 
