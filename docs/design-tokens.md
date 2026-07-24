@@ -9,7 +9,7 @@ values are reachable three ways:
 | Consumer | How it reads a token |
 | --- | --- |
 | Tailwind utility classes | `text-gray-450`, `bg-card`, `border-border/50` (opacity modifiers work — values are literals) |
-| CSS / vendor `ui/` via `var(--…)` | `color: var(--gray-450)`, `shadow-[0_0_0_1px_var(--sidebar-border)]` (page code must use utility classes — see ESLint note below) |
+| CSS / vendor `ui/` via `var(--…)` | `color: var(--gray-450)`, `0 8px 40px var(--black-alpha-10)` (page code must use utility classes — see ESLint note below) |
 | `/design` page resolver | computes hex at runtime from the same CSS variables |
 
 Non-color variables (shadows, radius, elevate system) and **derived** colors
@@ -73,8 +73,6 @@ wiring. Hex equivalents shown for reference.
 | `muted` / `-foreground` | `hsl(0 0% 94%)` / `hsl(0 0% 40%)` | `#F0F0F0` / `#666666` | Muted surfaces / body text |
 | `accent` / `-foreground` | `hsl(0 0% 96%)` / `hsl(0 0% 0%)` | `#F5F5F5` / `#000000` | Hover/selected surfaces |
 | `destructive` / `-foreground` | `hsl(0 72% 51%)` / `hsl(0 0% 98%)` | `#DC2828` / `#FAFAFA` | Destructive UI (shadcn) |
-| `chart-1…5` | `hsl(0 0% 20/35/50/65/80%)` | `#333333`→`#CCCCCC` | Chart palette (grayscale) |
-| `sidebar*` | see `tailwind.config.ts` | — | shadcn sidebar scaffold |
 
 ### ⚠️ Exact-value traps (deliberate near-misses)
 
@@ -96,18 +94,13 @@ overlays/shadows on light surfaces (`black-alpha-*`).
 | `white-alpha-08` | `rgba(255,255,255,0.08)` | `black-alpha-04` | `rgba(0,0,0,0.04)` |
 | | | `black-alpha-02` | `rgba(0,0,0,0.02)` |
 
-## Status colors
-
-`status-online` `rgb(34 197 94)` · `status-away` `rgb(245 158 11)` ·
-`status-busy` `rgb(239 68 68)` · `status-offline` `rgb(156 163 175)` (avatar dots).
-
 ## Derived interaction tokens (defined in `client/src/index.css`)
 
 Computed with CSS relative color syntax from the emitted token vars — these are
 formulas, not stored colors, so they stay in CSS:
 
 - `--primary-border`, `--secondary-border`, `--muted-border`, `--accent-border`,
-  `--destructive-border`, `--sidebar-primary-border`, `--sidebar-accent-border`
+  `--destructive-border`
   — each is `hsl(from var(--token) h s calc(l + var(--opaque-button-border-intensity)) / alpha)`
   with a plain `var(--token)` fallback for older browsers.
 - Elevate system: `--elevate-1` `rgba(0,0,0,.03)`, `--elevate-2` `rgba(0,0,0,.08)`,
@@ -205,7 +198,7 @@ nothing toggles the class and Tailwind utilities compile to light literals.
 ## Subframe import notes
 
 1. **Import your theme** → point it at `tailwind.config.ts`; every color above is
-   a literal value there (no `var()` indirection except the seven derived
+   a literal value there (no `var()` indirection except the five derived
    `*-border` interaction colors, which Subframe can ignore).
 2. **Design Guidelines doc** → this file is the palette/typography/spacing/radius
    reference to paste from; the live `/design` page shows the same values

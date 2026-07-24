@@ -66,28 +66,6 @@ const tokens = {
     DEFAULT: "hsl(0 72% 51%)", // #DC2828 — deliberately ≠ red-600 (#DC2626)
     foreground: "hsl(0 0% 98%)", // #FAFAFA
   },
-  chart: {
-    "1": "hsl(0 0% 20%)",
-    "2": "hsl(0 0% 35%)",
-    "3": "hsl(0 0% 50%)",
-    "4": "hsl(0 0% 65%)",
-    "5": "hsl(0 0% 80%)",
-  },
-  sidebar: {
-    DEFAULT: "hsl(0 0% 96%)",
-    foreground: "hsl(0 0% 0%)",
-    border: "hsl(0 0% 90%)",
-    ring: "hsl(0 0% 0%)",
-  },
-  "sidebar-primary": {
-    DEFAULT: "hsl(0 0% 0%)",
-    foreground: "hsl(0 0% 100%)",
-  },
-  "sidebar-accent": {
-    DEFAULT: "hsl(0 0% 93%)", // #EDEDED
-    foreground: "hsl(0 0% 0%)",
-  },
-
   /* — Brand grayscale, ordered by lightness (50 lightest → 900 darkest).
        In-between stops keep exact historical values; see docs/design-tokens.md
        for the old-name mapping table. — */
@@ -130,14 +108,6 @@ const tokens = {
     "04": "rgba(0,0,0,0.04)",
     "02": "rgba(0,0,0,0.02)",
   },
-
-  /* — Status indicator colors (avatar status dots) — */
-  status: {
-    online: "rgb(34 197 94)",
-    away: "rgb(245 158 11)",
-    busy: "rgb(239 68 68)",
-    offline: "rgb(156 163 175)",
-  },
 } satisfies TokenTree;
 
 /** Flatten the token tree into `--name[-key]` CSS custom properties. */
@@ -178,8 +148,6 @@ export default {
         muted: { ...tokens.muted, border: "var(--muted-border)" },
         accent: { ...tokens.accent, border: "var(--accent-border)" },
         destructive: { ...tokens.destructive, border: "var(--destructive-border)" },
-        "sidebar-primary": { ...tokens["sidebar-primary"], border: "var(--sidebar-primary-border)" },
-        "sidebar-accent": { ...tokens["sidebar-accent"], border: "var(--sidebar-accent-border)" },
       },
       fontFamily: {
         sans: ["'Inter'", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
@@ -225,20 +193,6 @@ export default {
       },
       transitionDelay: {
         60: "60ms", // TeamSlider role-line crossfade stagger
-      },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },

@@ -9,8 +9,13 @@ export default function ComingSoon() {
     document.title = `${siteConfig.name} — Coming Soon`;
     const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute("content", `${siteConfig.name} (${siteConfig.shortName}) — Operations, transformation, and growth consultancy for founders and managing partners since 2005. Our new site is coming soon.`);
-    const robots = document.querySelector('meta[name="robots"]');
-    if (robots) robots.setAttribute("content", "index, follow");
+    let robots = document.querySelector('meta[name="robots"]');
+    if (!robots) {
+      robots = document.createElement("meta");
+      robots.setAttribute("name", "robots");
+      document.head.appendChild(robots);
+    }
+    robots.setAttribute("content", "noindex, nofollow");
   }, []);
 
   return (

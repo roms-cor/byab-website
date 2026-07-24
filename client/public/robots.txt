@@ -2,12 +2,15 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /design
+Disallow: /coming-soon
 
 User-agent: Googlebot
 Allow: /
+Disallow: /coming-soon
 
 User-agent: Bingbot
 Allow: /
+Disallow: /coming-soon
 
 User-agent: GPTBot
 Allow: /
