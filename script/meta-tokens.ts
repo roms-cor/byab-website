@@ -29,7 +29,11 @@ const { teamMembers } = await import("../content/team.js").catch(() => import(".
 const { stats } = await import("../content/stats.js").catch(() => import("../content/stats.ts" as any));
 const { engagements } = await import("../content/work.js").catch(() => import("../content/work.ts" as any));
 const { testimonial } = await import("../content/testimonial.js").catch(() => import("../content/testimonial.ts" as any));
-const { faq } = await import("../content/faq.js").catch(() => import("../content/faq.ts" as any));
+const { resolvedFaq, servicesInline } = await import("../content/faq.js").catch(() => import("../content/faq.ts" as any));
+
+/** Re-exported for validate-seo.ts — resolved in content/faq.ts, the single source of truth. */
+export { resolvedFaq };
+export type ResolvedFaqItem = { question: string; answer: string };
 
 // timeline.tsx contains JSX (not importable under plain tsx without a React
 // pragma) — extract the plain-string fields from source instead.
@@ -58,8 +62,12 @@ const buildDateISO = now.toISOString().slice(0, 10); // UTC YYYY-MM-DD
 const buildYear = String(now.getUTCFullYear());
 const buildMonthYear = now.toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" });
 
+// hreflang: only the default locale + x-default. Other entries in
+// cfg.locales feed knowsLanguage / og:locale:alternate, but until a dedicated
+// translated URL exists we must not emit hreflang alternates that point at
+// the same page (Google treats hreflang to an untranslated URL as incorrect).
 const hreflangLinks = [
-  ...cfg.locales.map((locale: string) => `<link rel="alternate" hreflang="${locale}" href="${cfg.url}" />`),
+  `<link rel="alternate" hreflang="${cfg.locales[0]}" href="${cfg.url}" />`,
   `<link rel="alternate" hreflang="x-default" href="${cfg.url}" />`,
 ].join("\n    ");
 
@@ -105,19 +113,8 @@ export function resolveBase(text: string): string {
 }
 
 // ── Composed sections (fully resolved) ───────────────────────────────────────
-// Inline services summary, usable inside FAQ answers.
-const servicesInline = services
-  .map((s: any, i: number) => `(${i + 1}) ${s.title} — ${s.description}`)
-  .join(" ");
-
-/** Resolve base tokens + {{SERVICES_INLINE}} inside FAQ copy. */
-const resolveFaq = (text: string) =>
-  resolveBase(text.replaceAll("{{SERVICES_INLINE}}", servicesInline));
-
-/** FAQ with all tokens resolved — also used by validate-seo.ts. */
-export const resolvedFaq: { question: string; answer: string }[] = faq.map(
-  (f: any) => ({ question: resolveFaq(f.question), answer: resolveFaq(f.answer) })
-);
+// FAQ + inline services summary now resolve in content/faq.ts (shared with
+// the visible homepage FAQ section) — imported above.
 
 const composed: Record<string, string> = {
   SERVICES_INLINE: servicesInline,

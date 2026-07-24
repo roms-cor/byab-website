@@ -177,7 +177,8 @@
         { "@type": "ListItem", "position": 3, "name": "Track Record", "item": "{{SITE_URL}}#work" },
         { "@type": "ListItem", "position": 4, "name": "Team", "item": "{{SITE_URL}}#team" },
         { "@type": "ListItem", "position": 5, "name": "Story", "item": "{{SITE_URL}}#story" },
-        { "@type": "ListItem", "position": 6, "name": "Contact", "item": "{{SITE_URL}}#contact" }
+        { "@type": "ListItem", "position": 6, "name": "FAQ", "item": "{{SITE_URL}}#faq" },
+        { "@type": "ListItem", "position": 7, "name": "Contact", "item": "{{SITE_URL}}#contact" }
       ]
     }
     </script>
@@ -211,6 +212,12 @@
           "name": "Story",
           "description": "Company history from 2005 founding by Cécile Noiriel to the current four-person consultancy",
           "url": "{{SITE_URL}}#story"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "FAQ",
+          "description": "Frequently asked questions — who we are, services, founders, locations, track record, and how we differ",
+          "url": "{{SITE_URL}}#faq"
         },
         {
           "@type": "SiteNavigationElement",

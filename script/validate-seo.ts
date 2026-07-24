@@ -162,7 +162,10 @@ async function checkHtml(html: string) {
       (hreflangs[lang] ??= []).push(href);
     }
   }
-  const expectedLangs = [...cfg.locales, "x-default"];
+  // Only the default locale + x-default: no translated URLs exist yet, so
+  // hreflang alternates for other locales must not be emitted (they would
+  // point at an untranslated page — see meta-tokens.ts).
+  const expectedLangs = [cfg.locales[0], "x-default"];
   for (const lang of expectedLangs) {
     const hrefs = hreflangs[lang] ?? [];
     if (hrefs.length !== 1) fail(`hreflang "${lang}": expected exactly 1 link, found ${hrefs.length}`);
@@ -294,6 +297,12 @@ async function checkHtml(html: string) {
   for (const y of timelineYears) needContent("timeline year", y);
   needContent("testimonial quote", testimonial.quote.slice(0, 80));
   needContent("testimonial author", testimonial.author);
+  // Google requires FAQPage content to be visible on the page — every
+  // question and answer from content/faq.ts must be in the prerendered HTML.
+  for (const f of resolvedFaq) {
+    needContent("FAQ question", f.question);
+    needContent(`FAQ answer (${shorten(f.question, 40)})`, f.answer.slice(0, 80));
+  }
 
   const h1s = body.match(/<h1[\s>]/g) ?? [];
   check(h1s.length === 1, `expected exactly one <h1> in the page, found ${h1s.length}`);

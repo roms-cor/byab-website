@@ -1,18 +1,58 @@
 /**
  * Frequently Asked Questions — single source of truth.
  *
- * Used by script/meta-tokens.ts to generate:
- *   - the FAQPage JSON-LD block in client/index.html
- *   - the "Frequently Asked Questions" sections of llms.txt and llms-full.txt
+ * Used by:
+ *   - client/src/pages/home.tsx (visible FAQ section, via `resolvedFaq`)
+ *   - script/meta-tokens.ts to generate:
+ *     - the FAQPage JSON-LD block in client/index.html
+ *     - the "Frequently Asked Questions" sections of llms.txt and llms-full.txt
+ * Both consume the same `resolvedFaq` below, so the visible section and the
+ * structured data can never diverge (Google requires FAQPage content to be
+ * visible on the page).
  *
  * Questions and answers may contain {{TOKENS}} from site.config
  * ({{SITE_NAME}}, {{SITE_SHORT_NAME}}, {{SITE_ADDRESS_FULL}}, {{BUILD_YEAR}}…)
  * plus {{SERVICES_INLINE}}, which is composed automatically from
  * content/services.ts so the services answer can never go stale.
  */
+import { siteConfig } from "./site.config";
+import { services } from "./services";
+
 export interface FaqItem {
   question: string;
   answer: string;
+}
+
+/** Inline services summary, usable inside FAQ answers via {{SERVICES_INLINE}}. */
+export const servicesInline = services
+  .map((s, i) => `(${i + 1}) ${s.title} — ${s.description}`)
+  .join(" ");
+
+const tokenValues: Record<string, string> = {
+  SITE_NAME: siteConfig.name,
+  SITE_SHORT_NAME: siteConfig.shortName,
+  SITE_DOMAIN: siteConfig.domain,
+  SITE_URL: siteConfig.url,
+  SITE_EMAIL: siteConfig.email,
+  SLOGAN: siteConfig.slogan,
+  SITE_LOCATIONS: siteConfig.locations,
+  SITE_ADDRESS_FULL: `${siteConfig.address.street}, ${siteConfig.address.postalCode} ${siteConfig.address.city}, ${siteConfig.address.country}`,
+  BUILD_YEAR: String(new Date().getFullYear()),
+  SERVICES_INLINE: servicesInline,
+};
+
+function resolveFaqText(text: string): string {
+  const out = Object.entries(tokenValues).reduce(
+    (t, [key, value]) => t.replaceAll(`{{${key}}}`, value),
+    text
+  );
+  const leftover = out.match(/\{\{[A-Z_]+\}\}/g);
+  if (leftover) {
+    throw new Error(
+      `content/faq.ts: unresolved token(s) ${[...new Set(leftover)].join(", ")} — add them to tokenValues in content/faq.ts`
+    );
+  }
+  return out;
 }
 
 export const faq: FaqItem[] = [
@@ -51,3 +91,12 @@ export const faq: FaqItem[] = [
       "{{SITE_NAME}} is neither. It is a senior, multi-disciplinary team of four that embeds into client operations. No juniors on client work — every engagement is handled by founders and senior operators directly. No 200-page reports that collect dust. {{SITE_NAME}} operates: it doesn't just advise. Self-funded since 2005, 57% profitability, 0€ debt. The craft model, chosen deliberately.",
   },
 ];
+
+/**
+ * FAQ with all {{TOKENS}} resolved — the shared source for the visible
+ * homepage section, the FAQPage JSON-LD and the llms*.txt sections.
+ */
+export const resolvedFaq: FaqItem[] = faq.map((f) => ({
+  question: resolveFaqText(f.question),
+  answer: resolveFaqText(f.answer),
+}));
