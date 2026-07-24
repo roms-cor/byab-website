@@ -9,12 +9,18 @@ values are reachable three ways:
 | Consumer | How it reads a token |
 | --- | --- |
 | Tailwind utility classes | `text-gray-450`, `bg-card`, `border-border/50` (opacity modifiers work — values are literals) |
-| Inline styles / arbitrary values | `style={{ color: "var(--gray-450)" }}`, `shadow-[0_0_0_1px_var(--sidebar-border)]` |
+| CSS / vendor `ui/` via `var(--…)` | `color: var(--gray-450)`, `shadow-[0_0_0_1px_var(--sidebar-border)]` (page code must use utility classes — see ESLint note below) |
 | `/design` page resolver | computes hex at runtime from the same CSS variables |
 
 Non-color variables (shadows, radius, elevate system) and **derived** colors
 (`--primary-border` etc., CSS relative color syntax) live in `client/src/index.css`.
-ESLint forbids raw color literals in `client/src` and `content` (see `eslint.config.js`).
+ESLint enforces both guards (see `eslint.config.js`): raw color literals are
+forbidden in `client/src` and `content`, and inline `style={{…}}` props are
+forbidden in `client/src/pages/**`, `client/src/sections/**` and `content/**` —
+styling must be Tailwind token classes. Irreducibly dynamic values use an
+explicit `// eslint-disable-next-line no-restricted-syntax -- <reason>`
+(today: the TeamSlider orbit `--thumb-angle` CSS variable and the /design
+type-scale & spacing previews that render token data tables).
 
 ---
 
@@ -153,9 +159,42 @@ follows the 8px multiples):
 ## Border radius
 
 - **8px** — default corner rounding (cards, buttons, images; `--radius: .5rem`)
+- **10px** (`rounded-button`) — primary CTA buttons (hero, contact form, demos)
 - **9999px (pill)** — header CTA
 - **0px** — secondary/ghost buttons (sharp)
 - shadcn utility mapping (`tailwind.config.ts`): `rounded-lg` 9px · `rounded-md` 6px · `rounded-sm` 3px
+
+## Named non-color tokens (`tailwind.config.ts`)
+
+Recurring "magic values" promoted to named theme tokens — use these instead of
+arbitrary values:
+
+| Token | Class | Value | Usage |
+| --- | --- | --- | --- |
+| fontSize `hero` / `hero-lg` | `text-hero` / `lg:text-hero-lg` | 70px / 80px | Hero h1 display size |
+| fontSize `2xs` | `text-2xs` | 11px | Footer meta lines, skill badges |
+| fontSize `3xs` | `text-3xs` | 10px | Footer version line, stat subtexts |
+| letterSpacing `eyebrow` | `tracking-eyebrow` | 0.2em | Section eyebrow labels |
+| letterSpacing `label` | `tracking-label` | 0.15em | Uppercase panel/footer labels |
+| maxWidth `container` | `max-w-container` | 1200px | Site content column |
+| maxWidth `container-wide` | `max-w-container-wide` | 1400px | /design page shell |
+| spacing `header` | `h-header`, `top-header` | 72px | Fixed header height + mobile-nav offset |
+| borderRadius `button` | `rounded-button` | 10px | Primary CTA corner rounding |
+| boxShadow `slider-photo` | `shadow-slider-photo` | 0 8px 40px `black-alpha-10` | TeamSlider active portrait |
+| boxShadow `slider-thumb` | `shadow-slider-thumb` | 0 4px 12px `black-alpha-08` | TeamSlider orbit thumbnails |
+| transitionDuration `400` | `duration-400` | 400ms | TeamSlider orbit-thumb hover scale |
+| transitionDelay `60` | `delay-60` | 60ms | TeamSlider role-line crossfade stagger |
+
+`duration-400`/`delay-60` are named tokens (not `duration-[400ms]` arbitraries)
+because the animate plugin also registers `duration-*`/`delay-*` for
+`animation-*` — arbitrary time candidates are ambiguous and get silently
+dropped by Tailwind.
+
+These fontSize tokens are plain strings (no line-height tuple) so they emit
+only `font-size`, exactly like the arbitrary values they replaced. One-off
+dimensions (slider geometry such as `w-[260px]`/`-inset-[34px]`, logo heights,
+the `max-w-[800px]` testimonial measure) deliberately stay as arbitrary values
+at their single call site.
 
 ## Dark mode status
 

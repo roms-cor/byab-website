@@ -26,7 +26,7 @@ export const timeline: TimelineEntry[] = [
     photoAlt: "Cécile Noiriel",
     content: (
       <>
-        <p className="text-sm sm:text-base leading-relaxed" style={{ color: "var(--muted-foreground)" }}>
+        <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
           On April 1, 2005,{" "}
           <a href="https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-cecile-linkedin">
             Cécile Noiriel
@@ -37,7 +37,7 @@ export const timeline: TimelineEntry[] = [
           </a>
           , registered under SIREN 481 631 471. The mission: operational and commercial organization support for SMEs — because founders don't lack courage, they lack time and structure to execute.
         </p>
-        <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "var(--muted-foreground)" }}>
+        <p className="text-sm sm:text-base leading-relaxed mt-3 text-muted-foreground">
           From day one,{" "}
           <a href="https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab-figaro">
             Because You Are Busy
@@ -60,7 +60,7 @@ export const timeline: TimelineEntry[] = [
     photoAlt: "Anne Grosz",
     content: (
       <>
-        <p className="text-sm sm:text-base leading-relaxed" style={{ color: "var(--muted-foreground)" }}>
+        <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
           Ten years after the original founding,{" "}
           <a href="https://www.linkedin.com/in/annegrosz" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-anne-linkedin">
             Anne Grosz
@@ -71,7 +71,7 @@ export const timeline: TimelineEntry[] = [
           </a>{" "}
           (SIREN 814 783 056), registered November 20, 2015. Specialization: externalized general secretariat for law firms and SMEs.
         </p>
-        <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "var(--muted-foreground)" }}>
+        <p className="text-sm sm:text-base leading-relaxed mt-3 text-muted-foreground">
           Anne brings eight years as Secretary General and CFO at{" "}
           <a href="https://www.infocession.fr/avocats/vatier-associes" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-vatier">
             Vatier & Associés
@@ -93,7 +93,7 @@ export const timeline: TimelineEntry[] = [
     photo: null,
     photoAlt: null,
     content: (
-      <p className="text-sm sm:text-base leading-relaxed" style={{ color: "var(--muted-foreground)" }}>
+      <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
         Because You Are Busy evolves legally — from SAS to SARL, then to EI for greater operational simplicity. Accounts are systematically filed with a confidentiality declaration.{" "}
         <a href="https://www.pappers.fr/entreprise/because-you-are-busy-814783056" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab2-pappers">
           The craft model wins over the startup model
@@ -111,14 +111,14 @@ export const timeline: TimelineEntry[] = [
     photoAlt: "Georges Grosz",
     content: (
       <>
-        <p className="text-sm sm:text-base leading-relaxed" style={{ color: "var(--muted-foreground)" }}>
+        <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
           On July 4, 2025,{" "}
           <a href="https://www.linkedin.com/in/georges-grosz-8aa9613" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-georges-linkedin">
             Georges Grosz
           </a>{" "}
           joins Because You Are Busy as co-manager alongside Anne. His background: 22+ years as Senior Executive Consultant at CGI and professor of information systems at Université Paris 1 Panthéon-Sorbonne — decades of systems architecture and data governance for major French organizations.
         </p>
-        <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "var(--muted-foreground)" }}>
+        <p className="text-sm sm:text-base leading-relaxed mt-3 text-muted-foreground">
           With Georges, Because You Are Busy becomes a full transformation co-pilot — capable of rebuilding systems architecture, deploying data governance frameworks, and turning operational chaos into measurable, decision-ready clarity at any scale.
         </p>
       </>
@@ -133,7 +133,7 @@ export const timeline: TimelineEntry[] = [
     photoAlt: "Romain Cornu",
     content: (
       <>
-        <p className="text-sm sm:text-base leading-relaxed" style={{ color: "var(--muted-foreground)" }}>
+        <p className="text-sm sm:text-base leading-relaxed text-muted-foreground">
           At the same time, another path converges:{" "}
           <a href="https://fr.linkedin.com/in/romaincornu" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-romain-linkedin">
             Romain Cornu
@@ -148,7 +148,7 @@ export const timeline: TimelineEntry[] = [
           </a>
           .
         </p>
-        <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "var(--muted-foreground)" }}>
+        <p className="text-sm sm:text-base leading-relaxed mt-3 text-muted-foreground">
           Romain joins Because You Are Busy to build the growth engineering capability: ICP definition, outbound infrastructure, acquisition funnels, and the revenue metrics that make commercial growth predictable. When he joins, the Because You Are Busy puzzle is complete.
         </p>
       </>

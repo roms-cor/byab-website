@@ -49,7 +49,7 @@ function resolveFaqText(text: string): string {
   const leftover = out.match(/\{\{[A-Z_]+\}\}/g);
   if (leftover) {
     throw new Error(
-      `content/faq.ts: unresolved token(s) ${[...new Set(leftover)].join(", ")} — add them to tokenValues in content/faq.ts`
+      `content/faq.ts: unresolved token(s) ${Array.from(new Set(leftover)).join(", ")} — add them to tokenValues in content/faq.ts`
     );
   }
   return out;

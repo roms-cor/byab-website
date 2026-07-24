@@ -157,13 +157,16 @@ function tokenCssVars(tree: TokenTree): Record<string, string> {
 
 export default {
   darkMode: ["class"],
-  content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
+  /* content/ is scanned too: content/timeline.tsx JSX is prerendered into the
+     homepage, so its Tailwind classes must be seen by the scanner. */
+  content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}", "./content/**/*.tsx"],
   theme: {
     extend: {
       borderRadius: {
         lg: ".5625rem", /* 9px */
         md: ".375rem", /* 6px */
         sm: ".1875rem", /* 3px */
+        button: "10px", /* primary CTA corner rounding */
       },
       colors: {
         ...tokens,
@@ -182,6 +185,46 @@ export default {
         sans: ["'Inter'", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
         serif: ["Georgia", "serif"],
         mono: ["'JetBrains Mono'", "monospace"],
+      },
+      /* — Named non-color tokens: recurring "magic numbers" promoted to theme
+           tokens so pages compose token classes instead of arbitrary values.
+           One-off dimensions (slider geometry, logo heights, the 800px
+           testimonial measure) deliberately stay as arbitrary values at their
+           single call site. fontSize values are plain strings on purpose:
+           they emit ONLY font-size, exactly like the text-[70px]-style
+           arbitraries they replace (no line-height side effects). — */
+      fontSize: {
+        "3xs": "10px", // footer version line, stat subtexts
+        "2xs": "11px", // footer meta lines, skill badges
+        hero: "70px", // hero h1 display size (base)
+        "hero-lg": "80px", // hero h1 display size (lg+)
+      },
+      letterSpacing: {
+        label: "0.15em", // uppercase panel/footer labels
+        eyebrow: "0.2em", // section eyebrow labels
+      },
+      maxWidth: {
+        container: "1200px", // site content column
+        "container-wide": "1400px", // /design page shell
+      },
+      spacing: {
+        header: "72px", // fixed header height (h-header) + mobile-nav offset (top-header)
+      },
+      boxShadow: {
+        "slider-photo": "0 8px 40px var(--black-alpha-10)", // TeamSlider active portrait
+        "slider-thumb": "0 4px 12px var(--black-alpha-08)", // TeamSlider orbit thumbnails
+      },
+      /* Named (not arbitrary) on purpose: the animate plugin also registers
+         duration and delay utilities for animation properties, which makes arbitrary
+         candidates like duration-[400ms] ambiguous — Tailwind silently drops
+         them. Named scale values compile for both properties; the stray
+         animation-* twin is harmless because later plain-CSS animation
+         shorthands (.slider-orbit-reverse etc.) win the cascade. */
+      transitionDuration: {
+        400: "400ms", // TeamSlider orbit-thumb hover scale
+      },
+      transitionDelay: {
+        60: "60ms", // TeamSlider role-line crossfade stagger
       },
       keyframes: {
         "accordion-down": {

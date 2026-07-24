@@ -11,7 +11,7 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - **Contact form:** POST /api/contact saves submissions to `contact_submissions` table, then opens visitor's mailto: client pre-filled for hello@becausebusy.com. Response is minimal (`{ ok, id }`) — no PII in API responses/logs
 - Semantic HTML5 throughout
 - Proper heading hierarchy (h1 > h2 > h3)
-- **Build-time injection:** `script/build-defines.ts` (shared by `vite.config.ts` and the prerender step) defines `__APP_VERSION__` (from package.json), `__BUILD_DATE__` (full ISO datetime at build/publish time), and `__GIT_COMMIT_DATE__` (ISO datetime of the latest git commit). Both timestamps are displayed in the footer bottom bar (text-[10px], color #BBBBBB) as "Published {date} {time} · Commit {date} {time}". **This footer version line must always be preserved** — it is a persistent project requirement.
+- **Build-time injection:** `script/build-defines.ts` (shared by `vite.config.ts` and the prerender step) defines `__APP_VERSION__` (from package.json), `__BUILD_DATE__` (full ISO datetime at build/publish time), and `__GIT_COMMIT_DATE__` (ISO datetime of the latest git commit). Both timestamps are displayed in the footer bottom bar (`text-3xs` = 10px, `text-gray-250` #BBBBBB) as "Published {date} {time} · Commit {date} {time}". **This footer version line must always be preserved** — it is a persistent project requirement.
 - **Image optimization:** All images converted to WebP at 256px (hero/team) and 128px (orbit/story thumbnails), served from `client/public/images/`. Logos resized to 504×168 (2x retina). Total image payload ~92KB. Lazy loading + decoding="async" on below-fold images, fetchpriority="high" on LCP hero image + header logo.
 - **LCP optimization:** Hero first image renders with opacity:1 and NO CSS transition on initial paint (hasAdvanced ref). LCP image (anne-256.webp) preloaded in `<head>`.
 - **Full build-time prerender:** `script/build.ts` renders the complete homepage (`client/src/entry-prerender.tsx`, renderToString) into `dist/public/index.html` — ~67KB of static HTML. Non-JS crawlers (GPTBot, ClaudeBot, PerplexityBot, CCBot) see the entire page. React replaces it on mount (`createRoot().render`; DOM output is identical so there is no visible flash). The dev server stays client-rendered only.
@@ -24,6 +24,7 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - **Preload hints:** LCP image (anne-256.webp) and header logo preloaded in `<head>`
 - **Auto-push on Publish:** `script/build.ts` runs `script/push-to-github.sh` after building, which syncs the workspace to GitHub `main` using `GITHUB_PAT` (Replit secret). GitHub Actions then auto-deploys to `becausebusy.com`. Replit = staging, Publish = production.
 - **Auto-release:** `.github/workflows/release.yml` uses `TriPSs/conventional-changelog-action` to bump `package.json` version, generate `CHANGELOG.md`, and create a GitHub Release — only when conventional commits (`feat:`, `fix:`) are present. The deploy workflow skips bot-authored commits and `chore(release)` messages to prevent double-deploy loops.
+- **Styling convention (ESLint-enforced):** No inline `style={{…}}` props in `client/src/pages/**`, `client/src/sections/**`, or `content/**` — Tailwind token classes only, so Subframe and the Tailwind scanner can see every style. Recurring sizes have named tokens (`text-hero`, `text-2xs`/`text-3xs`, `h-header`, `max-w-container`, `rounded-button`, `tracking-eyebrow`/`tracking-label`, `shadow-slider-*`, `duration-400`/`delay-60`); see `docs/design-tokens.md`. Irreducibly dynamic values (TeamSlider orbit `--thumb-angle` variable, /design type-scale & spacing previews) carry explicit `eslint-disable` comments. `content/**` is included in the Tailwind content globs because timeline JSX is prerendered into the homepage.
 - **Conventional commits (persistent convention):** All commit messages in this project must follow [Conventional Commits](https://www.conventionalcommits.org/) format:
   - `feat: ...` → minor version bump (new feature)
   - `fix: ...` → patch version bump (bug fix)
@@ -33,7 +34,7 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - **Version sync caveat:** After a GitHub release bumps `package.json` version on GitHub, you must update the version in Replit's `package.json` **before the next deploy**, otherwise the footer will display the old version. `__APP_VERSION__` in `vite.config.ts` reads dynamically from `package.json` at build time — no hardcoding.
 
 ## Homepage Sections (in order)
-1. **Header** — fixed nav (h-[72px]), logo (h-[38px]), anchor links with title attributes (Services, Track Record, Team, Story, Contact), pill-shaped "Get in touch" CTA
+1. **Header** — fixed nav (`h-header` = 72px), logo (h-[38px]), anchor links with title attributes (Services, Track Record, Team, Story, Contact), pill-shaped "Get in touch" CTA
 2. **Hero** — h1 "We run what you can't get to anymore.", subtitle, proof stats row (20 years, 57%, 0€), TeamSlider
 3. **Marquee** — scrolling keyword strip (Organization, Finance, Strategy, Operations, Transformation, Growth, Outbound, Data)
 4. **Pain Recognition** — dark section (#000), 3 numbered pain points with bold leads
@@ -86,8 +87,9 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - `script/build.ts` — build orchestrator (generate-meta → vite → prerender → server → validate-seo → push)
 - `script/validate-seo.ts` — post-build SEO/GEO validation harness (fails the build on violations)
 - `client/src/entry-prerender.tsx` — SSR entry for the build-time homepage prerender
-- `client/src/pages/home.tsx` — Homepage landing page
-- `client/src/pages/components.tsx` — Components page (design system + sections)
+- `client/src/pages/home.tsx` — Homepage: thin ordered assembly of `client/src/sections/home/*` (one file per section)
+- `client/src/pages/components.tsx` — /design page: assembly of `client/src/sections/design/*` blocks (keeps side-nav observer + token resolution)
+- `client/src/sections/` — Presentational section components (home/ + design/); logic lives in hooks (`use-mobile-nav`, `use-contact-form`, `use-team-slider`) so Subframe can replace JSX without touching behavior
 - `client/src/App.tsx` — Router setup (/ and /components)
 - `tailwind.config.ts` — Design-token sheet: every color as a literal value, re-emitted as :root CSS vars (Subframe-importable)
 - `docs/design-tokens.md` — Full token reference (palette + old-name mapping, typography, spacing, radius)

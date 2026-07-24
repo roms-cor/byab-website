@@ -1,6 +1,11 @@
 /**
- * ESLint flat config — single purpose: forbid hardcoded color literals
- * (hex, rgb()/rgba(), hsl()/hsla()) in the app's React sources.
+ * ESLint flat config — two guards that keep styling inside the design system:
+ *
+ *  1. No hardcoded color literals (hex, rgb()/rgba(), hsl()/hsla()) in the
+ *     app's React sources.
+ *  2. No inline `style={{…}}` props in page/section/content sources — Subframe
+ *     and Tailwind's scanner only understand utility classes, so styling must
+ *     be expressed as design-token classes.
  *
  * All raw color values must live in the design-token sheet
  * (tailwind.config.ts), which re-emits every token as a :root CSS variable;
@@ -49,6 +54,27 @@ const noHardcodedColors = [
   },
 ];
 
+/* Inline-style ban for page/section/content code. A later flat-config block
+ * REPLACES (does not merge) a rule's options, so this list re-includes the
+ * color selectors above plus the style-prop selector.
+ * Escape hatch for irreducibly dynamic values: an explicit
+ *   // eslint-disable-next-line no-restricted-syntax -- <reason>
+ * at the call site. Documented exceptions today:
+ *   - client/src/pages/home.tsx — TeamSlider orbit thumbs: the per-thumb
+ *     angle rides a --thumb-angle CSS variable consumed by a static
+ *     [transform:…] class.
+ *   - client/src/pages/components.tsx — type-scale & spacing-scale previews:
+ *     font metrics / bar widths render the design-token data tables.
+ */
+const noInlineStyles = [
+  ...noHardcodedColors,
+  {
+    selector: 'JSXAttribute[name.name="style"]',
+    message:
+      "Inline style prop — use Tailwind token classes (for dynamic values, drive a static class with a CSS variable; eslint-disable with a reason only if irreducibly dynamic).",
+  },
+];
+
 export default [
   {
     files: [
@@ -67,6 +93,16 @@ export default [
     },
     rules: {
       "no-restricted-syntax": noHardcodedColors,
+    },
+  },
+  {
+    files: [
+      "client/src/pages/**/*.tsx",
+      "client/src/sections/**/*.tsx",
+      "content/**/*.tsx",
+    ],
+    rules: {
+      "no-restricted-syntax": noInlineStyles,
     },
   },
 ];
