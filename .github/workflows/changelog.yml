@@ -32,13 +32,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install tsx and git-cliff
+        run: npm install --no-save tsx git-cliff
 
       - name: Generate changelog
-        run: npm run changelog
+        run: npx tsx script/generate-changelog.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

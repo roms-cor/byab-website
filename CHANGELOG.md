@@ -39,7 +39,9 @@ Généré automatiquement avec [git-cliff](https://git-cliff.org).
 
 ### Autres
 
-- Changelog git-cliff : cliff.toml, exemple CHANGELOG.md généré, enrichissement par issues (testé), workflow validation sans commit ([8a122dc](https://github.com/roms-cor/byab-website/commit/8a122dc70284426842d894b43012bf6db712accb))
+- inclure CHANGELOG.md et cliff.toml dans la synchro publish ([ef32631](https://github.com/roms-cor/byab-website/commit/ef326319d704df0693f68e57d99748d3742a83e9))
+- activer le commit automatique du changelog et neutraliser l'écriture concurrente de release.yml ([73e4adb](https://github.com/roms-cor/byab-website/commit/73e4adb23e09d599765d690423f971060330fe94))
+- Changelog git-cliff : cliff.toml, exemple CHANGELOG.md généré, enrichissement par issues (testé), workflow validation sans commit ([83644b9](https://github.com/roms-cor/byab-website/commit/83644b930ab168f9eb3117e4cdfe87c120be9dbe))
 - Add Cécile Noiriel to Organization JSON-LD member array with jobTitle, url, and GEO-optimized description ([837a066](https://github.com/roms-cor/byab-website/commit/837a066b690d129d331557b3e63bc8947f2ef758))
 - Configure project templating and add post-merge hook script ([56ffcb7](https://github.com/roms-cor/byab-website/commit/56ffcb7787429b691cfc0b00b1ceab11180357d3))
 - Organize website content into separate configuration files ([a91d75a](https://github.com/roms-cor/byab-website/commit/a91d75a0f519c271cdb554daa74446184c1107ba))
