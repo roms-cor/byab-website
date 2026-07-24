@@ -33,11 +33,16 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install tsx and git-cliff
-        run: npm install --no-save tsx git-cliff
+      - name: Install git-cliff (binary, sans npm)
+        run: |
+          VERSION="2.13.1"
+          URL="https://github.com/orhun/git-cliff/releases/download/v${VERSION}/git-cliff-${VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+          curl -fsSL "$URL" | tar -xz --strip-components=1 -C /usr/local/bin git-cliff-${VERSION}-x86_64-unknown-linux-gnu/git-cliff
+          git-cliff --version
 
       - name: Generate changelog
-        run: npx tsx script/generate-changelog.ts
+        # npx télécharge tsx à la volée sans passer par npm ci
+        run: npx --yes tsx@latest script/generate-changelog.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
