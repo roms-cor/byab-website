@@ -167,7 +167,7 @@ For team member photos, provide two sizes:
 - `name-256.webp` — 256×256 px, used in the team grid and slider main view
 - `name-128.webp` — 128×128 px, used in the slider thumbnails and timeline
 
-For the OG image, place a 1200×630 PNG at `client/public/og-image.png` and update `ogImage` in `site.config.ts`.
+For the OG image, run `npm run og-image` — it regenerates `client/public/og-image.png` at 1200×630 from `client/public/images/logo-horizontal-black.webp` and the brand colors in `site.config.ts` (`script/generate-og-image.ts`, uses the `sharp` devDependency). Re-run it whenever the logo or brand colors change, then update `ogImage` in `site.config.ts` if the URL changed.
 
 ---
 
@@ -194,7 +194,7 @@ The exact same `npm run build` runs on Replit and in GitHub Actions — no workf
 
 1. Edit every file in `content/` (see §1) — the only code change needed. Services, team bios, stats, track record, company history, and FAQ copy in `llms.txt` / `llms-full.txt` and the FAQPage / OfferCatalog JSON-LD are all generated from `content/` at build time.
 2. Review the remaining template editorial text: the short framing lines in `client/public/llms*.txt.template` (brand promise, tone & voice, competitive differentiation, external reference links) and the team-member `description` lines in the Organization JSON-LD of `client/index.html.template` are written for the current profession.
-3. Replace images in `client/public/images/`, plus `favicon.png` / `favicon-16x16.png` / `favicon-32x32.png` / `apple-touch-icon.png` / `og-image.png` in `client/public/`. Generate `og-image.png` at **1200×630** — the validator warns when the file's real size differs from the declared one.
+3. Replace images in `client/public/images/`, plus `favicon.png` / `favicon-16x16.png` / `favicon-32x32.png` / `apple-touch-icon.png` in `client/public/`. Then regenerate the share card with `npm run og-image` (see §5) — it rebuilds `og-image.png` at **1200×630** from the new logo and brand colors; the validator warns when the file's real size differs from the declared one.
 4. Set the Replit Secrets (`GITHUB_PAT`, `GITHUB_REPO`, `DATABASE_URL`, `SESSION_SECRET`). Note `script/push-to-github.sh` falls back to the original repo slug when `GITHUB_REPO` is unset — always set it for a duplicate.
 5. Grep for leftover strings from the previous brand outside `content/` (old slogan, old acronym, old registry/SIREN links, `<oldacronym>-*.png` asset names). The build's template-safety scan catches the configured brand values case-insensitively, but a duplicate must also make sure no *previous*-brand editorial text survives in `client/src` or the `.template` files (§1 covers the files to edit).
 6. Run `npm run build` — if it passes, the site is fully crawlable and consistent, and every remaining brand reference lives in `content/`.

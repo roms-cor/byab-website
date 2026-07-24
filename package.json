@@ -11,7 +11,8 @@
     "lint": "eslint client/src",
     "changelog": "tsx script/generate-changelog.ts",
     "changelog:test": "tsx script/test-changelog-enrich.ts",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "og-image": "tsx script/generate-og-image.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -104,7 +105,8 @@
     "tailwindcss": "^3.4.17",
     "tsx": "^4.20.5",
     "typescript": "5.6.3",
-    "vite": "^7.3.0"
+    "vite": "^7.3.0",
+    "sharp": "^0.35.3"
   },
   "overrides": {
     "drizzle-kit": {
