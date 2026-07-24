@@ -33,7 +33,7 @@ export default function ComingSoon() {
 
       <p
         className="text-base sm:text-lg mt-4 text-center max-w-md leading-relaxed"
-        style={{ color: "#666666" }}
+        style={{ color: "hsl(var(--muted-foreground))" }}
         data-testid="text-coming-soon-tagline"
       >
         <strong className="font-semibold text-foreground">{siteConfig.slogan}</strong>, we're building something worth your time.
@@ -42,7 +42,7 @@ export default function ComingSoon() {
       <a
         href={`mailto:${siteConfig.email}`}
         className="inline-flex items-center gap-2 mt-10 px-5 py-2.5 text-sm font-medium rounded-[10px] transition-opacity duration-150 hover:opacity-70"
-        style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
+        style={{ backgroundColor: "hsl(var(--foreground))", color: "hsl(var(--background))" }}
         data-testid="link-coming-soon-contact"
       >
         <Mail className="w-4 h-4" />
@@ -51,14 +51,14 @@ export default function ComingSoon() {
 
       <p
         className="text-[11px] mt-16"
-        style={{ color: "#767676" }}
+        style={{ color: "var(--gray-76)" }}
         data-testid="text-coming-soon-footer"
       >
         Operations, transformation &amp; growth since 2005
         <a 
           href="/home" 
           className="ml-1 opacity-10 underline" 
-          style={{ color: "#767676" }}
+          style={{ color: "var(--gray-76)" }}
           data-testid="link-hidden-home"
         >
           .

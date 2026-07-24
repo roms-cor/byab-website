@@ -29,11 +29,24 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
+      # npm 10.8.x on Node 20 intermittently crashed with "Exit handler never
+      # called!" while still exiting 0, leaving node_modules empty and the
+      # build failing with "tsx: not found". Node 22 ships a fixed npm; the
+      # verify + retry below makes any future silent install failure loud.
       - name: Install dependencies
-        run: npm ci
+        run: |
+          install_and_verify() {
+            npm ci --no-audit --no-fund && npx tsx --version
+          }
+          install_and_verify || {
+            echo "::warning::npm ci failed or left an incomplete node_modules — retrying once"
+            rm -rf node_modules
+            npm cache clean --force
+            install_and_verify
+          }
 
       - name: Build
         run: npm run build

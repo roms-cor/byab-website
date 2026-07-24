@@ -58,6 +58,32 @@
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 
+  /* Brand color tokens — every raw hex/rgba used by the pages lives here.
+     Names encode the value (gray-99 = #999999) so mapping stays unambiguous.
+     Constants (no dark-mode variants), matching the previous inline values. */
+  --gray-1a: #1A1A1A;
+  --gray-33: #333333;
+  --gray-44: #444444;
+  --gray-59: #595959;
+  --gray-76: #767676;
+  --gray-77: #777777;
+  --gray-94: #949494;
+  --gray-99: #999999;
+  --gray-bb: #BBBBBB;
+  --gray-e5: #E5E5E5; /* NOT --border: hsl(0 0% 90%) computes to #E6E6E6 */
+  --red-dc: #DC2626; /* NOT --destructive: hsl(0 72% 51%) computes to #DC2828 */
+  --gray-c0: #C0C0C0;
+  --accent-yellow: #E8E020;
+  --white-alpha-85: rgba(255,255,255,0.85);
+  --white-alpha-50: rgba(255,255,255,0.5);
+  --white-alpha-25: rgba(255,255,255,0.25);
+  --white-alpha-08: rgba(255,255,255,0.08);
+  --black-alpha-10: rgba(0,0,0,0.10);
+  --black-alpha-08: rgba(0,0,0,0.08);
+  --black-alpha-06: rgba(0,0,0,0.06);
+  --black-alpha-04: rgba(0,0,0,0.04);
+  --black-alpha-02: rgba(0,0,0,0.02);
+
 /* Fallback for older browsers */
   --sidebar-primary-border: hsl(var(--sidebar-primary));
   --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);

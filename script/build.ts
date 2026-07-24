@@ -92,6 +92,10 @@ async function prerender(define: Record<string, string>) {
 async function buildAll() {
   await rm("dist", { recursive: true, force: true });
 
+  // Blocking guard: no hardcoded color literals outside the token sheet.
+  console.log("linting (hardcoded-color guard)...");
+  execSync("npx eslint client/src", { stdio: "inherit", cwd: rootDir });
+
   console.log("generating site metadata...");
   execSync(`npx tsx "${resolve(scriptDir, "generate-meta.ts")}"`, {
     stdio: "inherit",
