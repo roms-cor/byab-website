@@ -134,38 +134,7 @@
         "@type": "OfferCatalog",
         "name": "{{SITE_NAME}} Services",
         "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Operational Backbone",
-              "description": "{{SITE_NAME}} externalizes your entire back-office — general secretariat, admin, finance, and compliance — so founders stop drowning in operational detail and start leading. Run by a team with 20+ years of law firm and SME operational experience."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Transformation & Data",
-              "description": "{{SITE_NAME}} rebuilds the systems layer — architecture, project governance, and data strategy — that transforms operational chaos into measurable clarity. Anchored in 22+ years of CGI systems consulting and academic expertise at Université Paris 1 Panthéon-Sorbonne."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Growth Engine",
-              "description": "{{SITE_NAME}} engineers your full commercial pipeline — ICP definition, outbound sequences, acquisition funnels, and revenue metrics — so B2B revenue growth becomes systematic, not accidental. Built on proven playbooks from MerciApp, Clovis, and Datananas."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Legal Practice Ops",
-              "description": "Purpose-built operational support for law firms where precision is non-negotiable. Born from Anne Grosz's 8 years as Secretary General at Vatier & Associés — admin, finance, compliance, and client file management handled with law-firm precision."
-            }
-          }
+          {{SERVICES_OFFER_JSONLD_ENTITIES}}
         ]
       },
       "aggregateRating": {
@@ -193,46 +162,7 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is {{SITE_NAME}}?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "{{SITE_NAME}} ({{SITE_SHORT_NAME}}) is an operations, transformation, and growth consultancy founded in April 2005 by Cécile Noiriel in France. We help founders and managing partners who are too busy to handle everything themselves by externalizing their back-office, rebuilding their systems, and engineering predictable B2B revenue growth. As of {{BUILD_YEAR}}, the team is four senior operators: Cécile Noiriel (founder, 2005), Anne Grosz (operations, 2015), Georges Grosz (transformation & data, co-manager since July 2025), and Romain Cornu (growth engine, 2025–2026)."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What services does {{SITE_NAME}} offer?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "{{SITE_NAME}} offers four core services: (1) Operational Backbone — externalized general secretariat, admin, and finance, run by a team with 20+ years of law firm and SME operational experience; (2) Transformation & Data — systems architecture, project governance, and data strategy anchored in 22+ years of CGI consulting; (3) Growth Engine — outbound infrastructure, acquisition funnels, and predictable commercial pipelines built on proven playbooks from MerciApp, Clovis, and Datananas; (4) Legal Practice Ops — purpose-built support for law firms, born from Anne Grosz's 8 years as Secretary General at Vatier & Associés."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Who founded {{SITE_NAME}}?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "{{SITE_NAME}} was originally founded on April 1, 2005 by Cécile Noiriel as B Y A B (SIREN 481 631 471). In November 2015, Anne Grosz created the second {{SITE_NAME}} entity (SIREN 814 783 056), specializing in externalized general secretariat for law firms and SMEs. Georges Grosz joined as co-manager in July 2025 (22+ years at CGI, professor at Université Paris 1 Panthéon-Sorbonne), and Romain Cornu joined in 2025–2026 as growth engine (ex-MerciApp, Clovis, Datananas)."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Where is {{SITE_NAME}} located?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "{{SITE_NAME}} is based at {{SITE_ADDRESS_STREET}}, {{SITE_ADDRESS_POSTAL}} {{SITE_ADDRESS_CITY}}, {{SITE_ADDRESS_COUNTRY}}, and operates across Paris and La Rochelle. The team works with founders and managing partners across France, primarily in legal practices, B2B SaaS companies, and tech SMEs."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How long has {{SITE_NAME}} been operating, and what is its track record?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "{{SITE_NAME}} has been serving founders and managing partners since April 2005 — over 20 years of continuous, uninterrupted operation. In that time: 57% operating profitability, 0€ external debt raised ever, revenue around 130,000€ at peak. Recent engagements include a French B2B SaaS scale-up (growth engineering, 2025), a national law firm (operations restructuring, 2024), and a tech SME (transformation & data, 2025). A proven model, not a startup experiment."
-          }
-        }
+        {{FAQ_JSONLD_ENTITIES}}
       ]
     }
     </script>

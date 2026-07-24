@@ -28,6 +28,7 @@
  *      the content/ layer (so a duplicate only needs to edit content/).
  */
 import { readFile, readdir } from "fs/promises";
+import { resolvedFaq, timelineEntries } from "./meta-tokens";
 import { join, relative, resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -219,6 +220,13 @@ async function checkHtml(html: string) {
     check(qs.length >= 3, `FAQPage: expected ≥ 3 questions, found ${qs.length}`);
     const broken = qs.filter((q) => !q?.name || !q?.acceptedAnswer?.text);
     check(broken.length === 0, `FAQPage: ${broken.length} question(s) missing name or acceptedAnswer.text`);
+    // Cross-check against content/faq.ts (single source of truth).
+    check(qs.length === resolvedFaq.length, `FAQPage: ${qs.length} question(s) ≠ ${resolvedFaq.length} in content/faq.ts`);
+    resolvedFaq.forEach((f, i) => {
+      const q = qs[i];
+      check(q?.name === f.question, `FAQPage question #${i + 1} "${shorten(String(q?.name ?? ""))}" ≠ content/faq.ts question "${shorten(f.question)}"`);
+      check(q?.acceptedAnswer?.text === f.answer, `FAQPage answer #${i + 1} does not match content/faq.ts (stale FAQ copy)`);
+    });
   }
   let anchorIds: string[] = ["hero"];
   const bc = ldByType["BreadcrumbList"]?.[0];
@@ -363,11 +371,43 @@ else {
   }
 }
 
+// Cross-check the AI-crawler files against the content/ collections so they
+// can never silently go stale when content/ is edited.
+function checkLlmsContent(label: string, text: string) {
+  const need = (what: string, needle: string) => {
+    if (!needle) return;
+    check(text.includes(needle), `${label} missing ${what}: "${shorten(needle)}"`);
+  };
+  for (const s of services) {
+    need("service title", s.title);
+    need(`service description (${s.title})`, s.description.slice(0, 80));
+  }
+  for (const m of teamMembers) {
+    need("team member name", m.name);
+    need(`team member bio (${m.name})`, m.bio.slice(0, 80));
+    if (m.linkedin) need(`team member LinkedIn (${m.name})`, m.linkedin);
+  }
+  for (const s of stats) need("stat label", s.label);
+  for (const e of engagements) {
+    need("engagement title", e.title);
+    need(`engagement description (${e.title})`, e.description.slice(0, 80));
+  }
+  for (const t of timelineEntries) {
+    need(`history year (${t.year})`, t.year);
+    need(`history summary (${t.year})`, t.summary.slice(0, 80));
+  }
+  for (const f of resolvedFaq) {
+    need("FAQ question", f.question);
+    need(`FAQ answer (${shorten(f.question, 40)})`, f.answer.slice(0, 80));
+  }
+}
+
 const llms = await readOrNull(resolve(distPub, "llms.txt"));
 if (llms === null) fail("dist/public/llms.txt is missing");
 else {
   check(llms.includes(cfg.name), "llms.txt does not mention the site name");
   check(llms.includes(cfg.email), "llms.txt does not contain the contact email");
+  checkLlmsContent("llms.txt", llms);
 }
 
 const llmsFull = await readOrNull(resolve(distPub, "llms-full.txt"));
@@ -375,6 +415,8 @@ if (llmsFull === null) fail("dist/public/llms-full.txt is missing");
 else {
   check(llmsFull.includes(cfg.name), "llms-full.txt does not mention the site name");
   check(llmsFull.includes(cfg.domain), "llms-full.txt does not mention the domain");
+  checkLlmsContent("llms-full.txt", llmsFull);
+  check(llmsFull.includes(testimonial.quote), "llms-full.txt missing the testimonial quote");
 }
 
 const cname = await readOrNull(resolve(root, "CNAME"));

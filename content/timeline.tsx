@@ -3,6 +3,12 @@ import type { ReactNode } from "react";
 export interface TimelineEntry {
   year: string;
   title: string;
+  /**
+   * Plain-text one-paragraph summary of the entry (no JSX, no double quotes).
+   * Used at build time to generate the Company History sections of
+   * llms.txt / llms-full.txt — keep it in sync with `content` below.
+   */
+  summary: string;
   /** Small photo (128px), absolute public path, or null for no photo */
   photo: string | null;
   photoAlt: string | null;
@@ -14,6 +20,8 @@ export const timeline: TimelineEntry[] = [
   {
     year: "2005",
     title: "The founding conviction",
+    summary:
+      "Because You Are Busy (B Y A B, SIREN 481 631 471) created April 1, 2005 by Cécile Noiriel. Ultra-lean, ultra-profitable structure — revenue ~130,000€, 57%+ operating profitability, zero external debt raised, ever.",
     photo: "/images/cecile-128.webp",
     photoAlt: "Cécile Noiriel",
     content: (
@@ -46,6 +54,8 @@ export const timeline: TimelineEntry[] = [
   {
     year: "2015",
     title: "Specialization: law firms & SMEs",
+    summary:
+      "Second Because You Are Busy entity (SIREN 814 783 056) created November 20, 2015 by Anne Grosz — externalized general secretariat for law firms and SMEs, after 8 years as Secretary General & CFO at Vatier & Associés.",
     photo: "/images/anne-128.webp",
     photoAlt: "Anne Grosz",
     content: (
@@ -78,6 +88,8 @@ export const timeline: TimelineEntry[] = [
   {
     year: "2020",
     title: "Consolidation: craft over startup",
+    summary:
+      "Legal evolution from SAS to SARL, then EI. Craft model over startup model — confidential accounts, trust-based client relationships.",
     photo: null,
     photoAlt: null,
     content: (
@@ -93,6 +105,8 @@ export const timeline: TimelineEntry[] = [
   {
     year: "2025",
     title: "Georges: the transformation & data layer",
+    summary:
+      "Georges Grosz joins Because You Are Busy as co-manager on July 4, 2025 — transformation & data layer added. 22+ years at CGI, professor at Université Paris 1 Panthéon-Sorbonne.",
     photo: "/images/georges-128.webp",
     photoAlt: "Georges Grosz",
     content: (
@@ -113,6 +127,8 @@ export const timeline: TimelineEntry[] = [
   {
     year: "2025–26",
     title: "Romain: the growth machine",
+    summary:
+      "Romain Cornu joins Because You Are Busy to build the growth engineering capability: ICP definition, outbound funnels, and revenue metrics. Nearly 6 years at MerciApp, 4+ years Head of Growth at Clovis, Head of Marketing at Datananas, Outbound Teacher at GrowthMakers.",
     photo: "/images/romain-128.webp",
     photoAlt: "Romain Cornu",
     content: (
