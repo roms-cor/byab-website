@@ -45,6 +45,23 @@ find . -maxdepth 1 -not -name '.git' -not -name '.' -exec rm -rf {} +
 # New build inputs are picked up automatically as soon as they are committed —
 # no allowlist to maintain. Add a pattern below only to keep something private.
 EXCLUDES='^(\.agents/|\.local/|dist/|artifacts/|screenshots/)'
+
+# Guard: files created in the workspace but never `git add`ed are invisible to
+# `git ls-files` and would silently be left out of the publish, reproducing the
+# "local build passes, CI fails" symptom. Fail loudly if any exist (outside the
+# exclusion list). Set ALLOW_UNTRACKED=1 to publish anyway with a warning.
+UNTRACKED=$(git -C "$WORKSPACE" status --porcelain --untracked-files=all \
+  | sed -n 's/^?? //p' \
+  | grep -Ev "$EXCLUDES" || true)
+if [ -n "$UNTRACKED" ]; then
+  echo "⚠ Untracked files exist that will NOT be published (commit them or add to EXCLUDES):"
+  echo "$UNTRACKED" | sed 's/^/    /'
+  if [ "${ALLOW_UNTRACKED:-0}" != "1" ]; then
+    echo "✗ Aborting publish. Run 'git add' + commit these files, or set ALLOW_UNTRACKED=1 to publish without them."
+    exit 1
+  fi
+  echo "→ ALLOW_UNTRACKED=1 set — continuing without the files listed above."
+fi
 git -C "$WORKSPACE" ls-files -z \
   | grep -zEv "$EXCLUDES" \
   | tar -C "$WORKSPACE" --null -T - -cf - \

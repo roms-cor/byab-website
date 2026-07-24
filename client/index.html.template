@@ -43,7 +43,7 @@
       "@type": "Organization",
       "@id": "#organization",
       "name": "{{SITE_NAME}}",
-      "alternateName": ["{{SITE_SHORT_NAME}}", "B Y A B", "Because Busy"],
+      "alternateName": [{{ORG_ALTERNATE_NAMES_JSONLD}}],
       "description": "{{SITE_NAME}} is an operations, transformation, and growth consultancy founded in April 2005. We externalize what buries you — admin, finance, data, and growth — so founders and managing partners can lead. 57% operating profitability, 0€ external debt raised, 20+ years of uninterrupted service.",
       "foundingDate": "{{SITE_FOUNDING_DATE}}",
       "url": "{{SITE_URL}}",
@@ -176,7 +176,7 @@
         {
           "@type": "SiteNavigationElement",
           "name": "Story",
-          "description": "Company history from 2005 founding by Cécile Noiriel to the current four-person consultancy",
+          "description": "Company history from {{FOUNDING_YEAR}} founding by {{FOUNDER_NAME}} to the current {{TEAM_COUNT_WORD}}-person consultancy",
           "url": "{{SITE_URL}}#story"
         },
         {

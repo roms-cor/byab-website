@@ -12,6 +12,8 @@ export interface TeamMember {
   footerRole?: string;
   linkedin?: string;
   website?: string;
+  /** Extra public reference links (profiles, press) included in the AI-crawler external-references lists */
+  refs?: { label: string; href: string }[];
 }
 
 export const teamMembers: TeamMember[] = [
@@ -36,6 +38,9 @@ export const teamMembers: TeamMember[] = [
     since: "Since 2015",
     footerRole: "Co-founder & Operations",
     linkedin: "https://www.linkedin.com/in/annegrosz",
+    refs: [
+      { label: "Vatier & Associés — Infocession", href: "https://www.infocession.fr/avocats/vatier-associes" },
+    ],
   },
   {
     src: "/images/georges-256.webp",
@@ -56,5 +61,9 @@ export const teamMembers: TeamMember[] = [
     skills: ["Go-to-Market", "Acquisition Funnels", "Outbound B2B", "Revenue Ops"],
     since: "Since 2025",
     linkedin: "https://fr.linkedin.com/in/romaincornu",
+    refs: [
+      { label: "Romain Cornu — Avizio", href: "https://www.avizio.fr/expert/romain-cornu" },
+      { label: "Romain Cornu — Clay", href: "https://clay.earth/profile/romain-cornu" },
+    ],
   },
 ];

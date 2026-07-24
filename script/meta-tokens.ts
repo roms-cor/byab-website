@@ -125,8 +125,59 @@ export const orgSameAs: string[] = [
   ...teamMembers.filter((m: any) => m.linkedin).map((m: any) => m.linkedin),
 ];
 
+// Derived people/company tokens so the narrative templates never hardcode
+// personal names, spaced acronyms, or SIREN numbers (template-safety):
+// everything below comes from content/team.ts and content/companies.ts.
+const numberWords = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+const teamNames: string[] = teamMembers.map((m: any) => String(m.name));
+const teamNamesList =
+  teamNames.length > 1 ? `${teamNames.slice(0, -1).join(", ")}, and ${teamNames.at(-1)}` : teamNames.join("");
+
+const externalRefs: { label: string; href: string }[] = [
+  ...companies.flatMap((c: any) =>
+    c.links.map((l: any) => ({ label: `${l.label} — ${c.name} (SIREN ${c.siren})`, href: l.href }))
+  ),
+  ...teamMembers.flatMap((m: any) => [
+    ...(m.linkedin ? [{ label: `${m.name} — LinkedIn`, href: m.linkedin }] : []),
+    ...((m.refs ?? []) as { label: string; href: string }[]),
+  ]),
+];
+
+// Organization.alternateName — short name + registered entity names that
+// differ from the public brand name (e.g. the spaced acronym of an older
+// legal entity), so no alternate spelling is hardcoded in the template.
+const alternateNames = [
+  ...new Set<string>([cfg.shortName, ...companies.map((c: any) => String(c.name)).filter((n: string) => n !== cfg.name)]),
+];
+
+// Per-company tokens for narrative prose ({{COMPANY_1_SIREN}}, …).
+const companyTokens: Record<string, string> = {};
+companies.forEach((c: any, i: number) => {
+  const n = i + 1;
+  companyTokens[`COMPANY_${n}_NAME`] = c.name;
+  companyTokens[`COMPANY_${n}_SIREN`] = c.siren;
+  companyTokens[`COMPANY_${n}_FOUNDED`] = c.founded;
+  companyTokens[`COMPANY_${n}_FOUNDED_TEXT`] = c.foundedDateText ?? c.founded;
+  companyTokens[`COMPANY_${n}_FOUNDER`] = c.founder ?? "";
+});
+
 const composed: Record<string, string> = {
   SERVICES_INLINE: servicesInline,
+
+  // People / legal-entity tokens (derived from content/, never hardcoded)
+  ...companyTokens,
+  FOUNDER_NAME: teamMembers[0].name,
+  FOUNDING_YEAR: cfg.foundingDate.slice(0, 4),
+  TEAM_COUNT_WORD: numberWords[teamMembers.length] ?? String(teamMembers.length),
+  TEAM_NAMES: teamNamesList,
+  LLMS_LEGAL_IDS: companies
+    .map((c: any) =>
+      `- SIREN ${c.siren} (${c.name}, created ${c.foundedDateText ?? c.founded}${c.founder ? ` by ${c.founder}` : ""})`
+    )
+    .join("\n"),
+  LLMS_EXTERNAL_REFS: externalRefs.map((r) => `- [${r.label}](${r.href})`).join("\n"),
+  LLMS_EXTERNAL_REFS_PLAIN: externalRefs.map((r) => `- ${r.label}: ${r.href}`).join("\n"),
+  ORG_ALTERNATE_NAMES_JSONLD: alternateNames.map((n) => JSON.stringify(n)).join(", "),
 
   // llms.txt (summary format)
   LLMS_SERVICES: services

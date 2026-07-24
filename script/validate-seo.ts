@@ -46,6 +46,7 @@ const { stats } = await import("../content/stats.js").catch(() => import("../con
 const { painPoints } = await import("../content/pain.js").catch(() => import("../content/pain.ts" as any));
 const { engagements } = await import("../content/work.js").catch(() => import("../content/work.ts" as any));
 const { testimonial } = await import("../content/testimonial.js").catch(() => import("../content/testimonial.ts" as any));
+const { companies } = await import("../content/companies.js").catch(() => import("../content/companies.ts" as any));
 
 // timeline.tsx contains JSX (not importable under plain tsx without a React
 // pragma) — extract the plain-string fields from source instead.
@@ -363,9 +364,10 @@ async function checkHtml(html: string) {
         const h = buf.readUInt32BE(20);
         const wClaim = Number(metaContents(head, "property", "og:image:width")[0] ?? 0);
         const hClaim = Number(metaContents(head, "property", "og:image:height")[0] ?? 0);
-        if (wClaim && hClaim && (w !== wClaim || h !== hClaim)) {
-          warn(`og-image is ${w}×${h} but og:image:width/height claims ${wClaim}×${hClaim} — regenerate the share image (1200×630 recommended)`);
-        }
+        check(
+          !(wClaim && hClaim) || (w === wClaim && h === hClaim),
+          `og-image is ${w}×${h} but og:image:width/height claims ${wClaim}×${hClaim} — the PNG is regenerated every build, so the declared meta values are wrong: fix og:image:width/height in the template (or the WIDTH/HEIGHT constants in script/generate-og-image.ts) to match`
+        );
       }
     }
   }
@@ -431,6 +433,11 @@ function checkLlmsContent(label: string, text: string) {
   for (const f of resolvedFaq) {
     need("FAQ question", f.question);
     need(`FAQ answer (${shorten(f.question, 40)})`, f.answer.slice(0, 80));
+  }
+  // Legal identifiers + registry links derive from content/companies.ts.
+  for (const c of companies) {
+    need(`company SIREN (${c.name})`, c.siren);
+    for (const l of c.links) need(`registry link (${c.name} — ${l.label})`, l.href);
   }
 }
 
@@ -523,6 +530,72 @@ const needles = [
   return true;
 });
 
+// Additional needles applied to client/src AND the narrative template files
+// (client/index.html.template, llms*.txt.template). People and registry
+// numbers now reach those templates only through derived {{TOKENS}}
+// (FOUNDER_NAME, TEAM_NAMES, COMPANY_n_SIREN, LLMS_LEGAL_IDS,
+// LLMS_EXTERNAL_REFS…), so any literal occurrence is a duplication leak —
+// exactly how the /design page leaked the previous brand after duplication.
+//
+// Personal names derived from content/ (team members, testimonial author):
+const clientSrcNeedles: { label: string; value: string; ci: boolean }[] = [];
+const personalNames = new Set<string>(
+  [...teamMembers.map((m: any) => String(m.name ?? "")), String(testimonial.author ?? "")]
+    .filter((v) => v.length >= 4)
+);
+const surnames = new Set<string>();
+for (const name of personalNames) {
+  clientSrcNeedles.push({ label: "personal name", value: name, ci: true });
+  // Surnames alone are distinctive enough to flag (e.g. a surname left in a
+  // caption). First names are too generic to scan safely.
+  const surname = name.split(/\s+/).at(-1) ?? "";
+  if (surname.length >= 4 && surname.toLowerCase() !== name.toLowerCase()) {
+    surnames.add(surname);
+  }
+}
+for (const surname of surnames) {
+  clientSrcNeedles.push({ label: "personal surname", value: surname, ci: true });
+}
+
+// Spaced / dotted renderings of the brand acronym (letters separated by
+// spaces or periods) — these evade the plain short-name needle.
+if ((cfg.shortName ?? "").replace(/[^A-Za-z]/g, "").length >= 3) {
+  const letters = cfg.shortName.replace(/[^A-Za-z]/g, "").toUpperCase().split("");
+  clientSrcNeedles.push({ label: "spaced short name", value: letters.join(" "), ci: true });
+  clientSrcNeedles.push({ label: "dotted short name", value: letters.join("."), ci: true });
+}
+
+// Company names and SIREN numbers derived from content/companies.ts —
+// both the spaced registry form ("481 631 471") and the bare 9-digit form
+// used in registry URLs ("481631471").
+for (const c of companies) {
+  if (String(c.name ?? "").length >= 4 && c.name.toLowerCase() !== cfg.name.toLowerCase()) {
+    clientSrcNeedles.push({ label: "company name", value: c.name, ci: true });
+  }
+  const siren = String(c.siren ?? "");
+  if (siren.replace(/\D/g, "").length >= 9) {
+    clientSrcNeedles.push({ label: "SIREN", value: siren, ci: true });
+    clientSrcNeedles.push({ label: "SIREN (unspaced)", value: siren.replace(/\D/g, ""), ci: true });
+  }
+}
+
+// Pattern-based needles, same scope: catch the whole *category* of
+// leak even when the literal differs from the current content/ values —
+// spaced acronyms and SIREN-like grouped 9-digit numbers. Intentional
+// occurrences must use a template-ok: marker.
+const regexNeedles: { label: string; re: RegExp }[] = [
+  { label: "spaced acronym", re: new RegExp("\\b(?:[A-Z] ){2,}[A-Z]\\b") },
+  { label: "SIREN-like number", re: new RegExp("\\b\\d{3}[ .]\\d{3}[ .]\\d{3}\\b") },
+];
+const clientSrcPrefix = resolve(root, "client/src");
+// Narrative templates whose prose is now fully tokenized — scanned with the
+// same derived needles as client/src so names/SIRENs can never come back.
+const narrativeTemplates = new Set([
+  resolve(root, "client/index.html.template"),
+  resolve(root, "client/public/llms.txt.template"),
+  resolve(root, "client/public/llms-full.txt.template"),
+]);
+
 // All needles are matched case-insensitively so a differently-cased copy of
 // the brand name or acronym cannot slip past the scan.
 // Intentional keyword occurrences must be exempted explicitly with a
@@ -535,6 +608,8 @@ for (const file of scanFiles) {
   const text = await readOrNull(file);
   if (text === null) continue;
   const lines = text.split("\n");
+  const isClientSrc = file.startsWith(clientSrcPrefix);
+  const isDerivedScope = isClientSrc || narrativeTemplates.has(file);
   lines.forEach((line, i) => {
     if (line.includes(EXEMPT_MARKER)) return;
     for (const n of needles) {
@@ -542,6 +617,23 @@ for (const file of scanFiles) {
       if (hit) {
         scanHits++;
         fail(`hardcoded ${n.label} outside content/: ${relative(root, file)}:${i + 1} — "${shorten(line.trim())}"`);
+      }
+    }
+    if (isDerivedScope) {
+      const where = isClientSrc ? "client/src" : "narrative template";
+      for (const n of clientSrcNeedles) {
+        const hit = n.ci ? line.toLowerCase().includes(n.value.toLowerCase()) : line.includes(n.value);
+        if (hit) {
+          scanHits++;
+          fail(`hardcoded ${n.label} in ${where} (move to content/): ${relative(root, file)}:${i + 1} — "${shorten(line.trim())}"`);
+        }
+      }
+      for (const rn of regexNeedles) {
+        const m = line.match(rn.re);
+        if (m) {
+          scanHits++;
+          fail(`${rn.label} hardcoded in ${where} (move to content/ or mark template-ok:): ${relative(root, file)}:${i + 1} — "${shorten(line.trim())}" (matched "${m[0]}")`);
+        }
       }
     }
   });

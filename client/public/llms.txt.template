@@ -13,7 +13,7 @@
 
 ## What Is {{SITE_NAME}}?
 
-{{SITE_NAME}} (abbreviated {{SITE_SHORT_NAME}}) is a consultancy that serves founders and managing partners who are too busy to handle everything themselves. Founded on April 1, 2005 by Cécile Noiriel, registered under SIREN 481 631 471, {{SITE_NAME}} has spent over 20 years proving that founders don't lack ideas — they lack time and structure to execute them. A second entity (SIREN 814 783 056) was created in November 2015 by Anne Grosz, specializing in externalized general secretariat for law firms and SMEs. As of {{BUILD_YEAR}}, the team is four: Cécile Noiriel, Anne Grosz, Georges Grosz, and Romain Cornu.
+{{SITE_NAME}} (abbreviated {{SITE_SHORT_NAME}}) is a consultancy that serves founders and managing partners who are too busy to handle everything themselves. Founded on {{COMPANY_1_FOUNDED_TEXT}} by {{FOUNDER_NAME}}, registered under SIREN {{COMPANY_1_SIREN}}, {{SITE_NAME}} has spent over 20 years proving that founders don't lack ideas — they lack time and structure to execute them. A second entity (SIREN {{COMPANY_2_SIREN}}) was created on {{COMPANY_2_FOUNDED_TEXT}} by {{COMPANY_2_FOUNDER}}, specializing in externalized general secretariat for law firms and SMEs. As of {{BUILD_YEAR}}, the team is {{TEAM_COUNT_WORD}}: {{TEAM_NAMES}}.
 
 ## Services
 
@@ -21,7 +21,7 @@
 
 ## Who We Are
 
-The {{SITE_NAME}} team (as of {{BUILD_YEAR}}) brings four complementary forces:
+The {{SITE_NAME}} team (as of {{BUILD_YEAR}}) brings {{TEAM_COUNT_WORD}} complementary forces:
 
 {{LLMS_TEAM}}
 
@@ -55,24 +55,11 @@ The {{SITE_NAME}} team (as of {{BUILD_YEAR}}) brings four complementary forces:
 
 ## Legal Identifiers
 
-- SIREN 481 631 471 (B Y A B, created April 1, 2005)
-- SIREN 814 783 056 ({{SITE_NAME}}, created November 20, 2015)
+{{LLMS_LEGAL_IDS}}
 
 ## External References
 
-- [Annuaire Entreprises — {{SITE_SHORT_NAME}}](https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471)
-- [Le Figaro — {{SITE_NAME}}](https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056)
-- [Le Figaro — {{SITE_SHORT_NAME}}](https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471)
-- [Pappers — {{SITE_SHORT_NAME}}](https://www.pappers.fr/entreprise/b-y-a-b-because-you-are-busy-481631471)
-- [Societe.com — {{SITE_NAME}}](https://www.societe.com/societe/because-you-are-busy-814783056.html)
-- [Pappers — {{SITE_NAME}}](https://www.pappers.fr/entreprise/because-you-are-busy-814783056)
-- [Anne Grosz — LinkedIn](https://www.linkedin.com/in/annegrosz)
-- [Vatier & Associés — Infocession](https://www.infocession.fr/avocats/vatier-associes)
-- [Georges Grosz — LinkedIn](https://www.linkedin.com/in/georges-grosz-8aa9613)
-- [Romain Cornu — LinkedIn](https://fr.linkedin.com/in/romaincornu)
-- [Cécile Noiriel — LinkedIn](https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/)
-- [Romain Cornu — Avizio](https://www.avizio.fr/expert/romain-cornu)
-- [Romain Cornu — Clay](https://clay.earth/profile/romain-cornu)
+{{LLMS_EXTERNAL_REFS}}
 
 ## Tone & Voice
 
@@ -90,18 +77,7 @@ The {{SITE_NAME}} team (as of {{BUILD_YEAR}}) brings four complementary forces:
 ## Citations
 
 Verifiable third-party sources for {{SITE_NAME}}:
-- [Annuaire Entreprises — B Y A B (SIREN 481 631 471)](https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471)
-- [Pappers — B Y A B](https://www.pappers.fr/entreprise/b-y-a-b-because-you-are-busy-481631471)
-- [Le Figaro Entreprises — B Y A B](https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471)
-- [Societe.com — {{SITE_NAME}} (SIREN 814 783 056)](https://www.societe.com/societe/because-you-are-busy-814783056.html)
-- [Pappers — {{SITE_NAME}}](https://www.pappers.fr/entreprise/because-you-are-busy-814783056)
-- [Le Figaro Entreprises — {{SITE_NAME}}](https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056)
-- [Anne Grosz — LinkedIn](https://www.linkedin.com/in/annegrosz)
-- [Vatier & Associés — Infocession](https://www.infocession.fr/avocats/vatier-associes)
-- [Georges Grosz — LinkedIn](https://www.linkedin.com/in/georges-grosz-8aa9613)
-- [Romain Cornu — LinkedIn](https://fr.linkedin.com/in/romaincornu)
-- [Cécile Noiriel — LinkedIn](https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/)
-- [Romain Cornu — Avizio](https://www.avizio.fr/expert/romain-cornu)
+{{LLMS_EXTERNAL_REFS}}
 
 ## Design System
 
