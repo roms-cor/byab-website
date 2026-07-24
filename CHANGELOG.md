@@ -7,70 +7,48 @@ Généré automatiquement avec [git-cliff](https://git-cliff.org).
 ## Unreleased
 
 
-### ✨ Fonctionnalités
+### 🔧 Maintenance
 
-- prerender full homepage and add SEO/GEO build validation ([8fe8a4f](https://github.com/roms-cor/byab-website/commit/8fe8a4f9bc0d868e6d942d43a894d9fbb7e6e345))
-- GEO-optimize all editorial content across content layer, templates, and AI-facing files ([22a6d6c](https://github.com/roms-cor/byab-website/commit/22a6d6cdea3503e3d9da9e0f8d98cfdf3ac2ab27))
-- working contact form with database storage + mailto ([e79e07b](https://github.com/roms-cor/byab-website/commit/e79e07bb7b9c6fbca19e6d322470a3ea2d2cb042))
-- working contact form with database storage + mailto ([bc1bad1](https://github.com/roms-cor/byab-website/commit/bc1bad10fd84a47e12254cb34519b2a6c6757d4f))
-
-
-### 🐛 Corrections
-
-- build pipeline — commit date, version drift, CI depth ([6bf8902](https://github.com/roms-cor/byab-website/commit/6bf890281829aa2676b493c672b369bc3ed91c60))
-- build pipeline — commit date, version drift, CI depth ([9d08fa1](https://github.com/roms-cor/byab-website/commit/9d08fa18fa8172327674740abb8a6b01372b6a16))
-- update Romain Cornu's profile with full LinkedIn career details ([be9b33d](https://github.com/roms-cor/byab-website/commit/be9b33d9f942c59a1606420cea031af3cd5b59c5))
-- update Romain Cornu's profile with full LinkedIn career details ([ad801b6](https://github.com/roms-cor/byab-website/commit/ad801b63a1c6e2f8ed5e2ffb0ba459d2989d724a))
-- update Romain Cornu's profile with full LinkedIn career details ([337709d](https://github.com/roms-cor/byab-website/commit/337709d2badbfc41ae8c30fa37d67d76567b5791))
-- update Romain Cornu's profile with full LinkedIn career details ([f08ea7b](https://github.com/roms-cor/byab-website/commit/f08ea7b46a704fa889a56da454501af634ee02bd))
-- update Romain Cornu's profile with full LinkedIn career details ([9ad7111](https://github.com/roms-cor/byab-website/commit/9ad711112b82be16d601b3dfeb3b46ee0ef36023))
-- remove all Oysterz references from Romain Cornu's profile ([51af906](https://github.com/roms-cor/byab-website/commit/51af906f81d0b8701f6a47cc62d2a54096afd364))
-
-
-### ♻️ Refactorisations
-
-- extract content layer for template reuse ([72280a3](https://github.com/roms-cor/byab-website/commit/72280a325725d5deda42828a60d4eaaec3e1cb15))
-
-
-### 📚 Documentation
-
-- revue approfondie des tâches 6-8 (rapport docs/review-geo-seo.md) — conformité, scorecard GEO 82/100, stress-tests validateur ([2245839](https://github.com/roms-cor/byab-website/commit/22458396f7586b02a805acfa9d30c8b45598e435))
+- v1.0.0 — 2026-07-24 15:34 UTC ([399b844](https://github.com/roms-cor/byab-website/commit/399b84473894273ae29c6055b9b1f5ff6a6a41f0))
+- v1.0.0 — 2026-07-24 15:28 UTC ([65e0ade](https://github.com/roms-cor/byab-website/commit/65e0adefbbb680964b97866fd6c08f6eb8c333aa))
+- v1.0.0 — 2026-07-24 15:11 UTC ([a2fe5bf](https://github.com/roms-cor/byab-website/commit/a2fe5bf14ff1e12489ea46afa8ef7a26339b6efe))
+- v1.0.0 — 2026-07-24 15:06 UTC ([1786c27](https://github.com/roms-cor/byab-website/commit/1786c2759f2c1c36ea3aba6c5a5b14ee3bafc928))
+- v1.0.0 — 2026-07-24 14:55 UTC ([03ed423](https://github.com/roms-cor/byab-website/commit/03ed4236e4225d8541b1783ad92e8ae7e67eca9e))
+- v1.0.0 — 2026-07-24 14:45 UTC ([4c49f30](https://github.com/roms-cor/byab-website/commit/4c49f306da34b9cb1371a45c5dc58ba4163171b9))
+- v1.0.0 — 2026-07-24 14:41 UTC ([119e547](https://github.com/roms-cor/byab-website/commit/119e547db5e9e3b473289613a0f242a0a7b26143))
+- v1.0.0 — 2026-07-24 14:28 UTC ([80b3a4b](https://github.com/roms-cor/byab-website/commit/80b3a4b93d63823dc1ca96a1765a591db1708f62))
+- v1.0.0 — 2026-07-24 14:25 UTC ([c4915e5](https://github.com/roms-cor/byab-website/commit/c4915e53571a60a490f979d748819d236c293fa6))
+- v1.0.0 — 2026-07-24 14:23 UTC ([6dd459a](https://github.com/roms-cor/byab-website/commit/6dd459a1718b983a37bf0608f0e7a716b8116710))
+- v1.0.0 — 2026-07-24 14:21 UTC ([9b2c458](https://github.com/roms-cor/byab-website/commit/9b2c458aa2fd4f9c2a43ec5df6c907043256ca2b))
+- v1.0.0 — 2026-07-24 14:17 UTC ([8f8b6ce](https://github.com/roms-cor/byab-website/commit/8f8b6ce12b728f2a316cf11db6e1517ab785d828))
+- v1.0.0 — 2026-07-24 14:11 UTC ([a4944e3](https://github.com/roms-cor/byab-website/commit/a4944e3cd7853776a6102b36bde7c360a0fb4c1d))
+- v1.0.0 — 2026-07-24 13:31 UTC ([aa4929f](https://github.com/roms-cor/byab-website/commit/aa4929f86e1acdc588a8d99e370b8914141af74e))
+- v1.0.0 — 2026-07-24 13:25 UTC ([73ba340](https://github.com/roms-cor/byab-website/commit/73ba3405fcaf81f2d358571b1e8551aa12ebd632))
+- v1.0.0 — 2026-07-24 13:17 UTC ([f1ef9eb](https://github.com/roms-cor/byab-website/commit/f1ef9eb609f03f4e78cbd254712ecaad37d44c85))
+- v1.0.0 — 2026-07-24 13:05 UTC ([85a3904](https://github.com/roms-cor/byab-website/commit/85a390442584a8ee264c2961d023df3c575a2664))
+- v1.0.0 — 2026-07-24 12:52 UTC ([26857f3](https://github.com/roms-cor/byab-website/commit/26857f32bb167411430d73f1d6692e0446703171))
+- v1.0.0 — 2026-07-24 12:50 UTC ([c24bead](https://github.com/roms-cor/byab-website/commit/c24beadadac832a59cef0f93c72ebcf5c1385d3a))
+- v1.0.0 — 2026-07-24 12:47 UTC ([7718435](https://github.com/roms-cor/byab-website/commit/77184352865c2089e4fa6eeabdd8a272c97f1ffc))
+- v1.0.0 — 2026-07-24 12:44 UTC ([442c659](https://github.com/roms-cor/byab-website/commit/442c6590feff39bd2e7efb5f0dc996fca21d0e53))
+- v1.0.0 — 2026-03-16 22:28 UTC ([c137542](https://github.com/roms-cor/byab-website/commit/c137542f8d9e9a098a6d0fcc23879cc1c08fae24))
+- v1.0.0 — 2026-03-13 19:37 UTC ([6ba73a4](https://github.com/roms-cor/byab-website/commit/6ba73a4a92ef4fe97b7462ac816ce8cd5eee1fee))
+- v1.0.0 — 2026-03-05 20:32 UTC ([9ca8925](https://github.com/roms-cor/byab-website/commit/9ca89253c7f8ce35adffba6dae07642be02d59a6))
+- v1.0.0 — 2026-03-05 19:14 UTC ([8ce855f](https://github.com/roms-cor/byab-website/commit/8ce855fc4d04ac62b47bd6b20daa820d1c6c4913))
 
 
 ### Autres
 
-- inclure CHANGELOG.md et cliff.toml dans la synchro publish ([ef32631](https://github.com/roms-cor/byab-website/commit/ef326319d704df0693f68e57d99748d3742a83e9))
-- activer le commit automatique du changelog et neutraliser l'écriture concurrente de release.yml ([73e4adb](https://github.com/roms-cor/byab-website/commit/73e4adb23e09d599765d690423f971060330fe94))
-- Changelog git-cliff : cliff.toml, exemple CHANGELOG.md généré, enrichissement par issues (testé), workflow validation sans commit ([83644b9](https://github.com/roms-cor/byab-website/commit/83644b930ab168f9eb3117e4cdfe87c120be9dbe))
-- Add Cécile Noiriel to Organization JSON-LD member array with jobTitle, url, and GEO-optimized description ([837a066](https://github.com/roms-cor/byab-website/commit/837a066b690d129d331557b3e63bc8947f2ef758))
-- Configure project templating and add post-merge hook script ([56ffcb7](https://github.com/roms-cor/byab-website/commit/56ffcb7787429b691cfc0b00b1ceab11180357d3))
-- Organize website content into separate configuration files ([a91d75a](https://github.com/roms-cor/byab-website/commit/a91d75a0f519c271cdb554daa74446184c1107ba))
-- Add three distinct hero section variations exploring different initial user impressions ([d23afc1](https://github.com/roms-cor/byab-website/commit/d23afc13bd574c83ddc0b23553568b40cbbc4a1c))
-- Update Romain's professional experience and affiliations ([accc2dd](https://github.com/roms-cor/byab-website/commit/accc2dda58996aa8b4d01a6e02fa0a1adb7ef251))
-- Improve contact form by sending emails directly from the browser ([60d9931](https://github.com/roms-cor/byab-website/commit/60d993199b0b13a07753aa3f9be21c9a7e41d6b7))
-- Display full team member biographies without truncation ([77191c5](https://github.com/roms-cor/byab-website/commit/77191c517fc9ac6899ff711743cdd1c7625f04f2))
-- Limit team member bios to four lines for visual consistency ([809226e](https://github.com/roms-cor/byab-website/commit/809226efc45748f784b3b11c3d8e6df8cdc62da2))
-- Allow full display of team member biographies ([9003282](https://github.com/roms-cor/byab-website/commit/90032826893175be85e9882efc06d09728672157))
-- Prioritize founder Cécile's presentation on the homepage ([11b4092](https://github.com/roms-cor/byab-website/commit/11b4092942f5c4bfd1c693cf88a20339f4c318c5))
-- Center the slideshow on all screen sizes ([7af3379](https://github.com/roms-cor/byab-website/commit/7af33791d8220fc4be47c9f5877f9e63ecd7d078))
-- Launch website by disabling coming soon mode and updating content ([d0afe61](https://github.com/roms-cor/byab-website/commit/d0afe61fd683a50dd94a2c9f6decc604a2280c87))
-- Improve website navigation for better search engine and LLM discoverability ([ac41cbd](https://github.com/roms-cor/byab-website/commit/ac41cbd959c2e6c2d0fc47568973933a49ca401b))
-- Update site content to reflect latest brand and copy changes ([14a10dd](https://github.com/roms-cor/byab-website/commit/14a10dd01c335d2356a5f24b09efda7c35729328))
-- Update website content and structure to reflect brand guidelines ([4c661a0](https://github.com/roms-cor/byab-website/commit/4c661a0c06ff927729b7e74afe20880f40e96db7))
-- Add automatic releases and conventional commit support ([f65d3a1](https://github.com/roms-cor/byab-website/commit/f65d3a16562bb43ac8e8f8ca38780dc718da4de8))
-- Update hero heading font size and styles for better visual appeal ([319dd50](https://github.com/roms-cor/byab-website/commit/319dd5065d9b37bd33537d30d85527a6d0406e2d))
-- Add persistent display of publish and commit dates in the footer ([1c162d8](https://github.com/roms-cor/byab-website/commit/1c162d8255978bb120fd78f18a3ed3e109d4c0ef))
-- Improve website performance and accessibility with various optimizations ([83df804](https://github.com/roms-cor/byab-website/commit/83df8043f671a03c9adc8b05dbe8ea1500d91ccb))
-- Improve website performance, accessibility, and SEO with multiple optimizations ([798c72f](https://github.com/roms-cor/byab-website/commit/798c72f54ec38d0ae23458fa1ed2d5a970be0d74))
-- Update website to include all SEO and AI optimization tasks ([5514100](https://github.com/roms-cor/byab-website/commit/5514100c1b0a5f779fd72a297a5ede99be543311))
-- Add fallback routing for deployed application ([927e45a](https://github.com/roms-cor/byab-website/commit/927e45a7eec4e1bc3fa2c901b2571667223650ea))
-- Make the "Coming Soon" page link to the main site more visible ([e709a57](https://github.com/roms-cor/byab-website/commit/e709a576ce6f05667e3c998a3b1f368b448a9cc7))
-- Add hidden link to full site on coming soon page ([0ef76cb](https://github.com/roms-cor/byab-website/commit/0ef76cb1f31d3da5445662ea36d2ecbf377b4bb3))
-- Update website to show a coming soon page and move the homepage ([df42701](https://github.com/roms-cor/byab-website/commit/df427010affaac773002b57c5ce52ae5c3e6faf0))
-- Remove Oysterz link from Romain's footer entry ([4b392af](https://github.com/roms-cor/byab-website/commit/4b392aff45a6caee8641e1122b6a56dc1acfb8a2))
-- Automate website deployment by pushing changes to GitHub ([8154936](https://github.com/roms-cor/byab-website/commit/81549360b504a9472d3309edba99980d50585860))
-- Add automated deployment workflow and CNAME file to GitHub ([41b26b4](https://github.com/roms-cor/byab-website/commit/41b26b4adcaa57a08a70abf52d3a6f3edf9af639))
-- Optimize website performance by improving image and font loading ([da0ce81](https://github.com/roms-cor/byab-website/commit/da0ce812571039efe98be07cb78714e7468f7c30))
+- Publish v1.0.0 — 2026-03-05 17:18 UTC ([69c67e7](https://github.com/roms-cor/byab-website/commit/69c67e7d67d490a14e522d35e14d771bda0f18c1))
+- Publish v1.0.0 — 2026-03-05 15:31 UTC ([cd1bbad](https://github.com/roms-cor/byab-website/commit/cd1bbad10fbda66868c971d13709b67edbd12c29))
+- Publish v1.0.0 — 2026-03-05 15:00 UTC ([ae76cbd](https://github.com/roms-cor/byab-website/commit/ae76cbd57d5962fa670a4a44125b9b2e2dd0a9f2))
+- Publish v1.0.0 — 2026-03-05 08:55 UTC ([5381810](https://github.com/roms-cor/byab-website/commit/538181009f8ed7020bd82d6d0ff2347a1d6b2a7a))
+- Publish v1.0.0 — 2026-03-05 08:50 UTC ([319e27d](https://github.com/roms-cor/byab-website/commit/319e27db69a7a0c597e9a2f4a70336e28f3d37d8))
+- Publish v1.0.0 — 2026-03-05 06:47 UTC ([d651162](https://github.com/roms-cor/byab-website/commit/d65116200042729d6bc65923bc10e0ec967d5852))
+- Publish v1.0.0 — 2026-03-05 06:35 UTC ([b42d36e](https://github.com/roms-cor/byab-website/commit/b42d36e60117627a60b49fda409789a71cc3825d))
+- Publish v1.0.0 — 2026-03-05 06:35 UTC ([c497db3](https://github.com/roms-cor/byab-website/commit/c497db3b32195fb22890ea205bb3bf0441a2a62e))
+- PageSpeed optimizations ([f436139](https://github.com/roms-cor/byab-website/commit/f4361398eb7664052a13e8338f6b0c18e59ff4cf))
+- Create CNAME ([3add6ca](https://github.com/roms-cor/byab-website/commit/3add6ca5320c7178e17099641e17d78c4869e917))
+- Create deploy.yml ([692f609](https://github.com/roms-cor/byab-website/commit/692f60927f5db47a2e7b02225dc22df4feba738d))
 - Add build version and publish date to website footer ([c2d102e](https://github.com/roms-cor/byab-website/commit/c2d102e0be5d005f374a0d8d704042f0b8748278))
 - Add routing support for a static website deployed on GitHub Pages ([7430dec](https://github.com/roms-cor/byab-website/commit/7430dec5c5d95c47aa558bfbd4c3c5e18e9fc387))
 - Add comprehensive details and relevant backlinks to the website footer ([be29521](https://github.com/roms-cor/byab-website/commit/be29521cc8d1d159ace224c2d7382d297b3611b6))
