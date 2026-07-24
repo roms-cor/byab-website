@@ -99,6 +99,17 @@ const baseTokens: Record<string, string> = {
   SITE_ADDRESS_COUNTRY_CODE: cfg.address.countryCode,
   SITE_ADDRESS_FULL: `${cfg.address.street}, ${cfg.address.postalCode} ${cfg.address.city}, ${cfg.address.country}`,
   SITE_LOCATIONS: cfg.locations,
+  SITE_LOCATIONS_PROSE:
+    cfg.locationCities.length > 1
+      ? `${cfg.locationCities.slice(0, -1).join(", ")} and ${cfg.locationCities.at(-1)}`
+      : cfg.locationCities.join(""),
+  AREA_SERVED_JSONLD: [
+    ...cfg.locationCities.map((city: string) => ["City", city] as const),
+    ["Country", cfg.address.country] as const,
+  ]
+    .map(([type, name]) => `{ "@type": ${JSON.stringify(type)}, "name": ${JSON.stringify(name)} }`)
+    .join(",\n        "),
+  TEAM_PRELOAD_IMAGE: teamMembers[0].src,
   SITEMAP_LASTMOD: buildDateISO,
   BUILD_YEAR: buildYear,
   BUILD_MONTH_YEAR: buildMonthYear,

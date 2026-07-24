@@ -35,7 +35,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" /></noscript>
     <link rel="preload" as="image" type="image/webp" href="/images/logo-horizontal-white.webp" />
-    <link rel="preload" as="image" type="image/webp" href="/images/anne-256.webp" />
+    <link rel="preload" as="image" type="image/webp" href="{{TEAM_PRELOAD_IMAGE}}" />
 
     <script type="application/ld+json">
     {
@@ -48,9 +48,7 @@
       "foundingDate": "{{SITE_FOUNDING_DATE}}",
       "url": "{{SITE_URL}}",
       "areaServed": [
-        { "@type": "City", "name": "Paris" },
-        { "@type": "City", "name": "La Rochelle" },
-        { "@type": "Country", "name": "France" }
+        {{AREA_SERVED_JSONLD}}
       ],
       "knowsLanguage": ["fr", "en"],
       "sameAs": [
@@ -82,9 +80,7 @@
         "addressCountry": "{{SITE_ADDRESS_COUNTRY_CODE}}"
       },
       "areaServed": [
-        { "@type": "City", "name": "Paris" },
-        { "@type": "City", "name": "La Rochelle" },
-        { "@type": "Country", "name": "France" }
+        {{AREA_SERVED_JSONLD}}
       ],
       "priceRange": "$$",
       "serviceType": [
@@ -188,7 +184,7 @@
         {
           "@type": "SiteNavigationElement",
           "name": "Contact",
-          "description": "Get in touch — email {{SITE_EMAIL}}, based in Paris and La Rochelle, 24-hour response",
+          "description": "Get in touch — email {{SITE_EMAIL}}, based in {{SITE_LOCATIONS_PROSE}}, 24-hour response",
           "url": "{{SITE_URL}}#contact"
         }
       ]

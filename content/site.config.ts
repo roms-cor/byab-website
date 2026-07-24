@@ -33,8 +33,10 @@ export interface SiteConfig {
     /** ISO 3166-1 alpha-2 country code (e.g. "FR") */
     countryCode: string;
   };
-  /** Human-readable locations line (e.g. "Paris & La Rochelle") */
+  /** Human-readable locations line — derived from locationCities (e.g. "Paris & La Rochelle") */
   locations: string;
+  /** Cities served, used for schema.org areaServed and location prose */
+  locationCities: string[];
   /** Supported locales, first entry is the default */
   locales: string[];
   /** Brand colors (reference for metadata generation; CSS tokens live in index.css) */
@@ -51,6 +53,11 @@ export interface SiteConfig {
     mono: string;
   };
 }
+
+// Single source of truth for the cities served. `locations` (visible page
+// copy/footer) is derived from this list below, so the two can never drift
+// apart when the template is duplicated for another business.
+const locationCities = ["Paris", "La Rochelle"];
 
 export const siteConfig: SiteConfig = {
   name: "Because You Are Busy",
@@ -74,7 +81,8 @@ export const siteConfig: SiteConfig = {
     country: "France",
     countryCode: "FR",
   },
-  locations: "Paris & La Rochelle",
+  locations: locationCities.join(" & "),
+  locationCities,
   locales: ["en", "fr"],
   colors: {
     primary: "#999999",
