@@ -36,7 +36,7 @@ export default function ComingSoon() {
         style={{ color: "#666666" }}
         data-testid="text-coming-soon-tagline"
       >
-        <strong className="font-semibold text-foreground">Because you are busy</strong>, we're building something worth your time.
+        <strong className="font-semibold text-foreground">{siteConfig.slogan}</strong>, we're building something worth your time.
       </p>
 
       <a

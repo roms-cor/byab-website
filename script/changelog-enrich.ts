@@ -37,7 +37,7 @@ export async function enrichChangelog(
   markdown: string,
   shaToRefs: Map<string, IssueRef[]>,
   fetchTitle: IssueTitleFetcher,
-  repoUrl = "https://github.com/roms-cor/byab-website",
+  repoUrl = "https://github.com/roms-cor/byab-website", // template-ok: repo slug (deploy/changelog plumbing), reviewed via duplication checklist
 ): Promise<string> {
   const lines = markdown.split("\n");
   const out: string[] = [];

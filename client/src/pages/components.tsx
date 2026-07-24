@@ -290,14 +290,14 @@ export default function Components() {
                 <img src={logoSquareBlack} alt="Logomark on light background" className="h-16 sm:h-20 w-16 sm:w-20" data-testid="img-logo-light" />
                 <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs text-muted-foreground font-medium">Light background</figcaption>
                 <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
-                  <DownloadButton src={logoSquareBlack} filename="byab-logomark-black.png" />
+                  <DownloadButton src={logoSquareBlack} filename={`${siteConfig.shortName.toLowerCase()}-logomark-black.png`} />
                 </div>
               </figure>
               <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex flex-col items-center justify-center min-h-[160px] sm:min-h-[200px] gap-4" style={{ backgroundColor: "#000000" }}>
                 <img src={logoSquareWhite} alt="Logomark on dark background" className="h-16 sm:h-20 w-16 sm:w-20" data-testid="img-logo-dark" />
                 <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium" style={{ color: "#777777" }}>Dark background</figcaption>
                 <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
-                  <DownloadButton src={logoSquareWhite} filename="byab-logomark-white.png" />
+                  <DownloadButton src={logoSquareWhite} filename={`${siteConfig.shortName.toLowerCase()}-logomark-white.png`} />
                 </div>
               </figure>
             </div>
@@ -308,14 +308,14 @@ export default function Components() {
                 <img src={logoHorizontalWhite} alt="Horizontal logo on light background" className="h-auto w-48 sm:w-64" data-testid="img-logo-horizontal-light" />
                 <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs text-muted-foreground font-medium">Light background</figcaption>
                 <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
-                  <DownloadButton src={logoHorizontalWhite} filename="byab-horizontal-logo-light.png" />
+                  <DownloadButton src={logoHorizontalWhite} filename={`${siteConfig.shortName.toLowerCase()}-horizontal-logo-light.png`} />
                 </div>
               </figure>
               <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex flex-col items-center justify-center min-h-[160px] sm:min-h-[200px] gap-4" style={{ backgroundColor: "#000000" }}>
                 <img src={logoHorizontalBlack} alt="Horizontal logo on dark background" className="h-auto w-48 sm:w-64" data-testid="img-logo-horizontal-dark" />
                 <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium" style={{ color: "#777777" }}>Dark background</figcaption>
                 <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
-                  <DownloadButton src={logoHorizontalBlack} filename="byab-horizontal-logo-dark.png" />
+                  <DownloadButton src={logoHorizontalBlack} filename={`${siteConfig.shortName.toLowerCase()}-horizontal-logo-dark.png`} />
                 </div>
               </figure>
             </div>

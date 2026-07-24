@@ -73,6 +73,8 @@ const baseTokens: Record<string, string> = {
   SITE_TITLE: cfg.title,
   SITE_TITLE_HTML: cfg.title.replace(/&/g, "&amp;"),
   SITE_TAGLINE: cfg.tagline,
+  SLOGAN: cfg.slogan,
+  SLOGAN_LOWER: cfg.slogan.charAt(0).toLowerCase() + cfg.slogan.slice(1),
   SITE_DESCRIPTION: cfg.description,
   SITE_KEYWORDS: cfg.keywords,
   SITE_OG_IMAGE: cfg.ogImage,

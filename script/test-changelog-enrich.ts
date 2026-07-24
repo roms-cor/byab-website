@@ -23,8 +23,8 @@ assert.deepEqual(extractIssueRefs("voir issue #5 sans mot-clé"), []);
 const md = [
   "### Corrections",
   "",
-  "- fix: bug de formulaire ([abc1234](https://github.com/roms-cor/byab-website/commit/abc1234def))",
-  "- fix: autre bug ([def5678](https://github.com/roms-cor/byab-website/commit/def5678abc))",
+  "- fix: bug de formulaire ([abc1234](https://github.com/roms-cor/byab-website/commit/abc1234def))", // template-ok: repo slug (deploy/changelog plumbing), reviewed via duplication checklist
+  "- fix: autre bug ([def5678](https://github.com/roms-cor/byab-website/commit/def5678abc))", // template-ok: repo slug (deploy/changelog plumbing), reviewed via duplication checklist
 ].join("\n");
 
 const refs = new Map([["abc1234", [{ keyword: "Closes", number: 42 }]]]);
@@ -34,7 +34,7 @@ const enriched = await enrichChangelog(md, refs, async (n) =>
 );
 assert.ok(
   enriched.includes(
-    "— Closes [#42](https://github.com/roms-cor/byab-website/issues/42) : Le formulaire ne s'envoie pas",
+    "— Closes [#42](https://github.com/roms-cor/byab-website/issues/42) : Le formulaire ne s'envoie pas", // template-ok: repo slug (deploy/changelog plumbing), reviewed via duplication checklist
   ),
   "l'entrée doit être enrichie du titre de l'issue",
 );

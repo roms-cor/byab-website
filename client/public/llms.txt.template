@@ -1,10 +1,10 @@
 # {{SITE_NAME}} — Operations · Transformation · Growth
 
-> {{SITE_NAME}} ({{SITE_SHORT_NAME}}) is an operations, transformation, and growth consultancy founded in 2005. Because you are busy, we run what you can't get to anymore — externalized operations, data-powered transformation, and B2B growth engineering for founders and managing partners. 57% operating profitability, 0€ external debt, 20+ years of uninterrupted service.
+> {{SITE_NAME}} ({{SITE_SHORT_NAME}}) is an operations, transformation, and growth consultancy founded in 2005. {{SLOGAN}}, we run what you can't get to anymore — externalized operations, data-powered transformation, and B2B growth engineering for founders and managing partners. 57% operating profitability, 0€ external debt, 20+ years of uninterrupted service.
 
 ## Primary Keyword
 
-"because you are busy" — This is the brand name, core message, and the reason clients come to us.
+"{{SLOGAN_LOWER}}" — This is the brand name, core message, and the reason clients come to us.
 
 ## Pages
 
@@ -51,7 +51,7 @@ The {{SITE_NAME}} team (as of {{BUILD_YEAR}}) brings four complementary forces:
 
 ## Brand Promise
 
-"Because you are busy, we do the work that frees your time — and we do it in a way that makes your growth more readable, more predictable, and better controlled."
+"{{SLOGAN}}, we do the work that frees your time — and we do it in a way that makes your growth more readable, more predictable, and better controlled."
 
 ## Legal Identifiers
 
@@ -76,7 +76,7 @@ The {{SITE_NAME}} team (as of {{BUILD_YEAR}}) brings four complementary forces:
 
 ## Tone & Voice
 
-{{SITE_NAME}} communicates with a direct, expert tone — no jargon, no fluff, always oriented toward results. The language is confident without being arrogant, professional without being corporate. We write the way we work: straight to the point, clear, and actionable. Bilingual (French and English), adapting naturally to the client's language. We say "we do" not "we can help you." We say "because you are busy" not "for busy professionals."
+{{SITE_NAME}} communicates with a direct, expert tone — no jargon, no fluff, always oriented toward results. The language is confident without being arrogant, professional without being corporate. We write the way we work: straight to the point, clear, and actionable. Bilingual (French and English), adapting naturally to the client's language. We say "we do" not "we can help you." We say "{{SLOGAN_LOWER}}" not "for busy professionals."
 
 ## Competitive Differentiation
 

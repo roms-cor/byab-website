@@ -8,7 +8,7 @@
 
 **We run what you can't get to anymore.**
 
-Because you are busy building, leading, and deciding — {{SITE_NAME}} handles the operations, transformation, and growth that keep falling through the cracks. Since April 2005. 57% operating profitability. 0€ external debt raised, ever.
+{{SLOGAN}} building, leading, and deciding — {{SITE_NAME}} handles the operations, transformation, and growth that keep falling through the cracks. Since April 2005. 57% operating profitability. 0€ external debt raised, ever.
 
 ---
 
@@ -58,7 +58,7 @@ We don't advise. We do. We embed. We run.
 
 Since April 2005, {{SITE_NAME}} has been the partner that handles what falls through the cracks. We started with a radical commitment: instead of advising from the outside, embed directly into the operations. Run the back-office. Own the transformation. Build the growth engine. Not as consultants who leave reports — as operators who deliver results.
 
-Twenty years later, that model hasn't changed. What has changed is the depth: from pure operations, {{SITE_NAME}} has added transformation & data expertise (Georges Grosz, 22+ years at CGI) and growth engineering (Romain Cornu, MerciApp, Clovis). Three pillars, one promise: because you are busy, we do the work that frees your time.
+Twenty years later, that model hasn't changed. What has changed is the depth: from pure operations, {{SITE_NAME}} has added transformation & data expertise (Georges Grosz, 22+ years at CGI) and growth engineering (Romain Cornu, MerciApp, Clovis). Three pillars, one promise: {{SLOGAN_LOWER}}, we do the work that frees your time.
 
 ---
 
@@ -109,4 +109,4 @@ Locations: {{SITE_LOCATIONS}}, France
 
 ## Brand Promise
 
-"Because you are busy, we do the work that frees your time — and we do it in a way that makes your growth more readable, more predictable, and better controlled."
+"{{SLOGAN}}, we do the work that frees your time — and we do it in a way that makes your growth more readable, more predictable, and better controlled."

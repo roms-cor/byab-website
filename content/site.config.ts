@@ -13,6 +13,8 @@ export interface SiteConfig {
   title: string;
   /** Short tagline shown after the em-dash in the title */
   tagline: string;
+  /** Brand slogan used as a bold lead-in phrase in page copy (sentence case) */
+  slogan: string;
   /** Meta description (≤160 chars recommended) */
   description: string;
   /** Meta keywords (comma-separated) */
@@ -58,6 +60,7 @@ export const siteConfig: SiteConfig = {
   email: "hello@becausebusy.com",
   title: "Because You Are Busy — Operations, Transformation & Growth Consultancy",
   tagline: "Operations, Transformation & Growth Consultancy",
+  slogan: "Because you are busy",
   description:
     "Because You Are Busy (BYAB) — We run what you can't get to anymore. Operations, transformation, and growth consultancy for founders and managing partners since 2005. 57% operating profitability, 0€ debt, 20+ years.",
   keywords:

@@ -478,8 +478,8 @@ const scanFiles = [
 ];
 
 const needles = [
-  { label: "site name", value: cfg.name, ci: false },
-  { label: "short name", value: cfg.shortName, ci: false },
+  { label: "site name", value: cfg.name, ci: true },
+  { label: "short name", value: cfg.shortName, ci: true },
   { label: "domain", value: cfg.domain, ci: true },
   { label: "email", value: cfg.email, ci: true },
   { label: "street address", value: cfg.address.street, ci: true },
@@ -491,12 +491,20 @@ const needles = [
   return true;
 });
 
+// All needles are matched case-insensitively so a differently-cased copy of
+// the brand name or acronym cannot slip past the scan.
+// Intentional keyword occurrences must be exempted explicitly with a
+// `template-ok:` marker on the same line (e.g. `// template-ok: <reason>`),
+// or — better — moved into content/ (cfg.slogan, content/companies.ts).
+const EXEMPT_MARKER = "template-ok:";
+
 let scanHits = 0;
 for (const file of scanFiles) {
   const text = await readOrNull(file);
   if (text === null) continue;
   const lines = text.split("\n");
   lines.forEach((line, i) => {
+    if (line.includes(EXEMPT_MARKER)) return;
     for (const n of needles) {
       const hit = n.ci ? line.toLowerCase().includes(n.value.toLowerCase()) : line.includes(n.value);
       if (hit) {

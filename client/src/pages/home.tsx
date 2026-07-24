@@ -17,6 +17,7 @@ import { painPoints } from "@content/pain";
 import { engagements } from "@content/work";
 import { timeline } from "@content/timeline";
 import { testimonial } from "@content/testimonial";
+import { companies } from "@content/companies";
 
 const logoHorizontalWhite = "/images/logo-horizontal-white.webp";
 
@@ -358,7 +359,7 @@ function Hero() {
               style={{ color: "#666666" }}
               data-testid="text-hero-description"
             >
-              <strong className="font-medium text-foreground">Because you are busy,</strong> we externalize
+              <strong className="font-medium text-foreground">{siteConfig.slogan},</strong> we externalize
               your operations, engineer growth systems, and turn operational chaos into measurable
               clarity — so you lead your company instead of getting buried by it.
             </p>
@@ -638,7 +639,7 @@ function About() {
             <p className="text-sm sm:text-base leading-relaxed mt-4" style={{ color: "#666666" }}>
               Every engagement begins with the same question: <strong className="font-semibold text-foreground">what is burying you?</strong> We
               find it, remove it, and replace it with structure that holds — without the overhead
-              of a full internal team. Because you are busy, we run what you can't get to.
+              of a full internal team. {siteConfig.slogan}, we run what you can't get to.
             </p>
           </div>
           <div>
@@ -807,7 +808,7 @@ function Story() {
 
         <div className="mt-12 sm:mt-16 p-8 sm:p-12 rounded-lg" style={{ backgroundColor: "#000000" }}>
           <p className="text-lg sm:text-xl lg:text-2xl font-semibold leading-snug tracking-tight" style={{ color: "#FFFFFF" }} data-testid="text-story-promise">
-            "Because you are busy, we do the work that frees your time —
+            "{siteConfig.slogan}, we do the work that frees your time —
             and we do it in a way that makes your growth more readable,
             more predictable, and better controlled."
           </p>
@@ -924,7 +925,7 @@ function Contact() {
               <span style={{ color: "#767676" }}>off your plate.</span>
             </h2>
             <p className="text-sm sm:text-base mt-4 leading-relaxed" style={{ color: "#666666" }}>
-              Because you are busy, we'll take it from here. Tell us what's burying you
+              {siteConfig.slogan}, we'll take it from here. Tell us what's burying you
               and we'll get back within 24h.
             </p>
             <div className="mt-8 space-y-4">
@@ -1031,29 +1032,6 @@ function Footer() {
     { name: "Anne Grosz", role: "Co-founder & Operations", linkedin: "https://www.linkedin.com/in/annegrosz" },
     { name: "Georges Grosz", role: "Transformation & Data", linkedin: "https://www.linkedin.com/in/georges-grosz-8aa9613" },
     { name: "Romain Cornu", role: "Growth Engine", linkedin: "https://fr.linkedin.com/in/romaincornu" },
-  ];
-
-  const companies = [
-    {
-      name: "B Y A B",
-      siren: "481 631 471",
-      founded: "2005",
-      links: [
-        { label: "Annuaire Entreprises", href: "https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471" },
-        { label: "Pappers", href: "https://www.pappers.fr/entreprise/b-y-a-b-because-you-are-busy-481631471" },
-        { label: "Le Figaro", href: "https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471" },
-      ],
-    },
-    {
-      name: siteConfig.name,
-      siren: "814 783 056",
-      founded: "2015",
-      links: [
-        { label: "Société.com", href: "https://www.societe.com/societe/because-you-are-busy-814783056.html" },
-        { label: "Pappers", href: "https://www.pappers.fr/entreprise/because-you-are-busy-814783056" },
-        { label: "Le Figaro", href: "https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056" },
-      ],
-    },
   ];
 
   return (

@@ -11,7 +11,7 @@ import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import { extractIssueRefs, enrichChangelog, type IssueRef } from "./changelog-enrich";
 
-const REPO = "roms-cor/byab-website";
+const REPO = "roms-cor/byab-website"; // template-ok: repo slug (deploy/changelog plumbing), reviewed via duplication checklist
 const OUTPUT = "CHANGELOG.md";
 
 // 1. Génération de base avec git-cliff
@@ -35,7 +35,7 @@ async function fetchIssueTitle(issueNumber: number): Promise<string | null> {
   try {
     const headers: Record<string, string> = {
       Accept: "application/vnd.github+json",
-      "User-Agent": "byab-changelog",
+      "User-Agent": "byab-changelog", // template-ok: repo slug (deploy/changelog plumbing), reviewed via duplication checklist
     };
     const token = process.env.GITHUB_TOKEN;
     if (token) headers.Authorization = `Bearer ${token}`;
