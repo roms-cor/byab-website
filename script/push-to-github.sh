@@ -41,9 +41,14 @@ git config user.name "Replit Publish"
 
 find . -maxdepth 1 -not -name '.git' -not -name '.' -exec rm -rf {} +
 
-for item in .github .gitignore .replit CHANGELOG.md CNAME CNAME.template TEMPLATE.md attached_assets client cliff.toml content server shared script components.json drizzle.config.ts eslint.config.js package.json package-lock.json postcss.config.js replit.md tailwind.config.ts tsconfig.json vite.config.ts generated-icon.png; do
-  [ -e "${WORKSPACE}/$item" ] && cp -r "${WORKSPACE}/$item" .
-done
+# Publish every git-tracked file except explicit private/local exclusions.
+# New build inputs are picked up automatically as soon as they are committed —
+# no allowlist to maintain. Add a pattern below only to keep something private.
+EXCLUDES='^(\.agents/|\.local/|dist/|artifacts/|screenshots/)'
+git -C "$WORKSPACE" ls-files -z \
+  | grep -zEv "$EXCLUDES" \
+  | tar -C "$WORKSPACE" --null -T - -cf - \
+  | tar -xf -
 
 if [ -f "$TMPDIR/github-package.json" ]; then
   cp "$TMPDIR/github-package.json" package.json

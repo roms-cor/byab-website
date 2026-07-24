@@ -8,7 +8,7 @@
     "build": "tsx script/build.ts",
     "start": "NODE_ENV=production node dist/index.cjs",
     "check": "tsc",
-    "lint": "eslint client/src",
+    "lint": "eslint client/src content",
     "changelog": "tsx script/generate-changelog.ts",
     "changelog:test": "tsx script/test-changelog-enrich.ts",
     "db:push": "drizzle-kit push",

@@ -685,7 +685,7 @@ function Team() {
             Our team.
           </h2>
           <p className="text-sm sm:text-base mt-4 leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
-            Four complementary profiles — united by a conviction Cécile Noiriel has carried since 2005: founders deserve better than drowning in their own back-office.
+            Four complementary profiles — united by a conviction {teamMembers[0].name} has carried since 2005: founders deserve better than drowning in their own back-office.
           </p>
         </header>
 
@@ -1073,12 +1073,11 @@ function Footer() {
     { label: "Contact", href: "#contact" },
   ];
 
-  const people = [
-    { name: "Cécile Noiriel", role: "Founder, B Y A B 2005", linkedin: "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/" },
-    { name: "Anne Grosz", role: "Co-founder & Operations", linkedin: "https://www.linkedin.com/in/annegrosz" },
-    { name: "Georges Grosz", role: "Transformation & Data", linkedin: "https://www.linkedin.com/in/georges-grosz-8aa9613" },
-    { name: "Romain Cornu", role: "Growth Engine", linkedin: "https://fr.linkedin.com/in/romaincornu" },
-  ];
+  const people = teamMembers.map((m) => ({
+    name: m.name,
+    role: m.footerRole ?? m.role,
+    linkedin: m.linkedin,
+  }));
 
   return (
     <footer className="px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-8 sm:pb-10 border-t border-border/50" role="contentinfo">

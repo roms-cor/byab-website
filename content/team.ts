@@ -8,6 +8,8 @@ export interface TeamMember {
   bio: string;
   skills: string[];
   since: string;
+  /** Short label shown in the footer "People" column; defaults to `role` when omitted */
+  footerRole?: string;
   linkedin?: string;
   website?: string;
 }
@@ -21,6 +23,7 @@ export const teamMembers: TeamMember[] = [
     bio: "Cécile Noiriel founded Because You Are Busy (B Y A B, SIREN 481 631 471) on April 1, 2005 — with a conviction ahead of its time: founders don't lack courage, they lack time and structure. She has run the operation continuously for over 20 years, serving as the firm's founding operational anchor.",
     skills: ["Project Coordination", "Administrative Org", "Client Delivery", "Process Design"],
     since: "Since 2005",
+    footerRole: "Founder, B Y A B 2005",
     linkedin: "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/",
   },
   {
@@ -31,6 +34,7 @@ export const teamMembers: TeamMember[] = [
     bio: "Anne Grosz spent 8 years as Secretary General & CFO at Vatier & Associés (Paris law firm) before founding the second Because You Are Busy entity in 2015. She leads externalized general secretariat for law firms and SMEs — finance, admin, HR, and ISO compliance — with in-house rigor at external scale.",
     skills: ["General Secretariat", "Finance & Admin", "Law Firm Ops", "ISO Compliance"],
     since: "Since 2015",
+    footerRole: "Co-founder & Operations",
     linkedin: "https://www.linkedin.com/in/annegrosz",
   },
   {

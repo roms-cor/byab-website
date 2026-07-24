@@ -94,7 +94,7 @@ async function buildAll() {
 
   // Blocking guard: no hardcoded color literals outside the token sheet.
   console.log("linting (hardcoded-color guard)...");
-  execSync("npx eslint client/src", { stdio: "inherit", cwd: rootDir });
+  execSync("npx eslint client/src content", { stdio: "inherit", cwd: rootDir });
 
   console.log("generating site metadata...");
   execSync(`npx tsx "${resolve(scriptDir, "generate-meta.ts")}"`, {

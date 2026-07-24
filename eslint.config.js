@@ -8,6 +8,11 @@
  * `bg-[#999999]` and inline styles like `style={{ color: "#000" }}`,
  * because both are string literals (or template chunks) in the .tsx source.
  *
+ * content/** is also linted, because content/timeline.tsx JSX ends up in the
+ * prerendered homepage HTML. content/site.config.ts is exempt: its `colors`
+ * block is metadata-generation reference (e.g. the themeColor meta tag
+ * requires a literal), not rendered styling.
+ *
  * client/src/components/ui/** (shadcn/radix vendor components) is exempt.
  *
  * Run with `npm run lint`; also a blocking step of `npm run build`
@@ -44,8 +49,13 @@ const noHardcodedColors = [
 
 export default [
   {
-    files: ["client/src/**/*.ts", "client/src/**/*.tsx"],
-    ignores: ["client/src/components/ui/**"],
+    files: [
+      "client/src/**/*.ts",
+      "client/src/**/*.tsx",
+      "content/**/*.ts",
+      "content/**/*.tsx",
+    ],
+    ignores: ["client/src/components/ui/**", "content/site.config.ts"],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
