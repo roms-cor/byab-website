@@ -50,6 +50,13 @@ if [ -f "$TMPDIR/github-package.json" ]; then
   VERSION=$(node -e "console.log(require('./package.json').version)")
 fi
 
+# Replit's package firewall rewrites lockfile "resolved" URLs to an internal
+# proxy that GitHub Actions runners cannot reach (npm ci fails with EAI_AGAIN).
+# Normalize them back to the public registry before publishing.
+if [ -f package-lock.json ]; then
+  sed -i 's|http://package-firewall.replit.local/npm/|https://registry.npmjs.org/|g' package-lock.json
+fi
+
 git add -A
 
 if git diff --cached --quiet; then
