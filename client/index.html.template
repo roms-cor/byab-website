@@ -54,16 +54,7 @@
       ],
       "knowsLanguage": ["fr", "en"],
       "sameAs": [
-        "https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471",
-        "https://www.pappers.fr/entreprise/b-y-a-b-because-you-are-busy-481631471",
-        "https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471",
-        "https://www.societe.com/societe/because-you-are-busy-814783056.html",
-        "https://www.pappers.fr/entreprise/because-you-are-busy-814783056",
-        "https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056",
-        "https://www.linkedin.com/in/annegrosz",
-        "https://www.linkedin.com/in/georges-grosz-8aa9613",
-        "https://fr.linkedin.com/in/romaincornu",
-        "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/"
+        {{ORG_SAMEAS_JSONLD}}
       ],
       "founder": {{TEAM_JSONLD_FOUNDER}},
       "member": [

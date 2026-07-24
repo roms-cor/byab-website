@@ -27,6 +27,7 @@ const { siteConfig: cfg } = await import("../content/site.config.js").catch(
 const { services } = await import("../content/services.js").catch(() => import("../content/services.ts" as any));
 const { teamMembers } = await import("../content/team.js").catch(() => import("../content/team.ts" as any));
 const { stats } = await import("../content/stats.js").catch(() => import("../content/stats.ts" as any));
+const { companies } = await import("../content/companies.js").catch(() => import("../content/companies.ts" as any));
 const { engagements } = await import("../content/work.js").catch(() => import("../content/work.ts" as any));
 const { testimonial } = await import("../content/testimonial.js").catch(() => import("../content/testimonial.ts" as any));
 const { resolvedFaq, servicesInline } = await import("../content/faq.js").catch(() => import("../content/faq.ts" as any));
@@ -116,6 +117,14 @@ export function resolveBase(text: string): string {
 // FAQ + inline services summary now resolve in content/faq.ts (shared with
 // the visible homepage FAQ section) — imported above.
 
+// Organization sameAs — registry links from content/companies.ts + team
+// LinkedIn URLs from content/team.ts, so the list can never go stale when
+// the team or the registered entities change. Exported for validate-seo.ts.
+export const orgSameAs: string[] = [
+  ...companies.flatMap((c: any) => c.links.map((l: any) => l.href)),
+  ...teamMembers.filter((m: any) => m.linkedin).map((m: any) => m.linkedin),
+];
+
 const composed: Record<string, string> = {
   SERVICES_INLINE: servicesInline,
 
@@ -156,6 +165,9 @@ const composed: Record<string, string> = {
         null, 2
       ).replace(/^/gm, "        ").trimStart()
     )
+    .join(",\n        "),
+  ORG_SAMEAS_JSONLD: orgSameAs
+    .map((u) => JSON.stringify(u))
     .join(",\n        "),
   // Organization founder (first entry in content/team.ts) + member list (the
   // rest), so the JSON-LD team can never go stale when content/team.ts changes.

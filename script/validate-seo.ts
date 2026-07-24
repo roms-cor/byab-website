@@ -28,7 +28,7 @@
  *      the content/ layer (so a duplicate only needs to edit content/).
  */
 import { readFile, readdir } from "fs/promises";
-import { resolvedFaq, timelineEntries } from "./meta-tokens";
+import { resolvedFaq, timelineEntries, orgSameAs } from "./meta-tokens";
 import { join, relative, resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -199,6 +199,14 @@ async function checkHtml(html: string) {
     check(org.name === cfg.name, `Organization.name "${org.name}" ≠ config name`);
     check(org.url === cfg.url, `Organization.url "${org.url}" ≠ config url`);
     check(org.foundingDate === cfg.foundingDate, `Organization.foundingDate "${org.foundingDate}" ≠ config foundingDate`);
+    // Cross-check sameAs against content/companies.ts registry links +
+    // content/team.ts LinkedIn URLs (composed in meta-tokens.ts).
+    const sameAs: string[] = Array.isArray(org.sameAs) ? org.sameAs : [];
+    check(
+      sameAs.length === orgSameAs.length &&
+        orgSameAs.every((u, i) => sameAs[i] === u),
+      `Organization.sameAs stale: got [${sameAs.join(", ")}], expected registry links from content/companies.ts + LinkedIn URLs from content/team.ts [${orgSameAs.join(", ")}]`
+    );
     // Cross-check founder + member against content/team.ts (single source of
     // truth): founder = first entry, member = the rest.
     const expectPerson = (label: string, p: any, m: any) => {
