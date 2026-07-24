@@ -1,0 +1,55 @@
+name: Changelog
+
+# Après chaque push humain sur main : régénère CHANGELOG.md et le committe
+# sous `chore(changelog): update changelog [skip ci]`. Le [skip ci] empêche
+# nativement GitHub de redéclencher les workflows sur ce push ; les gardes
+# d'exclusion ci-dessous servent de seconde barrière anti-boucle.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: read
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    # Mêmes gardes anti-boucle que deploy.yml, plus l'exclusion chore(changelog)
+    if: |
+      github.actor != 'github-actions[bot]' &&
+      !startsWith(github.event.head_commit.message, 'chore(release)') &&
+      !startsWith(github.event.head_commit.message, 'chore(changelog)')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # historique complet requis par git-cliff
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate changelog
+        run: npm run changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and push changelog
+        run: |
+          if git diff --quiet -- CHANGELOG.md; then
+            echo "CHANGELOG.md inchangé — aucun commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          git commit -m "chore(changelog): update changelog [skip ci]"
+          git push

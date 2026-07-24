@@ -23,6 +23,9 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           skip-on-empty: true
+          # Le changelog est généré par git-cliff (changelog.yml) ; cette action
+          # ne doit pas écrire de CHANGELOG.md concurrent.
+          output-file: 'false'
 
       - name: Create GitHub Release
         if: ${{ steps.changelog.outputs.skipped == 'false' }}

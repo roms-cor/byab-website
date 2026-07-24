@@ -1,0 +1,65 @@
+Objectif : transformer ce projet en template réutilisable pour de futurs
+sites (même stack, contenu différent), sans casser le site actuel.
+
+Crée une branche de travail mentale : ne touche PAS au contenu existant
+de becausebusy.com tant que je n'ai pas validé.
+
+ÉTAPE 1 — Extraire toute la donnée éditoriale hors des composants
+
+Crée un dossier `content/` à la racine avec :
+- `content/site.config.ts` — nom du site, domaine, email, adresse,
+  locales, couleurs de marque, polices
+- `content/team.ts` — le tableau teamMembers (actuellement inline dans
+  home.tsx)
+- `content/services.ts` — le tableau services
+- `content/timeline.ts` — la timeline Story
+- `content/work.ts` — les engagements Track Record
+- `content/stats.ts` — les 4 métriques
+- `content/pain.ts` — les 3 pain points
+- `content/testimonial.ts` — le témoignage
+
+Chaque fichier exporte un type TypeScript + les données.
+Puis refactorise `client/src/pages/home.tsx` pour importer depuis
+`content/` au lieu d'avoir les données en dur. Le rendu visuel doit
+rester STRICTEMENT identique — aucun changement de pixel.
+
+ÉTAPE 2 — Rendre les métadonnées dynamiques
+
+Extrais tout ce qui est hardcodé "Because You Are Busy" ou
+"becausebusy.com" dans :
+- `client/index.html` (title, meta, OG, JSON-LD, canonical)
+- `client/public/robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt`
+- `CNAME`
+
+Génère ces fichiers depuis `content/site.config.ts` au build via un
+script `script/generate-meta.ts` appelé au début de `script/build.ts`.
+Attention : les 7 blocs JSON-LD doivent rester valides. Vérifie la
+sortie avant/après.
+
+ÉTAPE 3 — Paramétrer le déploiement
+
+Dans `script/push-to-github.sh`, remplace le REPO hardcodé
+("roms-cor/byab-website") par une variable d'environnement
+`GITHUB_REPO` avec fallback sur la valeur actuelle.
+
+ÉTAPE 4 — Documenter
+
+Crée `TEMPLATE.md` à la racine expliquant, pour un non-technicien :
+1. Quels fichiers modifier pour un nouveau site (uniquement `content/`)
+2. Quels secrets Replit configurer (DATABASE_URL, GITHUB_PAT,
+   GITHUB_REPO)
+3. Comment configurer le DNS Namecheap + GitHub Pages
+4. Ce qu'il ne faut JAMAIS toucher (workflows, script/build.ts,
+   vite.config.ts)
+
+CONTRAINTES ABSOLUES
+- Le site becausebusy.com doit rester identique visuellement et
+  fonctionnellement
+- Ne supprime pas la ligne de version dans le footer
+  (__APP_VERSION__ / __BUILD_DATE__ / __GIT_COMMIT_DATE__)
+- Ne modifie pas .github/workflows/ (filtres anti-loop critiques)
+- Commit avec message conventionnel : `refactor: extract content layer
+  for template reuse`
+
+Procède étape par étape. Après chaque étape, montre-moi le diff et
+attends ma validation avant de continuer.

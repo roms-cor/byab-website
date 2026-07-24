@@ -1,18 +1,8 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import { readFileSync } from "fs";
-import { execSync } from "child_process";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
-
-const pkg = JSON.parse(readFileSync("package.json", "utf-8"));
-
-let gitCommitDate = "";
-try {
-  const log = execSync("git log -2 --format=%cI", { encoding: "utf-8" }).trim().split("\n");
-  const msg = execSync("git log -1 --format=%s", { encoding: "utf-8" }).trim();
-  gitCommitDate = msg.startsWith("chore(publish)") && log[1] ? log[1] : log[0];
-} catch { /* no git available */ }
+import { buildDefines } from "./script/build-defines";
 
 export default defineConfig({
   plugins: [
@@ -35,14 +25,13 @@ export default defineConfig({
       "@": path.resolve(import.meta.dirname, "client", "src"),
       "@shared": path.resolve(import.meta.dirname, "shared"),
       "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+      "@content": path.resolve(import.meta.dirname, "content"),
     },
   },
   root: path.resolve(import.meta.dirname, "client"),
-  define: {
-    __APP_VERSION__: JSON.stringify(pkg.version),
-    __BUILD_DATE__: JSON.stringify(new Date().toISOString()),
-    __GIT_COMMIT_DATE__: JSON.stringify(gitCommitDate),
-  },
+  // Overridden by script/build.ts during `npm run build` so the client and
+  // prerender bundles share one identical set of values.
+  define: buildDefines(),
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,

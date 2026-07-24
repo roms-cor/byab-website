@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Copy, Check, ArrowDown, Download, Palette, Type, Grid3X3, Layers, BookOpen, Image, LayoutTemplate } from "lucide-react";
+import { siteConfig } from "@content/site.config";
 const logoSquareBlack = "/images/logo-square-black.webp";
 const logoSquareWhite = "/images/logo-square-white.webp";
 const logoHorizontalBlack = "/images/logo-horizontal-black.webp";
@@ -56,14 +57,14 @@ const siteSections = [
   { id: "marquee", name: "Marquee", description: "Infinite horizontal scroll of expertise keywords with alternating bold/normal pattern: Organization (bold), Finance, Strategy (bold), Operations, Transformation (bold), Growth, Outbound (bold), Data.", tokens: "bold text: #666666, normal text: #767676, border: Gray 100" },
   { id: "pain", name: "Pain Recognition", description: "Dark section with heading 'You didn't start a company to manage its back-office.' and 3 numbered pain points with bold lead text: (01) mental bandwidth consumed by operations, (02) scattered data and improvised processes, (03) stalling growth due to missing outbound/funnel ownership.", tokens: "bg: Accent (#000000), heading: #FFFFFF, accent word: #949494, numbers: #666666 font-mono, body: rgba(255,255,255,0.85), bold: #FFFFFF" },
   { id: "services", name: "Services", description: "Heading 'Four ways we take it off your plate.' with 'Discuss your project' CTA. 2×2 grid: Operational Backbone, Transformation & Data, Growth Engine, Legal Practice Ops. Each card has number, title, description, and outcome list with → prefix items in mono font.", tokens: "card bg: Gray 50, number: #767676, text: Link (#666666), outcomes: #666666 font-mono" },
-  { id: "stats", name: "Stats", description: "Dark panel with 'Because You Are Busy — by the numbers' label. 4 metrics with yellow accent suffixes (#E8E020): 20+ years, 57%, 3 pillars, 0€. Each stat has a descriptive label and a subtitle (e.g. 'Founded 2005 — still running', 'No hype. No dilution.').", tokens: "panel bg: Accent (#000000), values: #FFFFFF, suffixes: #E8E020, labels: rgba(255,255,255,0.5), subs: rgba(255,255,255,0.25) font-mono" },
+  { id: "stats", name: "Stats", description: "Dark panel with '" + siteConfig.name + " — by the numbers' label. 4 metrics with yellow accent suffixes (#E8E020): 20+ years, 57%, 3 pillars, 0€. Each stat has a descriptive label and a subtitle (e.g. 'Founded 2005 — still running', 'No hype. No dilution.').", tokens: "panel bg: Accent (#000000), values: #FFFFFF, suffixes: #E8E020, labels: rgba(255,255,255,0.5), subs: rgba(255,255,255,0.25) font-mono" },
   { id: "work", name: "Engagements", description: "Heading 'Recent engagements.' 3 engagement rows with category (mono), title, description, year, and outcome badge (yellow bg #E8E020): B2B SaaS Scale-Up / Pipeline engineered, National Law Firm / Operations rebuilt, Tech PME / Visibility restored.", tokens: "category: #666666 font-mono, description: #666666, year: #767676, badge bg: #E8E020, badge text: #000000" },
   { id: "approach", name: "About / Approach", description: "Background #F5F5F5. Two-column layout: heading 'We partner with founders who refuse to keep drowning.' with body text. Right column has 3 pillars with bullet dots: Operations-first ('We start where the friction is'), Data-driven ('Intuition without measurement is noise'), Growth-engineered ('We wire your commercial engine').", tokens: "bg: Gray 50 (#F5F5F5), pillar bullets: #000000, pillar names: font-semibold, pillar desc: #666666, borders: #C0C0C0" },
   { id: "team", name: "Team", description: "Heading 'Our team.' with intro: 'Four complementary profiles — united by a conviction Cécile Noiriel has carried since 2005.' 2×2 grid of team cards: Anne Grosz (Founder & Operations), Cécile Noiriel (Founder — B Y A B, 2005), Georges Grosz (Transformation & Data), Romain Cornu (Growth Engine). Each card has photo, name, role, bio, LinkedIn link.", tokens: "card bg: Gray 50, name: Text Primary, role: #767676, bio: #666666, photo border: #E5E5E5" },
-  { id: "story", name: "Story", description: "Background #F5F5F5. Full company history timeline (2005–2026) with 5 phases: 2005 Cécile Noiriel founds B Y A B (SIREN 481 631 471), 2015 Anne Grosz creates Because You Are Busy (SIREN 814 783 056), 2020 consolidation (craft over startup), 2025 Georges Grosz joins as co-manager, 2025–26 Romain Cornu completes the puzzle. Contains external backlinks to company registries, LinkedIn profiles, Vatier & Associés, Avizio, and Clay. Closes with brand promise quote on dark panel.", tokens: "bg: Gray 50 (#F5F5F5), year: Text Primary font-mono, text: Link (#666666), links: Text Primary underline, promise panel: Accent (#000000) bg, #FFFFFF text, credits: #949494" },
+  { id: "story", name: "Story", description: "Background #F5F5F5. Full company history timeline (2005–2026) with 5 phases: 2005 Cécile Noiriel founds B Y A B (SIREN 481 631 471), 2015 Anne Grosz creates " + siteConfig.name + " (SIREN 814 783 056), 2020 consolidation (craft over startup), 2025 Georges Grosz joins as co-manager, 2025–26 Romain Cornu completes the puzzle. Contains external backlinks to company registries, LinkedIn profiles, Vatier & Associés, Avizio, and Clay. Closes with brand promise quote on dark panel.", tokens: "bg: Gray 50 (#F5F5F5), year: Text Primary font-mono, text: Link (#666666), links: Text Primary underline, promise panel: Accent (#000000) bg, #FFFFFF text, credits: #949494" },
   { id: "testimonial", name: "Testimonial", description: "Centered blockquote: 'They didn't just take work off my plate. They rebuilt how my company runs — and revenue followed.' — M. Laurent, Managing Partner.", tokens: "avatar bg: Primary (#999999), avatar text: Text Primary" },
   { id: "contact", name: "Contact", description: "Background #F5F5F5. Two-column layout with heading 'Let's take something off your plate.' (accent word #767676), styled contact details with mono labels (Email, Based in), and 24h response promise. Form with Name, Email, 'Tell us what's burying you' textarea, and 'Send message' submit.", tokens: "bg: Gray 50 (#F5F5F5), labels: #666666 font-mono, inputs: default border/bg, submit: Accent (#000000)" },
-  { id: "footer", name: "Footer", description: "4-column grid: logo + tagline + email/location + nav links, People (Cécile Noiriel first as 'Founder, B Y A B 2005', Anne Grosz as 'Co-founder & Operations', Georges Grosz, Romain Cornu — all with LinkedIn), Companies (B Y A B SIREN 481 631 471 + Because You Are Busy SIREN 814 783 056 with registry links). Bottom bar: copyright, version/publish/commit timestamps, address.", tokens: "text: Link (#666666), company SIREN: #767676, registry links: #767676 underline, version: #BBBBBB" },
+  { id: "footer", name: "Footer", description: "4-column grid: logo + tagline + email/location + nav links, People (Cécile Noiriel first as 'Founder, B Y A B 2005', Anne Grosz as 'Co-founder & Operations', Georges Grosz, Romain Cornu — all with LinkedIn), Companies (B Y A B SIREN 481 631 471 + " + siteConfig.name + " SIREN 814 783 056 with registry links). Bottom bar: copyright, version/publish/commit timestamps, address.", tokens: "text: Link (#666666), company SIREN: #767676, registry links: #767676 underline, version: #BBBBBB" },
 ];
 
 const navSections = [
@@ -153,7 +154,7 @@ export default function Components() {
   const [activeSection, setActiveSection] = useState("overview");
 
   useEffect(() => {
-    document.title = "Design — Because You Are Busy";
+    document.title = `Design — ${siteConfig.name}`;
     let meta = document.querySelector('meta[name="robots"]') as HTMLMetaElement;
     if (meta) {
       meta.content = "noindex, nofollow";
@@ -164,7 +165,7 @@ export default function Components() {
       document.head.appendChild(meta);
     }
     return () => {
-      document.title = "Because You Are Busy — Operations, Transformation & Growth Consulting Since 2005";
+      document.title = siteConfig.title;
       if (meta) meta.content = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
     };
   }, []);
@@ -195,7 +196,7 @@ export default function Components() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <a href="/" aria-label="Home" data-testid="link-logo-home">
-              <img src={logoHorizontalWhite} alt="BYAB logo" className="h-12 w-auto" data-testid="img-logo-header" />
+              <img src={logoHorizontalWhite} alt={`${siteConfig.shortName} logo`} className="h-12 w-auto" data-testid="img-logo-header" />
             </a>
             <span className="text-border/80 text-sm font-light" aria-hidden="true">/</span>
             <span className="text-sm font-medium text-muted-foreground">Design</span>
@@ -874,7 +875,7 @@ export default function Components() {
             <div className="p-6 sm:p-8 rounded-lg" style={{ backgroundColor: "#000000" }}>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <img src={logoHorizontalBlack} alt="BYAB logo" className="h-6 w-auto mb-3" />
+                  <img src={logoHorizontalBlack} alt={`${siteConfig.shortName} logo`} className="h-6 w-auto mb-3" />
                   <p className="text-sm leading-relaxed" style={{ color: "#777777" }}>
                     Components maintained by the design team.
                   </p>

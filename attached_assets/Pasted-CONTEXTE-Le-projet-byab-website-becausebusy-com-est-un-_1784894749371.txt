@@ -1,0 +1,38 @@
+CONTEXTE
+Le projet byab-website (becausebusy.com) est un site vitrine one-page en React 18 + TypeScript + Vite 7, Tailwind 3 + shadcn/ui, déployé sur GitHub Pages. Le design est déjà tokenisé via des variables CSS dans client/src/index.css (--background, --foreground, --border, --primary, --muted, etc.), exposées comme classes Tailwind dans tailwind.config.ts (bg-background, text-foreground, border-border...). Le composant principal client/src/pages/home.tsx (1497 lignes) consomme déjà correctement ce système de tokens (70+ usages de classes comme text-foreground, border-border).
+
+OBJECTIF
+Éliminer toute valeur de style codée en dur (hex, rgb, px de couleur) qui n'est pas une référence à un token existant dans client/src/index.css, et empêcher toute régression future. Ce n'est PAS une tâche de redesign : le rendu visuel final doit être strictement identique à l'existant, pixel pour pixel.
+
+PÉRIMÈTRE EXACT — deux fichiers à corriger
+
+1. client/src/pages/components.tsx (page de documentation de marque à /design)
+   - Contient deux tableaux hardcodés : `brandColors` (5 entrées, lignes ~8-13) et `extendedPalette` (10 entrées, lignes ~16-26), avec des valeurs hex en dur (ex. `{ name: "Primary", hex: "#999999" }`).
+   - ATTENTION avant de remplacer : vérifie d'abord la correspondance réelle avec les variables de client/src/index.css. Le nommage actuel dans components.tsx ne correspond PAS forcément aux noms de variables CSS (exemple constaté : components.tsx labellise "Primary" = #999999 alors que --primary dans index.css vaut hsl(0 0% 0%) = noir). Ne fais pas un simple find-replace par nom — construis la table de correspondance hex → variable CSS en comparant les valeurs calculées réelles, pas les noms.
+   - Objectif : cette page doit afficher les couleurs en lisant les valeurs depuis les CSS custom properties (via getComputedStyle ou une liste de tokens définie une seule fois, référencée depuis index.css), plus aucune valeur hex écrite en dur dans ce fichier.
+
+2. client/index.html
+   - Contient un bloc HTML pré-rendu (dans <div id="root">, ligne ~295) avec des styles inline codés en dur (couleurs #fff, #000, #666666, #767676, #595959, rayons 9999px, etc.) — c'est un snapshot statique du header/hero utilisé pour le SEO/LCP avant hydratation React.
+   - Objectif : remplace les valeurs hex en dur de ce snapshot par les valeurs réelles issues des variables CSS de client/src/index.css (report-les en dur si le HTML doit rester statique pour le préchargement, mais elles doivent être IDENTIQUES aux valeurs actuelles des tokens — pas de nouvelle valeur inventée). Si tu identifies un moyen de générer ce bloc automatiquement à partir des tokens au build (via vite.config.ts), propose-le, mais ne le fais pas sans confirmation explicite — c'est un changement d'infrastructure de build, pas juste de style.
+
+GARDE-FOU ANTI-RÉGRESSION
+Ajoute une règle ESLint (ou stylelint si plus adapté) qui interdit :
+- les valeurs Tailwind arbitraires de couleur (ex. `bg-[#999999]`, `text-[#000]`)
+- les styles inline contenant une couleur hex ou rgb en dur (`style={{ color: "#000" }}`)
+dans tout client/src/**/*.tsx, avec une exception explicite pour client/src/index.css lui-même (seule source de vérité autorisée à contenir des valeurs hex/hsl brutes).
+
+HORS PÉRIMÈTRE — NE PAS FAIRE
+- Ne touche PAS à shadcn/ui, aux dépendances @radix-ui, ni à tailwind.config.ts au-delà de ce qui est nécessaire pour la règle de lint.
+- N'introduis AUCUNE nouvelle dépendance (pas de Relume, pas de nouvelle librairie de composants, pas de nouveau preset Tailwind).
+- Ne touche pas à vite.config.ts, au workflow .github/workflows/deploy.yml, ni à la logique __APP_VERSION__/__BUILD_DATE__/__GIT_COMMIT_DATE__.
+- Ne modifie pas client/src/pages/home.tsx (déjà conforme) sauf si tu y détectes toi-même une valeur hex en dur — dans ce cas, signale-le avant de corriger.
+- Ne supprime pas les fichiers client/src/components/ui/*.tsx — c'est un sujet de nettoyage séparé, hors scope ici.
+
+CRITÈRES D'ACCEPTATION
+- `grep -rE "#[0-9a-fA-F]{3,6}"` sur client/src/**/*.tsx et client/index.html ne retourne plus aucun résultat en dehors de client/src/index.css.
+- npm run build passe sans erreur.
+- Le rendu de / et /design est visuellement identique à avant (captures d'écran avant/après à comparer).
+- Le formulaire de contact (toast de succès/erreur) et le footer (version/date de build) fonctionnent toujours.
+- La règle de lint échoue volontairement si on réintroduit un hex en dur dans un .tsx (teste-le avec un exemple jetable avant de le retirer).
+
+Si un point du périmètre te semble ambigu ou risqué en cours de route, arrête-toi et demande plutôt que de deviner.

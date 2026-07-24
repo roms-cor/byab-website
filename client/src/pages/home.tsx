@@ -9,37 +9,16 @@ import { SiLinkedin, SiX } from "react-icons/si";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { siteConfig } from "@content/site.config";
+import { teamMembers } from "@content/team";
+import { services } from "@content/services";
+import { stats } from "@content/stats";
+import { painPoints } from "@content/pain";
+import { engagements } from "@content/work";
+import { timeline } from "@content/timeline";
+import { testimonial } from "@content/testimonial";
+
 const logoHorizontalWhite = "/images/logo-horizontal-white.webp";
-const photoAnne256 = "/images/anne-256.webp";
-const photoCecile256 = "/images/cecile-256.webp";
-const photoGeorges256 = "/images/georges-256.webp";
-const photoRomain256 = "/images/romain-256.webp";
-const photoAnne128 = "/images/anne-128.webp";
-const photoCecile128 = "/images/cecile-128.webp";
-const photoGeorges128 = "/images/georges-128.webp";
-const photoRomain128 = "/images/romain-128.webp";
-
-function useHeadLinks() {
-  useEffect(() => {
-    const existingCanonical = document.querySelector('link[rel="canonical"]');
-    if (existingCanonical) existingCanonical.remove();
-
-    const links = [
-      { rel: "canonical", href: "https://becausebusy.com/" },
-      { rel: "alternate", hreflang: "en", href: "https://becausebusy.com/" },
-      { rel: "alternate", hreflang: "fr", href: "https://becausebusy.com/" },
-      { rel: "alternate", hreflang: "x-default", href: "https://becausebusy.com/" },
-    ];
-    const elements: HTMLLinkElement[] = [];
-    links.forEach((attrs) => {
-      const link = document.createElement("link");
-      Object.entries(attrs).forEach(([k, v]) => link.setAttribute(k, v));
-      document.head.appendChild(link);
-      elements.push(link);
-    });
-    return () => elements.forEach((el) => el.remove());
-  }, []);
-}
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -88,7 +67,7 @@ function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white" role="banner">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
         <a href="/" aria-label="Home" data-testid="link-logo-home">
-          <img src={logoHorizontalWhite} alt="Because You Are Busy — Operations, Transformation & Growth Consultancy" width={240} height={48} className="h-[38px] w-auto" {...{fetchpriority: "high"} as any} data-testid="img-logo-header" />
+          <img src={logoHorizontalWhite} alt={siteConfig.title} width={240} height={48} className="h-[38px] w-auto" {...{fetchpriority: "high"} as any} data-testid="img-logo-header" />
         </a>
         <nav aria-label="Main navigation" className="hidden md:block">
           <ul className="flex items-center gap-6 list-none m-0 p-0">
@@ -165,49 +144,6 @@ function Header() {
   );
 }
 
-const teamMembers = [
-  {
-    src: photoCecile256,
-    thumb: photoCecile128,
-    name: "Cécile Noiriel",
-    role: "Founder — B Y A B, 2005",
-    bio: "Created B Y A B on April 1, 2005 with a conviction ahead of its time: founders don't lack courage — they lack time and structure. Has run the operation since day one.",
-    skills: ["Project Coordination", "Administrative Org", "Client Delivery", "Process Design"],
-    since: "Since 2005",
-    linkedin: "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/",
-  },
-  {
-    src: photoAnne256,
-    thumb: photoAnne128,
-    name: "Anne Grosz",
-    role: "Founder & Operations",
-    bio: "8 years as Secretary General & CFO at Vatier & Associés. Now leads externalized general secretariat for law firms and SMEs — finance, admin, HR, and ISO compliance.",
-    skills: ["General Secretariat", "Finance & Admin", "Law Firm Ops", "ISO Compliance"],
-    since: "Since 2015",
-    linkedin: "https://www.linkedin.com/in/annegrosz",
-  },
-  {
-    src: photoGeorges256,
-    thumb: photoGeorges128,
-    name: "Georges Grosz",
-    role: "Transformation & Data",
-    bio: "22+ years as Senior Executive Consultant at CGI. Teaches at Université Paris 1 Panthéon-Sorbonne. Brings the systems architecture discipline that turns chaotic operations into governed infrastructure.",
-    skills: ["Systems Architecture", "Data Governance", "Project Management", "Business Analysis"],
-    since: "Since July 2025",
-    linkedin: "https://www.linkedin.com/in/georges-grosz-8aa9613",
-  },
-  {
-    src: photoRomain256,
-    thumb: photoRomain128,
-    name: "Romain Cornu",
-    role: "Growth Engine",
-    bio: "6 years at MerciApp (now GTM & Key Accounts Lead), 4 years leading growth at Clovis. Ex-Datananas, GrowthMakers. Designs go-to-market engines that make growth predictable.",
-    skills: ["Go-to-Market", "Acquisition Funnels", "Outbound B2B", "Revenue Ops"],
-    since: "Since 2025",
-    linkedin: "https://fr.linkedin.com/in/romaincornu",
-  },
-];
-
 function TeamSlider() {
   const [active, setActive] = useState(0);
   const [prev, setPrev] = useState(-1);
@@ -260,7 +196,7 @@ function TeamSlider() {
                 <img
                   key={m.name}
                   src={m.src}
-                  alt={`${m.name}, ${m.role} at Because You Are Busy`}
+                  alt={`${m.name}, ${m.role} at ${siteConfig.name}`}
                   width={256}
                   height={256}
                   {...(isFirst ? { fetchpriority: "high" } : { fetchpriority: "low" }) as any}
@@ -504,23 +440,7 @@ function Marquee() {
 }
 
 function PainRecognition() {
-  const pains = [
-    {
-      num: "01",
-      lead: "Your mental bandwidth is consumed by operations",
-      rest: " that should run themselves — admin, finance, HR, compliance — instead of by the decisions that actually move the needle.",
-    },
-    {
-      num: "02",
-      lead: "Your data is scattered, your processes are improvised",
-      rest: ", and every week you're putting out fires instead of building the systems that would prevent them.",
-    },
-    {
-      num: "03",
-      lead: "Your growth is stalling",
-      rest: " not because the opportunity isn't there, but because no one owns the outbound machine, the funnel architecture, or the commercial pipeline that would capture it.",
-    },
-  ];
+  const pains = painPoints;
 
   return (
     <section aria-label="The problem we solve" className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24" style={{ backgroundColor: "#000000" }}>
@@ -558,53 +478,6 @@ function PainRecognition() {
 }
 
 function Services() {
-  const services = [
-    {
-      num: "01",
-      title: "Operational Backbone",
-      description: "Externalized general secretariat, admin, and finance management — so your back-office runs on autopilot and you stop drowning in the details.",
-      outcomes: [
-        "General secretariat & admin management",
-        "Accounting, treasury & financial reporting",
-        "HR, legal documentation & ISO compliance",
-        "Ideal for law firms, SMEs & growing founders",
-      ],
-    },
-    {
-      num: "02",
-      title: "Transformation & Data",
-      description: "Systems architecture, project governance and data strategy — turning operational chaos into measurable clarity and scalable infrastructure.",
-      outcomes: [
-        "Systems architecture & tech governance",
-        "Data strategy & operational dashboards",
-        "Project management & transformation roadmaps",
-        "Business analysis & decision enablement",
-      ],
-    },
-    {
-      num: "03",
-      title: "Growth Engine",
-      description: "Outbound systems, acquisition funnels, and predictable commercial pipelines — engineered so that revenue growth becomes systematic, not accidental.",
-      outcomes: [
-        "Outbound sequence design & automation",
-        "Acquisition funnel architecture",
-        "Sales process structuring & CRM ops",
-        "Growth machine from Datananas, Clovis, MerciApp playbooks",
-      ],
-    },
-    {
-      num: "04",
-      title: "Legal Practice Ops",
-      description: "Purpose-built operational support for law firms — where precision is non-negotiable, nothing can be improvised, and partners need to focus on practice, not paperwork.",
-      outcomes: [
-        "Partner-facing general secretariat",
-        "Finance, compliance & ISO management",
-        "Client file & deadline administration",
-        "20 years of law firm operational expertise",
-      ],
-    },
-  ];
-
   return (
     <section id="services" aria-labelledby="services-heading" className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
       <div className="max-w-[1200px] mx-auto">
@@ -652,19 +525,12 @@ function Services() {
 }
 
 function Stats() {
-  const stats = [
-    { value: "20", suffix: "+", label: "Years of uninterrupted operational service to founders", sub: "Founded 2005 — still running" },
-    { value: "57", suffix: "%", label: "Operating profitability — a lean machine that lives what it promises", sub: "No hype. No dilution." },
-    { value: "3", suffix: "", label: "Complementary expertise pillars: operations, transformation, growth", sub: "One engagement, full stack" },
-    { value: "0", suffix: "€", label: "External debt raised — ever. We grow on our own terms.", sub: "Ultra-lean by design" },
-  ];
-
   return (
     <section aria-label="Key metrics" className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
       <div className="max-w-[1200px] mx-auto">
         <div className="rounded-lg p-8 sm:p-12 lg:p-16" style={{ backgroundColor: "#000000" }}>
           <p className="text-xs uppercase tracking-[0.15em] font-medium mb-10" style={{ color: "#949494" }} data-testid="text-stats-label">
-            Because You Are Busy — by the numbers
+            {siteConfig.name} — by the numbers
           </p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
             {stats.map((stat) => (
@@ -684,29 +550,7 @@ function Stats() {
 }
 
 function Work() {
-  const projects = [
-    {
-      title: "B2B SaaS Scale-Up",
-      category: "Growth Engineering",
-      year: "2025",
-      description: "Outbound architecture, acquisition funnel structuring and sales machine deployment for a French B2B software company in growth phase.",
-      outcome: "Pipeline engineered",
-    },
-    {
-      title: "National Law Firm",
-      category: "Operations Restructuring",
-      year: "2024",
-      description: "Full operational restructuring — general secretariat, financial management, ISO compliance and HR processes rebuilt from the ground up.",
-      outcome: "Operations rebuilt",
-    },
-    {
-      title: "Tech PME",
-      category: "Transformation & Data",
-      year: "2025",
-      description: "Systems architecture review, data governance framework and operational dashboard deployment. Chaos to measurable clarity.",
-      outcome: "Visibility restored",
-    },
-  ];
+  const projects = engagements;
 
   return (
     <section id="work" aria-labelledby="work-heading" className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 border-t border-border/50">
@@ -759,15 +603,15 @@ function About() {
   const pillars = [
     {
       name: "Operations-first",
-      desc: "We start where the friction is, not where it looks good. Every engagement is grounded in the messy operational reality, not a top-down strategy deck.",
+      desc: `${siteConfig.name} starts where the friction is — not where it looks good. Every engagement is grounded in the operational reality: 20+ years of law firm and SME back-office, not top-down strategy decks.`,
     },
     {
       name: "Data-driven",
-      desc: "Intuition without measurement is noise. We build decision systems so you always know what's working, what's leaking, and what to act on next.",
+      desc: `Intuition without measurement is noise. ${siteConfig.name} builds decision systems — dashboards, governance frameworks, operational metrics — so you always know what's working, what's leaking, and what to act on next.`,
     },
     {
       name: "Growth-engineered",
-      desc: "Freeing your time is only the beginning. We wire your commercial engine so growth becomes predictable, not a function of luck or heroic effort.",
+      desc: `Freeing your time is only the beginning. ${siteConfig.name} wires your commercial engine — ICP, outbound, funnels, pipeline metrics — so revenue growth becomes systematic, not a function of luck or heroic effort.`,
     },
   ];
 
@@ -787,14 +631,14 @@ function About() {
               <span style={{ color: "#767676" }}>drowning.</span>
             </h2>
             <p className="text-sm sm:text-base leading-relaxed mt-6" style={{ color: "#666666" }}>
-              Three forces converge at Because You Are Busy: twenty years of hands-on operational
-              leadership, the systems architecture discipline of a Senior Executive Consultant,
-              and the growth engineering instincts of a serial B2B builder.
+              Three forces converge at {siteConfig.name}: 20+ years of hands-on operational
+              leadership (Anne & Cécile), 22+ years of systems architecture consulting at CGI
+              (Georges), and a decade of B2B growth engineering across MerciApp, Clovis, and Datananas (Romain).
             </p>
             <p className="text-sm sm:text-base leading-relaxed mt-4" style={{ color: "#666666" }}>
               Every engagement begins with the same question: <strong className="font-semibold text-foreground">what is burying you?</strong> We
               find it, remove it, and replace it with structure that holds — without the overhead
-              of a full internal team.
+              of a full internal team. Because you are busy, we run what you can't get to.
             </p>
           </div>
           <div>
@@ -913,136 +757,6 @@ function Team() {
 }
 
 function Story() {
-  const timeline = [
-    {
-      year: "2005",
-      title: "The first seed",
-      photo: photoCecile128,
-      photoAlt: "Cécile Noiriel",
-      content: (
-        <>
-          <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
-            It all starts on April 1, 2005 with the creation of{" "}
-            <a href="https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab-annuaire">
-              Because You Are Busy (B Y A B)
-            </a>
-            , a consulting firm registered under SIREN 481 631 471. At its origin:{" "}
-            <a href="https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-cecile-linkedin">
-              Cécile Noiriel
-            </a>
-            , founder and driving force of the structure from day one. The mission: studies, consulting, and assistance in administrative and commercial organization for SMEs.
-          </p>
-          <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "#666666" }}>
-            Behind this name, ahead of its time, lies a strong conviction: founders don't lack courage or ideas — they lack time and structure to execute them. For nearly twenty years,{" "}
-            <a href="https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab-figaro">
-              BYAB
-            </a>{" "}
-            will live exactly what it promises its clients: an{" "}
-            <a href="https://www.pappers.fr/entreprise/b-y-a-b-because-you-are-busy-481631471" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab-pappers">
-              ultra-lean, ultra-profitable structure
-            </a>
-            , with no fundraising and no hype — revenue around 130,000€, operating profitability above 57%, and near-zero debt.
-          </p>
-        </>
-      ),
-    },
-    {
-      year: "2015",
-      title: "Specialization: law firms & SMEs",
-      photo: photoAnne128,
-      photoAlt: "Anne Grosz",
-      content: (
-        <>
-          <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
-            Ten years after BYAB was born, a second entity extends and specializes the intuition:{" "}
-            <a href="https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab2-figaro">
-              Because You Are Busy
-            </a>{" "}
-            (SIREN 814 783 056), created on November 20, 2015. At its origin:{" "}
-            <a href="https://www.linkedin.com/in/annegrosz" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-anne-linkedin">
-              Anne Grosz
-            </a>
-            , who becomes president, then manager.
-          </p>
-          <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "#666666" }}>
-            Before launching, Anne spent eight years as Secretary General and CFO at{" "}
-            <a href="https://www.infocession.fr/avocats/vatier-associes" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-vatier">
-              Vatier & Associés
-            </a>
-            , a Paris law firm — managing accounting, HR, IT, legal documentation, events, and ISO compliance. With{" "}
-            <a href="https://www.societe.com/societe/because-you-are-busy-814783056.html" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab2-societe">
-              Because You Are Busy
-            </a>
-            , she transforms this expertise into an externalized offer: exactly what she embodied internally, now serving multiple clients.
-          </p>
-        </>
-      ),
-    },
-    {
-      year: "2020",
-      title: "Consolidation: craft over startup",
-      photo: null,
-      photoAlt: null,
-      content: (
-        <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
-          Over the years,{" "}
-          <a href="https://www.pappers.fr/entreprise/because-you-are-busy-814783056" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-byab2-pappers">
-            Because You Are Busy
-          </a>{" "}
-          evolves legally: initially created as a SAS with 500€ capital, it transforms into a SARL, then into an EI for greater simplicity. Accounts are systematically filed with a confidentiality declaration — consistent with a human-scale firm focused on delivery, not visibility.
-        </p>
-      ),
-    },
-    {
-      year: "2025",
-      title: "Georges: the transformation & data layer",
-      photo: photoGeorges128,
-      photoAlt: "Georges Grosz",
-      content: (
-        <>
-          <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
-            On July 4, 2025,{" "}
-            <a href="https://www.linkedin.com/in/georges-grosz-8aa9613" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-georges-linkedin">
-              Georges Grosz
-            </a>{" "}
-            joins as co-manager alongside Anne. His track record: 22+ years as Senior Executive Consultant at CGI, university lecturer at Paris 1 Panthéon-Sorbonne, decades of systems architecture and data governance work for large French organizations.
-          </p>
-          <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "#666666" }}>
-            With Georges, the story levels up: the administrative right-hand becomes a transformation co-pilot, capable of rebuilding systems and turning operational chaos into measurable clarity at any scale.
-          </p>
-        </>
-      ),
-    },
-    {
-      year: "2025–26",
-      title: "Romain: the growth machine",
-      photo: photoRomain128,
-      photoAlt: "Romain Cornu",
-      content: (
-        <>
-          <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#666666" }}>
-            At the same time, another path converges:{" "}
-            <a href="https://fr.linkedin.com/in/romaincornu" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-romain-linkedin">
-              Romain Cornu
-            </a>
-            , B2B growth specialist. Head of Marketing at Datananas, then nearly six years at MerciApp — from Growth Advisor to Investor to GTM & Key Accounts Lead.{" "}
-            <a href="https://www.avizio.fr/expert/romain-cornu" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-romain-avizio">
-              Head of Growth at Clovis
-            </a>
-            {" "}for over four years, and Outbound Teacher at GrowthMakers.{" "}
-            <a href="https://clay.earth/profile/romain-cornu" target="_blank" rel="noopener noreferrer" className="underline text-foreground font-medium" data-testid="link-romain-clay">
-              Full profile on Clay
-            </a>
-            .
-          </p>
-          <p className="text-sm sm:text-base leading-relaxed mt-3" style={{ color: "#666666" }}>
-            Where Anne and Georges spent decades relieving founders' mental load, Romain spent years building go-to-market engines, structuring outbound, and turning commercial processes into machines. When he joins, the puzzle is complete.
-          </p>
-        </>
-      ),
-    },
-  ];
-
   return (
     <section id="story" aria-labelledby="story-heading" className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36" style={{ backgroundColor: "#F5F5F5" }}>
       <div className="max-w-[1200px] mx-auto">
@@ -1099,7 +813,7 @@ function Story() {
           </p>
           <div className="mt-6 flex flex-wrap gap-4">
             <span className="text-xs font-medium" style={{ color: "#949494" }}>
-              Operational depth — Anne, Cécile, BYAB, law firms
+              Operational depth — Anne, Cécile, {siteConfig.shortName}, law firms
             </span>
             <span className="text-xs" style={{ color: "#949494" }}>·</span>
             <span className="text-xs font-medium" style={{ color: "#949494" }}>
@@ -1125,9 +839,7 @@ function Testimonial() {
             className="text-xl sm:text-2xl lg:text-3xl font-semibold text-foreground leading-snug tracking-tight"
             data-testid="text-testimonial-quote"
           >
-            "They didn't just take work off my plate.
-            They rebuilt how my company runs —
-            and revenue followed."
+            "{testimonial.quote}"
           </p>
           <footer className="mt-6 sm:mt-8">
             <div className="flex items-center justify-center gap-3">
@@ -1136,11 +848,11 @@ function Testimonial() {
                 style={{ backgroundColor: "#999999", color: "#000000" }}
                 aria-hidden="true"
               >
-                ML
+                {testimonial.initials}
               </div>
               <div className="text-left">
-                <cite className="not-italic text-sm font-medium text-foreground" data-testid="text-testimonial-author">M. Laurent</cite>
-                <p className="text-xs" style={{ color: "#666666" }}>Managing Partner</p>
+                <cite className="not-italic text-sm font-medium text-foreground" data-testid="text-testimonial-author">{testimonial.author}</cite>
+                <p className="text-xs" style={{ color: "#666666" }}>{testimonial.role}</p>
               </div>
             </div>
           </footer>
@@ -1172,7 +884,7 @@ function Contact() {
       const body = encodeURIComponent(
         `Name: ${variables.name}\nEmail: ${variables.email}\n\n${variables.message || ""}`
       );
-      window.location.href = `mailto:hello@becausebusy.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
 
       setName("");
       setEmail("");
@@ -1219,12 +931,12 @@ function Contact() {
               <div>
                 <span className="text-xs font-mono uppercase tracking-wider" style={{ color: "#666666" }}>Email</span>
                 <p className="text-sm font-medium text-foreground mt-0.5">
-                  <a href="mailto:hello@becausebusy.com" className="underline" style={{ textDecorationColor: "#E5E5E5" }} data-testid="link-contact-email">hello@becausebusy.com</a>
+                  <a href={`mailto:${siteConfig.email}`} className="underline" style={{ textDecorationColor: "#E5E5E5" }} data-testid="link-contact-email">{siteConfig.email}</a>
                 </p>
               </div>
               <div>
                 <span className="text-xs font-mono uppercase tracking-wider" style={{ color: "#666666" }}>Based in</span>
-                <p className="text-sm font-medium text-foreground mt-0.5">Paris & La Rochelle</p>
+                <p className="text-sm font-medium text-foreground mt-0.5">{siteConfig.locations}</p>
               </div>
             </div>
           </div>
@@ -1333,7 +1045,7 @@ function Footer() {
       ],
     },
     {
-      name: "Because You Are Busy",
+      name: siteConfig.name,
       siren: "814 783 056",
       founded: "2015",
       links: [
@@ -1350,7 +1062,7 @@ function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
 
           <div>
-            <img src={logoHorizontalWhite} alt="Because You Are Busy logo" width={140} height={28} loading="lazy" decoding="async" className="h-7 w-auto mb-4" data-testid="img-footer-logo" />
+            <img src={logoHorizontalWhite} alt={`${siteConfig.name} logo`} width={140} height={28} loading="lazy" decoding="async" className="h-7 w-auto mb-4" data-testid="img-footer-logo" />
             <p className="text-xs leading-relaxed" style={{ color: "#666666" }}>
               Operations, transformation & growth consultancy for founders and managing partners since 2005.
             </p>
@@ -1358,17 +1070,17 @@ function Footer() {
               <li className="flex items-center gap-2">
                 <Mail className="w-3 h-3 flex-shrink-0" style={{ color: "#767676" }} aria-hidden="true" />
                 <a
-                  href="mailto:hello@becausebusy.com"
+                  href={`mailto:${siteConfig.email}`}
                   className="text-xs transition-opacity duration-150 hover:opacity-70"
                   style={{ color: "#666666" }}
                   data-testid="link-footer-email"
                 >
-                  hello@becausebusy.com
+                  {siteConfig.email}
                 </a>
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="w-3 h-3 flex-shrink-0" style={{ color: "#767676" }} aria-hidden="true" />
-                <span className="text-xs" style={{ color: "#666666" }} data-testid="text-footer-locations">Paris & La Rochelle</span>
+                <span className="text-xs" style={{ color: "#666666" }} data-testid="text-footer-locations">{siteConfig.locations}</span>
               </li>
             </ul>
             <ul className="mt-3 space-y-1 list-none m-0 p-0">
@@ -1458,13 +1170,13 @@ function Footer() {
 
         <div className="mt-10 sm:mt-12 pt-6 border-t border-border/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <p className="text-[11px]" style={{ color: "#767676" }}>
-            © 2026 <span itemScope itemType="https://schema.org/Organization"><span itemProp="name">Because You Are Busy</span></span>. All rights reserved.
+            © 2026 <span itemScope itemType="https://schema.org/Organization"><span itemProp="name">{siteConfig.name}</span></span>. All rights reserved.
           </p>
           <p className="text-[10px] hidden sm:block" style={{ color: "#BBBBBB" }} data-testid="text-footer-version">
             v{__APP_VERSION__} · Published {new Date(__BUILD_DATE__).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} {new Date(__BUILD_DATE__).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })} · Commit {__GIT_COMMIT_DATE__ ? `${new Date(__GIT_COMMIT_DATE__).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} ${new Date(__GIT_COMMIT_DATE__).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })}` : "—"}
           </p>
           <p className="text-[11px]" style={{ color: "#767676" }} data-testid="text-footer-address">
-            18 rue Arago, 94400 Vitry-sur-Seine, France
+            {siteConfig.address.street}, {siteConfig.address.postalCode} {siteConfig.address.city}, {siteConfig.address.country}
           </p>
         </div>
       </div>
@@ -1473,7 +1185,6 @@ function Footer() {
 }
 
 export default function Home() {
-  useHeadLinks();
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Header />

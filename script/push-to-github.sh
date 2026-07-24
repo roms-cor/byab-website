@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
-REPO="roms-cor/byab-website"
+# Target repository — override by setting the GITHUB_REPO environment variable
+# in Replit Secrets (e.g. "your-org/your-repo").
+REPO="${GITHUB_REPO:-roms-cor/byab-website}"
 BRANCH="main"
 WORKSPACE="$(cd "$(dirname "$0")/.." && pwd)"
 TMPDIR=$(mktemp -d)
@@ -39,7 +41,7 @@ git config user.name "Replit Publish"
 
 find . -maxdepth 1 -not -name '.git' -not -name '.' -exec rm -rf {} +
 
-for item in .github .gitignore .replit CNAME attached_assets client server shared script components.json drizzle.config.ts package.json package-lock.json postcss.config.js replit.md tailwind.config.ts tsconfig.json vite.config.ts generated-icon.png; do
+for item in .github .gitignore .replit CHANGELOG.md CNAME attached_assets client cliff.toml content server shared script components.json drizzle.config.ts package.json package-lock.json postcss.config.js replit.md tailwind.config.ts tsconfig.json vite.config.ts generated-icon.png; do
   [ -e "${WORKSPACE}/$item" ] && cp -r "${WORKSPACE}/$item" .
 done
 

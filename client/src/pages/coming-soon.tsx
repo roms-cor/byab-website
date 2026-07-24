@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { Mail } from "lucide-react";
+import { siteConfig } from "@content/site.config";
 
 const logoHorizontalWhite = "/images/logo-horizontal-white.webp";
 
 export default function ComingSoon() {
   useEffect(() => {
-    document.title = "Because You Are Busy — Coming Soon";
+    document.title = `${siteConfig.name} — Coming Soon`;
     const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", "Because You Are Busy (BYAB) — Operations, transformation, and growth consultancy for founders and managing partners since 2005. Our new site is coming soon.");
+    if (meta) meta.setAttribute("content", `${siteConfig.name} (${siteConfig.shortName}) — Operations, transformation, and growth consultancy for founders and managing partners since 2005. Our new site is coming soon.`);
     const robots = document.querySelector('meta[name="robots"]');
     if (robots) robots.setAttribute("content", "index, follow");
   }, []);
@@ -16,7 +17,7 @@ export default function ComingSoon() {
     <div className="min-h-screen bg-background flex flex-col items-center justify-center px-6">
       <img
         src={logoHorizontalWhite}
-        alt="Because You Are Busy"
+        alt={siteConfig.name}
         width={240}
         height={48}
         className="h-10 sm:h-12 w-auto mb-12"
@@ -39,13 +40,13 @@ export default function ComingSoon() {
       </p>
 
       <a
-        href="mailto:hello@becausebusy.com"
+        href={`mailto:${siteConfig.email}`}
         className="inline-flex items-center gap-2 mt-10 px-5 py-2.5 text-sm font-medium rounded-[10px] transition-opacity duration-150 hover:opacity-70"
         style={{ backgroundColor: "#000000", color: "#FFFFFF" }}
         data-testid="link-coming-soon-contact"
       >
         <Mail className="w-4 h-4" />
-        hello@becausebusy.com
+        {siteConfig.email}
       </a>
 
       <p

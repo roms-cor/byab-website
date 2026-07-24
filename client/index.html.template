@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="{{SITE_LOCALE}}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{SITE_TITLE}}</title>
+    <meta name="description" content="{{SITE_DESCRIPTION}}" />
+    <meta name="keywords" content="{{SITE_KEYWORDS}}" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="{{SITE_NAME}} ({{SITE_SHORT_NAME}})" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{SITE_NAME}}" />
+    <meta property="og:title" content="{{SITE_TITLE}}" />
+    <meta property="og:description" content="{{SITE_DESCRIPTION}}" />
+    <meta property="og:locale" content="{{SITE_LOCALE_OG}}" />
+    <meta property="og:locale:alternate" content="{{SITE_ALT_LOCALE_OG}}" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{SITE_TITLE}}" />
+    <meta name="twitter:description" content="{{SITE_DESCRIPTION}}" />
+    <meta name="twitter:image" content="{{SITE_OG_IMAGE}}" />
+    <meta property="og:url" content="{{SITE_URL}}" />
+    <meta property="og:image" content="{{SITE_OG_IMAGE}}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="theme-color" content="{{SITE_THEME_COLOR}}" />
+    <link rel="canonical" href="{{SITE_URL}}" />
+    {{HREFLANG_LINKS}}
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" /></noscript>
+    <link rel="preload" as="image" type="image/webp" href="/images/logo-horizontal-white.webp" />
+    <link rel="preload" as="image" type="image/webp" href="/images/anne-256.webp" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "#organization",
+      "name": "{{SITE_NAME}}",
+      "alternateName": ["{{SITE_SHORT_NAME}}", "B Y A B", "Because Busy"],
+      "description": "{{SITE_NAME}} is an operations, transformation, and growth consultancy founded in April 2005. We externalize what buries you — admin, finance, data, and growth — so founders and managing partners can lead. 57% operating profitability, 0€ external debt raised, 20+ years of uninterrupted service.",
+      "foundingDate": "{{SITE_FOUNDING_DATE}}",
+      "url": "{{SITE_URL}}",
+      "areaServed": [
+        { "@type": "City", "name": "Paris" },
+        { "@type": "City", "name": "La Rochelle" },
+        { "@type": "Country", "name": "France" }
+      ],
+      "knowsLanguage": ["fr", "en"],
+      "sameAs": [
+        "https://annuaire-entreprises.data.gouv.fr/entreprise/because-you-are-busy-b-y-a-b-481631471",
+        "https://www.pappers.fr/entreprise/b-y-a-b-because-you-are-busy-481631471",
+        "https://entreprises.lefigaro.fr/b-y-a-b-b-y-a-b-83/entreprise-481631471",
+        "https://www.societe.com/societe/because-you-are-busy-814783056.html",
+        "https://www.pappers.fr/entreprise/because-you-are-busy-814783056",
+        "https://entreprises.lefigaro.fr/because-you-are-busy-94/entreprise-814783056",
+        "https://www.linkedin.com/in/annegrosz",
+        "https://www.linkedin.com/in/georges-grosz-8aa9613",
+        "https://fr.linkedin.com/in/romaincornu",
+        "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/"
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Cécile Noiriel",
+        "jobTitle": "Founder — B Y A B, 2005",
+        "url": "https://www.linkedin.com/in/c%C3%A9cile-noiriel-18396327/"
+      },
+      "member": [
+        {
+          "@type": "Person",
+          "name": "Anne Grosz",
+          "jobTitle": "Founder & Head of Operations",
+          "url": "https://www.linkedin.com/in/annegrosz",
+          "description": "8 years as Secretary General & CFO at Vatier & Associés (Paris law firm). Founded {{SITE_NAME}} (SIREN 814 783 056) in 2015. Expert in externalized general secretariat, admin, finance, and law firm operations."
+        },
+        {
+          "@type": "Person",
+          "name": "Georges Grosz",
+          "jobTitle": "Co-Manager, Transformation & Data",
+          "url": "https://www.linkedin.com/in/georges-grosz-8aa9613",
+          "description": "22+ years as Senior Executive Consultant at CGI. Professor at Université Paris 1 Panthéon-Sorbonne. Joined {{SITE_NAME}} as co-manager in July 2025. Expert in systems architecture, data governance, and project management."
+        },
+        {
+          "@type": "Person",
+          "name": "Romain Cornu",
+          "jobTitle": "Growth Engine",
+          "url": "https://fr.linkedin.com/in/romaincornu",
+          "description": "B2B growth specialist. Nearly 6 years at MerciApp (Growth Advisor → Investor → GTM & Key Accounts Lead), 4+ years Head of Growth at Clovis, Head of Marketing at Datananas, Outbound Teacher at GrowthMakers. Expert in go-to-market strategy, outbound B2B, acquisition funnels, and scalable sales machines."
+        }
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "#service",
+      "name": "{{SITE_NAME}}",
+      "alternateName": "{{SITE_SHORT_NAME}}",
+      "description": "{{SITE_NAME}} provides externalized operations, transformation consulting, and growth engineering for founders and managing partners since April 2005. 57% operating profitability, 0€ external debt, 20+ years of uninterrupted service.",
+      "foundingDate": "{{SITE_FOUNDING_DATE}}",
+      "url": "{{SITE_URL}}",
+      "email": "{{SITE_EMAIL}}",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{SITE_ADDRESS_STREET}}",
+        "addressLocality": "{{SITE_ADDRESS_CITY}}",
+        "postalCode": "{{SITE_ADDRESS_POSTAL}}",
+        "addressCountry": "{{SITE_ADDRESS_COUNTRY_CODE}}"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Paris" },
+        { "@type": "City", "name": "La Rochelle" },
+        { "@type": "Country", "name": "France" }
+      ],
+      "priceRange": "$$",
+      "serviceType": [
+        "Externalized Operations",
+        "General Secretariat",
+        "Transformation & Data Consulting",
+        "Growth Engineering",
+        "B2B Outbound",
+        "Legal Practice Operations",
+        "Law Firm Administration"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "{{SITE_NAME}} Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Operational Backbone",
+              "description": "{{SITE_NAME}} externalizes your entire back-office — general secretariat, admin, finance, and compliance — so founders stop drowning in operational detail and start leading. Run by a team with 20+ years of law firm and SME operational experience."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Transformation & Data",
+              "description": "{{SITE_NAME}} rebuilds the systems layer — architecture, project governance, and data strategy — that transforms operational chaos into measurable clarity. Anchored in 22+ years of CGI systems consulting and academic expertise at Université Paris 1 Panthéon-Sorbonne."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Growth Engine",
+              "description": "{{SITE_NAME}} engineers your full commercial pipeline — ICP definition, outbound sequences, acquisition funnels, and revenue metrics — so B2B revenue growth becomes systematic, not accidental. Built on proven playbooks from MerciApp, Clovis, and Datananas."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Legal Practice Ops",
+              "description": "Purpose-built operational support for law firms where precision is non-negotiable. Born from Anne Grosz's 8 years as Secretary General at Vatier & Associés — admin, finance, compliance, and client file management handled with law-firm precision."
+            }
+          }
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "1"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "{{SITE_NAME}}",
+      "alternateName": "{{SITE_SHORT_NAME}}",
+      "url": "{{SITE_URL}}",
+      "description": "{{SITE_NAME}} — operations, transformation, and growth consultancy for founders and managing partners since 2005.",
+      "inLanguage": ["en", "fr"]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is {{SITE_NAME}}?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{SITE_NAME}} ({{SITE_SHORT_NAME}}) is an operations, transformation, and growth consultancy founded in April 2005 by Cécile Noiriel in France. We help founders and managing partners who are too busy to handle everything themselves by externalizing their back-office, rebuilding their systems, and engineering predictable B2B revenue growth. As of {{BUILD_YEAR}}, the team is four senior operators: Cécile Noiriel (founder, 2005), Anne Grosz (operations, 2015), Georges Grosz (transformation & data, co-manager since July 2025), and Romain Cornu (growth engine, 2025–2026)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What services does {{SITE_NAME}} offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{SITE_NAME}} offers four core services: (1) Operational Backbone — externalized general secretariat, admin, and finance, run by a team with 20+ years of law firm and SME operational experience; (2) Transformation & Data — systems architecture, project governance, and data strategy anchored in 22+ years of CGI consulting; (3) Growth Engine — outbound infrastructure, acquisition funnels, and predictable commercial pipelines built on proven playbooks from MerciApp, Clovis, and Datananas; (4) Legal Practice Ops — purpose-built support for law firms, born from Anne Grosz's 8 years as Secretary General at Vatier & Associés."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who founded {{SITE_NAME}}?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{SITE_NAME}} was originally founded on April 1, 2005 by Cécile Noiriel as B Y A B (SIREN 481 631 471). In November 2015, Anne Grosz created the second {{SITE_NAME}} entity (SIREN 814 783 056), specializing in externalized general secretariat for law firms and SMEs. Georges Grosz joined as co-manager in July 2025 (22+ years at CGI, professor at Université Paris 1 Panthéon-Sorbonne), and Romain Cornu joined in 2025–2026 as growth engine (ex-MerciApp, Clovis, Datananas)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is {{SITE_NAME}} located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{SITE_NAME}} is based at {{SITE_ADDRESS_STREET}}, {{SITE_ADDRESS_POSTAL}} {{SITE_ADDRESS_CITY}}, {{SITE_ADDRESS_COUNTRY}}, and operates across Paris and La Rochelle. The team works with founders and managing partners across France, primarily in legal practices, B2B SaaS companies, and tech SMEs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long has {{SITE_NAME}} been operating, and what is its track record?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{SITE_NAME}} has been serving founders and managing partners since April 2005 — over 20 years of continuous, uninterrupted operation. In that time: 57% operating profitability, 0€ external debt raised ever, revenue around 130,000€ at peak. Recent engagements include a French B2B SaaS scale-up (growth engineering, 2025), a national law firm (operations restructuring, 2024), and a tech SME (transformation & data, 2025). A proven model, not a startup experiment."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{SITE_URL}}" },
+        { "@type": "ListItem", "position": 2, "name": "Services", "item": "{{SITE_URL}}#services" },
+        { "@type": "ListItem", "position": 3, "name": "Track Record", "item": "{{SITE_URL}}#work" },
+        { "@type": "ListItem", "position": 4, "name": "Team", "item": "{{SITE_URL}}#team" },
+        { "@type": "ListItem", "position": 5, "name": "Story", "item": "{{SITE_URL}}#story" },
+        { "@type": "ListItem", "position": 6, "name": "Contact", "item": "{{SITE_URL}}#contact" }
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SiteNavigationElement",
+      "name": "Main Navigation",
+      "hasPart": [
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Services",
+          "description": "Four service pillars: operational backbone, transformation & data, growth engine, and legal practice ops",
+          "url": "{{SITE_URL}}#services"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Track Record",
+          "description": "Recent client engagements and measurable outcomes across B2B SaaS, law firms, and tech SMEs",
+          "url": "{{SITE_URL}}#work"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Team",
+          "description": "Four complementary specialists: operations, transformation & data, growth, and founding coordination since 2005",
+          "url": "{{SITE_URL}}#team"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Story",
+          "description": "Company history from 2005 founding by Cécile Noiriel to the current four-person consultancy",
+          "url": "{{SITE_URL}}#story"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "name": "Contact",
+          "description": "Get in touch — email {{SITE_EMAIL}}, based in Paris and La Rochelle, 24-hour response",
+          "url": "{{SITE_URL}}#contact"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"><!--ssr-outlet--></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

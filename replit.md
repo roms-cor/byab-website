@@ -11,14 +11,15 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - **Contact form:** POST /api/contact saves submissions to `contact_submissions` table, then opens visitor's mailto: client pre-filled for hello@becausebusy.com. Response is minimal (`{ ok, id }`) — no PII in API responses/logs
 - Semantic HTML5 throughout
 - Proper heading hierarchy (h1 > h2 > h3)
-- **Build-time injection:** `vite.config.ts` defines `__APP_VERSION__` (from package.json), `__BUILD_DATE__` (full ISO datetime at build/publish time), and `__GIT_COMMIT_DATE__` (ISO datetime of the latest git commit). Both timestamps are displayed in the footer bottom bar (text-[10px], color #BBBBBB) as "Published {date} {time} · Commit {date} {time}". **This footer version line must always be preserved** — it is a persistent project requirement.
+- **Build-time injection:** `script/build-defines.ts` (shared by `vite.config.ts` and the prerender step) defines `__APP_VERSION__` (from package.json), `__BUILD_DATE__` (full ISO datetime at build/publish time), and `__GIT_COMMIT_DATE__` (ISO datetime of the latest git commit). Both timestamps are displayed in the footer bottom bar (text-[10px], color #BBBBBB) as "Published {date} {time} · Commit {date} {time}". **This footer version line must always be preserved** — it is a persistent project requirement.
 - **Image optimization:** All images converted to WebP at 256px (hero/team) and 128px (orbit/story thumbnails), served from `client/public/images/`. Logos resized to 504×168 (2x retina). Total image payload ~92KB. Lazy loading + decoding="async" on below-fold images, fetchpriority="high" on LCP hero image + header logo.
 - **LCP optimization:** Hero first image renders with opacity:1 and NO CSS transition on initial paint (hasAdvanced ref). LCP image (anne-256.webp) preloaded in `<head>`.
-- **Pre-rendered HTML shell:** `<div id="root">` contains a static HTML skeleton (header with full nav links + hero title) so FCP happens before JS loads. Crawlers/LLMs see the navigation even without JS. React replaces it entirely on mount.
-- **Non-render-blocking CSS:** Post-build script in `script/build.ts` transforms the Vite-injected `<link rel="stylesheet">` to async loading (`media="print" onload="this.media='all'"`).
+- **Full build-time prerender:** `script/build.ts` renders the complete homepage (`client/src/entry-prerender.tsx`, renderToString) into `dist/public/index.html` — ~67KB of static HTML. Non-JS crawlers (GPTBot, ClaudeBot, PerplexityBot, CCBot) see the entire page. React replaces it on mount (`createRoot().render`; DOM output is identical so there is no visible flash). The dev server stays client-rendered only.
+- **CSS is render-blocking by design:** the old `media="print"` async-CSS hack was removed when the full prerender landed — with the whole page in static HTML, async CSS causes a flash of unstyled content. Do not re-add it.
 - **Code splitting:** Components/design page lazy-loaded via React.lazy + Suspense — not bundled with homepage JS.
 - **Accessibility:** WCAG AA contrast (#767676 decorative text, #595959 small badge text, #949494 text on dark bg), 44×44px touch targets on slider dots/orbit buttons, prefers-reduced-motion support, form inputs with required/aria-required, skip-nav link, marquee aria-hidden, descriptive image alt text, orbit button images use alt="" with aria-label.
-- **Canonical:** Static canonical in index.html `<head>`, overridden by useHeadLinks on /home (removes static before injecting page-specific).
+- **Canonical + hreflang:** generated statically into the `<head>` at build time from `content/site.config.ts` (via the `{{HREFLANG_LINKS}}` token in `client/index.html.template`). No client-side head injection remains (`useHeadLinks` was removed).
+- **SEO/GEO validation:** `script/validate-seo.ts` runs at the end of every `npm run build` and fails it with a numbered report if any invariant breaks — head tags, JSON-LD consistency with config, prerendered content completeness, robots/sitemap/llms/CNAME consistency, unresolved `{{TOKENS}}`, missing og-image/icon assets, or brand/domain strings hardcoded outside `content/`. Sitemap `<lastmod>`, `{{BUILD_YEAR}}` and `{{BUILD_MONTH_YEAR}}` ("as of …" copy) are stamped automatically at build time.
 - **Font loading:** Google Fonts loaded asynchronously via preload+onload pattern (non-render-blocking), with slimmed weight range (Inter 400-700, JetBrains Mono 400-500)
 - **Preload hints:** LCP image (anne-256.webp) and header logo preloaded in `<head>`
 - **Auto-push on Publish:** `script/build.ts` runs `script/push-to-github.sh` after building, which syncs the workspace to GitHub `main` using `GITHUB_PAT` (Replit secret). GitHub Actions then auto-deploys to `becausebusy.com`. Replit = staging, Publish = production.
@@ -72,7 +73,7 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - **Favicons** — apple-touch-icon (180×180), favicon-32x32, favicon-16x16 + original favicon.png
 - **theme-color** — #ffffff
 - **Viewport** — No maximum-scale restriction (accessibility)
-- **hreflang** tags for en/fr (absolute URLs via useHeadLinks)
+- **hreflang** tags for en/fr + x-default — static in `<head>`, generated from `site.config.ts` locales
 - **robots.txt** — Allows all major search + AI bots (Googlebot, GPTBot, ClaudeBot, PerplexityBot, FirecrawlBot, OAI-SearchBot, Diffbot, Applebot, DataForSeoBot, iaskspider, omgili, etc.)
 - **llms.txt** — Comprehensive structured summary + Tone & Voice, Competitive Differentiation, Citations sections
 - **llms-full.txt** — Full editorial site content (hero, services, team bios, FAQ, track record, company history)
@@ -81,6 +82,10 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - **CNAME** — Single file at root (`becausebusy.com`), copied to dist during deploy
 
 ## Key Files
+- `content/site.config.ts` — single source of truth for brand/domain/SEO values (see TEMPLATE.md)
+- `script/build.ts` — build orchestrator (generate-meta → vite → prerender → server → validate-seo → push)
+- `script/validate-seo.ts` — post-build SEO/GEO validation harness (fails the build on violations)
+- `client/src/entry-prerender.tsx` — SSR entry for the build-time homepage prerender
 - `client/src/pages/home.tsx` — Homepage landing page
 - `client/src/pages/components.tsx` — Components page (design system + sections)
 - `client/src/App.tsx` — Router setup (/ and /components)
