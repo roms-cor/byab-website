@@ -38,15 +38,18 @@ jobs:
       # verify + retry below makes any future silent install failure loud.
       - name: Install dependencies
         run: |
-          install_and_verify() {
-            npm ci --no-audit --no-fund && npx tsx --version
-          }
-          install_and_verify || {
-            echo "::warning::npm ci failed or left an incomplete node_modules — retrying once"
+          npm ci --no-audit --no-fund || {
+            echo "::warning::npm ci crashed — dumping npm debug log, then retrying with --ignore-scripts"
+            tail -n 80 /home/runner/.npm/_logs/*-debug-0.log || true
             rm -rf node_modules
-            npm cache clean --force
-            install_and_verify
+            # Lifecycle scripts are not needed for the static site build:
+            # esbuild/rollup binaries arrive via optionalDependencies, and
+            # bufferutil/git-cliff are unused by `npm run build`.
+            npm ci --no-audit --no-fund --ignore-scripts
           }
+          # Fail loudly if the install silently left node_modules unusable
+          # (npm has crashed with "Exit handler never called!" but exit 0).
+          npx tsx --version
 
       - name: Build
         run: npm run build
