@@ -11,31 +11,33 @@ const logoHorizontalWhite = "/images/logo-horizontal-white.webp";
 
 /**
  * Design token table: token name → CSS color reference.
- * Every literal color value lives in client/src/index.css; the hex codes
+ * Every literal color value lives in tailwind.config.ts (the design-token
+ * sheet), which re-emits each token as a :root CSS variable; the hex codes
  * displayed on this page are resolved at runtime from the computed styles
  * (this page is client-only, never prerendered), so no color literal
  * appears in this source file.
  */
 const tokenRefs = {
-  gray50: "hsl(var(--card))",
-  gray100: "var(--gray-e5)",
-  gray200: "hsl(var(--input))",
-  gray300: "var(--gray-99)",
-  gray400: "var(--gray-77)",
-  gray500: "hsl(var(--muted-foreground))",
-  gray600: "var(--gray-44)",
-  gray700: "var(--gray-33)",
-  gray800: "var(--gray-1a)",
-  gray900: "hsl(var(--foreground))",
-  white: "hsl(var(--background))",
-  gray76: "var(--gray-76)",
-  gray94: "var(--gray-94)",
+  gray50: "var(--gray-50)",
+  gray100: "var(--gray-100)",
+  gray200: "var(--gray-200)",
+  gray225: "var(--gray-225)",
+  gray250: "var(--gray-250)",
+  gray300: "var(--gray-300)",
+  gray350: "var(--gray-350)",
+  gray400: "var(--gray-400)",
+  gray450: "var(--gray-450)",
+  gray500: "var(--gray-500)",
+  gray550: "var(--gray-550)",
+  gray600: "var(--gray-600)",
+  gray700: "var(--gray-700)",
+  gray800: "var(--gray-800)",
+  gray900: "var(--gray-900)",
+  white: "var(--background)",
   yellow: "var(--accent-yellow)",
   whiteA85: "var(--white-alpha-85)",
   whiteA50: "var(--white-alpha-50)",
   whiteA25: "var(--white-alpha-25)",
-  silver: "var(--gray-c0)",
-  grayBB: "var(--gray-bb)",
 } as const;
 
 type TokenName = keyof typeof tokenRefs;
@@ -85,9 +87,14 @@ const makeExtendedPalette = (t: TokenText) => [
   { name: "Gray 50", hex: t.gray50, css: tokenRefs.gray50 },
   { name: "Gray 100", hex: t.gray100, css: tokenRefs.gray100 },
   { name: "Gray 200", hex: t.gray200, css: tokenRefs.gray200 },
+  { name: "Gray 225", hex: t.gray225, css: tokenRefs.gray225 },
+  { name: "Gray 250", hex: t.gray250, css: tokenRefs.gray250 },
   { name: "Gray 300", hex: t.gray300, css: tokenRefs.gray300 },
+  { name: "Gray 350", hex: t.gray350, css: tokenRefs.gray350 },
   { name: "Gray 400", hex: t.gray400, css: tokenRefs.gray400 },
+  { name: "Gray 450", hex: t.gray450, css: tokenRefs.gray450 },
   { name: "Gray 500", hex: t.gray500, css: tokenRefs.gray500 },
+  { name: "Gray 550", hex: t.gray550, css: tokenRefs.gray550 },
   { name: "Gray 600", hex: t.gray600, css: tokenRefs.gray600 },
   { name: "Gray 700", hex: t.gray700, css: tokenRefs.gray700 },
   { name: "Gray 800", hex: t.gray800, css: tokenRefs.gray800 },
@@ -123,18 +130,18 @@ const engagementList = engagements.map((e) => `${e.title} / ${e.outcome}`).join(
 
 const makeSiteSections = (t: TokenText) => [
   { id: "header", name: "Header", description: `Fixed navigation bar with ${siteConfig.name} logo, anchor links (Services, Track Record, Team, Story, Contact), and primary CTA 'Get in touch'.`, tokens: `bg: Background / backdrop-blur, text: Link (${t.gray500}), CTA: Accent (${t.gray900})` },
-  { id: "hero", name: "Hero", description: "Full-width intro with an eyebrow label, display heading, subtitle, primary + secondary CTAs, a proof stats row of key brand metrics, and TeamSlider carousel on right.", tokens: `heading: Text Primary, accent word: ${t.gray76}, buttons: Accent + ${t.gray50}, proof stats: font-mono ${t.gray500}` },
-  { id: "marquee", name: "Marquee", description: "Infinite horizontal scroll of expertise keywords with alternating bold/normal pattern.", tokens: `bold text: ${t.gray500}, normal text: ${t.gray76}, border: Gray 100` },
-  { id: "pain", name: "Pain Recognition", description: "Dark section with a provocative heading and 3 numbered pain points, each with a bold lead phrase followed by supporting body copy.", tokens: `bg: Accent (${t.gray900}), heading: ${t.white}, accent word: ${t.gray94}, numbers: ${t.gray500} font-mono, body: ${t.whiteA85}, bold: ${t.white}` },
-  { id: "services", name: "Services", description: "Section heading with a CTA link, above a 2×2 grid of service cards. Each card has a number, title, description, and an outcome list with → prefix items in mono font.", tokens: `card bg: Gray 50, number: ${t.gray76}, text: Link (${t.gray500}), outcomes: ${t.gray500} font-mono` },
+  { id: "hero", name: "Hero", description: "Full-width intro with an eyebrow label, display heading, subtitle, primary + secondary CTAs, a proof stats row of key brand metrics, and TeamSlider carousel on right.", tokens: `heading: Text Primary, accent word: ${t.gray450}, buttons: Accent + ${t.gray50}, proof stats: font-mono ${t.gray500}` },
+  { id: "marquee", name: "Marquee", description: "Infinite horizontal scroll of expertise keywords with alternating bold/normal pattern.", tokens: `bold text: ${t.gray500}, normal text: ${t.gray450}, border: Gray 100` },
+  { id: "pain", name: "Pain Recognition", description: "Dark section with a provocative heading and 3 numbered pain points, each with a bold lead phrase followed by supporting body copy.", tokens: `bg: Accent (${t.gray900}), heading: ${t.white}, accent word: ${t.gray350}, numbers: ${t.gray500} font-mono, body: ${t.whiteA85}, bold: ${t.white}` },
+  { id: "services", name: "Services", description: "Section heading with a CTA link, above a 2×2 grid of service cards. Each card has a number, title, description, and an outcome list with → prefix items in mono font.", tokens: `card bg: Gray 50, number: ${t.gray450}, text: Link (${t.gray500}), outcomes: ${t.gray500} font-mono` },
   { id: "stats", name: "Stats", description: `Dark panel with '${siteConfig.name} — by the numbers' label. 4 metrics with yellow accent suffixes (${t.yellow}). Each stat has a descriptive label and a supporting subtitle.`, tokens: `panel bg: Accent (${t.gray900}), values: ${t.white}, suffixes: ${t.yellow}, labels: ${t.whiteA50}, subs: ${t.whiteA25} font-mono` },
-  { id: "work", name: "Engagements", description: `Heading 'Recent engagements.' Engagement rows with category (mono), title, description, year, and outcome badge (yellow bg ${t.yellow}): ${engagementList}. Sourced from content/work.ts.`, tokens: `category: ${t.gray500} font-mono, description: ${t.gray500}, year: ${t.gray76}, badge bg: ${t.yellow}, badge text: ${t.gray900}` },
-  { id: "approach", name: "About / Approach", description: `Background ${t.gray50}. Two-column layout: a positioning heading with body text on the left, and 3 named pillars with bullet dots and one-line descriptions on the right.`, tokens: `bg: Gray 50 (${t.gray50}), pillar bullets: ${t.gray900}, pillar names: font-semibold, pillar desc: ${t.gray500}, borders: ${t.silver}` },
-  { id: "team", name: "Team", description: `Heading 'Our team.' with an intro line, then a 2×2 grid of team cards: ${teamList}. Each card has photo, name, role, bio, LinkedIn link. Sourced from content/team.ts.`, tokens: `card bg: Gray 50, name: Text Primary, role: ${t.gray76}, bio: ${t.gray500}, photo border: ${t.gray100}` },
-  { id: "story", name: "Story", description: `Background ${t.gray50}. Company history timeline of dated phases, each with a year, heading, and body copy containing external backlinks (company registries, LinkedIn profiles, partner sites). Closes with a brand promise quote on a dark panel.`, tokens: `bg: Gray 50 (${t.gray50}), year: Text Primary font-mono, text: Link (${t.gray500}), links: Text Primary underline, promise panel: Accent (${t.gray900}) bg, ${t.white} text, credits: ${t.gray94}` },
+  { id: "work", name: "Engagements", description: `Heading 'Recent engagements.' Engagement rows with category (mono), title, description, year, and outcome badge (yellow bg ${t.yellow}): ${engagementList}. Sourced from content/work.ts.`, tokens: `category: ${t.gray500} font-mono, description: ${t.gray500}, year: ${t.gray450}, badge bg: ${t.yellow}, badge text: ${t.gray900}` },
+  { id: "approach", name: "About / Approach", description: `Background ${t.gray50}. Two-column layout: a positioning heading with body text on the left, and 3 named pillars with bullet dots and one-line descriptions on the right.`, tokens: `bg: Gray 50 (${t.gray50}), pillar bullets: ${t.gray900}, pillar names: font-semibold, pillar desc: ${t.gray500}, borders: ${t.gray225}` },
+  { id: "team", name: "Team", description: `Heading 'Our team.' with an intro line, then a 2×2 grid of team cards: ${teamList}. Each card has photo, name, role, bio, LinkedIn link. Sourced from content/team.ts.`, tokens: `card bg: Gray 50, name: Text Primary, role: ${t.gray450}, bio: ${t.gray500}, photo border: ${t.gray100}` },
+  { id: "story", name: "Story", description: `Background ${t.gray50}. Company history timeline of dated phases, each with a year, heading, and body copy containing external backlinks (company registries, LinkedIn profiles, partner sites). Closes with a brand promise quote on a dark panel.`, tokens: `bg: Gray 50 (${t.gray50}), year: Text Primary font-mono, text: Link (${t.gray500}), links: Text Primary underline, promise panel: Accent (${t.gray900}) bg, ${t.white} text, credits: ${t.gray350}` },
   { id: "testimonial", name: "Testimonial", description: `Centered blockquote: '${testimonial.quote}' — ${testimonial.author}, ${testimonial.role}. Sourced from content/testimonial.ts.`, tokens: `avatar bg: Primary (${t.gray300}), avatar text: Text Primary` },
-  { id: "contact", name: "Contact", description: `Background ${t.gray50}. Two-column layout with a section heading (accent word ${t.gray76}), styled contact details with mono labels (Email, Based in), and a response-time promise. Form with Name, Email, message textarea, and submit button.`, tokens: `bg: Gray 50 (${t.gray50}), labels: ${t.gray500} font-mono, inputs: default border/bg, submit: Accent (${t.gray900})` },
-  { id: "footer", name: "Footer", description: `4-column grid: logo + tagline + email/location + nav links, People (${teamMembers.map((m) => m.name).join(", ")} — all with LinkedIn), Companies (legal entities with registry links). Bottom bar: copyright, version/publish/commit timestamps, address.`, tokens: `text: Link (${t.gray500}), company SIREN: ${t.gray76}, registry links: ${t.gray76} underline, version: ${t.grayBB}` },
+  { id: "contact", name: "Contact", description: `Background ${t.gray50}. Two-column layout with a section heading (accent word ${t.gray450}), styled contact details with mono labels (Email, Based in), and a response-time promise. Form with Name, Email, message textarea, and submit button.`, tokens: `bg: Gray 50 (${t.gray50}), labels: ${t.gray500} font-mono, inputs: default border/bg, submit: Accent (${t.gray900})` },
+  { id: "footer", name: "Footer", description: `4-column grid: logo + tagline + email/location + nav links, People (${teamMembers.map((m) => m.name).join(", ")} — all with LinkedIn), Companies (legal entities with registry links). Bottom bar: copyright, version/publish/commit timestamps, address.`, tokens: `text: Link (${t.gray500}), company SIREN: ${t.gray450}, registry links: ${t.gray450} underline, version: ${t.gray250}` },
 ];
 
 const navSections = [
@@ -161,7 +168,7 @@ function CopyButton({ text }: { text: string }) {
       data-testid={`button-copy-${text.replace(/[^a-zA-Z0-9]/g, "").slice(0, 12)}`}
       className="inline-flex items-center justify-center w-7 h-7 rounded-md text-muted-foreground transition-colors duration-150"
       aria-label={`Copy ${text} to clipboard`}
-      style={{ background: copied ? "hsl(var(--border))" : "transparent" }}
+      style={{ background: copied ? "var(--border)" : "transparent" }}
     >
       {copied ? <Check className="w-3.5 h-3.5" aria-hidden="true" /> : <Copy className="w-3.5 h-3.5" aria-hidden="true" />}
     </button>
@@ -182,7 +189,7 @@ function DownloadButton({ src, filename }: { src: string; filename: string }) {
       onClick={handleDownload}
       data-testid={`button-download-${filename.replace(/[^a-zA-Z0-9]/g, "").slice(0, 20)}`}
       className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors duration-150 border border-border/50"
-      style={{ color: "hsl(var(--muted-foreground))" }}
+      style={{ color: "var(--muted-foreground)" }}
       aria-label={`Download ${filename}`}
     >
       <Download className="w-3 h-3" aria-hidden="true" />
@@ -291,7 +298,7 @@ export default function Components() {
           <section id="overview" aria-labelledby="overview-heading" className="px-4 sm:px-6 lg:px-16 py-12 sm:py-16 lg:py-24">
             <article className="max-w-3xl">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent text-xs font-medium text-muted-foreground mb-6 sm:mb-8" data-testid="badge-design-system">
-                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "var(--gray-99)" }} aria-hidden="true" />
+                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "var(--gray-300)" }} aria-hidden="true" />
                 Design System
               </div>
               <h1
@@ -310,7 +317,7 @@ export default function Components() {
                   href="#colors"
                   data-testid="button-explore-system"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[10px] text-sm font-medium transition-opacity duration-150"
-                  style={{ backgroundColor: "hsl(var(--foreground))", color: "hsl(var(--background))" }}
+                  style={{ backgroundColor: "var(--foreground)", color: "var(--background)" }}
                 >
                   Explore system
                   <ArrowDown className="w-3.5 h-3.5" aria-hidden="true" />
@@ -319,7 +326,7 @@ export default function Components() {
                   href="#sections"
                   data-testid="link-site-sections"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[10px] text-sm font-medium border border-border/50 text-muted-foreground transition-opacity duration-150"
-                  style={{ backgroundColor: "hsl(var(--card))" }}
+                  style={{ backgroundColor: "var(--card)" }}
                 >
                   Site sections
                 </a>
@@ -368,9 +375,9 @@ export default function Components() {
                   <DownloadButton src={logoSquareBlack} filename={`${siteConfig.shortName.toLowerCase()}-logomark-black.png`} />
                 </div>
               </figure>
-              <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex flex-col items-center justify-center min-h-[160px] sm:min-h-[200px] gap-4" style={{ backgroundColor: "hsl(var(--foreground))" }}>
+              <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex flex-col items-center justify-center min-h-[160px] sm:min-h-[200px] gap-4" style={{ backgroundColor: "var(--foreground)" }}>
                 <img src={logoSquareWhite} alt="Logomark on dark background" className="h-16 sm:h-20 w-16 sm:w-20" data-testid="img-logo-dark" />
-                <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium" style={{ color: "var(--gray-77)" }}>Dark background</figcaption>
+                <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium" style={{ color: "var(--gray-400)" }}>Dark background</figcaption>
                 <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
                   <DownloadButton src={logoSquareWhite} filename={`${siteConfig.shortName.toLowerCase()}-logomark-white.png`} />
                 </div>
@@ -386,9 +393,9 @@ export default function Components() {
                   <DownloadButton src={logoHorizontalWhite} filename={`${siteConfig.shortName.toLowerCase()}-horizontal-logo-light.png`} />
                 </div>
               </figure>
-              <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex flex-col items-center justify-center min-h-[160px] sm:min-h-[200px] gap-4" style={{ backgroundColor: "hsl(var(--foreground))" }}>
+              <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex flex-col items-center justify-center min-h-[160px] sm:min-h-[200px] gap-4" style={{ backgroundColor: "var(--foreground)" }}>
                 <img src={logoHorizontalBlack} alt="Horizontal logo on dark background" className="h-auto w-48 sm:w-64" data-testid="img-logo-horizontal-dark" />
-                <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium" style={{ color: "var(--gray-77)" }}>Dark background</figcaption>
+                <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium" style={{ color: "var(--gray-400)" }}>Dark background</figcaption>
                 <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
                   <DownloadButton src={logoHorizontalBlack} filename={`${siteConfig.shortName.toLowerCase()}-horizontal-logo-dark.png`} />
                 </div>
@@ -452,7 +459,7 @@ export default function Components() {
                   <div key={color.name} className="flex-1 h-16 sm:h-20" style={{ backgroundColor: color.hex }} />
                 ))}
               </div>
-              <div className="grid grid-cols-5 lg:grid-cols-10 divide-x divide-border/50">
+              <div className="grid grid-cols-5 divide-x divide-border/50">
                 {extendedPalette.map((color) => (
                   <div key={color.name} className="p-2 sm:p-3" data-testid={`palette-${color.name.toLowerCase().replace(/\s/g, "-")}`}>
                     <p className="text-[9px] sm:text-[10px] font-medium text-foreground truncate">{color.name}</p>
@@ -476,7 +483,7 @@ export default function Components() {
                         <dt className="sr-only">{item.pair}</dt>
                         <div
                           className="w-8 h-8 rounded-md flex items-center justify-center text-xs font-bold"
-                          style={{ backgroundColor: item.bg, color: item.fg, border: item.border ? "1px solid var(--gray-e5)" : "none" }}
+                          style={{ backgroundColor: item.bg, color: item.fg, border: item.border ? "1px solid var(--gray-100)" : "none" }}
                           aria-hidden="true"
                         >Aa</div>
                         <dd className="text-sm text-muted-foreground">{item.pair}</dd>
@@ -636,7 +643,7 @@ export default function Components() {
                   <div className="flex-1" role="cell">
                     <div
                       className="h-3 rounded-sm"
-                      style={{ width: item.value, backgroundColor: "var(--gray-99)", minWidth: "4px" }}
+                      style={{ width: item.value, backgroundColor: "var(--gray-300)", minWidth: "4px" }}
                       aria-label={`${item.value} spacing bar`}
                     />
                   </div>
@@ -679,14 +686,14 @@ export default function Components() {
                   <span
                     data-testid="button-demo-primary"
                     className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium"
-                    style={{ backgroundColor: "hsl(var(--foreground))", color: "hsl(var(--background))", borderRadius: "10px", border: "1px solid hsl(var(--muted-foreground))" }}
+                    style={{ backgroundColor: "var(--foreground)", color: "var(--background)", borderRadius: "10px", border: "1px solid var(--muted-foreground)" }}
                     role="presentation"
                   >
                     Start a project
                   </span>
                   <span
                     className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium opacity-50"
-                    style={{ backgroundColor: "hsl(var(--foreground))", color: "hsl(var(--background))", borderRadius: "10px", border: "1px solid hsl(var(--muted-foreground))" }}
+                    style={{ backgroundColor: "var(--foreground)", color: "var(--background)", borderRadius: "10px", border: "1px solid var(--muted-foreground)" }}
                     role="presentation"
                   >
                     Disabled
@@ -713,14 +720,14 @@ export default function Components() {
                   <span
                     data-testid="button-demo-secondary"
                     className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium border border-border/50"
-                    style={{ backgroundColor: "hsl(var(--card))", color: "hsl(var(--foreground))", borderRadius: "0px" }}
+                    style={{ backgroundColor: "var(--card)", color: "var(--foreground)", borderRadius: "0px" }}
                     role="presentation"
                   >
                     View our work
                   </span>
                   <span
                     className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium border border-border/50 opacity-50"
-                    style={{ backgroundColor: "hsl(var(--card))", color: "hsl(var(--foreground))", borderRadius: "0px" }}
+                    style={{ backgroundColor: "var(--card)", color: "var(--foreground)", borderRadius: "0px" }}
                     role="presentation"
                   >
                     Disabled
@@ -798,14 +805,14 @@ export default function Components() {
                   style={{ backgroundColor: card.bg, borderColor: card.borderCol }}
                   data-testid={`card-demo-${card.title.toLowerCase().replace(/\s/g, "-")}`}
                 >
-                  <div className="w-full h-20 sm:h-24 rounded-md mb-3 sm:mb-4" style={{ backgroundColor: "var(--gray-99)", opacity: card.textColor ? 0.15 : 0.25 }} aria-hidden="true" />
+                  <div className="w-full h-20 sm:h-24 rounded-md mb-3 sm:mb-4" style={{ backgroundColor: "var(--gray-300)", opacity: card.textColor ? 0.15 : 0.25 }} aria-hidden="true" />
                   <h4 className="text-sm font-medium" style={{ color: card.textColor || undefined }}>{card.title}</h4>
                   <p className="text-xs mt-1" style={{ color: card.subColor || undefined }}>{card.desc}</p>
                   <dl className="mt-3 space-y-1.5">
                     {Object.entries(card.specs).map(([k, v]) => (
                       <div key={k} className="flex items-center gap-2 text-[10px]">
                         <dt style={{ color: card.subColor || undefined }} className="text-muted-foreground">{k}</dt>
-                        <dd className="font-mono" style={{ color: card.textColor ? "var(--gray-99)" : undefined }}>{v}</dd>
+                        <dd className="font-mono" style={{ color: card.textColor ? "var(--gray-300)" : undefined }}>{v}</dd>
                       </div>
                     ))}
                   </dl>
@@ -837,14 +844,14 @@ export default function Components() {
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6">
                     <div className="flex items-center gap-3 sm:w-44 flex-shrink-0">
-                      <span className="text-xs font-mono" style={{ color: "var(--gray-99)" }}>
+                      <span className="text-xs font-mono" style={{ color: "var(--gray-300)" }}>
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <h3 className="text-sm sm:text-base font-semibold text-foreground">{section.name}</h3>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>{section.description}</p>
-                      <p className="text-xs font-mono mt-2" style={{ color: "var(--gray-77)" }}>{section.tokens}</p>
+                      <p className="text-sm leading-relaxed" style={{ color: "var(--muted-foreground)" }}>{section.description}</p>
+                      <p className="text-xs font-mono mt-2" style={{ color: "var(--gray-400)" }}>{section.tokens}</p>
                     </div>
                   </div>
                 </article>
@@ -862,7 +869,7 @@ export default function Components() {
                   <span
                     key={section.id}
                     className="text-xs font-mono px-2.5 py-1 rounded-md"
-                    style={{ backgroundColor: "var(--gray-e5)", color: "hsl(var(--muted-foreground))" }}
+                    style={{ backgroundColor: "var(--gray-100)", color: "var(--muted-foreground)" }}
                   >
                     {section.name}
                   </span>
@@ -893,7 +900,7 @@ export default function Components() {
               ].map((p) => (
                 <article key={p.num} className="p-6 sm:p-8 rounded-lg border border-border/50 bg-card/30" data-testid={`card-principle-${p.num}`}>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-8 h-8 rounded-md flex items-center justify-center text-sm" style={{ backgroundColor: "var(--gray-99)" }} aria-hidden="true">{p.num}</div>
+                    <div className="w-8 h-8 rounded-md flex items-center justify-center text-sm" style={{ backgroundColor: "var(--gray-300)" }} aria-hidden="true">{p.num}</div>
                     <h3 className="text-base font-semibold text-foreground">{p.title}</h3>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
@@ -904,7 +911,7 @@ export default function Components() {
             <article className="p-6 sm:p-8 rounded-lg border border-border/50 bg-card/30 mb-8 sm:mb-12">
               <h3 className="text-base font-semibold text-foreground mb-6">Design Tokens Reference</h3>
               <div className="rounded-lg border border-border/50 overflow-hidden">
-                <pre className="p-4 sm:p-5 text-xs sm:text-sm leading-relaxed overflow-x-auto" style={{ backgroundColor: "hsl(var(--foreground))", color: "var(--gray-99)" }}>
+                <pre className="p-4 sm:p-5 text-xs sm:text-sm leading-relaxed overflow-x-auto" style={{ backgroundColor: "var(--foreground)", color: "var(--gray-300)" }}>
                   <code>{`/* Colors */
 --color-primary: ${tok.gray300};
 --color-accent: ${tok.gray900};
@@ -947,15 +954,15 @@ export default function Components() {
           </section>
 
           <footer className="px-4 sm:px-6 lg:px-16 py-8 sm:py-12" role="contentinfo">
-            <div className="p-6 sm:p-8 rounded-lg" style={{ backgroundColor: "hsl(var(--foreground))" }}>
+            <div className="p-6 sm:p-8 rounded-lg" style={{ backgroundColor: "var(--foreground)" }}>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                   <img src={logoHorizontalBlack} alt={`${siteConfig.shortName} logo`} className="h-6 w-auto mb-3" />
-                  <p className="text-sm leading-relaxed" style={{ color: "var(--gray-77)" }}>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--gray-400)" }}>
                     Components maintained by the design team.
                   </p>
                 </div>
-                <p className="text-xs" style={{ color: "hsl(var(--muted-foreground))" }}>
+                <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
                   Last updated: February 2026<br />
                   Version 1.0
                 </p>

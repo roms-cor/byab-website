@@ -2,50 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* LIGHT MODE */
+/* LIGHT MODE
+   All COLOR tokens live in tailwind.config.ts (the design-token sheet); a
+   small Tailwind plugin re-emits each one as a :root CSS custom property
+   (--gray-450, --muted-foreground, --accent-yellow, …). This file only keeps
+   non-color variables and DERIVED colors (CSS relative color syntax below).
+   Full token reference: docs/design-tokens.md. */
 :root {
   --button-outline: rgba(0,0,0, .10);
   --badge-outline: rgba(0,0,0, .05);
   --opaque-button-border-intensity: -8;
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
-  --background: 0 0% 100%;
-  --foreground: 0 0% 0%;
-  --border: 0 0% 90%;
-  --card: 0 0% 96%;
-  --card-foreground: 0 0% 0%;
-  --card-border: 0 0% 90%;
-  --sidebar: 0 0% 96%;
-  --sidebar-foreground: 0 0% 0%;
-  --sidebar-border: 0 0% 90%;
-  --sidebar-primary: 0 0% 0%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 0 0% 93%;
-  --sidebar-accent-foreground: 0 0% 0%;
-  --sidebar-ring: 0 0% 0%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 0%;
-  --popover-border: 0 0% 90%;
-  --primary: 0 0% 0%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 0 0% 96%;
-  --secondary-foreground: 0 0% 0%;
-  --muted: 0 0% 94%;
-  --muted-foreground: 0 0% 40%;
-  --accent: 0 0% 96%;
-  --accent-foreground: 0 0% 0%;
-  --destructive: 0 72% 51%;
-  --destructive-foreground: 0 0% 98%;
-  --input: 0 0% 80%;
-  --ring: 0 0% 0%;
-  --chart-1: 0 0% 20%;
-  --chart-2: 0 0% 35%;
-  --chart-3: 0 0% 50%;
-  --chart-4: 0 0% 65%;
-  --chart-5: 0 0% 80%;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: Georgia, serif;
-  --font-mono: 'JetBrains Mono', monospace;
   --radius: .5rem;
   --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
   --shadow-xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
@@ -58,101 +26,81 @@
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 
-  /* Brand color tokens — every raw hex/rgba used by the pages lives here.
-     Names encode the value (gray-99 = #999999) so mapping stays unambiguous.
-     Constants (no dark-mode variants), matching the previous inline values. */
-  --gray-1a: #1A1A1A;
-  --gray-33: #333333;
-  --gray-44: #444444;
-  --gray-59: #595959;
-  --gray-76: #767676;
-  --gray-77: #777777;
-  --gray-94: #949494;
-  --gray-99: #999999;
-  --gray-bb: #BBBBBB;
-  --gray-e5: #E5E5E5; /* NOT --border: hsl(0 0% 90%) computes to #E6E6E6 */
-  --red-dc: #DC2626; /* NOT --destructive: hsl(0 72% 51%) computes to #DC2828 */
-  --gray-c0: #C0C0C0;
-  --accent-yellow: #E8E020;
-  --white-alpha-85: rgba(255,255,255,0.85);
-  --white-alpha-50: rgba(255,255,255,0.5);
-  --white-alpha-25: rgba(255,255,255,0.25);
-  --white-alpha-08: rgba(255,255,255,0.08);
-  --black-alpha-10: rgba(0,0,0,0.10);
-  --black-alpha-08: rgba(0,0,0,0.08);
-  --black-alpha-06: rgba(0,0,0,0.06);
-  --black-alpha-04: rgba(0,0,0,0.04);
-  --black-alpha-02: rgba(0,0,0,0.02);
-
 /* Fallback for older browsers */
-  --sidebar-primary-border: hsl(var(--sidebar-primary));
-  --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --sidebar-primary-border: var(--sidebar-primary);
+  --sidebar-primary-border: hsl(from var(--sidebar-primary) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
-  --sidebar-accent-border: hsl(var(--sidebar-accent));
-  --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --sidebar-accent-border: var(--sidebar-accent);
+  --sidebar-accent-border: hsl(from var(--sidebar-accent) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
-  --primary-border: hsl(var(--primary));
-  --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --primary-border: var(--primary);
+  --primary-border: hsl(from var(--primary) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
-  --secondary-border: hsl(var(--secondary));
-  --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --secondary-border: var(--secondary);
+  --secondary-border: hsl(from var(--secondary) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
-  --muted-border: hsl(var(--muted));
-  --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --muted-border: var(--muted);
+  --muted-border: hsl(from var(--muted) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
-  --accent-border: hsl(var(--accent));
-  --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --accent-border: var(--accent);
+  --accent-border: hsl(from var(--accent) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
-  --destructive-border: hsl(var(--destructive));
-  --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --destructive-border: var(--destructive);
+  --destructive-border: hsl(from var(--destructive) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
+/* DARK MODE variable overrides (shadcn scaffold). Nothing toggles the .dark
+   class anywhere today — the site is single-theme. Tailwind utility classes
+   compile to the light literals from tailwind.config.ts, so these overrides
+   only affect `var(--…)` consumers if .dark were ever applied. Values were
+   converted from bare HSL triplets to full colors to match the emitted token
+   format (value-preserving). */
 .dark {
   --button-outline: rgba(255,255,255, .10);
   --badge-outline: rgba(255,255,255, .05);
   --opaque-button-border-intensity: 9;
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
-  --background: 0 0% 8%;
-  --foreground: 0 0% 98%;
-  --border: 0 0% 18%;
-  --card: 0 0% 10%;
-  --card-foreground: 0 0% 98%;
-  --card-border: 0 0% 12%;
-  --sidebar: 0 0% 12%;
-  --sidebar-foreground: 0 0% 98%;
-  --sidebar-border: 0 0% 14%;
-  --sidebar-primary: 0 0% 16%;
-  --sidebar-primary-foreground: 0 0% 98%;
-  --sidebar-accent: 0 0% 14%;
-  --sidebar-accent-foreground: 0 0% 98%;
-  --sidebar-ring: 0 0% 16%;
-  --popover: 0 0% 14%;
-  --popover-foreground: 0 0% 98%;
-  --popover-border: 0 0% 16%;
-  --primary: 0 0% 16%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 0 0% 16%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 0 0% 15%;
-  --muted-foreground: 0 0% 70%;
-  --accent: 0 0% 14%;
-  --accent-foreground: 0 0% 98%;
-  --destructive: 0 72% 51%;
-  --destructive-foreground: 0 0% 98%;
-  --input: 0 0% 35%;
-  --ring: 0 0% 16%;
-  --chart-1: 0 0% 80%;
-  --chart-2: 0 0% 65%;
-  --chart-3: 0 0% 50%;
-  --chart-4: 0 0% 35%;
-  --chart-5: 0 0% 20%;
+  --background: hsl(0 0% 8%);
+  --foreground: hsl(0 0% 98%);
+  --border: hsl(0 0% 18%);
+  --card: hsl(0 0% 10%);
+  --card-foreground: hsl(0 0% 98%);
+  --card-border: hsl(0 0% 12%);
+  --sidebar: hsl(0 0% 12%);
+  --sidebar-foreground: hsl(0 0% 98%);
+  --sidebar-border: hsl(0 0% 14%);
+  --sidebar-primary: hsl(0 0% 16%);
+  --sidebar-primary-foreground: hsl(0 0% 98%);
+  --sidebar-accent: hsl(0 0% 14%);
+  --sidebar-accent-foreground: hsl(0 0% 98%);
+  --sidebar-ring: hsl(0 0% 16%);
+  --popover: hsl(0 0% 14%);
+  --popover-foreground: hsl(0 0% 98%);
+  --popover-border: hsl(0 0% 16%);
+  --primary: hsl(0 0% 16%);
+  --primary-foreground: hsl(0 0% 98%);
+  --secondary: hsl(0 0% 16%);
+  --secondary-foreground: hsl(0 0% 98%);
+  --muted: hsl(0 0% 15%);
+  --muted-foreground: hsl(0 0% 70%);
+  --accent: hsl(0 0% 14%);
+  --accent-foreground: hsl(0 0% 98%);
+  --destructive: hsl(0 72% 51%);
+  --destructive-foreground: hsl(0 0% 98%);
+  --input: hsl(0 0% 35%);
+  --ring: hsl(0 0% 16%);
+  --chart-1: hsl(0 0% 80%);
+  --chart-2: hsl(0 0% 65%);
+  --chart-3: hsl(0 0% 50%);
+  --chart-4: hsl(0 0% 35%);
+  --chart-5: hsl(0 0% 20%);
   --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
   --shadow-xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
   --shadow-sm: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
@@ -163,32 +111,32 @@
   --shadow-2xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
 
 /* Fallback for older browsers */
-  --sidebar-primary-border: hsl(var(--sidebar-primary));
-  --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --sidebar-primary-border: var(--sidebar-primary);
+  --sidebar-primary-border: hsl(from var(--sidebar-primary) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
-  --sidebar-accent-border: hsl(var(--sidebar-accent));
-  --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --sidebar-accent-border: var(--sidebar-accent);
+  --sidebar-accent-border: hsl(from var(--sidebar-accent) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
-  --primary-border: hsl(var(--primary));
-  --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --primary-border: var(--primary);
+  --primary-border: hsl(from var(--primary) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
-  --secondary-border: hsl(var(--secondary));
-  --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --secondary-border: var(--secondary);
+  --secondary-border: hsl(from var(--secondary) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
-  --muted-border: hsl(var(--muted));
-  --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --muted-border: var(--muted);
+  --muted-border: hsl(from var(--muted) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
-  --accent-border: hsl(var(--accent));
-  --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --accent-border: var(--accent);
+  --accent-border: hsl(from var(--accent) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 
   /* Fallback for older browsers */
-  --destructive-border: hsl(var(--destructive));
-  --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --destructive-border: var(--destructive);
+  --destructive-border: hsl(from var(--destructive) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
 @layer base {
@@ -271,7 +219,7 @@
   /* Placeholder styling for contentEditable div */
   [contenteditable][data-placeholder]:empty::before {
     content: attr(data-placeholder);
-    color: hsl(var(--muted-foreground));
+    color: var(--muted-foreground);
     pointer-events: none;
   }
 

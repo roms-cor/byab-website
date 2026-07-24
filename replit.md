@@ -89,7 +89,9 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - `client/src/pages/home.tsx` — Homepage landing page
 - `client/src/pages/components.tsx` — Components page (design system + sections)
 - `client/src/App.tsx` — Router setup (/ and /components)
-- `client/src/index.css` — Design tokens + animations (marquee, ring-pulse, slider-rotate)
+- `tailwind.config.ts` — Design-token sheet: every color as a literal value, re-emitted as :root CSS vars (Subframe-importable)
+- `docs/design-tokens.md` — Full token reference (palette + old-name mapping, typography, spacing, radius)
+- `client/src/index.css` — Derived interaction tokens (--*-border), elevate system, animations (marquee, ring-pulse, slider-rotate)
 - `client/index.html` — Meta tags, OG, JSON-LD structured data
 - `client/public/llms.txt` — AI-optimized summary
 - `client/public/llms-full.txt` — Full design system docs
@@ -101,14 +103,17 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - `server/routes.ts` — API routes (POST /api/contact)
 
 ## Brand Design Tokens (Pure Grayscale)
-- **Primary**: #999999 — Decorative fills, accents (NOT for text)
-- **Accent**: #000000 — Primary buttons, dark sections
+Single source of truth: `tailwind.config.ts` (all colors as literal values, emitted as `--*` CSS vars). Full reference: `docs/design-tokens.md`.
+- **Gray scale**: gray-50 #F5F5F5 → gray-900 #000000 ordered by lightness; in-between stops 225/250/350/450/550 preserve historical brand values (old hex-encoded names --gray-c0/--gray-bb/--gray-94/--gray-76/--gray-59 were renamed, values unchanged)
+- **Primary**: #999999 (gray-300) — Decorative fills, accents (NOT for text)
+- **Accent**: #000000 (gray-900) — Primary buttons, dark sections
 - **Background**: #FFFFFF
 - **Text Primary**: #000000
-- **Text on white**: #666666 (5.74:1) body text, #767676 (4.6:1) decorative, #595959 (7:1) small badges
-- **Text on dark**: #949494 (4.7:1 on black) labels, meta
-- **Card BG**: #F5F5F5 (Gray 50)
-- **Card Border**: #E5E5E5 (Gray 100)
+- **Text on white**: #666666 gray-500 (5.74:1) body text, #767676 gray-450 (4.6:1) decorative, #595959 gray-550 (7:1) small badges
+- **Text on dark**: #949494 gray-350 (4.7:1 on black) labels, meta
+- **Card BG**: #F5F5F5 (gray-50)
+- **Card Border**: #E5E5E5 (gray-100)
+- **Exact-value traps**: `border` hsl(0 0% 90%) computes #E6E6E6 ≠ gray-100 #E5E5E5; `destructive` hsl(0 72% 51%) computes #DC2828 ≠ red-600 #DC2626 (form errors use red-600)
 - **Font**: Inter (body + headings), JetBrains Mono (code)
 - **Spacing**: 8px grid
 - **Border Radius**: 8px default, 9999px (pill) header CTA, 0px secondary buttons

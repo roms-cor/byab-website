@@ -1,0 +1,58 @@
+Diagnostic
+J'ai audité le repo (structure, Tailwind config, index.css, les pages, et le projet Subframe "BYAB - Website" déjà connecté via MCP). Voici l'état des lieux qui explique pourquoi la migration vers Subframe serait douloureuse aujourd'hui :
+
+1. Design tokens à moitié centralisés. tailwind.config.ts + client/src/index.css définissent bien un système de tokens HSL (--background, --primary, etc.) façon shadcn — jusque-là c'est un bon point de départ. Mais à côté, 20+ tokens "bruts" supplémentaires (--gray-76, --white-alpha-25, --accent-yellow...) sont ajoutés en CSS pur, hors du thème Tailwind, et consommés directement en dehors du système de classes.
+
+2. Styles inline massifs qui contournent Tailwind. Sur les 2 pages principales : 147 style={{...}} inline et 84 usages directs de hsl(var(--x)), dont un pattern répété 36 fois (style={{ color: "hsl(var(--muted-foreground))" }} au lieu de la classe text-muted-foreground). Plus 81 valeurs Tailwind arbitraires (text-[70px], top-[72px]...). C'est le point bloquant n°1 : Subframe génère et lit du code en classes Tailwind mappées à des tokens de thème — du style inline, il ne le "voit" pas et ne peut pas le relier au design system.
+
+3. Deux fichiers monolithiques. home.tsx (1232 lignes, 16 sections : Header, TeamSlider, Hero, Marquee, PainRecognition, Services, Stats, Work, About, Team, Story, Testimonial, Faq, Contact, Footer) et components.tsx (971 lignes) contiennent chacun tout — markup, logique d'état, effets, data — dans un seul fichier. Subframe raisonne en 1 composant/page = ~1 fichier ; il n'y a ici aucune frontière claire à faire correspondre à des pages/composants Subframe.
+
+4. Logique métier et présentation imbriquées. Le Header gère state de menu mobile + focus trap + media query dans le même bloc que le JSX ; Contact mêle useMutation, toast, et markup. La doc Subframe recommande explicitement de séparer présentation (synchronisée depuis Subframe) et logique (wrapper local) — actuellement impossible à faire proprement.
+
+5. Bibliothèque shadcn/ui à 95% morte. 47 composants installés dans client/src/components/ui/, seuls 3 sont réellement utilisés dans toute l'app (card par not-found.tsx, tooltip/toaster au niveau App). ~44 fichiers de composants radix/shadcn ne servent à rien et vont polluer toute tentative de mapping avec les composants Subframe existants.
+
+6. Le projet Subframe existant est encore vide côté marque. Théme Subframe = valeurs par défaut (couleurs, fonts, radius tous vides), doc "Design Guidelines" vide, et seuls des composants par défaut du starter (Drawer, Dialog, Layouts) + un composant "Hero" custom déjà commencé. Rien n'a encore été synchronisé avec les vrais tokens BYAB.
+
+Plan d'action
+Phase 1 — Assainir les fondations de tokens (préalable obligatoire)
+Objectif : que tailwind.config.ts + index.css deviennent la seule source de vérité, importable telle quelle par Subframe (Import your theme supporte config Tailwind v3/v4 ou variables CSS brutes).
+
+Fusionner les tokens "bruts" (--gray-76, --white-alpha-*, --accent-yellow, --red-dc...) dans theme.extend.colors de tailwind.config.ts au lieu de les laisser en CSS custom properties parallèles — un seul espace de tokens.
+Remplacer les triplets HSL nus (--background: 0 0% 100%) par des valeurs de couleur complètes (hsl(...) ou hex) partout où c'est raisonnable, car le format d'import "CSS variables" de Subframe attend des valeurs de couleur directement exploitables (hex/rgb/hsl/oklch), pas des fragments consommés uniquement via l'astuce hsl(var(--x) / <alpha-value>).
+Nommer chaque token gris avec une échelle cohérente (gray-50…900) plutôt que des noms basés sur la valeur hex (gray-76, gray-99) — plus lisible et plus proche de ce que Subframe génère par défaut.
+Documenter la palette, la typo (Inter/JetBrains Mono), le spacing (grille 8px) et les radius dans un seul endroit — ça alimentera directement le doc "Design Guidelines" du projet Subframe (aujourd'hui vide) via write_design_document.
+Effort : faible-moyen. Gain : élevé — sans ça, tout le reste ne sert à rien.
+
+Phase 2 — Éliminer les styles inline et les valeurs arbitraires
+Remplacer systématiquement les 147 style={{ color: ... }} par les classes Tailwind correspondantes (text-muted-foreground, text-background, etc.) une fois les tokens de la Phase 1 en place.
+Remplacer les valeurs arbitraires répétées (text-[70px], top-[72px], w-[38px]...) par des tokens d'espacement/typographie nommés dans le thème (ex: fontSize.hero, spacing.header), pour que Subframe reconnaisse des valeurs de design system plutôt que des magic numbers.
+Un lint rule (eslint) simple interdisant style={{ dans client/src/pages et client/src/components fixerait la règle pour l'avenir.
+Effort : moyen (mécanique mais volumineux). Gain : élevé — c'est la condition pour que le code généré par Subframe et le code existant "parlent le même langage".
+
+Phase 3 — Éclater les fichiers monolithiques en composants isolés
+Extraire chaque section de home.tsx dans son propre fichier sous client/src/components/sections/ (Header.tsx, Hero.tsx, TeamSlider.tsx, Marquee.tsx, PainRecognition.tsx, Services.tsx, Stats.tsx, Work.tsx, About.tsx, Team.tsx, Story.tsx, Testimonial.tsx, Faq.tsx, Contact.tsx, Footer.tsx), home.tsx devenant un simple assemblage.
+Faire pareil pour components.tsx (page "/design") : séparer les blocs Overview/Logo/Colors/Typography/Spacing/UI/Sections/Guidelines en composants dédiés.
+Chaque fichier de section = une unité 1:1 avec une future page/section Subframe, ce qui rend triviale la correspondance "ce composant vient d'où dans Subframe".
+Effort : moyen. Gain : élevé pour la maintenabilité et pour le mapping Subframe.
+
+Phase 4 — Séparer présentation et logique métier
+Conformément à la pratique recommandée par Subframe ("wrap Subframe components in your own logical component so you don't need to un-sync"), pour chaque section avec état/effets :
+
+Header.tsx : extraire le state menu mobile + focus trap + media-query listener dans un hook useMobileNav(), laisser le JSX pur.
+Contact.tsx : extraire useMutation/toast dans un hook useContactForm().
+TeamSlider.tsx : extraire rotation/état actif dans useTeamSlider().
+Résultat : les futurs composants Subframe pourront remplacer directement le JSX présentational, sans toucher aux hooks qui portent la logique.
+
+Effort : moyen. Gain : élevé pour la durabilité du futur workflow "sync depuis Subframe".
+
+Phase 5 — Nettoyer le mort avant de brancher Subframe
+Supprimer les ~44 composants shadcn/ui inutilisés (accordion, dialog, dropdown-menu, sidebar, carousel, chart, etc.) et les dépendances Radix associées dans package.json — sauf si vous voulez garder ce socle volontairement comme filet en attendant les composants Subframe. Sinon, chaque composant mort est un candidat de confusion quand Subframe et vous listerez "les composants existants".
+Nettoyer tailwind.config.ts des couleurs/animations shadcn non utilisées si les composants correspondants sont retirés.
+Effort : faible. Gain : moyen (réduit le bruit, accélère toute correspondance manuelle).
+
+Phase 6 — Le vrai transfert vers Subframe (une fois 1-5 faits)
+edit_theme (ou copier/coller le nouveau tailwind.config.ts/index.css nettoyé via l'UI "Import theme") pour remplacer le thème vide actuel du projet 818c5b29aafa par les vrais tokens BYAB (couleurs, Inter/JetBrains Mono, radius 8px/pill/0, spacing 8px).
+Rédiger le doc "Design Guidelines" (actuellement vide) via write_design_document à partir du contenu déjà écrit dans pages/components.tsx (qui documente déjà tout : palette, contrastes WCAG, échelle typographique, spacing) — ce fichier est en fait un excellent brief prêt à l'emploi.
+Concevoir dans Subframe, composant par composant, les briques réutilisables identifiées en Phase 3 (Button primaire/secondaire, Card, Badge pill, NavLink, StatBlock, TimelineItem...) en s'appuyant sur le composant "Hero" déjà présent comme premier jalon.
+Faire un sync --all (CLI Subframe) pour rapatrier ces composants dans le repo, puis recâbler les sections extraites en Phase 3 pour consommer ces composants au lieu du markup Tailwind brut — les hooks de logique (Phase 4) restent inchangés.
+Les pages elles-mêmes ne se synchronisent jamais automatiquement (comportement natif de Subframe) : chaque page sera conçue dans l'éditeur Subframe puis exportée/fusionnée à la main dans les fichiers de section correspondants, en gardant la logique.

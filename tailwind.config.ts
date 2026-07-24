@@ -1,4 +1,159 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
+
+/**
+ * Design-token sheet — the single source of truth for every color the site
+ * uses. Each value below is a full, directly usable color (hex / hsl / rgba),
+ * so the theme can be imported as-is by design tools (e.g. Subframe's
+ * "Import your theme") and Tailwind's opacity modifiers keep working:
+ * `border-border/50` still renders hsl(0 0% 90% / 0.5), exactly as before.
+ *
+ * The inline plugin at the bottom re-emits every token as a :root CSS custom
+ * property (--gray-450, --accent-yellow, --muted-foreground, …), so inline
+ * styles (`style={{ color: "var(--gray-450)" }}`) and the /design page's
+ * runtime token resolver read the exact same values as the Tailwind classes.
+ * Derived interaction tokens (--primary-border and friends) are computed with
+ * CSS relative color syntax and stay in client/src/index.css.
+ *
+ * Value provenance — these near-misses are deliberate; verify computed values
+ * before "normalizing" anything (see docs/design-tokens.md):
+ *   --border      hsl(0 0% 90%)  computes #E6E6E6 — NOT gray-100 #E5E5E5
+ *   --destructive hsl(0 72% 51%) computes #DC2828 — NOT red-600 #DC2626
+ *
+ * Gray scale: 50…900 ordered light → dark; the in-between stops (225, 250,
+ * 350, 450, 550) preserve historical brand values exactly (they replaced the
+ * old hex-encoded names --gray-c0, --gray-bb, --gray-94, --gray-76, --gray-59).
+ */
+
+type TokenGroup = Record<string, string>;
+type TokenTree = Record<string, string | TokenGroup>;
+
+const tokens = {
+  /* — Semantic (shadcn) tokens. hsl notation preserved from the historical
+       triplet wiring so computed values stay bit-identical. — */
+  background: "hsl(0 0% 100%)", // #FFFFFF
+  foreground: "hsl(0 0% 0%)", // #000000
+  border: "hsl(0 0% 90%)", // #E6E6E6 — deliberately ≠ gray-100 (#E5E5E5)
+  input: "hsl(0 0% 80%)", // #CCCCCC (same value as gray-200)
+  ring: "hsl(0 0% 0%)", // #000000
+  card: {
+    DEFAULT: "hsl(0 0% 96%)", // #F5F5F5 (same value as gray-50)
+    foreground: "hsl(0 0% 0%)",
+    border: "hsl(0 0% 90%)",
+  },
+  popover: {
+    DEFAULT: "hsl(0 0% 100%)",
+    foreground: "hsl(0 0% 0%)",
+    border: "hsl(0 0% 90%)",
+  },
+  primary: {
+    DEFAULT: "hsl(0 0% 0%)",
+    foreground: "hsl(0 0% 100%)",
+  },
+  secondary: {
+    DEFAULT: "hsl(0 0% 96%)",
+    foreground: "hsl(0 0% 0%)",
+  },
+  muted: {
+    DEFAULT: "hsl(0 0% 94%)", // #F0F0F0
+    foreground: "hsl(0 0% 40%)", // #666666 (same value as gray-500)
+  },
+  accent: {
+    DEFAULT: "hsl(0 0% 96%)",
+    foreground: "hsl(0 0% 0%)",
+  },
+  destructive: {
+    DEFAULT: "hsl(0 72% 51%)", // #DC2828 — deliberately ≠ red-600 (#DC2626)
+    foreground: "hsl(0 0% 98%)", // #FAFAFA
+  },
+  chart: {
+    "1": "hsl(0 0% 20%)",
+    "2": "hsl(0 0% 35%)",
+    "3": "hsl(0 0% 50%)",
+    "4": "hsl(0 0% 65%)",
+    "5": "hsl(0 0% 80%)",
+  },
+  sidebar: {
+    DEFAULT: "hsl(0 0% 96%)",
+    foreground: "hsl(0 0% 0%)",
+    border: "hsl(0 0% 90%)",
+    ring: "hsl(0 0% 0%)",
+  },
+  "sidebar-primary": {
+    DEFAULT: "hsl(0 0% 0%)",
+    foreground: "hsl(0 0% 100%)",
+  },
+  "sidebar-accent": {
+    DEFAULT: "hsl(0 0% 93%)", // #EDEDED
+    foreground: "hsl(0 0% 0%)",
+  },
+
+  /* — Brand grayscale, ordered by lightness (50 lightest → 900 darkest).
+       In-between stops keep exact historical values; see docs/design-tokens.md
+       for the old-name mapping table. — */
+  gray: {
+    "50": "#F5F5F5", // card surfaces (same value as card)
+    "100": "#E5E5E5", // hairline borders on cards (was --gray-e5)
+    "200": "#CCCCCC", // form input borders (same value as input)
+    "225": "#C0C0C0", // About-section borders (was --gray-c0, "silver")
+    "250": "#BBBBBB", // footer version text (was --gray-bb)
+    "300": "#999999", // brand primary: decorative fills (was --gray-99)
+    "350": "#949494", // text on dark: labels, credits, 4.7:1 (was --gray-94)
+    "400": "#777777", // service-card numbers (was --gray-77)
+    "450": "#767676", // decorative text on white, 4.6:1 (was --gray-76)
+    "500": "#666666", // body text on white, 5.74:1 (same value as muted-foreground)
+    "550": "#595959", // small badge text, 7:1 (was --gray-59)
+    "600": "#444444", // secondary dark text (was --gray-44)
+    "700": "#333333", // dark text/surfaces (was --gray-33)
+    "800": "#1A1A1A", // near-black surfaces (was --gray-1a)
+    "900": "#000000", // brand accent: headings, buttons (same value as foreground)
+  },
+
+  /* — Brand accents — */
+  red: {
+    "600": "#DC2626", // form validation errors (was --red-dc; equals Tailwind's default red-600)
+  },
+  "accent-yellow": "#E8E020", // stats suffixes, engagement outcome badges
+
+  /* — Alpha tokens: translucent text/borders over dark surfaces (white-alpha)
+       and soft shadows/overlays on light surfaces (black-alpha). — */
+  "white-alpha": {
+    "85": "rgba(255,255,255,0.85)",
+    "50": "rgba(255,255,255,0.5)",
+    "25": "rgba(255,255,255,0.25)",
+    "08": "rgba(255,255,255,0.08)",
+  },
+  "black-alpha": {
+    "10": "rgba(0,0,0,0.10)",
+    "08": "rgba(0,0,0,0.08)",
+    "06": "rgba(0,0,0,0.06)",
+    "04": "rgba(0,0,0,0.04)",
+    "02": "rgba(0,0,0,0.02)",
+  },
+
+  /* — Status indicator colors (avatar status dots) — */
+  status: {
+    online: "rgb(34 197 94)",
+    away: "rgb(245 158 11)",
+    busy: "rgb(239 68 68)",
+    offline: "rgb(156 163 175)",
+  },
+} satisfies TokenTree;
+
+/** Flatten the token tree into `--name[-key]` CSS custom properties. */
+function tokenCssVars(tree: TokenTree): Record<string, string> {
+  const vars: Record<string, string> = {};
+  for (const [name, value] of Object.entries(tree)) {
+    if (typeof value === "string") {
+      vars[`--${name}`] = value;
+    } else {
+      for (const [key, subValue] of Object.entries(value)) {
+        vars[key === "DEFAULT" ? `--${name}` : `--${name}-${key}`] = subValue;
+      }
+    }
+  }
+  return vars;
+}
 
 export default {
   darkMode: ["class"],
@@ -11,81 +166,22 @@ export default {
         sm: ".1875rem", /* 3px */
       },
       colors: {
-        // Flat / base colors (regular buttons)
-        background: "hsl(var(--background) / <alpha-value>)",
-        foreground: "hsl(var(--foreground) / <alpha-value>)",
-        border: "hsl(var(--border) / <alpha-value>)",
-        input: "hsl(var(--input) / <alpha-value>)",
-        card: {
-          DEFAULT: "hsl(var(--card) / <alpha-value>)",
-          foreground: "hsl(var(--card-foreground) / <alpha-value>)",
-          border: "hsl(var(--card-border) / <alpha-value>)",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover) / <alpha-value>)",
-          foreground: "hsl(var(--popover-foreground) / <alpha-value>)",
-          border: "hsl(var(--popover-border) / <alpha-value>)",
-        },
-        primary: {
-          DEFAULT: "hsl(var(--primary) / <alpha-value>)",
-          foreground: "hsl(var(--primary-foreground) / <alpha-value>)",
-          border: "var(--primary-border)",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary) / <alpha-value>)",
-          foreground: "hsl(var(--secondary-foreground) / <alpha-value>)",
-          border: "var(--secondary-border)",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted) / <alpha-value>)",
-          foreground: "hsl(var(--muted-foreground) / <alpha-value>)",
-          border: "var(--muted-border)",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent) / <alpha-value>)",
-          foreground: "hsl(var(--accent-foreground) / <alpha-value>)",
-          border: "var(--accent-border)",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive) / <alpha-value>)",
-          foreground: "hsl(var(--destructive-foreground) / <alpha-value>)",
-          border: "var(--destructive-border)",
-        },
-        ring: "hsl(var(--ring) / <alpha-value>)",
-        chart: {
-          "1": "hsl(var(--chart-1) / <alpha-value>)",
-          "2": "hsl(var(--chart-2) / <alpha-value>)",
-          "3": "hsl(var(--chart-3) / <alpha-value>)",
-          "4": "hsl(var(--chart-4) / <alpha-value>)",
-          "5": "hsl(var(--chart-5) / <alpha-value>)",
-        },
-        sidebar: {
-          ring: "hsl(var(--sidebar-ring) / <alpha-value>)",
-          DEFAULT: "hsl(var(--sidebar) / <alpha-value>)",
-          foreground: "hsl(var(--sidebar-foreground) / <alpha-value>)",
-          border: "hsl(var(--sidebar-border) / <alpha-value>)",
-        },
-        "sidebar-primary": {
-          DEFAULT: "hsl(var(--sidebar-primary) / <alpha-value>)",
-          foreground: "hsl(var(--sidebar-primary-foreground) / <alpha-value>)",
-          border: "var(--sidebar-primary-border)",
-        },
-        "sidebar-accent": {
-          DEFAULT: "hsl(var(--sidebar-accent) / <alpha-value>)",
-          foreground: "hsl(var(--sidebar-accent-foreground) / <alpha-value>)",
-          border: "var(--sidebar-accent-border)"
-        },
-        status: {
-          online: "rgb(34 197 94)",
-          away: "rgb(245 158 11)",
-          busy: "rgb(239 68 68)",
-          offline: "rgb(156 163 175)",
-        },
+        ...tokens,
+        /* Interaction-border colors are DERIVED at runtime (CSS relative
+           color syntax + older-browser fallback) in client/src/index.css —
+           referenced here so `border-primary-border` classes keep resolving. */
+        primary: { ...tokens.primary, border: "var(--primary-border)" },
+        secondary: { ...tokens.secondary, border: "var(--secondary-border)" },
+        muted: { ...tokens.muted, border: "var(--muted-border)" },
+        accent: { ...tokens.accent, border: "var(--accent-border)" },
+        destructive: { ...tokens.destructive, border: "var(--destructive-border)" },
+        "sidebar-primary": { ...tokens["sidebar-primary"], border: "var(--sidebar-primary-border)" },
+        "sidebar-accent": { ...tokens["sidebar-accent"], border: "var(--sidebar-accent-border)" },
       },
       fontFamily: {
-        sans: ["var(--font-sans)"],
-        serif: ["var(--font-serif)"],
-        mono: ["var(--font-mono)"],
+        sans: ["'Inter'", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+        serif: ["Georgia", "serif"],
+        mono: ["'JetBrains Mono'", "monospace"],
       },
       keyframes: {
         "accordion-down": {
@@ -103,5 +199,14 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+    /* Re-emit every token as a :root CSS variable so inline `var(--…)`
+       consumers and the /design page's runtime resolver share exactly the
+       same values as the Tailwind utility classes. */
+    plugin(({ addBase }) => {
+      addBase({ ":root": tokenCssVars(tokens) });
+    }),
+  ],
 } satisfies Config;
