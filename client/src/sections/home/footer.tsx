@@ -33,7 +33,7 @@ export function Footer() {
           <div>
             <img src={logoHorizontalWhite} alt={`${siteConfig.name} logo`} width={140} height={28} loading="lazy" decoding="async" className="h-7 w-auto mb-4" data-testid="img-footer-logo" />
             <p className="text-xs leading-relaxed text-muted-foreground">
-              Operations, transformation & growth consultancy for founders and managing partners since 2005.
+              Operations, transformation & growth consultancy for CEOs, COOs, founders & managing partners since 2005.
             </p>
             <ul className="mt-4 space-y-2 list-none m-0 p-0">
               <li className="flex items-center gap-2">
@@ -63,6 +63,15 @@ export function Footer() {
                   </a>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/why"
+                  className="text-xs flex items-center gap-1 transition-opacity duration-150 hover:opacity-70 text-muted-foreground"
+                  data-testid="link-footer-why"
+                >
+                  Why us <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/design"

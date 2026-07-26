@@ -45,12 +45,14 @@ const allowlist = [
 ];
 
 /**
- * Prerender the full homepage to static HTML and inject it into the built
- * index.html in place of the <!--ssr-outlet--> marker.
+ * Prerender the full homepage, the /design design-system page AND the
+ * public /why page to static HTML, injecting each into its built shell
+ * (dist/public/index.html, dist/public/design/index.html,
+ * dist/public/why/index.html) in place of the <!--ssr-outlet--> marker.
  *
  * AI crawlers (GPTBot, ClaudeBot, PerplexityBot, CCBot) and other non-JS
  * agents therefore see the complete page content, not an empty shell.
- * The client bundle re-renders into #root on load from the same components
+ * The client bundles re-render into #root on load from the same components
  * and content/, so the visible result is unchanged.
  */
 async function prerender(define: Record<string, string>) {
@@ -70,23 +72,35 @@ async function prerender(define: Record<string, string>) {
   });
 
   const mod = await import(pathToFileURL(resolve(prerenderOut, "entry-prerender.mjs")).href);
-  const appHtml: string = mod.render();
-  if (!appHtml || appHtml.length < 5000) {
-    throw new Error(`prerender: rendered HTML suspiciously small (${appHtml?.length ?? 0} chars) — homepage render is broken`);
-  }
+  const pages: { label: string; appHtml: string; file: string; template: string }[] = [
+    { label: "homepage", appHtml: mod.render(), file: "dist/public/index.html", template: "client/index.html.template" },
+    { label: "/design page", appHtml: mod.renderDesign(), file: "dist/public/design/index.html", template: "client/design/index.html.template" },
+    { label: "/why page", appHtml: mod.renderWhy(), file: "dist/public/why/index.html", template: "client/why/index.html.template" },
+  ];
 
-  const htmlPath = resolve(rootDir, "dist/public/index.html");
-  let html = await readFile(htmlPath, "utf-8");
-  const marker = "<!--ssr-outlet-->";
-  if (!html.includes(marker)) {
-    throw new Error(`prerender: ${marker} marker not found in dist/public/index.html — check client/index.html.template`);
+  for (const { label, appHtml, file, template } of pages) {
+    if (!appHtml || appHtml.length < 5000) {
+      throw new Error(`prerender: rendered HTML suspiciously small (${appHtml?.length ?? 0} chars) — ${label} render is broken`);
+    }
+
+    const htmlPath = resolve(rootDir, file);
+    let html: string;
+    try {
+      html = await readFile(htmlPath, "utf-8");
+    } catch {
+      throw new Error(`prerender: ${file} is missing — check the client build inputs (rollupOptions.input) in build.ts`);
+    }
+    const marker = "<!--ssr-outlet-->";
+    if (!html.includes(marker)) {
+      throw new Error(`prerender: ${marker} marker not found in ${file} — check ${template}`);
+    }
+    // Function replacement avoids `$`-pattern interpretation in the HTML.
+    html = html.replace(marker, () => appHtml);
+    await writeFile(htmlPath, html, "utf-8");
+    console.log(`prerender: injected ${(appHtml.length / 1024).toFixed(1)} kB of static ${label} HTML`);
   }
-  // Function replacement avoids `$`-pattern interpretation in the HTML.
-  html = html.replace(marker, () => appHtml);
-  await writeFile(htmlPath, html, "utf-8");
 
   await rm(prerenderOut, { recursive: true, force: true });
-  console.log(`prerender: injected ${(appHtml.length / 1024).toFixed(1)} kB of static homepage HTML`);
 }
 
 async function buildAll() {
@@ -117,9 +131,21 @@ async function buildAll() {
   await viteBuild({
     configFile: resolve(rootDir, "vite.config.ts"),
     define,
+    build: {
+      rollupOptions: {
+        // Three HTML shells: the homepage SPA plus the /design and /why
+        // static pages (emitted at dist/public/<page>/index.html so GitHub
+        // Pages serves them as real 200s instead of the SPA 404 fallback).
+        input: {
+          main: resolve(rootDir, "client/index.html"),
+          design: resolve(rootDir, "client/design/index.html"),
+          why: resolve(rootDir, "client/why/index.html"),
+        },
+      },
+    },
   });
 
-  console.log("prerendering homepage...");
+  console.log("prerendering homepage + /design + /why...");
   await prerender(define);
 
   console.log("building server...");

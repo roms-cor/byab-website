@@ -1,21 +1,17 @@
 import { siteConfig } from "@content/site.config";
 import { timeline } from "@content/timeline";
+import { SectionHeading } from "@/components/section-heading";
 
 export function Story() {
   return (
     <section id="story" aria-labelledby="story-heading" className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 bg-card">
       <div className="max-w-container mx-auto">
         <header className="mb-12 sm:mb-16 max-w-2xl">
-          <p className="text-xs uppercase tracking-eyebrow font-medium mb-3 text-muted-foreground" aria-hidden="true">Our story</p>
-          <h2
-            id="story-heading"
-            className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground leading-tight"
-            data-testid="text-section-story"
-          >
+          <SectionHeading eyebrow="Our story" id="story-heading" testId="text-section-story" className="leading-tight">
             Twenty years of the same intuition:
             founders don't lack ideas — they lack
             time to execute them.
-          </h2>
+          </SectionHeading>
         </header>
 
         <div className="space-y-0">

@@ -1,6 +1,6 @@
 # {{SITE_NAME}} — Operations · Transformation · Growth
 
-> {{SITE_NAME}} ({{SITE_SHORT_NAME}}) is an operations, transformation, and growth consultancy founded in 2005. {{SLOGAN}}, we run what you can't get to anymore — externalized operations, data-powered transformation, and B2B growth engineering for founders and managing partners. 57% operating profitability, 0€ external debt, 20+ years of uninterrupted service.
+> {{SITE_NAME}} ({{SITE_SHORT_NAME}}) is an operations, transformation, and growth consultancy founded in 2005. {{SLOGAN}}, we run what you can't get to anymore — externalized operations, data-powered transformation, and B2B growth engineering for CEOs, COOs, founders, and managing partners. 57% operating profitability, 0€ external debt, 20+ years of uninterrupted service.
 
 ## Primary Keyword
 
@@ -9,11 +9,12 @@
 ## Pages
 
 - [Homepage](/) — Agency landing page: services, track record, company history with backlinks, stats, about, testimonial, and contact form
-- [Design](/design) — Complete design system: brand identity, design tokens, UI components, and site section reference (noindex)
+- [Why us](/why) — Conversion-focused overview: the problem we remove, the three-step engagement, the operating model (senior operators, no vendors, self-funded), track record, and objections FAQ
+- [Design](/design) — Complete design system as fully crawlable static HTML: brand identity, design tokens with real values, UI components, and site section reference
 
 ## What Is {{SITE_NAME}}?
 
-{{SITE_NAME}} (abbreviated {{SITE_SHORT_NAME}}) is a consultancy that serves founders and managing partners who are too busy to handle everything themselves. Founded on {{COMPANY_1_FOUNDED_TEXT}} by {{FOUNDER_NAME}}, registered under SIREN {{COMPANY_1_SIREN}}, {{SITE_NAME}} has spent over 20 years proving that founders don't lack ideas — they lack time and structure to execute them. A second entity (SIREN {{COMPANY_2_SIREN}}) was created on {{COMPANY_2_FOUNDED_TEXT}} by {{COMPANY_2_FOUNDER}}, specializing in externalized general secretariat for law firms and SMEs. As of {{BUILD_YEAR}}, the team is {{TEAM_COUNT_WORD}}: {{TEAM_NAMES}}.
+{{SITE_NAME}} (abbreviated {{SITE_SHORT_NAME}}) is a consultancy that takes operations off the desks of CEOs, COOs, founders, and managing partners. Founded on {{COMPANY_1_FOUNDED_TEXT}} by {{FOUNDER_NAME}}, registered under SIREN {{COMPANY_1_SIREN}}, {{SITE_NAME}} has spent over 20 years proving that executives don't lack ideas — they lack time and structure to execute them. A second entity (SIREN {{COMPANY_2_SIREN}}) was created on {{COMPANY_2_FOUNDED_TEXT}} by {{COMPANY_2_FOUNDER}}, specializing in externalized general secretariat for law firms and SMEs. As of {{BUILD_YEAR}}, the team is {{TEAM_COUNT_WORD}}: {{TEAM_NAMES}}.
 
 ## Services
 
@@ -63,7 +64,7 @@ The {{SITE_NAME}} team (as of {{BUILD_YEAR}}) brings {{TEAM_COUNT_WORD}} complem
 
 ## Tone & Voice
 
-{{SITE_NAME}} communicates with a direct, expert tone — no jargon, no fluff, always oriented toward results. The language is confident without being arrogant, professional without being corporate. We write the way we work: straight to the point, clear, and actionable. Bilingual (French and English), adapting naturally to the client's language. We say "we do" not "we can help you." We say "{{SLOGAN_LOWER}}" not "for busy professionals."
+{{SITE_NAME}} communicates in executive language — direct, senior, results-first, addressed to CEOs, COOs, founders, and managing partners. No jargon, no fluff: business outcomes (time back, execution reliability, predictable revenue, controlled risk) over service lists. The language is confident without being arrogant, professional without being corporate. We write the way we work: straight to the point, clear, and actionable. Bilingual (French and English), adapting naturally to the client's language. We say "we do" not "we can help you." We say "we operate" not "we advise." We say "{{SLOGAN_LOWER}}" not "for busy professionals."
 
 ## Competitive Differentiation
 
@@ -81,4 +82,4 @@ Verifiable third-party sources for {{SITE_NAME}}:
 
 ## Design System
 
-Full components reference (brand identity, colors, typography, spacing, UI components, site sections, guidelines) available at [/design](/design) and [/llms-full.txt](/llms-full.txt).
+Full components reference (brand identity, colors, typography, spacing, UI components, site sections, guidelines) available as static, crawlable HTML at [/design](/design). Editorial site content is also available at [/llms-full.txt](/llms-full.txt).

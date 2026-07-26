@@ -1,18 +1,14 @@
 import { resolvedFaq } from "@content/faq";
+import { SectionHeading } from "@/components/section-heading";
 
 export function Faq() {
   return (
     <section id="faq" aria-labelledby="faq-heading" className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 border-t border-border/50">
       <div className="max-w-container mx-auto">
         <header className="mb-12 sm:mb-16 max-w-2xl">
-          <p className="text-xs uppercase tracking-eyebrow font-medium mb-3 text-muted-foreground" aria-hidden="true">FAQ</p>
-          <h2
-            id="faq-heading"
-            className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground"
-            data-testid="text-section-faq"
-          >
+          <SectionHeading eyebrow="FAQ" id="faq-heading" testId="text-section-faq">
             Frequently asked questions.
-          </h2>
+          </SectionHeading>
         </header>
 
         <div className="border border-border/50 rounded-lg overflow-hidden divide-y divide-black-alpha-06">

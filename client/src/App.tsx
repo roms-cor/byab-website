@@ -9,6 +9,7 @@ import NotFound from "@/pages/not-found";
 
 const Components = lazy(() => import("@/pages/components"));
 const ComingSoon = lazy(() => import("@/pages/coming-soon"));
+const Why = lazy(() => import("@/pages/why"));
 
 function Router() {
   return (
@@ -20,6 +21,11 @@ function Router() {
       <Route path="/coming-soon">
         <Suspense fallback={<div className="min-h-screen bg-background" />}>
           <ComingSoon />
+        </Suspense>
+      </Route>
+      <Route path="/why">
+        <Suspense fallback={<div className="min-h-screen bg-background" />}>
+          <Why />
         </Suspense>
       </Route>
       <Route path="/design">

@@ -69,13 +69,13 @@ export const siteConfig: SiteConfig = {
   tagline: "Operations, Transformation & Growth Consultancy",
   slogan: "Because you are busy",
   description:
-    "Because You Are Busy (BYAB) — We run what you can't get to anymore. Operations, transformation, and growth consultancy for founders and managing partners since 2005. 57% operating profitability, 0€ debt, 20+ years.",
+    "Because You Are Busy (BYAB) — We run what you can't get to anymore. Operations, transformation & growth for CEOs, COOs, founders and managing partners since 2005. 57% profitability, 0€ debt.",
   keywords:
-    "because you are busy, BYAB, externalized operations, transformation consulting, growth engineering, B2B growth, law firm operations, general secretariat, founder operations, managing partner support, externalized back-office, operations consultancy France, B2B SaaS growth, outbound B2B, systems architecture, data governance",
+    "because you are busy, BYAB, externalized operations, CEO operations support, COO as a service, executive operations, transformation consulting, growth engineering, B2B growth, law firm operations, general secretariat, founder operations, managing partner support, externalized back-office, operations consultancy France, B2B SaaS growth, outbound B2B, systems architecture, data governance",
   ogImage: "https://becausebusy.com/og-image.png",
   foundingDate: "2005-04-01",
   address: {
-    street: "18 rue Arago",
+    street: "8 rue Arago",
     postalCode: "94400",
     city: "Vitry-sur-Seine",
     country: "France",

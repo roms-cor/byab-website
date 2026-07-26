@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { services } from "@content/services";
+import { SectionHeading } from "@/components/section-heading";
 
 export function Services() {
   return (
@@ -7,17 +8,12 @@ export function Services() {
       <div className="max-w-container mx-auto">
         <header className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12 sm:mb-16">
           <div>
-            <p className="text-xs uppercase tracking-eyebrow font-medium mb-3 text-muted-foreground" aria-hidden="true">What we do</p>
-            <h2
-              id="services-heading"
-              className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground"
-              data-testid="text-section-services"
-            >
-              Four ways we<br />take it off your plate.
-            </h2>
+            <SectionHeading eyebrow="What we do" id="services-heading" testId="text-section-services">
+              Four ways we take it<br />off the executive desk.
+            </SectionHeading>
           </div>
           <a href="#contact" className="text-sm font-medium flex items-center gap-1.5 transition-opacity duration-150 text-muted-foreground" data-testid="link-discuss-project">
-            Discuss your project <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+            Tell us what to take over <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </a>
         </header>
 

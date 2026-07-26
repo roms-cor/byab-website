@@ -1,5 +1,6 @@
 import { ArrowRight, Loader2 } from "lucide-react";
 import { siteConfig } from "@content/site.config";
+import { SectionHeading } from "@/components/section-heading";
 import { useContactForm } from "@/hooks/use-contact-form";
 
 export function Contact() {
@@ -20,18 +21,13 @@ export function Contact() {
       <div className="max-w-container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           <div>
-            <p className="text-xs uppercase tracking-eyebrow font-medium mb-3 text-muted-foreground" aria-hidden="true">Contact</p>
-            <h2
-              id="contact-heading"
-              className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground leading-tight"
-              data-testid="text-section-contact"
-            >
+            <SectionHeading eyebrow="Contact" id="contact-heading" testId="text-section-contact" className="leading-tight">
               Let's take something{" "}
-              <span className="text-gray-450">off your plate.</span>
-            </h2>
+              <span className="text-gray-450">off your desk.</span>
+            </SectionHeading>
             <p className="text-sm sm:text-base mt-4 leading-relaxed text-muted-foreground">
-              {siteConfig.slogan}, we'll take it from here. Tell us what's burying you
-              and we'll get back within 24h.
+              {siteConfig.slogan}, we'll take it from here. Tell us what's consuming your
+              time and you'll hear back from a senior operator within 24h — in confidence.
             </p>
             <div className="mt-8 space-y-4">
               <div>
@@ -85,11 +81,11 @@ export function Contact() {
                 {errors.email && <p id="contact-email-error" className="text-xs mt-1 text-red-600" data-testid="text-error-email">{errors.email}</p>}
               </div>
               <div>
-                <label htmlFor="contact-message" className="text-xs font-medium text-foreground block mb-1.5">Tell us what's burying you</label>
+                <label htmlFor="contact-message" className="text-xs font-medium text-foreground block mb-1.5">What should leave your desk first?</label>
                 <textarea
                   id="contact-message"
                   rows={4}
-                  placeholder="What would you delegate tomorrow if you could?"
+                  placeholder="What would you hand over tomorrow if you trusted someone to run it?"
                   value={message}
                   onChange={(e) => onMessageChange(e.target.value)}
                   disabled={isPending}
@@ -110,7 +106,7 @@ export function Contact() {
                   </>
                 ) : (
                   <>
-                    Send message
+                    Get a senior operator's reply
                     <ArrowRight className="w-4 h-4" aria-hidden="true" />
                   </>
                 )}

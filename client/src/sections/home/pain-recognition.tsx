@@ -11,9 +11,9 @@ export function PainRecognition() {
             className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight text-background"
             data-testid="text-section-pain"
           >
-            You didn't start a company
-            to manage its{" "}
-            <span className="text-gray-350">back-office.</span>
+            You run the company.
+            Who runs the{" "}
+            <span className="text-gray-350">operations?</span>
           </h2>
           <ul className="space-y-0 list-none m-0 p-0 divide-y divide-white-alpha-08">
             {pains.map((pain, i) => (

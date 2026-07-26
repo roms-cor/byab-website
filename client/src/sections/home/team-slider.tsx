@@ -37,7 +37,7 @@ export function TeamSlider() {
                   decoding={isFirst ? "sync" : "async"}
                   className={`absolute inset-0 w-full h-full rounded-full object-cover border-[3px] border-background shadow-slider-photo ${
                     isActive || isInitialFirst ? "opacity-100 scale-100" : i === prev ? "opacity-0 scale-[1.08]" : "opacity-0 scale-[0.92]"
-                  }${isInitialFirst ? "" : " transition-[opacity,transform] duration-700 ease-in-out"}`}
+                  }${isInitialFirst ? "" : " transition-opacity-transform duration-700 ease-in-out"}`}
                   data-testid={isActive ? "img-slider-active" : undefined}
                 />
               );
@@ -77,7 +77,7 @@ export function TeamSlider() {
             {teamMembers.map((m, i) => (
               <p
                 key={m.name}
-                className={`absolute inset-x-0 text-xl sm:text-2xl font-semibold text-foreground tracking-tight transition-[opacity,transform] duration-500 ease-in-out ${
+                className={`absolute inset-x-0 text-xl sm:text-2xl font-semibold text-foreground tracking-tight transition-opacity-transform duration-500 ease-in-out ${
                   i === active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3.5"
                 }`}
                 data-testid={i === active ? "text-slider-name" : undefined}
@@ -90,7 +90,7 @@ export function TeamSlider() {
             {teamMembers.map((m, i) => (
               <p
                 key={m.role}
-                className={`absolute inset-x-0 text-sm font-medium text-muted-foreground transition-[opacity,transform] duration-500 ease-in-out delay-60 ${
+                className={`absolute inset-x-0 text-sm font-medium text-muted-foreground transition-opacity-transform duration-500 ease-in-out delay-60 ${
                   i === active ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2.5"
                 }`}
                 data-testid={i === active ? "text-slider-role" : undefined}

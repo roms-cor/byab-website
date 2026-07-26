@@ -1,11 +1,14 @@
 /**
  * Design token table: token name → CSS color reference.
- * Every literal color value lives in tailwind.config.ts (the design-token
- * sheet), which re-emits each token as a :root CSS variable; the hex codes
- * displayed on the /design page are resolved at runtime from the computed
- * styles (the page is client-only, never prerendered), so no color literal
- * appears in these source files.
+ * Every literal color value lives in design-tokens.ts at the repo root (the
+ * design-token sheet, imported by tailwind.config.ts, which re-emits each
+ * token as a :root CSS variable). The values displayed on the /design page
+ * resolve statically from those literals — no getComputedStyle — so the
+ * build-time prerender of /design contains the real values and the browser
+ * re-render is identical. No color literal appears in these source files.
  */
+import { tokenVarText } from "../../../../design-tokens";
+
 export const tokenRefs = {
   gray50: "var(--gray-50)",
   gray100: "var(--gray-100)",
@@ -32,34 +35,15 @@ export const tokenRefs = {
 export type TokenName = keyof typeof tokenRefs;
 export type TokenText = Record<TokenName, string>;
 
-/** Resolve a CSS color reference to its computed value via a probe element. */
-function computeCssColor(ref: string): string {
-  const el = document.createElement("span");
-  el.style.color = ref;
-  document.body.appendChild(el);
-  const computed = getComputedStyle(el).color;
-  document.body.removeChild(el);
-  return computed;
-}
-
-/** Opaque computed colors become uppercase hex text; alpha colors keep their functional notation (spaces stripped). */
-function formatColorText(computed: string): string {
-  const m = computed.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-  if (m) {
-    return (
-      "#" +
-      m.slice(1, 4)
-        .map((n) => Number(n).toString(16).padStart(2, "0").toUpperCase())
-        .join("")
-    );
-  }
-  return computed.replace(/\s+/g, "");
-}
-
+/**
+ * Token display texts, resolved statically from the design-token sheet:
+ * opaque colors as uppercase hex, alpha colors in functional notation —
+ * exactly the strings the old getComputedStyle probe produced at runtime.
+ */
 export function resolveTokenTexts(): TokenText {
   const out = {} as Record<TokenName, string>;
   for (const name of Object.keys(tokenRefs) as TokenName[]) {
-    out[name] = typeof document === "undefined" ? "" : formatColorText(computeCssColor(tokenRefs[name]));
+    out[name] = tokenVarText(tokenRefs[name]);
   }
   return out;
 }

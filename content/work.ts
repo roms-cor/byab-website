@@ -12,7 +12,7 @@ export const engagements: Engagement[] = [
     category: "Growth Engineering",
     year: "2025",
     description:
-      "ICP definition, outbound infrastructure design, acquisition funnel architecture, and sales pipeline metrics for a French B2B SaaS company moving from founder-led sales to systematic, repeatable growth.",
+      "ICP definition, outbound infrastructure design, acquisition funnel architecture, and sales pipeline metrics for a French B2B SaaS company — moving the CEO from founder-led sales to a commercial machine the company owns and can forecast.",
     outcome: "Pipeline engineered",
   },
   {
@@ -20,7 +20,7 @@ export const engagements: Engagement[] = [
     category: "Operations Restructuring",
     year: "2024",
     description:
-      "Full operational overhaul of a multi-office French law firm: general secretariat rebuild, financial reporting automation, ISO compliance processes, and HR documentation — all rebuilt from scratch by Because You Are Busy.",
+      "Full operational overhaul of a multi-office French law firm: general secretariat rebuild, financial reporting automation, ISO compliance processes, and HR documentation — partners' time returned to clients while Because You Are Busy rebuilt and ran the rest.",
     outcome: "Operations rebuilt",
   },
   {
@@ -28,7 +28,7 @@ export const engagements: Engagement[] = [
     category: "Transformation & Data",
     year: "2025",
     description:
-      "Information systems architecture review, data governance framework design, and operational dashboard deployment for a growing French tech SME — operational chaos transformed into decision-ready visibility.",
+      "Information systems architecture review, data governance framework design, and operational dashboard deployment for a growing French tech SME — leadership went from operational chaos to steering on numbers they trust.",
     outcome: "Visibility restored",
   },
 ];

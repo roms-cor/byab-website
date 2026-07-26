@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{SITE_LOCALE}}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design System — {{SITE_NAME}}</title>
+    <meta name="description" content="Design system and brand reference for {{SITE_NAME}} ({{SITE_SHORT_NAME}}): logo usage, color tokens with real values, typography scale, spacing grid, UI components, and site section documentation." />
+    <!-- Crawlable but not indexed (RevOps decision): full static HTML for AI
+         crawlers, kept out of Google via this static noindex. Deliberately
+         absent from sitemap.xml. -->
+    <meta name="robots" content="noindex" />
+    <meta name="author" content="{{SITE_NAME}} ({{SITE_SHORT_NAME}})" />
+    <meta name="theme-color" content="{{SITE_THEME_COLOR}}" />
+    <link rel="canonical" href="{{SITE_URL}}design" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" /></noscript>
+    <link rel="preload" as="image" type="image/webp" href="/images/logo-horizontal-white.webp" />
+  </head>
+  <body>
+    <div id="root"><!--ssr-outlet--></div>
+    <script type="module" src="/src/entry-design.tsx"></script>
+  </body>
+</html>

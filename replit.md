@@ -1,7 +1,7 @@
 # Because You Are Busy — Landing Page & Components
 
 ## Overview
-A two-page site for Because You Are Busy (BYAB), an operations, transformation, and growth consultancy serving founders and managing partners since 2005. The homepage is the agency landing page; the Components page is the single source of truth — it defines the brand identity, design tokens, UI elements, and documents every section available on the site.
+A three-page site for Because You Are Busy (BYAB), an operations, transformation, and growth consultancy serving founders and managing partners since 2005. The homepage is the agency landing page; `/why` is a prerendered, indexable conversion page; the Components page is the single source of truth — it defines the brand identity, design tokens, UI elements, and documents every section available on the site.
 
 **Primary keyword:** "because you are busy"
 
@@ -14,12 +14,12 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - **Build-time injection:** `script/build-defines.ts` (shared by `vite.config.ts` and the prerender step) defines `__APP_VERSION__` (from package.json), `__BUILD_DATE__` (full ISO datetime at build/publish time), and `__GIT_COMMIT_DATE__` (ISO datetime of the latest git commit). Both timestamps are displayed in the footer bottom bar (`text-3xs` = 10px, `text-gray-250` #BBBBBB) as "Published {date} {time} · Commit {date} {time}". **This footer version line must always be preserved** — it is a persistent project requirement.
 - **Image optimization:** All images converted to WebP at 256px (hero/team) and 128px (orbit/story thumbnails), served from `client/public/images/`. Logos resized to 504×168 (2x retina). Total image payload ~92KB. Lazy loading + decoding="async" on below-fold images, fetchpriority="high" on LCP hero image + header logo.
 - **LCP optimization:** Hero first image renders with opacity:1 and NO CSS transition on initial paint (hasAdvanced ref). LCP image (anne-256.webp) preloaded in `<head>`.
-- **Full build-time prerender:** `script/build.ts` renders the complete homepage (`client/src/entry-prerender.tsx`, renderToString) into `dist/public/index.html` — ~67KB of static HTML. Non-JS crawlers (GPTBot, ClaudeBot, PerplexityBot, CCBot) see the entire page. React replaces it on mount (`createRoot().render`; DOM output is identical so there is no visible flash). The dev server stays client-rendered only.
+- **Full build-time prerender:** `script/build.ts` renders the complete homepage (`client/src/entry-prerender.tsx`, renderToString) into `dist/public/index.html` — ~67KB of static HTML. Non-JS crawlers (GPTBot, ClaudeBot, PerplexityBot, CCBot) see the entire page. React replaces it on mount (`createRoot().render`; DOM output is identical so there is no visible flash). The dev server stays client-rendered only. The `/design` page is prerendered the same way into `dist/public/design/index.html` with its own dedicated shell (`client/design/index.html.template`: own title/description, canonical `/design`, **static noindex**, no homepage JSON-LD), remounted by the eager entry `client/src/entry-design.tsx` — no Suspense fallback, so no flash. The public `/why` page follows the same pattern: prerendered into `dist/public/why/index.html` from its own **indexable** shell (`client/why/index.html.template`, canonical `/why`), eager entry `client/src/entry-why.tsx`. Inside /why sections, links back to home must be plain `<a href="/">` (the static shell mounts no Router — a wouter Link would change the URL without navigating).
 - **CSS is render-blocking by design:** the old `media="print"` async-CSS hack was removed when the full prerender landed — with the whole page in static HTML, async CSS causes a flash of unstyled content. Do not re-add it.
-- **Code splitting:** Components/design page lazy-loaded via React.lazy + Suspense — not bundled with homepage JS.
+- **Code splitting:** Components/design page lazy-loaded via React.lazy + Suspense — not bundled with homepage JS. The built `/design` page loads through its own eager entry (`entry-design.tsx`); the SPA lazy route remains for dev + client-side navigation. The SEO validator fails the build if design or /why page code leaks into the homepage JS graph; `/why` mirrors the same pattern (lazy SPA route + eager `entry-why.tsx`, marker `why-page-root`).
 - **Accessibility:** WCAG AA contrast (#767676 decorative text, #595959 small badge text, #949494 text on dark bg), 44×44px touch targets on slider dots/orbit buttons, prefers-reduced-motion support, form inputs with required/aria-required, skip-nav link, marquee aria-hidden, descriptive image alt text, orbit button images use alt="" with aria-label.
 - **Canonical + hreflang:** generated statically into the `<head>` at build time from `content/site.config.ts` (via the `{{HREFLANG_LINKS}}` token in `client/index.html.template`). No client-side head injection remains (`useHeadLinks` was removed).
-- **SEO/GEO validation:** `script/validate-seo.ts` runs at the end of every `npm run build` and fails it with a numbered report if any invariant breaks — head tags, JSON-LD consistency with config, prerendered content completeness, robots/sitemap/llms/CNAME consistency, unresolved `{{TOKENS}}`, missing og-image/icon assets, or brand/domain strings hardcoded outside `content/`. Sitemap `<lastmod>`, `{{BUILD_YEAR}}` and `{{BUILD_MONTH_YEAR}}` ("as of …" copy) are stamped automatically at build time.
+- **SEO/GEO validation:** `script/validate-seo.ts` runs at the end of every `npm run build` and fails it with a numbered report if any invariant breaks — head tags, JSON-LD consistency with config, prerendered content completeness, robots/sitemap/llms/CNAME consistency, unresolved `{{TOKENS}}`, missing og-image/icon assets, or brand/domain strings hardcoded outside `content/`. It also validates the prerendered `/design` page: dedicated head (title/canonical/static noindex, zero JSON-LD), all 8 sections present, real token values + font names visible without JS, robots/llms/sitemap coherence, and homepage-bundle isolation. Sitemap `<lastmod>`, `{{BUILD_YEAR}}` and `{{BUILD_MONTH_YEAR}}` ("as of …" copy) are stamped automatically at build time. The prerendered `/why` page gets the same treatment: dedicated indexable head (title/description from `content/why.ts`, canonical `/why`, index-follow robots parsed as directives), exactly one WebPage + one BreadcrumbList JSON-LD block (deliberately NO FAQPage — the homepage owns it), every section's copy visible without JS, sitemap + llms.txt listing, and homepage-bundle isolation.
 - **Font loading:** Google Fonts loaded asynchronously via preload+onload pattern (non-render-blocking), with slimmed weight range (Inter 400-700, JetBrains Mono 400-500)
 - **Preload hints:** LCP image (anne-256.webp) and header logo preloaded in `<head>`
 - **Auto-push on Publish:** `script/build.ts` runs `script/push-to-github.sh` after building, which syncs the workspace to GitHub `main` using `GITHUB_PAT` (Replit secret). GitHub Actions then auto-deploys to `becausebusy.com`. Replit = staging, Publish = production.
@@ -57,7 +57,8 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 ## Routes
 - `/` — Full homepage (agency landing page)
 - `/home` — Redirects to `/` (legacy URL preserved)
-- `/design` — Design system page (noindex, design tokens + site sections reference)
+- `/why` — Why-us conversion page ("blueprint/run-book" landing graduated from a canvas mockup). **Public and indexable**: prerendered static HTML from `why/index.html`, dedicated head + canonical, listed in sitemap.xml; all copy in `content/why.ts` (FAQ entries reused from `content/faq.ts` via `faqIndexes`)
+- `/design` — Design system page (design tokens + site sections reference). **Crawlable but noindex**: served as prerendered static HTML from `design/index.html` (real 200 for non-JS agents), kept out of Google via a static `<meta name="robots" content="noindex">`, deliberately absent from sitemap.xml
 
 ## SEO & AI Search Optimization
 - **Primary keyword:** "because you are busy" — appears in title, meta, h1 subtext, hero description, about section, contact section, story quote, footer, schema.org, llms.txt
@@ -75,10 +76,10 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - **theme-color** — #ffffff
 - **Viewport** — No maximum-scale restriction (accessibility)
 - **hreflang** tags for en/fr + x-default — static in `<head>`, generated from `site.config.ts` locales
-- **robots.txt** — Allows all major search + AI bots (Googlebot, GPTBot, ClaudeBot, PerplexityBot, FirecrawlBot, OAI-SearchBot, Diffbot, Applebot, DataForSeoBot, iaskspider, omgili, etc.)
+- **robots.txt** — Allows all major search + AI bots (Googlebot, GPTBot, ClaudeBot, PerplexityBot, FirecrawlBot, OAI-SearchBot, Diffbot, Applebot, DataForSeoBot, iaskspider, omgili, etc.). `/design` is NOT disallowed — it is crawlable; its static noindex meta keeps it out of the index
 - **llms.txt** — Comprehensive structured summary + Tone & Voice, Competitive Differentiation, Citations sections
 - **llms-full.txt** — Full editorial site content (hero, services, team bios, FAQ, track record, company history)
-- **sitemap.xml** — Both routes with absolute URLs and priorities
+- **sitemap.xml** — Homepage + `/why`, absolute URLs + auto-stamped lastmod (`/design` is noindex and does not belong in a sitemap)
 - **Backlinks** (14+ external) embedded in Story section: annuaire-entreprises, Pappers, societe.com, Le Figaro, LinkedIn (4 profiles), Vatier, Avizio, Clay
 - **CNAME** — Single file at root (`becausebusy.com`), copied to dist during deploy
 
@@ -86,12 +87,15 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - `content/site.config.ts` — single source of truth for brand/domain/SEO values (see TEMPLATE.md)
 - `script/build.ts` — build orchestrator (generate-meta → vite → prerender → server → validate-seo → push)
 - `script/validate-seo.ts` — post-build SEO/GEO validation harness (fails the build on violations)
-- `client/src/entry-prerender.tsx` — SSR entry for the build-time homepage prerender
+- `client/src/entry-prerender.tsx` — SSR entry for the build-time prerenders (homepage + /design + /why)
+- `client/src/entry-design.tsx` — eager client entry for the built /design page (shell: `client/design/index.html.template`)
+- `client/src/entry-why.tsx` — eager client entry for the built /why page (shell: `client/why/index.html.template`)
 - `client/src/pages/home.tsx` — Homepage: thin ordered assembly of `client/src/sections/home/*` (one file per section)
 - `client/src/pages/components.tsx` — /design page: assembly of `client/src/sections/design/*` blocks (keeps side-nav observer + token resolution)
-- `client/src/sections/` — Presentational section components (home/ + design/); logic lives in hooks (`use-mobile-nav`, `use-contact-form`, `use-team-slider`) so Subframe can replace JSX without touching behavior
-- `client/src/App.tsx` — Router setup (/ and /components)
-- `tailwind.config.ts` — Design-token sheet: every color as a literal value, re-emitted as :root CSS vars (Subframe-importable)
+- `client/src/sections/` — Presentational section components (home/ + design/ + why/); logic lives in hooks (`use-mobile-nav`, `use-contact-form`, `use-team-slider`) so Subframe can replace JSX without touching behavior
+- `client/src/App.tsx` — Router setup (/, /home redirect, lazy /design + /why + /coming-soon, 404)
+- `design-tokens.ts` — Design-token sheet (repo root): every color as a literal value, single sanctioned home for color literals; also feeds the /design page's static token texts
+- `tailwind.config.ts` — Tailwind theme wired to `design-tokens.ts`, re-emits every token as :root CSS vars (Subframe-importable)
 - `docs/design-tokens.md` — Full token reference (palette + old-name mapping, typography, spacing, radius)
 - `client/src/index.css` — Derived interaction tokens (--*-border), elevate system, animations (marquee, ring-pulse, slider-rotate)
 - `client/index.html` — Meta tags, OG, JSON-LD structured data
@@ -105,7 +109,7 @@ A two-page site for Because You Are Busy (BYAB), an operations, transformation, 
 - `server/routes.ts` — API routes (POST /api/contact)
 
 ## Brand Design Tokens (Pure Grayscale)
-Single source of truth: `tailwind.config.ts` (all colors as literal values, emitted as `--*` CSS vars). Full reference: `docs/design-tokens.md`.
+Single source of truth: `design-tokens.ts` at the repo root (all colors as literal values; imported by `tailwind.config.ts` and emitted as `--*` CSS vars). Full reference: `docs/design-tokens.md`.
 - **Gray scale**: gray-50 #F5F5F5 → gray-900 #000000 ordered by lightness; in-between stops 225/250/350/450/550 preserve historical brand values (old hex-encoded names --gray-c0/--gray-bb/--gray-94/--gray-76/--gray-59 were renamed, values unchanged)
 - **Primary**: #999999 (gray-300) — Decorative fills, accents (NOT for text)
 - **Accent**: #000000 (gray-900) — Primary buttons, dark sections

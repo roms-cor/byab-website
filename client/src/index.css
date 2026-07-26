@@ -271,3 +271,11 @@
     inset: -1px;
   }
 }
+
+/* /why hero backdrop — ultra-light dot grid driven by the foreground token
+   (consumers control intensity with an opacity utility). Lives here because
+   the ESLint color guard bans raw color functions in .tsx sources. */
+.pattern-dots {
+  background-image: radial-gradient(var(--foreground) 1px, transparent 1px);
+  background-size: 24px 24px;
+}

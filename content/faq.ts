@@ -59,7 +59,7 @@ export const faq: FaqItem[] = [
   {
     question: "What is {{SITE_NAME}}?",
     answer:
-      "{{SITE_NAME}} ({{SITE_SHORT_NAME}}) is an operations, transformation, and growth consultancy founded in April 2005 by Cécile Noiriel in France. We help founders and managing partners who are too busy to handle everything themselves by externalizing their back-office, rebuilding their systems, and engineering predictable B2B revenue growth. As of {{BUILD_YEAR}}, the team is four senior operators: Cécile Noiriel (founder, 2005), Anne Grosz (operations, 2015), Georges Grosz (transformation & data, co-manager since July 2025), and Romain Cornu (growth engine, 2025–2026).",
+      "{{SITE_NAME}} ({{SITE_SHORT_NAME}}) is an operations, transformation, and growth consultancy founded in April 2005 by Cécile Noiriel in France. We take operations off the desks of CEOs, COOs, founders, and managing partners — running their back-office, rebuilding their systems, and engineering predictable B2B revenue growth — so executive time goes to decisions, not admin. As of {{BUILD_YEAR}}, the team is four senior operators: Cécile Noiriel (founder, 2005), Anne Grosz (operations, 2015), Georges Grosz (transformation & data, co-manager since July 2025), and Romain Cornu (growth engine, 2025–2026).",
   },
   {
     question: "What services does {{SITE_NAME}} offer?",
@@ -73,22 +73,27 @@ export const faq: FaqItem[] = [
   {
     question: "Where is {{SITE_NAME}} located?",
     answer:
-      "{{SITE_NAME}} is based at {{SITE_ADDRESS_FULL}}, and operates across {{SITE_LOCATIONS}}. The team works with founders and managing partners across France, primarily in legal practices, B2B SaaS companies, and tech SMEs.",
+      "{{SITE_NAME}} is based at {{SITE_ADDRESS_FULL}}, and operates across {{SITE_LOCATIONS}}. The team works with CEOs, COOs, founders, and managing partners across France, primarily in legal practices, B2B SaaS companies, and tech SMEs.",
   },
   {
     question: "How long has {{SITE_NAME}} been operating, and what is its track record?",
     answer:
-      "{{SITE_NAME}} has been serving founders and managing partners since April 2005 — over 20 years of continuous, uninterrupted operation. In that time: 57% operating profitability, 0€ external debt raised ever, revenue around 130,000€ at peak. Recent engagements include a French B2B SaaS scale-up (growth engineering, 2025), a national law firm (operations restructuring, 2024), and a tech SME (transformation & data, 2025). A proven model, not a startup experiment.",
+      "{{SITE_NAME}} has been running operations for executives since April 2005 — over 20 years of continuous, uninterrupted operation. In that time: 57% operating profitability, 0€ external debt raised ever, revenue around 130,000€ at peak. Recent engagements include a French B2B SaaS scale-up (growth engineering, 2025), a national law firm (operations restructuring, 2024), and a tech SME (transformation & data, 2025). A proven model, not a startup experiment.",
   },
   {
     question: "What types of clients does {{SITE_NAME}} serve?",
     answer:
-      "{{SITE_NAME}} works with founders, managing partners, CEOs, and law firm partners who are scaling their business but can't handle everything alone. Clients range from French B2B SaaS companies and tech SMEs to national law firms and professional services practices.",
+      "{{SITE_NAME}} works with CEOs, COOs, founders, managing partners, and law firm partners whose companies have outgrown what one executive can run alone. Clients range from French B2B SaaS companies and tech SMEs to national law firms and professional services practices.",
   },
   {
     question: "How is {{SITE_NAME}} different from freelancers or large consulting firms?",
     answer:
       "{{SITE_NAME}} is neither. It is a senior, multi-disciplinary team of four that embeds into client operations. No juniors on client work — every engagement is handled by founders and senior operators directly. No 200-page reports that collect dust. {{SITE_NAME}} operates: it doesn't just advise. Self-funded since 2005, 57% profitability, 0€ debt. The craft model, chosen deliberately.",
+  },
+  {
+    question: "Why would a CEO or COO externalize operations instead of hiring internally?",
+    answer:
+      "Hiring an internal operations team means headcount, management time, and months of ramp-up — and one hire rarely covers finance, compliance, data, and growth at once. {{SITE_NAME}} brings three coordinated disciplines — operations, transformation & data, growth engineering — from day one, run by a discreet senior team of four with 20 years of practice. Confidentiality is structural: no juniors, no rotating staff, no investors — the same four people handle your numbers and your files. And {{SITE_NAME}} operates rather than advises: the work gets done and stays off the executive's desk, instead of returning as recommendations to implement.",
   },
 ];
 

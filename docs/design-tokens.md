@@ -1,22 +1,24 @@
 # Design Tokens — Because You Are Busy (BYAB)
 
-Single source of truth: **`tailwind.config.ts`**. Every color is defined there as a
-full, directly usable value (hex / hsl / rgba) — ready to paste into design tools
-(e.g. Subframe's *Import your theme* and *Design Guidelines*). A small inline
-Tailwind plugin re-emits every token as a `:root` CSS custom property, so the same
+Single source of truth: **`design-tokens.ts`** (repo root). Every color is defined
+there as a full, directly usable value (hex / hsl / rgba) — ready to paste into
+design tools (e.g. Subframe's *Import your theme* and *Design Guidelines*).
+`tailwind.config.ts` imports the sheet to build the Tailwind theme, and a small
+inline plugin re-emits every token as a `:root` CSS custom property, so the same
 values are reachable three ways:
 
 | Consumer | How it reads a token |
 | --- | --- |
 | Tailwind utility classes | `text-gray-450`, `bg-card`, `border-border/50` (opacity modifiers work — values are literals) |
 | CSS / vendor `ui/` via `var(--…)` | `color: var(--gray-450)`, `0 8px 40px var(--black-alpha-10)` (page code must use utility classes — see ESLint note below) |
-| `/design` page resolver | computes hex at runtime from the same CSS variables |
+| `/design` page texts | resolved statically from the sheet literals (`tokenVarText`), so the build-time prerender of /design shows real values without JS |
 
 Non-color variables (shadows, radius, elevate system) and **derived** colors
 (`--primary-border` etc., CSS relative color syntax) live in `client/src/index.css`.
 ESLint enforces both guards (see `eslint.config.js`): raw color literals are
 forbidden in `client/src` and `content`, and inline `style={{…}}` props are
-forbidden in `client/src/pages/**`, `client/src/sections/**` and `content/**` —
+forbidden in `client/src/pages/**`, `client/src/sections/**`,
+`client/src/components/**` (vendor `ui/` excepted) and `content/**` —
 styling must be Tailwind token classes. Irreducibly dynamic values use an
 explicit `// eslint-disable-next-line no-restricted-syntax -- <reason>`
 (today: the TeamSlider orbit `--thumb-angle` CSS variable and the /design
@@ -167,10 +169,12 @@ arbitrary values:
 | fontSize `hero` / `hero-lg` | `text-hero` / `lg:text-hero-lg` | 70px / 80px | Hero h1 display size |
 | fontSize `2xs` | `text-2xs` | 11px | Footer meta lines, skill badges |
 | fontSize `3xs` | `text-3xs` | 10px | Footer version line, stat subtexts |
+| fontSize `4xs` | `text-4xs` | 9px | /design color-swatch captions (base; `3xs` from `sm:`) |
 | letterSpacing `eyebrow` | `tracking-eyebrow` | 0.2em | Section eyebrow labels |
 | letterSpacing `label` | `tracking-label` | 0.15em | Uppercase panel/footer labels |
 | maxWidth `container` | `max-w-container` | 1200px | Site content column |
 | maxWidth `container-wide` | `max-w-container-wide` | 1400px | /design page shell |
+| minHeight `logo-tile` / `logo-tile-sm` | `min-h-logo-tile` / `sm:min-h-logo-tile-sm` | 160px / 200px | /design logo preview tiles |
 | spacing `header` | `h-header`, `top-header` | 72px | Fixed header height + mobile-nav offset |
 | borderRadius `button` | `rounded-button` | 10px | Primary CTA corner rounding |
 | boxShadow `slider-photo` | `shadow-slider-photo` | 0 8px 40px `black-alpha-10` | TeamSlider active portrait |
@@ -197,9 +201,10 @@ nothing toggles the class and Tailwind utilities compile to light literals.
 
 ## Subframe import notes
 
-1. **Import your theme** → point it at `tailwind.config.ts`; every color above is
-   a literal value there (no `var()` indirection except the five derived
-   `*-border` interaction colors, which Subframe can ignore).
+1. **Import your theme** → point it at `tailwind.config.ts` (theme shape) with
+   the literal values in `design-tokens.ts`, which it imports; no `var()`
+   indirection except the five derived `*-border` interaction colors, which
+   Subframe can ignore.
 2. **Design Guidelines doc** → this file is the palette/typography/spacing/radius
    reference to paste from; the live `/design` page shows the same values
    resolved at runtime.

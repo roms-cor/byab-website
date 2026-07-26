@@ -1,0 +1,39 @@
+Contexte du projet
+Because You Are Busy (BYAB) — site vitrine agence conseil (React + Vite + Express + Tailwind + shadcn/ui tokens). Replit = environnement de dev/staging, "Publish" pousse vers GitHub main (script/push-to-github.sh) qui déploie en prod via GitHub Actions. Voir replit.md pour l'architecture complète (build-time prerender, SEO/GEO validation, versioning automatique).
+
+Décision d'orientation (important, à respecter)
+Le design system reste géré directement en code (React + Tailwind), PAS via Subframe ni aucun autre outil de design visuel externe. Un projet Subframe existe et a été exploré/peuplé dans une session précédente (thème + composants + une page assemblée), mais ce n'est PAS la source de vérité et rien n'en sera resynchronisé dans ce repo. Le code React/Tailwind actuel EST la source de vérité. N'importe aucun code depuis Subframe, ne propose pas de migration vers un outil de design visuel.
+
+Ce qui est déjà fait (ne pas refaire)
+- Tous les tokens couleur/typo/radius/spacing sont centralisés dans tailwind.config.ts (valeurs littérales, un plugin les ré-émet en variables CSS :root). Référence complète : docs/design-tokens.md.
+- Les styles inline (style={{...}}) et les couleurs codées en dur sont interdits par une règle ESLint (no-restricted-syntax) sur client/src/pages, client/src/sections et content. Toute exception documentée doit avoir un commentaire // eslint-disable-next-line avec justification.
+- home.tsx et components.tsx sont de simples assemblages ; chaque section vit dans son propre fichier sous client/src/sections/home/ et client/src/sections/design/.
+- La logique d'état est extraite dans des hooks (client/src/hooks/use-mobile-nav.ts, use-contact-form.ts, use-team-slider.ts) — les fichiers de section ne contiennent que de la présentation + ces hooks.
+- Les composants shadcn/ui inutilisés ont été supprimés (47 → 4 fichiers réellement utilisés : card, toast, toaster, tooltip).
+- npm run lint, npm run check (tsc) et npm run build passent tous sans erreur (322 checks SEO/GEO inclus dans le build).
+
+Tâches à exécuter, par priorité
+
+1. Extraire un composant SectionHeading partagé
+   Le pattern "eyebrow (p uppercase text-xs tracking-eyebrow) + heading (h2)" est dupliqué en JSX inline dans au moins 7 fichiers : client/src/sections/home/services.tsx, work.tsx, about.tsx, team.tsx, story.tsx, faq.tsx, contact.tsx. Créer client/src/components/section-heading.tsx exportant un composant réutilisable (props : eyebrow, heading, className optionnel pour les variantes de largeur/couleur déjà présentes comme le "gray-450" sur certains mots). Remplacer les 7 occurrences. Vérifier visuellement qu'aucun rendu ne change (même markup, juste factorisé).
+
+2. Audit des valeurs arbitraires restantes
+   Il reste ~44 valeurs Tailwind arbitraires (ex: w-[260px], -inset-[34px], max-w-[800px]) documentées dans docs/design-tokens.md comme "one-off, gardées volontairement à leur unique point d'usage". Vérifier qu'aucune n'est en fait dupliquée ailleurs dans le code (auquel cas elle mériterait de devenir un token nommé dans tailwind.config.ts, comme cela a déjà été fait pour text-hero, rounded-button, etc.). Ne PAS transformer les vrais one-off.
+
+3. Vérifier la cohérence des exceptions ESLint documentées
+   eslint.config.js liste 2 exceptions à la règle no-restricted-syntax (TeamSlider --thumb-angle, previews de type-scale/spacing sur /design). Confirmer qu'aucune nouvelle exception n'a été ajoutée sans justification équivalente en commentaire.
+
+4. Hygiène continue à chaque changement de section/composant
+   - Ne jamais introduire de style={{}} ni de couleur hex/rgb/hsl brute — utiliser les classes token (bg-card, text-muted-foreground, etc.) ou une variable CSS déjà déclarée dans tailwind.config.ts.
+   - Toute nouvelle couleur/taille récurrente (utilisée ≥2 fois) doit devenir un token nommé dans tailwind.config.ts plutôt qu'une valeur arbitraire répétée, et être documentée dans docs/design-tokens.md.
+   - Respecter les commits conventionnels (feat:, fix:, chore:, refactor:, perf:, docs:, style:, test:) — le pipeline de changelog/release en dépend.
+   - Après tout changement de package.json côté version, vérifier que la version Replit correspond bien à celle du dernier GitHub Release avant le prochain Publish (cf. "Version sync caveat" dans replit.md).
+
+5. Validation avant de considérer une tâche terminée
+   Lancer npm run lint && npm run check && npm run build et confirmer que les 3 passent sans erreur, y compris le rapport de validation SEO/GEO à la fin du build. Ne pas committer si l'un des trois échoue.
+
+Contraintes
+- Ne pas toucher au projet Subframe existant, ne rien en synchroniser.
+- Ne pas réintroduire de dépendances Radix/shadcn déjà supprimées sauf besoin fonctionnel réel et justifié.
+- Préserver la ligne de version/footer ("Published {date} {time} · Commit {date} {time}") — exigence persistante du projet, ne jamais la supprimer.
+- Toute modification de home.tsx doit garder l'ordre des sections identique (contrainte SEO/structure de page validée par script/validate-seo.ts).

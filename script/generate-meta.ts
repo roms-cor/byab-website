@@ -9,6 +9,7 @@
  *
  * Output files (git-tracked, never hand-edit):
  *   client/index.html
+ *   client/why/index.html
  *   client/public/robots.txt
  *   client/public/sitemap.xml
  *   client/public/llms.txt
@@ -17,6 +18,7 @@
  *
  * Source templates (git-tracked, edit these instead):
  *   client/index.html.template
+ *   client/why/index.html.template
  *   client/public/robots.txt.template
  *   client/public/sitemap.xml.template
  *   client/public/llms.txt.template
@@ -35,6 +37,8 @@ const root = resolve(__dirname, "..");
 // ── File pairs ───────────────────────────────────────────────────────────────
 const pairs: [string, string][] = [
   ["client/index.html.template", "client/index.html"],
+  ["client/design/index.html.template", "client/design/index.html"],
+  ["client/why/index.html.template", "client/why/index.html"],
   ["client/public/robots.txt.template", "client/public/robots.txt"],
   ["client/public/sitemap.xml.template", "client/public/sitemap.xml"],
   ["client/public/llms.txt.template", "client/public/llms.txt"],

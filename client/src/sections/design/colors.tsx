@@ -73,8 +73,8 @@ export function ColorsSection({ tok }: { tok: TokenText }) {
         <div className="grid grid-cols-5 divide-x divide-border/50">
           {extendedPalette.map((color) => (
             <div key={color.name} className="p-2 sm:p-3" data-testid={`palette-${color.name.toLowerCase().replace(/\s/g, "-")}`}>
-              <p className="text-[9px] sm:text-3xs font-medium text-foreground truncate">{color.name}</p>
-              <code className="text-[9px] sm:text-3xs font-mono text-muted-foreground">{color.hex}</code>
+              <p className="text-4xs sm:text-3xs font-medium text-foreground truncate">{color.name}</p>
+              <code className="text-4xs sm:text-3xs font-mono text-muted-foreground">{color.hex}</code>
             </div>
           ))}
         </div>

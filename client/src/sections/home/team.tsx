@@ -1,20 +1,16 @@
 import { Globe } from "lucide-react";
 import { SiLinkedin } from "react-icons/si";
 import { teamMembers } from "@content/team";
+import { SectionHeading } from "@/components/section-heading";
 
 export function Team() {
   return (
     <section id="team" aria-labelledby="team-heading" className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 border-t border-border/50">
       <div className="max-w-container mx-auto">
         <header className="mb-12 sm:mb-16 max-w-2xl">
-          <p className="text-xs uppercase tracking-eyebrow font-medium mb-3 text-muted-foreground" aria-hidden="true">Who we are</p>
-          <h2
-            id="team-heading"
-            className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground"
-            data-testid="text-section-team"
-          >
+          <SectionHeading eyebrow="Who we are" id="team-heading" testId="text-section-team">
             Our team.
-          </h2>
+          </SectionHeading>
           <p className="text-sm sm:text-base mt-4 leading-relaxed text-muted-foreground">
             Four complementary profiles — united by a conviction {teamMembers[0].name} has carried since 2005: founders deserve better than drowning in their own back-office.
           </p>

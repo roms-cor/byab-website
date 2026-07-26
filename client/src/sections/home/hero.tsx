@@ -29,9 +29,9 @@ export function Hero() {
               className="text-base sm:text-lg mt-6 sm:mt-8 leading-relaxed max-w-lg text-muted-foreground"
               data-testid="text-hero-description"
             >
-              <strong className="font-medium text-foreground">{siteConfig.slogan},</strong> we externalize
-              your operations, engineer growth systems, and turn operational chaos into measurable
-              clarity — so you lead your company instead of getting buried by it.
+              <strong className="font-medium text-foreground">{siteConfig.slogan},</strong> we take
+              operations, transformation, and growth off the executive desk and run them — so your
+              time goes to the decisions only a CEO or COO can make.
             </p>
             <div className="flex flex-wrap items-center gap-4 mt-8 sm:mt-10">
               <a
@@ -39,7 +39,7 @@ export function Hero() {
                 data-testid="button-hero-primary"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-button text-sm font-medium transition-opacity duration-150 bg-foreground text-background border border-muted-foreground"
               >
-                Start a project
+                Take work off my desk
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </a>
               <a
@@ -47,14 +47,14 @@ export function Hero() {
                 data-testid="button-hero-secondary"
                 className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium border transition-opacity duration-150 bg-card text-foreground rounded-none border-gray-100"
               >
-                Our approach
+                See how we operate
               </a>
             </div>
 
             <div className="mt-12 pt-8 border-t border-border/50 flex flex-wrap gap-6 sm:gap-8" data-testid="hero-proof">
               <div>
                 <p className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">20</p>
-                <p className="text-xs font-mono mt-1 text-muted-foreground">Years serving<br />founders</p>
+                <p className="text-xs font-mono mt-1 text-muted-foreground">Years running<br />executive ops</p>
               </div>
               <div>
                 <p className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">57%</p>

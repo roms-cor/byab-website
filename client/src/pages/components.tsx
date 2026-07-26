@@ -16,14 +16,21 @@ const logoHorizontalBlack = "/images/logo-horizontal-black.webp";
 
 /**
  * Design-system reference page (/design) — assembles the blocks in
- * @/sections/design. Client-only: lazy-loaded by the router and never
- * prerendered, so design tokens are resolved from computed styles at mount.
+ * @/sections/design. Reached two ways: as a lazy-loaded SPA route (dev
+ * server, client-side navigation) and as prerendered static HTML at
+ * design/index.html with its own shell (entry-design.tsx remounts it
+ * identically on load — full page loads, non-JS crawlers). Token texts are
+ * static literals from the design-tokens.ts sheet, so the prerender shows
+ * real values and both renders are identical.
  */
 export default function Components() {
   const [activeSection, setActiveSection] = useState("overview");
-  // Resolved once on mount — this page is client-only (never prerendered).
+  // Static texts from the design-token sheet — identical in prerender and browser.
   const [tok] = useState(resolveTokenTexts);
 
+  // Dev-server safety net: the built design/index.html already ships a static
+  // <meta name="robots" content="noindex"> (this duplicate is harmless there);
+  // the dev server serves the SPA shell, which has none.
   useEffect(() => {
     document.title = `Design System — ${siteConfig.name}`;
     const meta = document.createElement("meta");

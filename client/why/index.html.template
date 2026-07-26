@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="{{SITE_LOCALE}}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{WHY_TITLE}}</title>
+    <meta name="description" content="{{WHY_DESCRIPTION}}" />
+    <!-- Public, indexable conversion page — unlike /design (noindex), /why is
+         meant to rank: dedicated title/description from content/why.ts,
+         canonical {{SITE_URL}}why, listed in sitemap.xml. -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="{{SITE_NAME}} ({{SITE_SHORT_NAME}})" />
+    <meta name="theme-color" content="{{SITE_THEME_COLOR}}" />
+    <link rel="canonical" href="{{SITE_URL}}why" />
+    {{WHY_HREFLANG_LINKS}}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{SITE_NAME}}" />
+    <meta property="og:title" content="{{WHY_TITLE}}" />
+    <meta property="og:description" content="{{WHY_DESCRIPTION}}" />
+    <meta property="og:url" content="{{SITE_URL}}why" />
+    <meta property="og:image" content="{{SITE_OG_IMAGE}}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="{{SITE_LOCALE_OG}}" />
+    <meta property="og:locale:alternate" content="{{SITE_ALT_LOCALE_OG}}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{WHY_TITLE}}" />
+    <meta name="twitter:description" content="{{WHY_DESCRIPTION}}" />
+    <meta name="twitter:image" content="{{SITE_OG_IMAGE}}" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <!-- Inter 300 added for the /why stat numerals (font-light). -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" /></noscript>
+
+    <!-- Structured data: WebPage + BreadcrumbList ONLY. The Organization /
+         FAQPage / WebSite graph lives on the homepage — duplicating it here
+         (especially FAQPage, whose questions reappear in the appendix) would
+         create competing structured data. validate-seo.ts enforces this. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "{{SITE_URL}}why",
+      "url": "{{SITE_URL}}why",
+      "name": "{{WHY_TITLE}}",
+      "description": "{{WHY_DESCRIPTION}}",
+      "inLanguage": "{{SITE_LOCALE}}",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "{{SITE_NAME}}",
+        "url": "{{SITE_URL}}"
+      },
+      "about": {
+        "@type": "Organization",
+        "name": "{{SITE_NAME}}",
+        "url": "{{SITE_URL}}"
+      },
+      "primaryImageOfPage": "{{SITE_OG_IMAGE}}"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{SITE_URL}}" },
+        { "@type": "ListItem", "position": 2, "name": "{{WHY_BREADCRUMB_LABEL}}", "item": "{{SITE_URL}}why" }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"><!--ssr-outlet--></div>
+    <script type="module" src="/src/entry-why.tsx"></script>
+  </body>
+</html>

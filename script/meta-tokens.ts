@@ -31,6 +31,7 @@ const { companies } = await import("../content/companies.js").catch(() => import
 const { engagements } = await import("../content/work.js").catch(() => import("../content/work.ts" as any));
 const { testimonial } = await import("../content/testimonial.js").catch(() => import("../content/testimonial.ts" as any));
 const { resolvedFaq, servicesInline } = await import("../content/faq.js").catch(() => import("../content/faq.ts" as any));
+const { whyContent } = await import("../content/why.js").catch(() => import("../content/why.ts" as any));
 
 /** Re-exported for validate-seo.ts — resolved in content/faq.ts, the single source of truth. */
 export { resolvedFaq };
@@ -174,6 +175,18 @@ companies.forEach((c: any, i: number) => {
 
 const composed: Record<string, string> = {
   SERVICES_INLINE: servicesInline,
+
+  // /why page head tokens (client/why/index.html.template) — sourced from
+  // content/why.ts so the /why head can never drift from the page copy.
+  WHY_TITLE: whyContent.seo.title,
+  WHY_DESCRIPTION: whyContent.seo.description,
+  WHY_BREADCRUMB_LABEL: whyContent.seo.breadcrumbLabel,
+  // hreflang for /why: default locale + x-default only (same policy as the
+  // homepage — no translated /why URL exists yet).
+  WHY_HREFLANG_LINKS: [
+    `<link rel="alternate" hreflang="${cfg.locales[0]}" href="${cfg.url}why" />`,
+    `<link rel="alternate" hreflang="x-default" href="${cfg.url}why" />`,
+  ].join("\n    "),
 
   // People / legal-entity tokens (derived from content/, never hardcoded)
   ...companyTokens,

@@ -21,14 +21,14 @@ export function LogoSection() {
 
       <h3 className="text-xs sm:text-sm font-semibold text-foreground mb-4 sm:mb-6 uppercase tracking-wider">Logomark (Square)</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
-        <figure className="relative rounded-lg border border-border/50 bg-white p-8 sm:p-12 flex flex-col items-center justify-center min-h-[160px] sm:min-h-[200px] gap-4">
+        <figure className="relative rounded-lg border border-border/50 bg-white p-8 sm:p-12 flex flex-col items-center justify-center min-h-logo-tile sm:min-h-logo-tile-sm gap-4">
           <img src={logoSquareBlack} alt="Logomark on light background" className="h-16 sm:h-20 w-16 sm:w-20" data-testid="img-logo-light" />
           <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs text-muted-foreground font-medium">Light background</figcaption>
           <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
             <DownloadButton src={logoSquareBlack} filename={`${siteConfig.shortName.toLowerCase()}-logomark-black.png`} />
           </div>
         </figure>
-        <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex flex-col items-center justify-center min-h-[160px] sm:min-h-[200px] gap-4 bg-foreground">
+        <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex flex-col items-center justify-center min-h-logo-tile sm:min-h-logo-tile-sm gap-4 bg-foreground">
           <img src={logoSquareWhite} alt="Logomark on dark background" className="h-16 sm:h-20 w-16 sm:w-20" data-testid="img-logo-dark" />
           <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium text-gray-400">Dark background</figcaption>
           <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
@@ -39,14 +39,14 @@ export function LogoSection() {
 
       <h3 className="text-xs sm:text-sm font-semibold text-foreground mb-4 sm:mb-6 uppercase tracking-wider">Horizontal Logo</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-        <figure className="relative rounded-lg border border-border/50 bg-white p-8 sm:p-12 flex flex-col items-center justify-center min-h-[160px] sm:min-h-[200px] gap-4">
+        <figure className="relative rounded-lg border border-border/50 bg-white p-8 sm:p-12 flex flex-col items-center justify-center min-h-logo-tile sm:min-h-logo-tile-sm gap-4">
           <img src={logoHorizontalWhite} alt="Horizontal logo on light background" className="h-auto w-48 sm:w-64" data-testid="img-logo-horizontal-light" />
           <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs text-muted-foreground font-medium">Light background</figcaption>
           <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">
             <DownloadButton src={logoHorizontalWhite} filename={`${siteConfig.shortName.toLowerCase()}-horizontal-logo-light.png`} />
           </div>
         </figure>
-        <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex flex-col items-center justify-center min-h-[160px] sm:min-h-[200px] gap-4 bg-foreground">
+        <figure className="relative rounded-lg border border-border/50 p-8 sm:p-12 flex flex-col items-center justify-center min-h-logo-tile sm:min-h-logo-tile-sm gap-4 bg-foreground">
           <img src={logoHorizontalBlack} alt="Horizontal logo on dark background" className="h-auto w-48 sm:w-64" data-testid="img-logo-horizontal-dark" />
           <figcaption className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 text-xs font-medium text-gray-400">Dark background</figcaption>
           <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4">

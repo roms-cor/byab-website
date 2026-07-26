@@ -3,13 +3,14 @@
  *
  *  1. No hardcoded color literals (hex, rgb()/rgba(), hsl()/hsla()) in the
  *     app's React sources.
- *  2. No inline `style={{…}}` props in page/section/content sources — Subframe
- *     and Tailwind's scanner only understand utility classes, so styling must
- *     be expressed as design-token classes.
+ *  2. No inline `style={{…}}` props in page/section/shared-component/content
+ *     sources — Subframe and Tailwind's scanner only understand utility
+ *     classes, so styling must be expressed as design-token classes.
  *
- * All raw color values must live in the design-token sheet
- * (tailwind.config.ts), which re-emits every token as a :root CSS variable;
- * components reference them via Tailwind token classes or `var(--…)`.
+ * All raw color values must live in the design-token sheet (design-tokens.ts
+ * at the repo root, imported by tailwind.config.ts, which re-emits every
+ * token as a :root CSS variable); components reference them via Tailwind
+ * token classes or `var(--…)`.
  * This catches both arbitrary Tailwind colors like
  * `bg-[#999999]` and inline styles like `style={{ color: "#000" }}`,
  * because both are string literals (or template chunks) in the .tsx source.
@@ -38,33 +39,34 @@ const noHardcodedColors = [
   "error",
   {
     selector: `Literal[value=/${HEX}/]`,
-    message: "Hardcoded hex color — use a token class or var(--…) from the tailwind.config.ts token sheet instead.",
+    message: "Hardcoded hex color — use a token class or var(--…) from the design-tokens.ts token sheet instead.",
   },
   {
     selector: `TemplateElement[value.raw=/${HEX}/]`,
-    message: "Hardcoded hex color in template literal — use a token class or var(--…) from the tailwind.config.ts token sheet instead.",
+    message: "Hardcoded hex color in template literal — use a token class or var(--…) from the design-tokens.ts token sheet instead.",
   },
   {
     selector: `Literal[value=/${FUNC}/]`,
-    message: "Literal rgb()/rgba()/hsl() color — use var(--…) tokens from the tailwind.config.ts token sheet instead.",
+    message: "Literal rgb()/rgba()/hsl() color — use var(--…) tokens from the design-tokens.ts token sheet instead.",
   },
   {
     selector: `TemplateElement[value.raw=/${FUNC}/]`,
-    message: "Literal rgb()/rgba()/hsl() color in template literal — use var(--…) tokens from the tailwind.config.ts token sheet instead.",
+    message: "Literal rgb()/rgba()/hsl() color in template literal — use var(--…) tokens from the design-tokens.ts token sheet instead.",
   },
 ];
 
-/* Inline-style ban for page/section/content code. A later flat-config block
- * REPLACES (does not merge) a rule's options, so this list re-includes the
- * color selectors above plus the style-prop selector.
+/* Inline-style ban for page/section/shared-component/content code. A later
+ * flat-config block REPLACES (does not merge) a rule's options, so this list
+ * re-includes the color selectors above plus the style-prop selector.
  * Escape hatch for irreducibly dynamic values: an explicit
  *   // eslint-disable-next-line no-restricted-syntax -- <reason>
  * at the call site. Documented exceptions today:
- *   - client/src/pages/home.tsx — TeamSlider orbit thumbs: the per-thumb
- *     angle rides a --thumb-angle CSS variable consumed by a static
- *     [transform:…] class.
- *   - client/src/pages/components.tsx — type-scale & spacing-scale previews:
- *     font metrics / bar widths render the design-token data tables.
+ *   - client/src/sections/home/team-slider.tsx — TeamSlider orbit thumbs:
+ *     the per-thumb angle rides a --thumb-angle CSS variable consumed by a
+ *     static [transform:…] class.
+ *   - client/src/sections/design/typography.tsx + spacing.tsx — type-scale
+ *     & spacing-scale previews: font metrics / bar widths render the
+ *     design-token data tables.
  */
 const noInlineStyles = [
   ...noHardcodedColors,
@@ -99,8 +101,10 @@ export default [
     files: [
       "client/src/pages/**/*.tsx",
       "client/src/sections/**/*.tsx",
+      "client/src/components/**/*.tsx",
       "content/**/*.tsx",
     ],
+    ignores: ["client/src/components/ui/**"],
     rules: {
       "no-restricted-syntax": noInlineStyles,
     },

@@ -1,4 +1,5 @@
 import { engagements } from "@content/work";
+import { SectionHeading } from "@/components/section-heading";
 
 export function Work() {
   const projects = engagements;
@@ -7,14 +8,9 @@ export function Work() {
     <section id="work" aria-labelledby="work-heading" className="px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36 border-t border-border/50">
       <div className="max-w-container mx-auto">
         <header className="mb-12 sm:mb-16">
-          <p className="text-xs uppercase tracking-eyebrow font-medium mb-3 text-muted-foreground" aria-hidden="true">Track record</p>
-          <h2
-            id="work-heading"
-            className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-foreground"
-            data-testid="text-section-work"
-          >
+          <SectionHeading eyebrow="Track record" id="work-heading" testId="text-section-work">
             Recent engagements.
-          </h2>
+          </SectionHeading>
         </header>
 
         <div className="border border-border/50 rounded-lg overflow-hidden divide-y divide-black-alpha-06">

@@ -20,7 +20,18 @@
  *      stats, engagements, team, timeline, testimonial, contact, footer) is
  *      present in the raw HTML, visible to crawlers that do NOT execute
  *      JavaScript (GPTBot, ClaudeBot, PerplexityBot, CCBot…).
- *   4. Files — robots.txt, sitemap.xml (auto-stamped lastmod), llms.txt,
+ *   3b. /design page — prerendered static HTML at design/index.html with a
+ *      dedicated head (own title/description, canonical /design, static
+ *      noindex, no homepage JSON-LD), all sections and real token values
+ *      visible without JS, and the design code kept out of the homepage JS
+ *      graph (code-splitting invariant).
+ *   3b′. /why page — prerendered, INDEXABLE conversion page at
+ *      why/index.html: dedicated head from content/why.ts (canonical /why,
+ *      index-follow robots), WebPage + BreadcrumbList JSON-LD only (no
+ *      FAQPage duplication), full copy visible without JS, listed in
+ *      sitemap.xml + llms.txt, own JS chunk out of the homepage graph.
+ *   4. Files — robots.txt (crawlable /design, AI bots allowed), sitemap.xml
+ *      (auto-stamped lastmod, no /design — noindex pages stay out), llms.txt,
  *      llms-full.txt and CNAME consistent with site.config; no unresolved
  *      {{TOKENS}} anywhere; og:image and icon/preload assets exist on disk.
  *   5. Template safety — brand name, short name, domain, email and street
@@ -31,6 +42,9 @@ import { readFile, readdir } from "fs/promises";
 import { resolvedFaq, timelineEntries, orgSameAs } from "./meta-tokens";
 import { join, relative, resolve, dirname } from "path";
 import { fileURLToPath } from "url";
+// Static token display texts — same code path the /design page renders
+// (design-tokens.ts sheet literals), so expectations can never drift.
+import { resolveTokenTexts } from "../client/src/sections/design/tokens";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "..");
@@ -47,6 +61,7 @@ const { painPoints } = await import("../content/pain.js").catch(() => import("..
 const { engagements } = await import("../content/work.js").catch(() => import("../content/work.ts" as any));
 const { testimonial } = await import("../content/testimonial.js").catch(() => import("../content/testimonial.ts" as any));
 const { companies } = await import("../content/companies.js").catch(() => import("../content/companies.ts" as any));
+const { whyContent } = await import("../content/why.js").catch(() => import("../content/why.ts" as any));
 
 // timeline.tsx contains JSX (not importable under plain tsx without a React
 // pragma) — extract the plain-string fields from source instead.
@@ -55,6 +70,7 @@ const timelineTitles = [...timelineSrc.matchAll(/^\s*title:\s*"([^"]+)"/gm)].map
 const timelineYears = [...timelineSrc.matchAll(/^\s*year:\s*"([^"]+)"/gm)].map((m) => m[1]);
 
 const pkg = JSON.parse(await readFile(resolve(root, "package.json"), "utf-8"));
+const designTokenTexts = resolveTokenTexts();
 
 // ── Reporting ────────────────────────────────────────────────────────────────
 let passed = 0;
@@ -382,12 +398,355 @@ async function checkHtml(html: string) {
   }
 }
 
+// ── 3b: /design — crawlable design-system page (own shell, static noindex) ──
+const designHtml = await readOrNull(resolve(distPub, "design/index.html"));
+if (designHtml === null) {
+  fail("dist/public/design/index.html is missing — the /design prerender did not run (check rollupOptions.input + prerender() in script/build.ts)");
+} else {
+  await checkDesignHtml(designHtml);
+}
+
+async function checkDesignHtml(dHtml: string) {
+  const headEnd = dHtml.indexOf("</head>");
+  const head = dHtml.slice(0, Math.max(headEnd, 0));
+  const body = dHtml.slice(Math.max(headEnd, 0));
+  const headLinks = head.match(/<link\b[^>]*>/g) ?? [];
+
+  // ── Dedicated head ──
+  const titles = [...head.matchAll(/<title>([\s\S]*?)<\/title>/g)].map((m) => decode(m[1]));
+  const expectedTitle = `Design System — ${cfg.name}`;
+  if (titles.length !== 1) fail(`/design <title>: expected exactly 1, found ${titles.length}`);
+  else if (titles[0] !== expectedTitle) fail(`/design <title> "${titles[0]}" ≠ "${expectedTitle}" (must match the client-side document.title in pages/components.tsx)`);
+  else pass();
+
+  const descs = metaContents(head, "name", "description");
+  if (descs.length !== 1) fail(`/design meta description: expected exactly 1, found ${descs.length}`);
+  else {
+    check(descs[0].length >= 50, `/design meta description suspiciously short: "${descs[0]}"`);
+    check(descs[0] !== cfg.description, "/design meta description must be dedicated, not a copy of the homepage description");
+  }
+
+  const robotsMeta = metaContents(head, "name", "robots");
+  if (robotsMeta.length !== 1) fail(`/design meta name="robots": expected exactly 1 static tag, found ${robotsMeta.length}`);
+  else check(robotsMeta[0].includes("noindex"), `/design meta robots "${robotsMeta[0]}" must contain "noindex" — the page is crawlable but stays out of the index`);
+
+  const canonicals = headLinks.filter((t) => /rel="canonical"/.test(t)).map((t) => t.match(/href="([^"]*)"/)?.[1] ?? "");
+  if (canonicals.length !== 1) fail(`/design canonical: expected exactly 1, found ${canonicals.length}`);
+  else if (canonicals[0] !== `${cfg.url}design`) fail(`/design canonical "${canonicals[0]}" ≠ "${cfg.url}design"`);
+  else pass();
+
+  // The homepage's JSON-LD (FAQPage & friends) must not be duplicated here —
+  // the /design shell carries no structured data at all.
+  check(!/application\/ld\+json/.test(dHtml), "/design must not embed JSON-LD blocks — FAQPage etc. are homepage-specific");
+
+  // ── Prerender completeness (what non-JS crawlers see) ──
+  check(!dHtml.includes("<!--ssr-outlet-->"), "/design prerender: <!--ssr-outlet--> marker still present — static HTML was not injected");
+  check(!/<div id="root">\s*<\/div>/.test(dHtml), "/design prerender: #root is empty — page was not prerendered");
+
+  const bodyDecoded = decode(body.replace(/<!--[\s\S]*?-->/g, ""));
+
+  // Section registry derives from side-nav.tsx (the page's single source of
+  // structure) — every registered section must exist in the static HTML.
+  const sideNavSrc = await readFile(resolve(root, "client/src/sections/design/side-nav.tsx"), "utf-8");
+  const sectionIds = [...sideNavSrc.matchAll(/\bid:\s*"([^"]+)"/g)].map((m) => m[1]);
+  check(sectionIds.length >= 8, `side-nav.tsx: expected ≥ 8 sections in navSections, found ${sectionIds.length}`);
+  for (const id of sectionIds) {
+    check(body.includes(`id="${id}"`), `/design prerender missing section id="${id}" (registered in side-nav.tsx)`);
+  }
+
+  // Real token values must be visible without JS — no empty fields.
+  for (const [name, text] of Object.entries(designTokenTexts)) {
+    check(bodyDecoded.includes(text), `/design prerender missing token value ${name} = "${text}" — token texts must resolve statically from design-tokens.ts`);
+  }
+  for (const font of [cfg.fonts.body, cfg.fonts.mono]) {
+    check(bodyDecoded.includes(font), `/design prerender missing font name "${font}" (typography section incomplete)`);
+  }
+
+  const h1s = body.match(/<h1[\s>]/g) ?? [];
+  check(h1s.length === 1, `/design: expected exactly one <h1>, found ${h1s.length}`);
+  check(body.includes("<main"), "/design: missing <main> landmark in prerendered HTML");
+  check(body.includes("<nav"), "/design: missing <nav> landmark in prerendered HTML");
+  check(body.includes("<footer"), "/design: missing <footer> landmark in prerendered HTML");
+
+  const visible = body
+    .replace(/<script[\s\S]*?<\/script>/g, " ")
+    .replace(/<style[\s\S]*?<\/style>/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  check(
+    visible.length >= 3000,
+    `/design prerendered visible text is only ${visible.length} chars — the full page should be ≥ 3000 (prerender incomplete)`
+  );
+
+  // Head-referenced assets must exist in the build output.
+  for (const t of headLinks) {
+    const rel = t.match(/rel="([^"]*)"/)?.[1] ?? "";
+    const href = t.match(/href="([^"]*)"/)?.[1] ?? "";
+    const as = t.match(/\bas="([^"]*)"/)?.[1] ?? "";
+    if ((rel.includes("icon") || (rel === "preload" && as === "image")) && href.startsWith("/")) {
+      const ok = await readFile(join(distPub, href)).then(() => true).catch(() => false);
+      check(ok, `/design head references an asset missing from build output: ${href}`);
+    }
+  }
+}
+
+
+// ── 3b′: /why — public, indexable conversion page (own shell + prerender) ───
+const whyHtml = await readOrNull(resolve(distPub, "why/index.html"));
+if (whyHtml === null) {
+  fail("dist/public/why/index.html is missing — the /why prerender did not run (check rollupOptions.input + prerender() in script/build.ts)");
+} else {
+  await checkWhyHtml(whyHtml);
+}
+
+async function checkWhyHtml(wHtml: string) {
+  const headEnd = wHtml.indexOf("</head>");
+  const head = wHtml.slice(0, Math.max(headEnd, 0));
+  const body = wHtml.slice(Math.max(headEnd, 0));
+  const headLinks = head.match(/<link\b[^>]*>/g) ?? [];
+  const whyUrl = `${cfg.url}why`;
+
+  // ── Dedicated, indexable head (values from content/why.ts) ──
+  const titles = [...head.matchAll(/<title>([\s\S]*?)<\/title>/g)].map((m) => decode(m[1]));
+  if (titles.length !== 1) fail(`/why <title>: expected exactly 1, found ${titles.length}`);
+  else if (titles[0] !== whyContent.seo.title) fail(`/why <title> "${titles[0]}" ≠ content/why.ts seo.title "${whyContent.seo.title}" (must also match the client-side document.title in pages/why.tsx)`);
+  else pass();
+  check(whyContent.seo.title !== cfg.title, "/why seo.title must differ from the homepage title (duplicate <title>)");
+
+  const descs = metaContents(head, "name", "description");
+  if (descs.length !== 1) fail(`/why meta description: expected exactly 1, found ${descs.length}`);
+  else {
+    check(descs[0] === whyContent.seo.description, `/why meta description ≠ content/why.ts seo.description`);
+    check(descs[0] !== cfg.description, "/why meta description must be dedicated, not a copy of the homepage description");
+  }
+
+  const robotsMeta = metaContents(head, "name", "robots");
+  if (robotsMeta.length !== 1) fail(`/why meta name="robots": expected exactly 1, found ${robotsMeta.length}`);
+  else {
+    // Parse directives — substring checks would let "nofollow" pass ("follow"
+    // is a substring of it) and vice versa.
+    const directives = robotsMeta[0].split(",").map((d) => d.trim().toLowerCase());
+    check(directives.includes("index") && directives.includes("follow") && !directives.includes("noindex") && !directives.includes("nofollow"), `/why meta robots "${robotsMeta[0]}" must allow index, follow — this page is public and indexable`);
+  }
+
+  const canonicals = headLinks.filter((t) => /rel="canonical"/.test(t)).map((t) => t.match(/href="([^"]*)"/)?.[1] ?? "");
+  if (canonicals.length !== 1) fail(`/why canonical: expected exactly 1, found ${canonicals.length}`);
+  else if (canonicals[0] !== whyUrl) fail(`/why canonical "${canonicals[0]}" ≠ "${whyUrl}"`);
+  else pass();
+
+  const hreflangs: Record<string, string[]> = {};
+  for (const t of headLinks) {
+    if (/rel="alternate"/.test(t) && /hreflang="/.test(t)) {
+      const lang = t.match(/hreflang="([^"]*)"/)?.[1] ?? "";
+      const href = t.match(/href="([^"]*)"/)?.[1] ?? "";
+      (hreflangs[lang] ??= []).push(href);
+    }
+  }
+  for (const lang of [cfg.locales[0], "x-default"]) {
+    const hrefs = hreflangs[lang] ?? [];
+    if (hrefs.length !== 1) fail(`/why hreflang "${lang}": expected exactly 1 link, found ${hrefs.length}`);
+    else if (hrefs[0] !== whyUrl) fail(`/why hreflang "${lang}" href "${hrefs[0]}" ≠ "${whyUrl}"`);
+    else pass();
+  }
+  const extraWhyLangs = Object.keys(hreflangs).filter((l) => ![cfg.locales[0], "x-default"].includes(l));
+  check(extraWhyLangs.length === 0, `/why: unexpected hreflang entries: ${extraWhyLangs.join(", ")}`);
+
+  expectMeta(head, "property", "og:type", "website");
+  expectMeta(head, "property", "og:site_name", cfg.name);
+  expectMeta(head, "property", "og:title", whyContent.seo.title);
+  expectMeta(head, "property", "og:description", whyContent.seo.description);
+  expectMeta(head, "property", "og:url", whyUrl);
+  expectMeta(head, "property", "og:image", cfg.ogImage);
+  expectMeta(head, "name", "twitter:card", "summary_large_image");
+  expectMeta(head, "name", "twitter:title", whyContent.seo.title);
+  expectMeta(head, "name", "twitter:description", whyContent.seo.description);
+  expectMeta(head, "name", "twitter:image", cfg.ogImage);
+
+  // ── JSON-LD: WebPage + BreadcrumbList ONLY (homepage graph not duplicated) ──
+  const ldBlocks = [...wHtml.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => m[1]);
+  const topTypes: string[] = [];
+  ldBlocks.forEach((block, i) => {
+    try { topTypes.push(String(JSON.parse(block)["@type"])); pass(); }
+    catch (e: any) { fail(`/why JSON-LD block #${i + 1} is invalid JSON: ${e.message}`); }
+  });
+  check(topTypes.filter((t) => t === "WebPage").length === 1, `/why JSON-LD: expected exactly one WebPage block, found ${topTypes.filter((t) => t === "WebPage").length}`);
+  check(topTypes.filter((t) => t === "BreadcrumbList").length === 1, `/why JSON-LD: expected exactly one BreadcrumbList block, found ${topTypes.filter((t) => t === "BreadcrumbList").length}`);
+  const extraTypes = topTypes.filter((t) => !["WebPage", "BreadcrumbList"].includes(t));
+  check(extraTypes.length === 0, `/why JSON-LD: unexpected top-level @type(s): ${extraTypes.join(", ")} — FAQPage/Organization & friends live on the homepage only`);
+
+  for (const block of ldBlocks) {
+    let obj: any;
+    try { obj = JSON.parse(block); } catch { continue; }
+    if (obj["@type"] === "WebPage") {
+      check(obj.url === whyUrl, `/why WebPage.url "${obj.url}" ≠ "${whyUrl}"`);
+      check(obj.name === whyContent.seo.title, "/why WebPage.name ≠ content/why.ts seo.title");
+      check(obj.isPartOf?.url === cfg.url, "/why WebPage.isPartOf.url ≠ config url");
+    }
+    if (obj["@type"] === "BreadcrumbList") {
+      const items: any[] = Array.isArray(obj.itemListElement) ? obj.itemListElement : [];
+      check(items.length === 2, `/why BreadcrumbList: expected 2 items, found ${items.length}`);
+      check(items[0]?.item === cfg.url, "/why BreadcrumbList first item ≠ config url");
+      check(items[1]?.item === whyUrl && items[1]?.name === whyContent.seo.breadcrumbLabel, `/why BreadcrumbList second item must be "${whyContent.seo.breadcrumbLabel}" → ${whyUrl}`);
+    }
+    const bad: string[] = [];
+    (function walkObj(v: any) {
+      if (typeof v === "string") {
+        if (v.startsWith("http") && v.includes(cfg.domain) && !v.startsWith(cfg.url)) bad.push(v);
+      } else if (Array.isArray(v)) v.forEach(walkObj);
+      else if (v && typeof v === "object") Object.values(v).forEach(walkObj);
+    })(obj);
+    check(bad.length === 0, `/why JSON-LD: own-domain URLs not on canonical origin: ${bad.slice(0, 3).join(", ")}`);
+  }
+
+  // ── Prerender completeness (what non-JS crawlers see) ──
+  check(!wHtml.includes("<!--ssr-outlet-->"), "/why prerender: <!--ssr-outlet--> marker still present — static HTML was not injected");
+  check(!/<div id="root">\s*<\/div>/.test(wHtml), "/why prerender: #root is empty — page was not prerendered");
+
+  const bodyDecoded = decode(body.replace(/<!--[\s\S]*?-->/g, ""));
+  const needWhy = (what: string, needle: string) => {
+    if (!needle) return;
+    check(bodyDecoded.includes(needle), `/why prerendered HTML missing ${what}: "${shorten(needle)}"`);
+  };
+
+  needWhy("site name", cfg.name);
+  needWhy("contact email", cfg.email);
+  needWhy("locations", cfg.locations);
+  needWhy("hero heading", whyContent.hero.heading);
+  needWhy("hero description", whyContent.hero.description.slice(0, 80));
+  needWhy("hero kicker", whyContent.hero.kicker);
+  needWhy("volume line", whyContent.hero.volumeLine);
+  needWhy("console title", whyContent.console.title);
+  needWhy("console uptime label", whyContent.console.uptimeLabel);
+  for (const line of whyContent.console.terminalLines) needWhy("console terminal line", line);
+  for (const g of whyContent.console.gauges) {
+    needWhy("console gauge label", g.label);
+    needWhy("console gauge value", g.value);
+  }
+  needWhy("problem heading", whyContent.problem.heading);
+  needWhy("problem why-alone lead", whyContent.problem.whyAloneLead);
+  needWhy("problem why-alone text", whyContent.problem.whyAloneText.slice(0, 80));
+  needWhy("how heading", whyContent.how.heading);
+  for (const s of whyContent.how.steps) {
+    needWhy("how step title", s.title);
+    needWhy(`how step text (${s.title})`, s.text.slice(0, 80));
+  }
+  needWhy("model heading", whyContent.model.heading);
+  for (const b of whyContent.model.benefits) {
+    needWhy("model benefit title", b.title);
+    needWhy(`model benefit text (${b.title})`, b.text.slice(0, 80));
+  }
+  needWhy("track heading", whyContent.track.heading);
+  needWhy("final CTA heading", whyContent.finalCta.heading);
+  needWhy("final CTA description", whyContent.finalCta.description.slice(0, 80));
+  needWhy("appendix heading", whyContent.appendix.heading);
+  needWhy("email-capture title", whyContent.appendix.capture.title);
+  needWhy("email-capture subtitle", whyContent.appendix.capture.subtitle);
+  for (const s of stats) {
+    needWhy("stat label", s.label);
+    needWhy(`stat sub (${shorten(s.label, 30)})`, s.sub);
+  }
+  for (const p of painPoints) {
+    needWhy("pain point lead", p.lead);
+    needWhy(`pain point rest (${shorten(p.lead, 30)})`, p.rest.slice(0, 80));
+  }
+  for (const e of engagements) {
+    needWhy("engagement title", e.title);
+    needWhy(`engagement outcome (${e.title})`, e.outcome);
+    needWhy(`engagement description (${e.title})`, e.description.slice(0, 80));
+  }
+  needWhy("testimonial quote", testimonial.quote.slice(0, 80));
+  needWhy("testimonial author", testimonial.author);
+  // FAQ subset: whyContent.appendix.faqIndexes selects entries from
+  // content/faq.ts — both question and answer must be visible without JS
+  // (native <details> keeps closed answers in the DOM).
+  const selectedWhyFaq = (whyContent.appendix.faqIndexes as readonly number[])
+    .map((i: number) => resolvedFaq[i])
+    .filter(Boolean);
+  check(selectedWhyFaq.length >= 3, `/why FAQ selection: expected ≥ 3 valid faqIndexes into content/faq.ts, found ${selectedWhyFaq.length}`);
+  for (const f of selectedWhyFaq) {
+    needWhy("FAQ question", f.question);
+    needWhy(`FAQ answer (${shorten(f.question, 40)})`, f.answer.slice(0, 80));
+  }
+
+  const h1s = body.match(/<h1[\s>]/g) ?? [];
+  check(h1s.length === 1, `/why: expected exactly one <h1>, found ${h1s.length}`);
+  check(body.includes("<main"), "/why: missing <main> landmark in prerendered HTML");
+  check(body.includes("<nav"), "/why: missing <nav> landmark in prerendered HTML");
+  check(body.includes("<footer"), "/why: missing <footer> landmark in prerendered HTML");
+
+  const visible = body
+    .replace(/<script[\s\S]*?<\/script>/g, " ")
+    .replace(/<style[\s\S]*?<\/style>/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  check(visible.length >= 3000, `/why prerendered visible text is only ${visible.length} chars — the full page should be ≥ 3000 (prerender incomplete)`);
+
+  for (const t of headLinks) {
+    const rel = t.match(/rel="([^"]*)"/)?.[1] ?? "";
+    const href = t.match(/href="([^"]*)"/)?.[1] ?? "";
+    const as = t.match(/\bas="([^"]*)"/)?.[1] ?? "";
+    if ((rel.includes("icon") || (rel === "preload" && as === "image")) && href.startsWith("/")) {
+      const ok = await readFile(join(distPub, href)).then(() => true).catch(() => false);
+      check(ok, `/why head references an asset missing from build output: ${href}`);
+    }
+  }
+}
+
+
+// ── 3c: code splitting — homepage JS must not embark the design page ────────
+// "badge-design-system" is a design-page-only testid literal (overview.tsx)
+// that survives minification. The design graph must contain it (sanity: if
+// the marker is ever renamed, this fails loudly instead of the homepage
+// check silently passing) and the homepage graph must not.
+const DESIGN_JS_MARKER = "badge-design-system";
+// "why-page-root" is the /why page-root testid literal (pages/why.tsx).
+const WHY_JS_MARKER = "why-page-root";
+function moduleGraph(pageHtml: string): string[] {
+  return [
+    ...[...pageHtml.matchAll(/<script type="module"[^>]*\bsrc="([^"]+)"/g)].map((m) => m[1]),
+    ...[...pageHtml.matchAll(/<link rel="modulepreload"[^>]*\bhref="([^"]+)"/g)].map((m) => m[1]),
+  ].filter((p) => p.startsWith("/"));
+}
+if (html !== null) {
+  const scripts = moduleGraph(html);
+  check(scripts.length > 0, "homepage: no module scripts found in dist/public/index.html");
+  for (const src of scripts) {
+    const js = await readOrNull(join(distPub, src));
+    if (js === null) fail(`homepage references a JS file missing from build output: ${src}`);
+    else {
+      check(!js.includes(DESIGN_JS_MARKER), `homepage JS graph embarks the /design page code (${src}) — the design chunk must stay out of the homepage bundle`);
+      check(!js.includes(WHY_JS_MARKER), `homepage JS graph embarks the /why page code (${src}) — the why chunk must stay out of the homepage bundle`);
+    }
+  }
+}
+if (designHtml !== null) {
+  let markerFound = false;
+  for (const src of moduleGraph(designHtml)) {
+    const js = await readOrNull(join(distPub, src));
+    if (js !== null && js.includes(DESIGN_JS_MARKER)) markerFound = true;
+  }
+  check(markerFound, `/design JS graph does not contain its own page code (marker "${DESIGN_JS_MARKER}") — entry wiring broken, or the marker was renamed in overview.tsx`);
+}
+if (whyHtml !== null) {
+  let whyMarkerFound = false;
+  for (const src of moduleGraph(whyHtml)) {
+    const js = await readOrNull(join(distPub, src));
+    if (js !== null && js.includes(WHY_JS_MARKER)) whyMarkerFound = true;
+  }
+  check(whyMarkerFound, `/why JS graph does not contain its own page code (marker "${WHY_JS_MARKER}") — entry wiring broken, or the testid was renamed in pages/why.tsx`);
+}
+
 // ── 4: generated metadata files ──────────────────────────────────────────────
 const robots = await readOrNull(resolve(distPub, "robots.txt"));
 if (robots === null) fail("dist/public/robots.txt is missing");
 else {
   check(robots.includes(`Sitemap: ${cfg.url}sitemap.xml`), `robots.txt Sitemap line ≠ "Sitemap: ${cfg.url}sitemap.xml"`);
-  check(robots.includes("Disallow: /design"), "robots.txt: missing Disallow: /design");
+  // /design is deliberately crawlable (static noindex keeps it out of the
+  // index) — a Disallow would hide the design system from AI crawlers again.
+  check(!robots.includes("Disallow: /design"), "robots.txt must NOT contain Disallow: /design — the design system page is crawlable (noindex-only policy)");
+  check(!robots.includes("Disallow: /why"), "robots.txt must NOT contain Disallow: /why — /why is public and indexable");
   for (const bot of ["GPTBot", "ClaudeBot", "PerplexityBot", "CCBot"]) {
     check(new RegExp(`User-agent: ${bot}\\s*\\nAllow: /`).test(robots), `robots.txt: AI crawler ${bot} not explicitly allowed`);
   }
@@ -397,12 +756,14 @@ const sitemap = await readOrNull(resolve(distPub, "sitemap.xml"));
 if (sitemap === null) fail("dist/public/sitemap.xml is missing");
 else {
   check(sitemap.includes(`<loc>${cfg.url}</loc>`), `sitemap.xml <loc> ≠ config url`);
+  check(sitemap.includes(`<loc>${cfg.url}why</loc>`), `sitemap.xml missing <loc>${cfg.url}why</loc> — the indexable /why page must be listed`);
   const lm = sitemap.match(/<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/);
   if (!lm) fail("sitemap.xml: <lastmod> missing or not YYYY-MM-DD");
   else {
     const age = Math.abs(Date.now() - new Date(`${lm[1]}T00:00:00Z`).getTime());
     check(age < 48 * 3600 * 1000, `sitemap.xml <lastmod> "${lm[1]}" is not the build date — auto-stamping broken`);
   }
+  check(!sitemap.includes("/design"), "sitemap.xml must not list /design — a noindex page does not belong in a sitemap");
 }
 
 // Cross-check the AI-crawler files against the content/ collections so they
@@ -446,6 +807,11 @@ if (llms === null) fail("dist/public/llms.txt is missing");
 else {
   check(llms.includes(cfg.name), "llms.txt does not mention the site name");
   check(llms.includes(cfg.email), "llms.txt does not contain the contact email");
+  // Coherence with the /design crawl policy: the design system must be
+  // referenced as a fully consultable resource, not flagged as restricted.
+  check(llms.includes("](/design)"), "llms.txt: missing the /design design-system link");
+  check(llms.includes("](/why)"), "llms.txt: missing the /why page link");
+  check(!llms.toLowerCase().includes("noindex"), "llms.txt must not describe /design as noindex/restricted — it is fully crawlable static HTML");
   checkLlmsContent("llms.txt", llms);
 }
 
@@ -464,6 +830,8 @@ else check(cname.trim() === cfg.domain, `CNAME "${cname.trim()}" ≠ config doma
 
 for (const [label, content] of [
   ["dist/public/index.html", html],
+  ["dist/public/design/index.html", designHtml],
+  ["dist/public/why/index.html", whyHtml],
   ["dist/public/robots.txt", robots],
   ["dist/public/sitemap.xml", sitemap],
   ["dist/public/llms.txt", llms],
@@ -503,6 +871,9 @@ const scanFiles = [
   ...(await walk(resolve(root, "shared"), [".ts"])),
   ...(await walk(resolve(root, "script"), [".ts"])),
   resolve(root, "client/index.html.template"),
+  resolve(root, "client/design/index.html.template"),
+  resolve(root, "client/why/index.html.template"),
+  resolve(root, "design-tokens.ts"),
   resolve(root, "client/public/robots.txt.template"),
   resolve(root, "client/public/sitemap.xml.template"),
   resolve(root, "client/public/llms.txt.template"),
@@ -592,6 +963,7 @@ const clientSrcPrefix = resolve(root, "client/src");
 // same derived needles as client/src so names/SIRENs can never come back.
 const narrativeTemplates = new Set([
   resolve(root, "client/index.html.template"),
+  resolve(root, "client/why/index.html.template"),
   resolve(root, "client/public/llms.txt.template"),
   resolve(root, "client/public/llms-full.txt.template"),
 ]);

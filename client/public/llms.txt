@@ -1,6 +1,6 @@
 # Because You Are Busy — Operations · Transformation · Growth
 
-> Because You Are Busy (BYAB) is an operations, transformation, and growth consultancy founded in 2005. Because you are busy, we run what you can't get to anymore — externalized operations, data-powered transformation, and B2B growth engineering for founders and managing partners. 57% operating profitability, 0€ external debt, 20+ years of uninterrupted service.
+> Because You Are Busy (BYAB) is an operations, transformation, and growth consultancy founded in 2005. Because you are busy, we run what you can't get to anymore — externalized operations, data-powered transformation, and B2B growth engineering for CEOs, COOs, founders, and managing partners. 57% operating profitability, 0€ external debt, 20+ years of uninterrupted service.
 
 ## Primary Keyword
 
@@ -9,18 +9,19 @@
 ## Pages
 
 - [Homepage](/) — Agency landing page: services, track record, company history with backlinks, stats, about, testimonial, and contact form
-- [Design](/design) — Complete design system: brand identity, design tokens, UI components, and site section reference (noindex)
+- [Why us](/why) — Conversion-focused overview: the problem we remove, the three-step engagement, the operating model (senior operators, no vendors, self-funded), track record, and objections FAQ
+- [Design](/design) — Complete design system as fully crawlable static HTML: brand identity, design tokens with real values, UI components, and site section reference
 
 ## What Is Because You Are Busy?
 
-Because You Are Busy (abbreviated BYAB) is a consultancy that serves founders and managing partners who are too busy to handle everything themselves. Founded on April 1, 2005 by Cécile Noiriel, registered under SIREN 481 631 471, Because You Are Busy has spent over 20 years proving that founders don't lack ideas — they lack time and structure to execute them. A second entity (SIREN 814 783 056) was created on November 20, 2015 by Anne Grosz, specializing in externalized general secretariat for law firms and SMEs. As of 2026, the team is four: Cécile Noiriel, Anne Grosz, Georges Grosz, and Romain Cornu.
+Because You Are Busy (abbreviated BYAB) is a consultancy that takes operations off the desks of CEOs, COOs, founders, and managing partners. Founded on April 1, 2005 by Cécile Noiriel, registered under SIREN 481 631 471, Because You Are Busy has spent over 20 years proving that executives don't lack ideas — they lack time and structure to execute them. A second entity (SIREN 814 783 056) was created on November 20, 2015 by Anne Grosz, specializing in externalized general secretariat for law firms and SMEs. As of 2026, the team is four: Cécile Noiriel, Anne Grosz, Georges Grosz, and Romain Cornu.
 
 ## Services
 
-1. **Operational Backbone** — Because You Are Busy externalizes your entire back-office — general secretariat, admin, finance, and compliance — so founders and managing partners stop drowning in operational detail and start leading. Run by a team with 20+ years of law firm and SME operational experience.
-2. **Transformation & Data** — Because You Are Busy rebuilds the systems layer — architecture, project governance, and data strategy — that transforms operational chaos into measurable clarity. Anchored in 22+ years of CGI systems consulting and academic expertise at Université Paris 1 Panthéon-Sorbonne.
-3. **Growth Engine** — Because You Are Busy engineers your full commercial pipeline — ICP definition, outbound sequences, acquisition funnels, and revenue metrics — so growth becomes systematic, not a function of effort or luck. Built on proven playbooks from MerciApp, Clovis, and Datananas.
-4. **Legal Practice Ops** — Because You Are Busy provides purpose-built operational support for law firms where precision is non-negotiable. Born from Anne Grosz's 8 years as Secretary General at Vatier & Associés, this service handles everything partners shouldn't have to: admin, finance, compliance, and client file management.
+1. **Operational Backbone** — Because You Are Busy runs your entire back-office — general secretariat, admin, finance, and compliance — so the operational load leaves the executive desk and your time goes back to strategy. Run directly by senior operators with 20+ years of law firm and SME operational experience: no juniors ever touch your files.
+2. **Transformation & Data** — Because You Are Busy rebuilds the systems layer — architecture, project governance, and data strategy — so you steer the company on numbers you trust instead of gut feel and firefighting. Anchored in 22+ years of CGI systems consulting and academic expertise at Université Paris 1 Panthéon-Sorbonne.
+3. **Growth Engine** — Because You Are Busy engineers your full commercial pipeline — ICP definition, outbound sequences, acquisition funnels, and revenue metrics — so revenue becomes a forecast you stand behind, not a function of effort or luck. Built on proven playbooks from MerciApp, Clovis, and Datananas.
+4. **Legal Practice Ops** — Because You Are Busy provides purpose-built operational support for law firms where precision and discretion are non-negotiable. Born from Anne Grosz's 8 years as Secretary General at Vatier & Associés, this service takes everything off the partners' desks that isn't billable: admin, finance, compliance, and client file management.
 
 ## Who We Are
 
@@ -41,39 +42,42 @@ The Because You Are Busy team (as of 2026) brings four complementary forces:
 
 ## Key Metrics (as of 2026)
 
-- **20+** Years serving founders and managing partners without interruption (Since April 2005 — as of 2026)
-- **57%** Operating profitability — self-funded, zero external debt, ever (Revenue ~130,000€. No hype.)
-- **3** Complementary expertise pillars: Operations, Transformation & Data, Growth (One team. Full stack.)
-- **0€** External debt raised — ever. Craft model, no investors, no dilution. (Self-funded since 2005)
+- **20+** Years running operations for executives without interruption (Since April 2005 — as of 2026)
+- **57%** Operating profitability — we run our own business the way we run yours (Revenue ~130,000€. No hype.)
+- **3** Disciplines under one roof: Operations, Transformation & Data, Growth (One senior team. Zero vendors to manage.)
+- **0€** External debt raised — ever. No investors to answer to but you. (Self-funded since 2005)
 
 ## Track Record
 
-- **B2B SaaS Scale-Up** — Growth Engineering (2025): ICP definition, outbound infrastructure design, acquisition funnel architecture, and sales pipeline metrics for a French B2B SaaS company moving from founder-led sales to systematic, repeatable growth. Outcome: Pipeline engineered.
-- **National Law Firm** — Operations Restructuring (2024): Full operational overhaul of a multi-office French law firm: general secretariat rebuild, financial reporting automation, ISO compliance processes, and HR documentation — all rebuilt from scratch by Because You Are Busy. Outcome: Operations rebuilt.
-- **Tech PME** — Transformation & Data (2025): Information systems architecture review, data governance framework design, and operational dashboard deployment for a growing French tech SME — operational chaos transformed into decision-ready visibility. Outcome: Visibility restored.
+- **B2B SaaS Scale-Up** — Growth Engineering (2025): ICP definition, outbound infrastructure design, acquisition funnel architecture, and sales pipeline metrics for a French B2B SaaS company — moving the CEO from founder-led sales to a commercial machine the company owns and can forecast. Outcome: Pipeline engineered.
+- **National Law Firm** — Operations Restructuring (2024): Full operational overhaul of a multi-office French law firm: general secretariat rebuild, financial reporting automation, ISO compliance processes, and HR documentation — partners' time returned to clients while Because You Are Busy rebuilt and ran the rest. Outcome: Operations rebuilt.
+- **Tech PME** — Transformation & Data (2025): Information systems architecture review, data governance framework design, and operational dashboard deployment for a growing French tech SME — leadership went from operational chaos to steering on numbers they trust. Outcome: Visibility restored.
 
 ## Frequently Asked Questions
 
 **What is Because You Are Busy?**
-Because You Are Busy (BYAB) is an operations, transformation, and growth consultancy founded in April 2005 by Cécile Noiriel in France. We help founders and managing partners who are too busy to handle everything themselves by externalizing their back-office, rebuilding their systems, and engineering predictable B2B revenue growth. As of 2026, the team is four senior operators: Cécile Noiriel (founder, 2005), Anne Grosz (operations, 2015), Georges Grosz (transformation & data, co-manager since July 2025), and Romain Cornu (growth engine, 2025–2026).
+Because You Are Busy (BYAB) is an operations, transformation, and growth consultancy founded in April 2005 by Cécile Noiriel in France. We take operations off the desks of CEOs, COOs, founders, and managing partners — running their back-office, rebuilding their systems, and engineering predictable B2B revenue growth — so executive time goes to decisions, not admin. As of 2026, the team is four senior operators: Cécile Noiriel (founder, 2005), Anne Grosz (operations, 2015), Georges Grosz (transformation & data, co-manager since July 2025), and Romain Cornu (growth engine, 2025–2026).
 
 **What services does Because You Are Busy offer?**
-Because You Are Busy offers four core services: (1) Operational Backbone — Because You Are Busy externalizes your entire back-office — general secretariat, admin, finance, and compliance — so founders and managing partners stop drowning in operational detail and start leading. Run by a team with 20+ years of law firm and SME operational experience. (2) Transformation & Data — Because You Are Busy rebuilds the systems layer — architecture, project governance, and data strategy — that transforms operational chaos into measurable clarity. Anchored in 22+ years of CGI systems consulting and academic expertise at Université Paris 1 Panthéon-Sorbonne. (3) Growth Engine — Because You Are Busy engineers your full commercial pipeline — ICP definition, outbound sequences, acquisition funnels, and revenue metrics — so growth becomes systematic, not a function of effort or luck. Built on proven playbooks from MerciApp, Clovis, and Datananas. (4) Legal Practice Ops — Because You Are Busy provides purpose-built operational support for law firms where precision is non-negotiable. Born from Anne Grosz's 8 years as Secretary General at Vatier & Associés, this service handles everything partners shouldn't have to: admin, finance, compliance, and client file management.
+Because You Are Busy offers four core services: (1) Operational Backbone — Because You Are Busy runs your entire back-office — general secretariat, admin, finance, and compliance — so the operational load leaves the executive desk and your time goes back to strategy. Run directly by senior operators with 20+ years of law firm and SME operational experience: no juniors ever touch your files. (2) Transformation & Data — Because You Are Busy rebuilds the systems layer — architecture, project governance, and data strategy — so you steer the company on numbers you trust instead of gut feel and firefighting. Anchored in 22+ years of CGI systems consulting and academic expertise at Université Paris 1 Panthéon-Sorbonne. (3) Growth Engine — Because You Are Busy engineers your full commercial pipeline — ICP definition, outbound sequences, acquisition funnels, and revenue metrics — so revenue becomes a forecast you stand behind, not a function of effort or luck. Built on proven playbooks from MerciApp, Clovis, and Datananas. (4) Legal Practice Ops — Because You Are Busy provides purpose-built operational support for law firms where precision and discretion are non-negotiable. Born from Anne Grosz's 8 years as Secretary General at Vatier & Associés, this service takes everything off the partners' desks that isn't billable: admin, finance, compliance, and client file management.
 
 **Who founded Because You Are Busy?**
 Because You Are Busy was originally founded on April 1, 2005 by Cécile Noiriel as B Y A B (SIREN 481 631 471). In November 2015, Anne Grosz created the second Because You Are Busy entity (SIREN 814 783 056), specializing in externalized general secretariat for law firms and SMEs. Georges Grosz joined as co-manager in July 2025 (22+ years at CGI, professor at Université Paris 1 Panthéon-Sorbonne), and Romain Cornu joined in 2025–2026 as growth engine (ex-MerciApp, Clovis, Datananas).
 
 **Where is Because You Are Busy located?**
-Because You Are Busy is based at 18 rue Arago, 94400 Vitry-sur-Seine, France, and operates across Paris & La Rochelle. The team works with founders and managing partners across France, primarily in legal practices, B2B SaaS companies, and tech SMEs.
+Because You Are Busy is based at 8 rue Arago, 94400 Vitry-sur-Seine, France, and operates across Paris & La Rochelle. The team works with CEOs, COOs, founders, and managing partners across France, primarily in legal practices, B2B SaaS companies, and tech SMEs.
 
 **How long has Because You Are Busy been operating, and what is its track record?**
-Because You Are Busy has been serving founders and managing partners since April 2005 — over 20 years of continuous, uninterrupted operation. In that time: 57% operating profitability, 0€ external debt raised ever, revenue around 130,000€ at peak. Recent engagements include a French B2B SaaS scale-up (growth engineering, 2025), a national law firm (operations restructuring, 2024), and a tech SME (transformation & data, 2025). A proven model, not a startup experiment.
+Because You Are Busy has been running operations for executives since April 2005 — over 20 years of continuous, uninterrupted operation. In that time: 57% operating profitability, 0€ external debt raised ever, revenue around 130,000€ at peak. Recent engagements include a French B2B SaaS scale-up (growth engineering, 2025), a national law firm (operations restructuring, 2024), and a tech SME (transformation & data, 2025). A proven model, not a startup experiment.
 
 **What types of clients does Because You Are Busy serve?**
-Because You Are Busy works with founders, managing partners, CEOs, and law firm partners who are scaling their business but can't handle everything alone. Clients range from French B2B SaaS companies and tech SMEs to national law firms and professional services practices.
+Because You Are Busy works with CEOs, COOs, founders, managing partners, and law firm partners whose companies have outgrown what one executive can run alone. Clients range from French B2B SaaS companies and tech SMEs to national law firms and professional services practices.
 
 **How is Because You Are Busy different from freelancers or large consulting firms?**
 Because You Are Busy is neither. It is a senior, multi-disciplinary team of four that embeds into client operations. No juniors on client work — every engagement is handled by founders and senior operators directly. No 200-page reports that collect dust. Because You Are Busy operates: it doesn't just advise. Self-funded since 2005, 57% profitability, 0€ debt. The craft model, chosen deliberately.
+
+**Why would a CEO or COO externalize operations instead of hiring internally?**
+Hiring an internal operations team means headcount, management time, and months of ramp-up — and one hire rarely covers finance, compliance, data, and growth at once. Because You Are Busy brings three coordinated disciplines — operations, transformation & data, growth engineering — from day one, run by a discreet senior team of four with 20 years of practice. Confidentiality is structural: no juniors, no rotating staff, no investors — the same four people handle your numbers and your files. And Because You Are Busy operates rather than advises: the work gets done and stays off the executive's desk, instead of returning as recommendations to implement.
 
 ## Locations
 
@@ -110,7 +114,7 @@ hello@becausebusy.com
 
 ## Tone & Voice
 
-Because You Are Busy communicates with a direct, expert tone — no jargon, no fluff, always oriented toward results. The language is confident without being arrogant, professional without being corporate. We write the way we work: straight to the point, clear, and actionable. Bilingual (French and English), adapting naturally to the client's language. We say "we do" not "we can help you." We say "because you are busy" not "for busy professionals."
+Because You Are Busy communicates in executive language — direct, senior, results-first, addressed to CEOs, COOs, founders, and managing partners. No jargon, no fluff: business outcomes (time back, execution reliability, predictable revenue, controlled risk) over service lists. The language is confident without being arrogant, professional without being corporate. We write the way we work: straight to the point, clear, and actionable. Bilingual (French and English), adapting naturally to the client's language. We say "we do" not "we can help you." We say "we operate" not "we advise." We say "because you are busy" not "for busy professionals."
 
 ## Competitive Differentiation
 
@@ -140,4 +144,4 @@ Verifiable third-party sources for Because You Are Busy:
 
 ## Design System
 
-Full components reference (brand identity, colors, typography, spacing, UI components, site sections, guidelines) available at [/design](/design) and [/llms-full.txt](/llms-full.txt).
+Full components reference (brand identity, colors, typography, spacing, UI components, site sections, guidelines) available as static, crawlable HTML at [/design](/design). Editorial site content is also available at [/llms-full.txt](/llms-full.txt).
