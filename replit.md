@@ -23,14 +23,15 @@ A three-page site for Because You Are Busy (BYAB), an operations, transformation
 - **Font loading:** Google Fonts loaded asynchronously via preload+onload pattern (non-render-blocking), with slimmed weight range (Inter 400-700, JetBrains Mono 400-500)
 - **Preload hints:** LCP image (anne-256.webp) and header logo preloaded in `<head>`
 - **Auto-push on Publish:** `script/build.ts` runs `script/push-to-github.sh` after building, which syncs the workspace to GitHub `main` using `GITHUB_PAT` (Replit secret). GitHub Actions then auto-deploys to `becausebusy.com`. Replit = staging, Publish = production.
-- **Auto-release:** `.github/workflows/release.yml` uses `TriPSs/conventional-changelog-action` to bump `package.json` version, generate `CHANGELOG.md`, and create a GitHub Release — only when conventional commits (`feat:`, `fix:`) are present. The deploy workflow skips bot-authored commits and `chore(release)` messages to prevent double-deploy loops.
+- **Auto-release:** `.github/workflows/release.yml` uses `TriPSs/conventional-changelog-action` to bump `package.json` and create a GitHub Release from accepted Conventional Commit messages. `feat:` produces a minor release; `fix:`, `docs:`, `refactor:`, `perf:`, `style:`, and `test:` produce a patch release; `chore:` is accepted for maintenance publishing without a release. `CHANGELOG.md` is generated separately by the git-cliff workflow. The deploy workflow skips bot-authored commits and `chore(release)` messages to prevent double-deploy loops.
 - **Styling convention (ESLint-enforced):** No inline `style={{…}}` props in `client/src/pages/**`, `client/src/sections/**`, or `content/**` — Tailwind token classes only, so Subframe and the Tailwind scanner can see every style. Recurring sizes have named tokens (`text-hero`, `text-2xs`/`text-3xs`, `h-header`, `max-w-container`, `rounded-button`, `tracking-eyebrow`/`tracking-label`, `shadow-slider-*`, `duration-400`/`delay-60`); see `docs/design-tokens.md`. Irreducibly dynamic values (TeamSlider orbit `--thumb-angle` variable, /design type-scale & spacing previews) carry explicit `eslint-disable` comments. `content/**` is included in the Tailwind content globs because timeline JSX is prerendered into the homepage.
 - **Conventional commits (persistent convention):** All commit messages in this project must follow [Conventional Commits](https://www.conventionalcommits.org/) format:
   - `feat: ...` → minor version bump (new feature)
   - `fix: ...` → patch version bump (bug fix)
-  - `chore: ...` → no version bump (maintenance, publish)
-  - `refactor:`, `perf:`, `docs:`, `style:`, `test:` → also valid, no bump
-  - The push script uses `chore(publish):` prefix automatically
+  - `docs:`, `refactor:`, `perf:`, `style:`, `test:` → patch version bump
+  - `chore: ...` → no version bump (maintenance, default publish)
+  - To control the next Publish message, put exactly one accepted Conventional Commit line in the local `.publish-message` file. Accepted types are `feat`, `fix`, `docs`, `chore`, `refactor`, `perf`, `style`, and `test`, with an optional scope, for example `docs: clarify publishing`.
+  - On Publish, `script/push-to-github.sh` trims and validates `.publish-message`, uses it for the GitHub commit, and empties the local file only after a successful push. An absent or blank file falls back to `chore(publish): v{version} — {UTC date}`. `.publish-message` is local-only and is never copied to GitHub.
 - **Version sync caveat:** After a GitHub release bumps `package.json` version on GitHub, you must update the version in Replit's `package.json` **before the next deploy**, otherwise the footer will display the old version. `__APP_VERSION__` in `vite.config.ts` reads dynamically from `package.json` at build time — no hardcoding.
 
 ## Homepage Sections (in order)
@@ -64,7 +65,7 @@ A three-page site for Because You Are Busy (BYAB), an operations, transformation
 - **Primary keyword:** "because you are busy" — appears in title, meta, h1 subtext, hero description, about section, contact section, story quote, footer, schema.org, llms.txt
 - **Title tag:** "Because You Are Busy — Operations, Transformation & Growth Consultancy"
 - **All URLs absolute** — sitemap, robots.txt Sitemap directive, JSON-LD, canonical, hreflang all use `https://becausebusy.com/`
-- **Schema.org structured data** (7 blocks in index.html):
+- **Schema.org structured data** (6 blocks in `client/index.html`):
   1. Organization — name, alternateName, sameAs (all backlinks), founder, members, areaServed (structured objects)
   2. ProfessionalService — services catalog, address, email, aggregateRating, areaServed (structured objects)
   3. WebSite — name, description, inLanguage
@@ -84,6 +85,15 @@ A three-page site for Because You Are Busy (BYAB), an operations, transformation
 - **CNAME** — Single file at root (`becausebusy.com`), copied to dist during deploy
 
 ## Key Files
+- **Generated metadata files — never edit the outputs directly.** Edit the matching `.template` file for structure/editorial framing, or edit `content/` for site data and generated sections; `script/generate-meta.ts` recreates every output at build time:
+  - `client/index.html.template` → `client/index.html`
+  - `client/design/index.html.template` → `client/design/index.html`
+  - `client/why/index.html.template` → `client/why/index.html`
+  - `client/public/robots.txt.template` → `client/public/robots.txt`
+  - `client/public/sitemap.xml.template` → `client/public/sitemap.xml`
+  - `client/public/llms.txt.template` → `client/public/llms.txt`
+  - `client/public/llms-full.txt.template` → `client/public/llms-full.txt`
+  - `CNAME.template` → `CNAME`
 - `content/site.config.ts` — single source of truth for brand/domain/SEO values (see TEMPLATE.md)
 - `script/build.ts` — build orchestrator (generate-meta → vite → prerender → server → validate-seo → push)
 - `script/validate-seo.ts` — post-build SEO/GEO validation harness (fails the build on violations)
@@ -148,16 +158,3 @@ Single source of truth: `design-tokens.ts` at the repo root (all colors as liter
 6. UI Components — Buttons (primary/secondary), inputs (text/states), cards (default/elevated/dark)
 7. Site Sections — All 10 homepage sections documented with purpose, structure, and tokens used
 8. Guidelines — 4 design principles, CSS tokens reference, machine-readable resources
-
-## Homepage Sections
-1. Header — Fixed nav, Because Busy logo, anchor links (Services, Track Record, Story, About, Contact), CTA
-2. Hero — "We run what you can't get to anymore." + "Because you are busy" in description, circular team slider, Since 2005 label
-3. Marquee — Infinite scrolling expertise keywords (Operations, Transformation, Growth, etc.)
-4. Services — 2×2 grid: Operational Backbone, Transformation & Data, Growth Engine, Legal Practice Ops
-5. Work — Stacked engagement rows (B2B SaaS Scale-Up, National Law Firm, Tech PME)
-6. Stats — Dark panel: 20 years, 57% profitability, 3 pillars, 0€ debt
-7. About — Three converging forces at Because You Are Busy: operations (Anne, Cécile), systems & data (Georges), growth (Romain)
-8. Story — Full company history timeline (2005–2026) with 5 phases + 14 external backlinks + brand promise ("Because you are busy, we do the work...")
-9. Testimonial — "They didn't just take work off my plate..." — M. Laurent, Managing Partner
-10. Contact — "Because you are busy, we'll take it from here." + hello@becausebusy.com, Paris & La Rochelle
-11. Footer — Logo, © 2026 Because You Are Busy, Components link

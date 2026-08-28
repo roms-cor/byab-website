@@ -67,6 +67,10 @@ Timeline entries for the Story section. Each entry has a year, title, optional p
 
 Single source of truth for the FAQ. Each entry has a question and an answer (both may use `{{TOKENS}}` such as `{{SITE_NAME}}` or `{{BUILD_YEAR}}`; `{{SERVICES_INLINE}}` expands to the current services list). The build generates the FAQPage JSON-LD in `client/index.html` and the FAQ sections of `llms.txt` / `llms-full.txt` from this file.
 
+### `content/why.ts` — `/why` conversion page
+
+Single source of truth for copy that exists only on the public `/why` page, including its SEO title and description, hero, operating model, steps, benefits, CTA, and FAQ selection. Shared stats, pain points, engagements, testimonial, and FAQ entries remain in their own `content/` files and are imported rather than duplicated.
+
 ### `content/testimonial.ts` — Client testimonial
 
 Single testimonial quote, initials, author name, and role.
