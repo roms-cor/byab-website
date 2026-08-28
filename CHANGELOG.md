@@ -7,6 +7,11 @@ Généré automatiquement avec [git-cliff](https://git-cliff.org).
 ## Unreleased
 
 
+### 📚 Documentation
+
+- correct generated-files list, JSON-LD count and publish flow ([f7eff84](https://github.com/roms-cor/byab-website/commit/f7eff84e5bc30a5b004d615e86b074cdd1bc1eea))
+
+
 ### 🔧 Maintenance
 
 - v1.0.0 — 2026-07-26 15:57 UTC ([0fc38dc](https://github.com/roms-cor/byab-website/commit/0fc38dc528def638f12d6fbac984dddede31e80c))
